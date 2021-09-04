@@ -1,4 +1,6 @@
 name: TheNexus
 version: 1.0.0
 main: whirss.thenexus.Main
-authors: [Whirss]
+author: Whirss
+api-version: 1.17
+load: STARTUP
