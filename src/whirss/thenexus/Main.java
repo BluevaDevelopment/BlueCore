@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import whirss.thenexus.commands.NexusCommand;
 import whirss.thenexus.events.OnPlayerJoin;
+import whirss.thenexus.events.OnPlayerQuit;
 
 public final class Main extends JavaPlugin {
 	
@@ -65,6 +66,7 @@ public final class Main extends JavaPlugin {
 	public void RegisterEvents() {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new OnPlayerJoin(this), this);
+		pm.registerEvents(new OnPlayerQuit(this), this);
 		
 	}
 	

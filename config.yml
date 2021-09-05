@@ -9,7 +9,7 @@
 no-modify: 100
 
 # Metrics:
-# This plugin uses the bStats metrics system. If you want your data not to be collected, you can disable this system from \plugins bStats config.yml 
+# This plugin uses the bStats metrics system. If you want your data not to be collected, you can disable this system here. 
 # The following information is collected and sent to bstats.org:
 #      Whether the server is in offline or online mode
 #      The plugin version
@@ -58,7 +58,7 @@ welcome:
     enabled: true
 
     # Time the server waits to send the welcome title. (In ticks)
-    wait: 10
+    wait: 10 # 20 Ticks = 1 Second
 
     # Set the welcome title
     title: '&d&lServer Name'
@@ -82,7 +82,37 @@ welcome:
     enabled: true
 
     # Time the server waits to send the welcome actionbar. (In ticks)
-    wait: 10
+    wait: 10 # 20 Ticks = 1 Second
 
     # Message to appear in the welcome actionbar
     message: '&dWelcome to YourServer'
+
+  # Announces to all players when a player joins or leaves.
+  broadcast:
+
+    # Announces to all players when a new player joins the game
+    first_join:
+
+      # Enable or disable this broadcast
+      enabled: true
+
+      # Message that will appear in this broadcast
+      message: '&f%player_name% &dhas logged into the server for the first time. Welcome to the server!'
+
+    # Announces to all players when a player joins.
+    join:
+
+      # Enable or disable this broadcast
+      enabled: true
+
+      # Message that will appear in this broadcast
+      message: '&8[&a+&8] &a%player_name%'
+
+    # Announces to all players when a player leaves.
+    leave:
+
+      #Enable or disable this broadcast
+      enabled: true
+
+      # Message that will appear in this broadcast
+      message: '&8[&c-&8] &a%player_name%'

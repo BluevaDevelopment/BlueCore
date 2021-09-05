@@ -55,6 +55,18 @@ public class OnPlayerJoin implements Listener {
 	            }
 	        }, main.getConfig().getInt("welcome.actionbar.wait")); 
 	   }
+	   
+	   if(main.getConfig().getBoolean("welcome.broadcast.join.enabled")) {
+		   event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("welcome.broadcast.join.message").replace("%player_name%", event.getPlayer().getDisplayName())));
+	   } else {
+		   event.setJoinMessage("");
+	   }
+	   
+	   if(main.getConfig().getBoolean("welcome.broadcast.first_join.enabled")) {
+		   if(main.getUserdata(event.getPlayer().getUniqueId()).getBoolean("")) {
+			   
+		   }
+	   }
 	}
 
 }
