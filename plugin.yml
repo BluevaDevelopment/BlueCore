@@ -4,3 +4,10 @@ main: whirss.thenexus.Main
 author: Whirss
 api-version: 1.17
 load: STARTUP
+depend: [Vault]
+softdepend: [PlaceholderAPI]
+commands:
+   nexus:
+      aliases: [thenexus, tn, nx, x]
+      description: Command for players
+      usage: /nexus [action]

@@ -14,6 +14,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import whirss.thenexus.commands.NexusCommand;
 import whirss.thenexus.events.OnPlayerJoin;
 
 public final class Main extends JavaPlugin {
@@ -27,6 +28,8 @@ public final class Main extends JavaPlugin {
 	private FileConfiguration userdata = null;
 	private File userdataFile = null;
 	
+	public String version = "1.0.0";
+	
 	public void onEnable() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " _____ _          _   _");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "|_   _| |__   ___| \\ | | _____  ___   _ ___");
@@ -36,6 +39,7 @@ public final class Main extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "");
 		
 		RegisterEvents();
+		RegisterCommands();
 		
 		registerConfig();
 		registerKits();
@@ -64,6 +68,10 @@ public final class Main extends JavaPlugin {
 		
 	}
 	
+	public void RegisterCommands() {
+		this.getCommand("nexus").setExecutor(new NexusCommand(this));
+	}
+	
 	//config.yml
 	public void registerConfig(){
 		File config = new File(this.getDataFolder(),"config.yml");
@@ -77,7 +85,7 @@ public final class Main extends JavaPlugin {
   					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
   					+ "\r\n"
   					+ "");
-			saveConfig();
+			saveDefaultConfig();
 		}
 	}
   	

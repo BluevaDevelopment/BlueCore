@@ -1,1 +1,88 @@
+#  _____ _          _   _
+# |_   _| |__   ___| \ | | _____  ___   _ ___
+#   | | | '_ \ / _ |  \| |/ _ \ \/ | | | / __|
+#   | | | | | |  __| |\  |  __/>  <| |_| \__ \
+#   |_| |_| |_|\___|_| \_|\___/_/\_\\__,_|___/
+#
+# Configuration generated in version 1.0.0
+
+no-modify: 100
+
+# Metrics:
+# This plugin uses the bStats metrics system. If you want your data not to be collected, you can disable this system from \plugins bStats config.yml 
+# The following information is collected and sent to bstats.org:
+#      Whether the server is in offline or online mode
+#      The plugin version
+#      The server version
+#      The java version
+#      The OS version/name and architecture
+#      The location of your server
+#      The core count for the CPU
+#      The number of players online
+#      The Metrics version
 metrics: true
+ 
+# Welcome:
+# Welcome all the users that enter the server.
+# You can use the placeholders of the plugin (https://github.com/Whirss/TheNexus/wiki) or all PlaceHolderAPI placeholders.
+welcome:
+
+  # This is the message that appears when you enter a server. 
+  # It can contain server information such as the store, web page or whatever you want.
+  message:
+
+    # Enables or disables the welcome message
+    enabled: true
+
+    # Time the server waits to send the welcome message. (In ticks)
+    wait: 10 # 20 Ticks = 1 Second
+
+    # This is the message that will be sent to the players. Modify it to your liking, you can add or remove the lines you want.
+    list:
+    - '&5&m--------------------------------------'
+    - ''
+    - '        &5✦ &d&lWELCOME TO &nSERVERNAME&5 ✦'
+    - '   &b✵ &fThe best server in all of minecraft &b✵'
+    - ''
+    - ' &d➦ &fStore: &bstore.servername.com'
+    - ' &d➦ &fWeb: &bwww.servername.com'
+    - ' &d➦ &fDiscord: &bdiscord.servername.com'
+    - ''
+    - '&5&m--------------------------------------'
+
+  # Title that will be sent to the players when they join to the server.
+  # (Does not work in versions lower than 1.12)
+  title:
+
+    #Enables or disables the welcome title.
+    enabled: true
+
+    # Time the server waits to send the welcome title. (In ticks)
+    wait: 10
+
+    # Set the welcome title
+    title: '&d&lServer Name'
+
+    # Sets the welcome subtitle. Appears below the title
+    subtitle: '&fwww.servername.com'
+
+    # The time it takes for the title to fade into the screen. (In ticks)
+    fade-in: 10
+
+    #The time it takes for the title to stay on the screen. (In ticks)
+    stay: 80
+
+    #The time it takes for the title to fade out of the screen. (In ticks)
+    fade-out: 10
+
+  # Actionbar that is sent to the player when they join the server.
+  actionbar:
+
+    # Enables or disables the welcome actionbar.
+    enabled: true
+
+    # Time the server waits to send the welcome actionbar. (In ticks)
+    wait: 10
+
+    # Message to appear in the welcome actionbar
+    message: '&dWelcome to YourServer'
