@@ -116,3 +116,58 @@ welcome:
 
       # Message that will appear in this broadcast
       message: '&8[&c-&8] &a%player_name%'
+
+# Scoreboard:
+# Sets the scoreboard (sidebar) that is sent to the player
+scoreboard:
+
+  # Enables or disables the scoreboard
+  enabled: true
+
+  # Every how many ticks will the scoreboard be updated
+  ticks: 10
+
+  # The title displayed at the very top of the scoreboard
+  # WARNING! (Only for 1.12 or earlier) The title must be 35 characters or less. (Including color codes).
+  title: '&d&lThe &5&lNexus'
+
+  # The lines of the scoreboard. (Maximum 15 lines)
+  lines: 
+  - '&a'
+  - '&d&l➦ Player Name'
+  - ' &b● &f%player_name%'
+  - '&b'
+  - '&d&l➦ Ping'
+  - ' &b● &f%player_ping%'
+  - '&c'
+  - '&d&l➦ Money'
+  - ' &b● &f%player_money%'
+  - '&d'
+  - 'play.servername.com'
+  
+
+  disabled-worlds:
+  - 'world_the_end'
+
+# TabList:
+# Sets the header and footer in the player list. (Show when you press the TAB key)
+tablist:
+
+  # Enable or disable the tablist
+  enabled: true
+
+  # Every how many ticks will the tablist be updated 
+  ticks: 10
+
+  # Sets the header of the tablist. Add or remove the lines you want.
+  header:
+  - ''
+  - '&d&lTheNexus'
+  - '&fwww.servername.com'
+  - ''
+
+  # Sets the footer of the tablist. Add or remove the lines you want.
+  footer:
+  - ''
+  - '&7You are playing with &d%online% players'
+  - '&7                                                  &7'

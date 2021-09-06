@@ -52,6 +52,12 @@ public final class Main extends JavaPlugin {
 	        new Metrics(this, pluginId);
 		}
 		
+		ScoreboardAdmin scoreboard = new ScoreboardAdmin(this);
+		scoreboard.createScoreboard();
+		
+		TablistAdmin tablist = new TablistAdmin(this);
+		tablist.createTablist();
+		
 	}
 	
 	public void onDisable() {
