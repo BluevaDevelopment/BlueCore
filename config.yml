@@ -172,10 +172,12 @@ tablist:
   - '&7You are playing with &d%online% players'
   - '&7                                                  &7'
   
+# Chat:
 # Customize your server chat.
 chat:
 
    # Customize the format of your server chat.
+   # If you prefer to disable this option and use the original format of minecraft or another plugin write 'none'.
    format: '&7{player_displayname} &8➤ &f{message}'
    
    # If you enable this option, players will only be able to read messages from other players who are in the same world.
@@ -201,3 +203,11 @@ chat:
       - 'fuck'
       - 'loser'
       - 'idiot'
+      
+   command_blocker:
+      enabled: true
+      list:
+      - 'pl'
+      - 'plugins'
+      - ''
+   

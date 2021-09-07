@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -15,19 +14,21 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.google.common.collect.Lists;
 
 import whirss.thenexus.admins.LastLocationAdmin;
 import whirss.thenexus.admins.ScoreboardAdmin;
 import whirss.thenexus.admins.TablistAdmin;
 import whirss.thenexus.commands.NexusCommand;
 import whirss.thenexus.events.OnPlayerChatAsync;
+import whirss.thenexus.events.OnPlayerCommand;
 import whirss.thenexus.events.OnPlayerDeath;
 import whirss.thenexus.events.OnPlayerJoin;
 import whirss.thenexus.events.OnPlayerQuit;
 
 public final class Main extends JavaPlugin {
 	
+	private FileConfiguration commands = null;
+	private File commandsFile = null;
 	private FileConfiguration kits = null;
 	private File kitsFile = null;
 	private FileConfiguration warps = null;
@@ -38,7 +39,6 @@ public final class Main extends JavaPlugin {
 	private File userdataFile = null;
 	
 	public String version = "1.0.0";
-	public List<String> global = Lists.newArrayList();
 	
 	public void onEnable() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " _____ _          _   _");
@@ -49,8 +49,9 @@ public final class Main extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "");
 		
 		RegisterEvents();
-		RegisterCommands();
+		RegisterPluginCommands();
 		
+		registerCommands();
 		registerConfig();
 		registerKits();
 		registerMessages();
@@ -87,10 +88,11 @@ public final class Main extends JavaPlugin {
 		pm.registerEvents(new OnPlayerQuit(this), this);
 		pm.registerEvents(new OnPlayerDeath(this), this);
 		pm.registerEvents(new OnPlayerChatAsync(this), this);
+		pm.registerEvents(new OnPlayerCommand(this), this);
 		
 	}
 	
-	public void RegisterCommands() {
+	public void RegisterPluginCommands() {
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
 	}
 	
@@ -111,7 +113,7 @@ public final class Main extends JavaPlugin {
 		}
 	}
   	
-  //messages.yml:
+	//messages.yml:
   	public FileConfiguration getMessages() {
   		if(messages == null) {
   			reloadMessages();
@@ -306,6 +308,55 @@ public final class Main extends JavaPlugin {
   					+ "\r\n"
   					+ "");
   			saveUserdata();
+  		}
+  	}
+  	
+  //commands.yml:
+  	public FileConfiguration getCommands() {
+  		if(commands == null) {
+  			reloadCommands();
+  		}
+  		return commands;
+  	}
+  	
+  	public void reloadCommands(){
+  		if(commands == null){
+  			commandsFile = new File(getDataFolder(),"commands.yml");
+  		}
+  		commands = YamlConfiguration.loadConfiguration(commandsFile);
+  		Reader defConfigStream;
+  		try{
+  			defConfigStream = new InputStreamReader(this.getResource("commands.yml"),"UTF8");
+  			if(defConfigStream != null){
+  				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+  				commands.setDefaults(defConfig);
+  			}			
+  		}catch(UnsupportedEncodingException e){
+  			e.printStackTrace();
+  		}
+  	}
+  	
+  	public void saveCommands(){
+  		try{
+  			commands.save(commandsFile);			
+  		}catch(IOException e){
+  			e.printStackTrace();
+  		}
+  	}
+   
+  	public void registerCommands(){
+  		commandsFile = new File(this.getDataFolder(),"commands.yml");
+  		if(!commandsFile.exists()){
+  			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\commands.yml");
+  			this.getCommands().options().copyDefaults(true);
+  			getCommands().options().header(" _____ _          _   _\r\n"
+  					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+  					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+  					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+  					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+  					+ "\r\n"
+  					+ "");
+  			saveCommands();
   		}
   	}
 
