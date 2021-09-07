@@ -6,6 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/dnlbl/Favorites/Documents/Desktop/jars/spigot-1.17.1.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/Documents/jars/spigot-1.17.1.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/Documents/jars/PlaceholderAPI-2.10.10.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/Documents/jars/Vault.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

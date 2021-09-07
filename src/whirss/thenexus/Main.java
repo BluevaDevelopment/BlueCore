@@ -14,7 +14,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import whirss.thenexus.admins.LastLocationAdmin;
+import whirss.thenexus.admins.ScoreboardAdmin;
+import whirss.thenexus.admins.TablistAdmin;
 import whirss.thenexus.commands.NexusCommand;
+import whirss.thenexus.events.OnPlayerDeath;
 import whirss.thenexus.events.OnPlayerJoin;
 import whirss.thenexus.events.OnPlayerQuit;
 
@@ -58,6 +62,9 @@ public final class Main extends JavaPlugin {
 		TablistAdmin tablist = new TablistAdmin(this);
 		tablist.createTablist();
 		
+		LastLocationAdmin lastlocation = new LastLocationAdmin(this);
+		lastlocation.createLastLocation();
+		
 	}
 	
 	public void onDisable() {
@@ -73,6 +80,7 @@ public final class Main extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new OnPlayerJoin(this), this);
 		pm.registerEvents(new OnPlayerQuit(this), this);
+		pm.registerEvents(new OnPlayerDeath(this), this);
 		
 	}
 	
