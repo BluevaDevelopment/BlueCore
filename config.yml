@@ -171,3 +171,33 @@ tablist:
   - ''
   - '&7You are playing with &d%online% players'
   - '&7                                                  &7'
+  
+# Customize your server chat.
+chat:
+
+   # Customize the format of your server chat.
+   format: '&7{player_displayname} &8➤ &f{message}'
+   
+   # If you enable this option, players will only be able to read messages from other players who are in the same world.
+   per_world: false
+   
+   # Avoid toxicity on your server by blocking bad vocabulary
+   antiswear:
+   
+      # Enables or disables the antiswear.
+      enabled: true
+      
+      # What do you want to happen if a blocked word is detected?
+      # - Block the whole message. (mode: block)
+      # - Replace the blocked word with asterisks (mode: replace)
+      mode: replace
+      
+      # List of blocked words. You can add or remove the ones you want.
+      list:
+      - 'asshole'
+      - 'bitch'
+      - 'cunt'
+      - 'dick'
+      - 'fuck'
+      - 'loser'
+      - 'idiot'

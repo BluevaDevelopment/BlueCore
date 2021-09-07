@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -14,10 +15,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.google.common.collect.Lists;
+
 import whirss.thenexus.admins.LastLocationAdmin;
 import whirss.thenexus.admins.ScoreboardAdmin;
 import whirss.thenexus.admins.TablistAdmin;
 import whirss.thenexus.commands.NexusCommand;
+import whirss.thenexus.events.OnPlayerChatAsync;
 import whirss.thenexus.events.OnPlayerDeath;
 import whirss.thenexus.events.OnPlayerJoin;
 import whirss.thenexus.events.OnPlayerQuit;
@@ -34,6 +38,7 @@ public final class Main extends JavaPlugin {
 	private File userdataFile = null;
 	
 	public String version = "1.0.0";
+	public List<String> global = Lists.newArrayList();
 	
 	public void onEnable() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " _____ _          _   _");
@@ -81,6 +86,7 @@ public final class Main extends JavaPlugin {
 		pm.registerEvents(new OnPlayerJoin(this), this);
 		pm.registerEvents(new OnPlayerQuit(this), this);
 		pm.registerEvents(new OnPlayerDeath(this), this);
+		pm.registerEvents(new OnPlayerChatAsync(this), this);
 		
 	}
 	
