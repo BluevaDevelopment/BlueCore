@@ -204,10 +204,13 @@ chat:
       - 'loser'
       - 'idiot'
       
+   # Block commands that can generate security vulnerabilities in your server.
    command_blocker:
-      enabled: true
-      list:
-      - 'pl'
-      - 'plugins'
-      - ''
    
+      # Enables or disables the command blocker
+      enabled: true
+      
+      # List of blocked commands (You have to include the /)
+      list:
+      - '/pl'
+      - '/plugins'

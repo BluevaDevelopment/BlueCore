@@ -40,7 +40,7 @@ public class OnPlayerCommand implements Listener {
 	        if (Continue)
 	          continue; 
 	        event.setCancelled(true);
-        	List<String> commands = main.getCommands().getStringList("commands." + key + ".commands-to-execute");
+        	List<String> commands = main.getCommands().getStringList("commands." + key + ".run_commands");
             ConsoleCommandSender consoleCommandSender = Bukkit.getServer().getConsoleSender();
             for (int j = 0; j < commands.size(); j++) {
               String commandToSend = ((String)commands.get(j)).replaceAll("%player%", player.getName());
