@@ -1,4 +1,4 @@
-package whirss.thenexus.events;
+package org.jachi.whirss.thenexus.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.Main;
 
 public class OnPlayerQuit implements Listener {
 	

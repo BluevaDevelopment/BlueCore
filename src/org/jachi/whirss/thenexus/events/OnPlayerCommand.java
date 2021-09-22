@@ -1,4 +1,4 @@
-package whirss.thenexus.events;
+package org.jachi.whirss.thenexus.events;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-import whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.Main;
 
 public class OnPlayerCommand implements Listener {
 	

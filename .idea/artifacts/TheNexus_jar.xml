@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="TheNexus:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TheNexus_jar</output-path>
+    <root id="root">
+      <element id="archive" name="TheNexus.jar">
+        <element id="module-output" name="TheNexus" />
+      </element>
+      <element id="library" level="project" name="PlaceholderAPI-2.10.10" />
+      <element id="library" level="project" name="spigot-1.17.1" />
+      <element id="library" level="project" name="Vault" />
+    </root>
+  </artifact>
+</component>

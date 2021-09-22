@@ -1,11 +1,11 @@
-package whirss.thenexus.events;
+package org.jachi.whirss.thenexus.events;
 
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.Main;
 
 public class OnPlayerDeath implements Listener {
 	

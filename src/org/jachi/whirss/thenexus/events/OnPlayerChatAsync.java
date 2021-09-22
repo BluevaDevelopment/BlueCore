@@ -1,4 +1,4 @@
-package whirss.thenexus.events;
+package org.jachi.whirss.thenexus.events;
 
 import java.util.Set;
 
@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.Main;
 
 public class OnPlayerChatAsync implements Listener {
 	

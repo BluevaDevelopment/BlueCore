@@ -1,4 +1,4 @@
-package whirss.thenexus.events;
+package org.jachi.whirss.thenexus.events;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.Main;
 
 public class OnPlayerJoin implements Listener {
 	

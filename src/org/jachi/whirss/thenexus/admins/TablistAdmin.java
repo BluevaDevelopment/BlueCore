@@ -1,4 +1,4 @@
-package whirss.thenexus.admins;
+package org.jachi.whirss.thenexus.admins;
 
 import java.util.ArrayList;
 
@@ -7,8 +7,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import whirss.thenexus.Main;
-import whirss.thenexus.StringUtil;
+import org.jachi.whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.StringUtil;
 
 
 

@@ -1,4 +1,4 @@
-package whirss.thenexus.admins;
+package org.jachi.whirss.thenexus.admins;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-import whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.Main;
 
 public class ScoreboardAdmin {
 	

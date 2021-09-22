@@ -1,4 +1,4 @@
-package whirss.thenexus;
+package org.jachi.whirss.thenexus;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

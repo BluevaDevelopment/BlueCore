@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: PlaceholderAPI-2.10.10.jar spigot-1.17.1.jar Vault.jar
+

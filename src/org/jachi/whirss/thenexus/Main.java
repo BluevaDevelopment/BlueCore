@@ -1,4 +1,4 @@
-package whirss.thenexus;
+package org.jachi.whirss.thenexus;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,15 +15,15 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
-import whirss.thenexus.admins.LastLocationAdmin;
-import whirss.thenexus.admins.ScoreboardAdmin;
-import whirss.thenexus.admins.TablistAdmin;
-import whirss.thenexus.commands.NexusCommand;
-import whirss.thenexus.events.OnPlayerChatAsync;
-import whirss.thenexus.events.OnPlayerCommand;
-import whirss.thenexus.events.OnPlayerDeath;
-import whirss.thenexus.events.OnPlayerJoin;
-import whirss.thenexus.events.OnPlayerQuit;
+import org.jachi.whirss.thenexus.admins.LastLocationAdmin;
+import org.jachi.whirss.thenexus.admins.ScoreboardAdmin;
+import org.jachi.whirss.thenexus.admins.TablistAdmin;
+import org.jachi.whirss.thenexus.commands.NexusCommand;
+import org.jachi.whirss.thenexus.events.OnPlayerChatAsync;
+import org.jachi.whirss.thenexus.events.OnPlayerCommand;
+import org.jachi.whirss.thenexus.events.OnPlayerDeath;
+import org.jachi.whirss.thenexus.events.OnPlayerJoin;
+import org.jachi.whirss.thenexus.events.OnPlayerQuit;
 
 public final class Main extends JavaPlugin {
 	

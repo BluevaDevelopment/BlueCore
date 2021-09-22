@@ -1,11 +1,11 @@
-package whirss.thenexus.admins;
+package org.jachi.whirss.thenexus.admins;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.Main;
 
 public class LastLocationAdmin {
 	
