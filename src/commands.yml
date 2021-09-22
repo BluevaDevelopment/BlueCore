@@ -5,9 +5,8 @@ commands:
     - 'console: msg %player% &aThis command works in all worlds'
   example2:
     command: /onlynether
-    per-world:
-       enable: true
-       list:
-       - 'world_nether'
+    worlds:
+    - 'world_nether'
+    not_executed: '&cYou cannot execute this command in the world you are in'
     run_commands:
     - 'console: msg %player% &aThis command only works in the nether world'

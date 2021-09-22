@@ -42,6 +42,7 @@ public class NexusCommand implements CommandExecutor {
 						main.reloadKits();
 						main.reloadMessages();
 						main.reloadWarps();
+						main.reloadCommands();
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("reloaded_plugin")));
 					} else {
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
