@@ -3,16 +3,16 @@ The Nexus is a plugin that aims to include an all in one of the basic needs of a
 
 ## Features already added
 
- - MOTD
+- MOTD
 - Titles
 - Actionbar
 - Tablist
 - Scoreboard
-- Chat utilities [Chat Form, AntiSwear, CMDBlocker, etc...].
+- Chat utilities [Chat Format, AntiSwear, CMDBlocker, etc...].
 - Custom Commands
 
 ## Planned features
-- 300 commands. [For players, moderation, etc...].
+- +300 commands. [For players, moderation, etc...].
 - Kits
 - Warps
 - Permissions manager
