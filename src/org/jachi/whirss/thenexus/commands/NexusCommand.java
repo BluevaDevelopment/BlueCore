@@ -25,7 +25,7 @@ public class NexusCommand implements CommandExecutor {
 
 			if(args.length > 0){
 				if(args[0].equalsIgnoreCase("help")){
-					if(p.hasPermission("thenexus.admin.help") || sender.hasPermission("thenexus.admin.*")){
+					if(p.hasPermission("thenexus.help") || sender.hasPermission("thenexus.*")){
 						sender.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "The" + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Nexus");
 						sender.sendMessage(ChatColor.GRAY + "Version: " + main.version + " | By Whirss");
 						sender.sendMessage("");
@@ -37,18 +37,19 @@ public class NexusCommand implements CommandExecutor {
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
 					}
 				}else if(args[0].equalsIgnoreCase("reload")){
-					if(p.hasPermission("thenexus.admin.reload") || sender.hasPermission("thenexus.admin.*")){
+					if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
 						main.reloadConfig();
 						main.reloadKits();
 						main.reloadMessages();
 						main.reloadWarps();
 						main.reloadCommands();
+						main.reloadWorlds();
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("reloaded_plugin")));
 					} else {
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
 					}
 				}else if(args[0].equalsIgnoreCase("wiki")){
-					if(p.hasPermission("thenexus.admin.reload") || sender.hasPermission("thenexus.admin.*")){
+					if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("reloaded_plugin")));
 					} else {
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
@@ -57,7 +58,7 @@ public class NexusCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("unknown_command")));
 				}
 			}else{
-				if(sender.hasPermission("thenexus.admin.help") || sender.hasPermission("thenexus.admin.*")) {
+				if(sender.hasPermission("thenexus.help") || sender.hasPermission("thenexus.*")) {
 					sender.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "The" + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Nexus");
 					sender.sendMessage(ChatColor.GRAY + "Version: " + main.version + " | By Whirss");
 					sender.sendMessage("");

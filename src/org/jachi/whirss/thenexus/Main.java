@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -19,6 +21,7 @@ import org.jachi.whirss.thenexus.admins.LastLocationAdmin;
 import org.jachi.whirss.thenexus.admins.ScoreboardAdmin;
 import org.jachi.whirss.thenexus.admins.TablistAdmin;
 import org.jachi.whirss.thenexus.commands.NexusCommand;
+import org.jachi.whirss.thenexus.commands.WorldManagerCommand;
 import org.jachi.whirss.thenexus.events.OnPlayerChatAsync;
 import org.jachi.whirss.thenexus.events.OnPlayerCommand;
 import org.jachi.whirss.thenexus.events.OnPlayerDeath;
@@ -37,6 +40,8 @@ public final class Main extends JavaPlugin {
 	private File messagesFile = null;
 	private FileConfiguration userdata = null;
 	private File userdataFile = null;
+	private FileConfiguration worlds = null;
+	private File worldsFile = null;
 	
 	public String version = "1.0.0";
 	
@@ -56,6 +61,7 @@ public final class Main extends JavaPlugin {
 		registerKits();
 		registerMessages();
 		registerWarps();
+		registerWorlds();
 		
 		if(getConfig().getBoolean("metrics")) {
 			int pluginId = 12700; 
@@ -70,7 +76,13 @@ public final class Main extends JavaPlugin {
 		
 		LastLocationAdmin lastlocation = new LastLocationAdmin(this);
 		lastlocation.createLastLocation();
-		
+
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
+			@Override
+			public void run(){
+				LoadWorlds();
+			}
+		});
 	}
 	
 	public void onDisable() {
@@ -94,6 +106,44 @@ public final class Main extends JavaPlugin {
 	
 	public void RegisterPluginCommands() {
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
+		this.getCommand("worldmanager").setExecutor(new WorldManagerCommand(this));
+	}
+
+	public void LoadWorlds() {
+		if(getWorlds().isSet("worlds")) {
+			Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Loading worlds from \\plugins\\TheNexus\\worlds.yml");
+			for (String key : getWorlds().getConfigurationSection("worlds").getKeys(false)) {
+				Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Loading world " + key.toString());
+				WorldCreator setupworld = new WorldCreator(key);
+				setupworld.createWorld();
+			}
+		} else {
+			Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Importing worlds from the server to TheNexus World Manager");
+			for (World world : Bukkit.getWorlds()) {
+				getWorlds().set("worlds." + world.getName() + ".alias", world.getName());
+				getWorlds().set("worlds." + world.getName() + ".build", true);
+				getWorlds().set("worlds." + world.getName() + ".break", true);
+				getWorlds().set("worlds." + world.getName() + ".pvp", true);
+				getWorlds().set("worlds." + world.getName() + ".fall_damage", true);
+				getWorlds().set("worlds." + world.getName() + ".interact", true);
+				getWorlds().set("worlds." + world.getName() + ".drop_items", true);
+				getWorlds().set("worlds." + world.getName() + ".mob_spawning", true);
+				getWorlds().set("worlds." + world.getName() + ".difficulty", "NORMAL");
+				getWorlds().set("worlds." + world.getName() + ".respawnWorld", "");
+				getWorlds().set("worlds." + world.getName() + ".allowWeather", true);
+				getWorlds().set("worlds." + world.getName() + ".seed", world.getSeed());
+				getWorlds().set("worlds." + world.getName() + ".generator", "");
+				getWorlds().set("worlds." + world.getName() + ".environment", world.getEnvironment().toString());
+				getWorlds().set("worlds." + world.getName() + ".type", "LARGE_BIOMES");
+				getWorlds().set("worlds." + world.getName() + ".spawnlocation.x", 0.0);
+				getWorlds().set("worlds." + world.getName() + ".spawnlocation.y", 65.0);
+				getWorlds().set("worlds." + world.getName() + ".spawnlocation.z", 0.0);
+				getWorlds().set("worlds." + world.getName() + ".spawnlocation.pitch", 0.0);
+				getWorlds().set("worlds." + world.getName() + ".spawnlocation.yaw", 0.0);
+				saveWorlds();
+				Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Imported world: " + world.getName());
+			}
+		}
 	}
 	
 	//config.yml
@@ -359,5 +409,54 @@ public final class Main extends JavaPlugin {
   			saveCommands();
   		}
   	}
+
+	//worlds.yml:
+	public FileConfiguration getWorlds() {
+		if(worlds == null) {
+			reloadWorlds();
+		}
+		return worlds;
+	}
+
+	public void reloadWorlds(){
+		if(worlds == null){
+			worldsFile = new File(getDataFolder(),"worlds.yml");
+		}
+		worlds = YamlConfiguration.loadConfiguration(worldsFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("worlds.yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				worlds.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveWorlds(){
+		try{
+			worlds.save(worldsFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerWorlds(){
+		worldsFile = new File(this.getDataFolder(),"worlds.yml");
+		if(!worldsFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\worlds.yml");
+			this.getWorlds().options().copyDefaults(true);
+			getWorlds().options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveWorlds();
+		}
+	}
 
 }

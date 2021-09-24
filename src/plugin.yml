@@ -11,3 +11,7 @@ commands:
       aliases: [thenexus, tn, nx, x]
       description: Command for players
       usage: /nexus [action]
+   worldmanager:
+      aliases: [ world, worlds, wm, w ]
+      description: World Manager
+      usage: /worldmanager [action]

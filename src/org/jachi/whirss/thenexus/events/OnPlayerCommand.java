@@ -89,12 +89,12 @@ public class OnPlayerCommand implements Listener {
 			}
 		}
 
-		if(main.getConfig().getBoolean("command_blocker.enabled")) {
+		if(main.getConfig().getBoolean("chat.command_blocker.enabled")) {
 	    	String[] arrayOfString;
 	        int j = (arrayOfString = event.getMessage().split(" ")).length;
 	        for (int i = 0; i < j; i++) {
 	          String bcmd = arrayOfString[i];
-	          if (main.getConfig().getStringList("command_blocker.list").contains(bcmd.toLowerCase())) {
+	          if (main.getConfig().getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
 	            event.setCancelled(true);
 	            event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
 	          } 
