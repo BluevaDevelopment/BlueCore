@@ -107,7 +107,8 @@ public class WorldManagerCommand implements CommandExecutor {
                                 setupworld.type(WorldType.NORMAL);
                                 setupworld.generateStructures(true);
                                 setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".alias", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
                                 main.getWorlds().set("worlds." + worldname + ".build", true);
                                 main.getWorlds().set("worlds." + worldname + ".break", true);
                                 main.getWorlds().set("worlds." + worldname + ".pvp", true);
@@ -144,7 +145,8 @@ public class WorldManagerCommand implements CommandExecutor {
                                 setupworld.generatorSettings("2;0;1;");
                                 setupworld.generateStructures(false);
                                 setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".alias", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
                                 main.getWorlds().set("worlds." + worldname + ".build", true);
                                 main.getWorlds().set("worlds." + worldname + ".break", true);
                                 main.getWorlds().set("worlds." + worldname + ".pvp", true);
@@ -180,7 +182,8 @@ public class WorldManagerCommand implements CommandExecutor {
                                 setupworld.type(WorldType.LARGE_BIOMES);
                                 setupworld.generateStructures(true);
                                 setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".alias", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
                                 main.getWorlds().set("worlds." + worldname + ".build", true);
                                 main.getWorlds().set("worlds." + worldname + ".break", true);
                                 main.getWorlds().set("worlds." + worldname + ".pvp", true);
@@ -216,7 +219,8 @@ public class WorldManagerCommand implements CommandExecutor {
                                 setupworld.type(WorldType.AMPLIFIED);
                                 setupworld.generateStructures(true);
                                 setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".alias", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
+                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
                                 main.getWorlds().set("worlds." + worldname + ".build", true);
                                 main.getWorlds().set("worlds." + worldname + ".break", true);
                                 main.getWorlds().set("worlds." + worldname + ".pvp", true);
@@ -285,12 +289,12 @@ public class WorldManagerCommand implements CommandExecutor {
                 } else {
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
-            }else if(args[0].equalsIgnoreCase("goto")){
+            }else if(args[0].equalsIgnoreCase("setspawn")){
                 if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.goto") ||
+                        sender.hasPermission("thenexus.worldmanager.setspawn") ||
                         sender.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.RED + "Usage /wm tp <worldname>");
+                        p.sendMessage(ChatColor.RED + "Usage: /wm setspawn <worldname>");
                         return true;
                     }
                     if (args.length == 2) {
@@ -299,7 +303,57 @@ public class WorldManagerCommand implements CommandExecutor {
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
                             return true;
                         }
-                        p.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", p.getLocation().getX());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", p.getLocation().getY());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", p.getLocation().getZ());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", p.getLocation().getPitch());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", p.getLocation().getYaw());
+                        main.saveWorlds();
+                    }
+                } else {
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                }
+            }else if(args[0].equalsIgnoreCase("spawn")){
+                if(p.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.worldmanager.spawn") ||
+                        sender.hasPermission("thenexus.worldmanager.*")){
+                    if (args.length == 1) {
+                        String worldname = p.getPlayer().getWorld().getName();
+                        World world = Bukkit.getWorld(main.getWorlds().getString("worlds." + worldname + ".name"));
+                        double x = Double.valueOf(main.getWorlds().getDouble("worlds." + worldname + ".spawnlocation.x"));
+                        double y = Double.valueOf(main.getWorlds().getDouble("worlds." + worldname + ".spawnlocation.y"));
+                        double z = Double.valueOf(main.getWorlds().getDouble("worlds." + worldname + ".spawnlocation.z"));
+                        float pitch = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.pitch"));
+                        float yaw = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.yaw"));
+                        Location loc = new Location(world, x, y, z, yaw, pitch);
+                        p.teleport(loc);
+                        return true;
+                    }
+                } else {
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                }
+            }else if(args[0].equalsIgnoreCase("goto")){
+                if(p.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.worldmanager.goto") ||
+                        sender.hasPermission("thenexus.worldmanager.*")){
+                    if (args.length == 1) {
+                        p.sendMessage(ChatColor.RED + "Usage /wm goto <worldname>");
+                        return true;
+                    }
+                    if (args.length == 2) {
+                        String worldname = args[1];
+                        if (Bukkit.getWorld(worldname) == null) {
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
+                            return true;
+                        }
+                        World world = Bukkit.getWorld(main.getWorlds().getString("worlds." + worldname + ".name"));
+                        double x = Double.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.x"));
+                        double y = Double.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.y"));
+                        double z = Double.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.z"));
+                        float pitch = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.pitch"));
+                        float yaw = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.yaw"));
+                        Location loc = new Location(world, x, y, z, yaw, pitch);
+                        p.teleport(loc);
                         return true;
                     }
                 } else {
@@ -408,6 +462,7 @@ public class WorldManagerCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.AQUA + "/wm unload <worldname>" + ChatColor.GRAY + " - Unloads the world without deleting it");
                 sender.sendMessage(ChatColor.AQUA + "/wm delete <worldname>" + ChatColor.GRAY + " - Delete an alredy existing world");
                 sender.sendMessage(ChatColor.AQUA + "/wm import <worldname>" + ChatColor.GRAY + " - Import a world from server file");
+                sender.sendMessage(ChatColor.AQUA + "/wm setspawn <worldname>" + ChatColor.GRAY + " - Sets the spawn of a world");
                 sender.sendMessage(ChatColor.AQUA + "/wm goto <worldname>" + ChatColor.GRAY + " - Teleport to a world");
                 sender.sendMessage(ChatColor.AQUA + "/wm types <worldname>" + ChatColor.GRAY + " - List of world types");
                 sender.sendMessage(ChatColor.AQUA + "/wm list <worldname>" + ChatColor.GRAY + " - List of loaded worlds");

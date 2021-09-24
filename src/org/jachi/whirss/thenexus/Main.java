@@ -120,7 +120,8 @@ public final class Main extends JavaPlugin {
 		} else {
 			Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Importing worlds from the server to TheNexus World Manager");
 			for (World world : Bukkit.getWorlds()) {
-				getWorlds().set("worlds." + world.getName() + ".alias", world.getName());
+				getWorlds().set("worlds." + world.getName() + ".name", world.getName());
+				getWorlds().set("worlds." + world.getName() + ".alias", "&a" + world.getName().replace("_", " "));
 				getWorlds().set("worlds." + world.getName() + ".build", true);
 				getWorlds().set("worlds." + world.getName() + ".break", true);
 				getWorlds().set("worlds." + world.getName() + ".pvp", true);

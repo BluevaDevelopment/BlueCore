@@ -10,13 +10,13 @@ The Nexus is a plugin that aims to include an all in one of the basic needs of a
 - Scoreboard
 - Chat utilities [Chat Format, AntiSwear, CMDBlocker, etc...].
 - Custom Commands
+- World manager
 
 ## Planned features
 - +300 commands. [For players, moderation, etc...].
 - Kits
 - Warps
 - Permissions manager
-- World manager
 - Hologram manager
 - Economy system
 
