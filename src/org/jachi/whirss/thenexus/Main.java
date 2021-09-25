@@ -134,8 +134,8 @@ public final class Main extends JavaPlugin {
 				getWorlds().set("worlds." + world.getName() + ".allowWeather", true);
 				getWorlds().set("worlds." + world.getName() + ".seed", world.getSeed());
 				getWorlds().set("worlds." + world.getName() + ".generator", "");
-				getWorlds().set("worlds." + world.getName() + ".environment", world.getEnvironment().toString());
-				getWorlds().set("worlds." + world.getName() + ".type", "LARGE_BIOMES");
+				getWorlds().set("worlds." + world.getName() + ".environment", world.getWorldType().toString());
+				getWorlds().set("worlds." + world.getName() + ".type", "");
 				getWorlds().set("worlds." + world.getName() + ".spawnlocation.x", 0.0);
 				getWorlds().set("worlds." + world.getName() + ".spawnlocation.y", 65.0);
 				getWorlds().set("worlds." + world.getName() + ".spawnlocation.z", 0.0);

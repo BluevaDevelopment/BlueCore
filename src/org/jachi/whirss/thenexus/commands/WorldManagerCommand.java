@@ -21,304 +21,260 @@ public class WorldManagerCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+        final Player player = (Player)sender;
+
         if (!(sender instanceof Player)) {
-            sender.sendMessage("You must be a player to run this command.");
+            player.sendMessage("You must be a player to run this command.");
             return true;
         }
-        final Player p = (Player)sender;
 
         if(args.length > 0){
             if(args[0].equalsIgnoreCase("help")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.help") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
-                    sender.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
-                    sender.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/thenexus/worldmanager");
-                    sender.sendMessage("");
-                    sender.sendMessage(ChatColor.AQUA + "/wm create <worldname> [-worldtype]" + ChatColor.GRAY + " - Creates a new world");
-                    sender.sendMessage(ChatColor.AQUA + "/wm unload <worldname>" + ChatColor.GRAY + " - Unloads the world without deleting it");
-                    sender.sendMessage(ChatColor.AQUA + "/wm delete <worldname>" + ChatColor.GRAY + " - Delete an alredy existing world");
-                    sender.sendMessage(ChatColor.AQUA + "/wm import <worldname>" + ChatColor.GRAY + " - Import a world from server file");
-                    sender.sendMessage(ChatColor.AQUA + "/wm goto <worldname>" + ChatColor.GRAY + " - Teleport to a world");
-                    sender.sendMessage(ChatColor.AQUA + "/wm types <worldname>" + ChatColor.GRAY + " - List of world types");
-                    sender.sendMessage(ChatColor.AQUA + "/wm list <worldname>" + ChatColor.GRAY + " - List of loaded worlds");
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.help") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
+                    player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
+                    player.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/thenexus/worldmanager");
+                    player.sendMessage("");
+                    player.sendMessage(ChatColor.AQUA + "/wm create <worldname> [-worldtype]" + ChatColor.GRAY + " - Creates a new world");
+                    player.sendMessage(ChatColor.AQUA + "/wm unload <worldname>" + ChatColor.GRAY + " - Unloads the world without deleting it");
+                    player.sendMessage(ChatColor.AQUA + "/wm delete <worldname>" + ChatColor.GRAY + " - Delete an alredy existing world");
+                    player.sendMessage(ChatColor.AQUA + "/wm import <worldname>" + ChatColor.GRAY + " - Import a world from server file");
+                    player.sendMessage(ChatColor.AQUA + "/wm goto <worldname>" + ChatColor.GRAY + " - Teleport to a world");
+                    player.sendMessage(ChatColor.AQUA + "/wm setspawn" + ChatColor.GRAY + " - Sets the spawn of a world");
+                    player.sendMessage(ChatColor.AQUA + "/wm types" + ChatColor.GRAY + " - List of world types");
+                    player.sendMessage(ChatColor.AQUA + "/wm list" + ChatColor.GRAY + " - List of loaded worlds");
 
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("create")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.create") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.create") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <-worldtype>");
+                        player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> <type>");
                         return true;
                     }
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) != null) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_alredy_exist").replace("%worldmanager_worldname%",  worldname)));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_alredy_exist").replace("%worldmanager_worldname%",  worldname)));
+                            return true;
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment>");
                             return true;
                         }
-                    } else if (args.length == 3) {
-                        String worldtype = args[2];
-                        String worldname = args[1];
-                        if (worldtype.equals("-flat")) {
+                    }
+                    if (args.length == 3) {
+                        if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             try {
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", worldname)));
-                                WorldCreator setupworld = new WorldCreator(worldname);
-                                setupworld.type(WorldType.FLAT);
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", args[1])));
+                                WorldCreator setupworld = new WorldCreator(args[1]);
+                                setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
                                 setupworld.generateStructures(true);
                                 setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".alias", worldname);
-                                main.getWorlds().set("worlds." + worldname + ".build", true);
-                                main.getWorlds().set("worlds." + worldname + ".break", true);
-                                main.getWorlds().set("worlds." + worldname + ".pvp", true);
-                                main.getWorlds().set("worlds." + worldname + ".fall_damage", true);
-                                main.getWorlds().set("worlds." + worldname + ".interact", true);
-                                main.getWorlds().set("worlds." + worldname + ".drop_items", true);
-                                main.getWorlds().set("worlds." + worldname + ".mob_spawning", true);
-                                main.getWorlds().set("worlds." + worldname + ".difficulty", "NORMAL");
-                                main.getWorlds().set("worlds." + worldname + ".respawnWorld", "");
-                                main.getWorlds().set("worlds." + worldname + ".allowWeather", true);
-                                main.getWorlds().set("worlds." + worldname + ".seed", Bukkit.getWorld(worldname).getSeed());
-                                main.getWorlds().set("worlds." + worldname + ".generator", "");
-                                main.getWorlds().set("worlds." + worldname + ".generator", "");
-                                main.getWorlds().set("worlds." + worldname + ".environment", Bukkit.getWorld(worldname).getEnvironment().toString());
-                                main.getWorlds().set("worlds." + worldname + ".type", "FLAT");
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", 65.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", 0.0);
+                                main.getWorlds().set("worlds." + args[1] + ".name", args[1]);
+                                main.getWorlds().set("worlds." + args[1] + ".alias", "&a" + args[1].replace("_", " "));
+                                main.getWorlds().set("worlds." + args[1] + ".build", true);
+                                main.getWorlds().set("worlds." + args[1] + ".break", true);
+                                main.getWorlds().set("worlds." + args[1] + ".pvp", true);
+                                main.getWorlds().set("worlds." + args[1] + ".fall_damage", true);
+                                main.getWorlds().set("worlds." + args[1] + ".interact", true);
+                                main.getWorlds().set("worlds." + args[1] + ".drop_items", true);
+                                main.getWorlds().set("worlds." + args[1] + ".mob_spawning", true);
+                                main.getWorlds().set("worlds." + args[1] + ".difficulty", "NORMAL");
+                                main.getWorlds().set("worlds." + args[1] + ".respawnWorld", "");
+                                main.getWorlds().set("worlds." + args[1] + ".allowWeather", true);
+                                main.getWorlds().set("worlds." + args[1] + ".seed", Bukkit.getWorld(args[1]).getSeed());
+                                main.getWorlds().set("worlds." + args[1] + ".generator", "");
+                                main.getWorlds().set("worlds." + args[1] + ".generator", "");
+                                main.getWorlds().set("worlds." + args[1] + ".environment", args[2].toUpperCase());
+                                main.getWorlds().set("worlds." + args[1] + ".type", "NORMAL");
+                                main.getWorlds().set("worlds." + args[1] + ".spawnlocation.x", 0.0);
+                                main.getWorlds().set("worlds." + args[1] + ".spawnlocation.y", 65.0);
+                                main.getWorlds().set("worlds." + args[1] + ".spawnlocation.z", 0.0);
+                                main.getWorlds().set("worlds." + args[1] + ".spawnlocation.pitch", 0.0);
+                                main.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
                                 main.saveWorlds();
-                                p.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world").replace("%worldmanager_worldname%", worldname)));
+                                player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world")).replace("%worldmanager_worldname%", args[1]));
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
+                                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
                             }
                             return true;
+                        } else {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_args")));
                         }
-                        if (worldtype.equals("-normal")) {
-                            try {
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", worldname)));
-                                WorldCreator setupworld = new WorldCreator(worldname);
-                                setupworld.type(WorldType.NORMAL);
-                                setupworld.generateStructures(true);
-                                setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
-                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
-                                main.getWorlds().set("worlds." + worldname + ".build", true);
-                                main.getWorlds().set("worlds." + worldname + ".break", true);
-                                main.getWorlds().set("worlds." + worldname + ".pvp", true);
-                                main.getWorlds().set("worlds." + worldname + ".fall_damage", true);
-                                main.getWorlds().set("worlds." + worldname + ".interact", true);
-                                main.getWorlds().set("worlds." + worldname + ".drop_items", true);
-                                main.getWorlds().set("worlds." + worldname + ".mob_spawning", true);
-                                main.getWorlds().set("worlds." + worldname + ".difficulty", "NORMAL");
-                                main.getWorlds().set("worlds." + worldname + ".respawnWorld", "");
-                                main.getWorlds().set("worlds." + worldname + ".allowWeather", true);
-                                main.getWorlds().set("worlds." + worldname + ".seed", Bukkit.getWorld(worldname).getSeed());
-                                main.getWorlds().set("worlds." + worldname + ".generator", "");
-                                main.getWorlds().set("worlds." + worldname + ".environment", Bukkit.getWorld(worldname).getEnvironment().toString());
-                                main.getWorlds().set("worlds." + worldname + ".type", "NORMAL");
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", 65.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", 0.0);
-                                main.saveWorlds();
-                                p.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world").replace("%worldmanager_worldname%", worldname)));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
+                    }
+                    if (args.length == 4) {
+                        if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
+                            if(args[3].equals("-t")) {
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
+                            } else if(args[3].equals("-g")) {
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
+                            } else {
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
                             }
-                            return true;
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
                         }
-                        if (worldtype.equals("-void")) {
-                            try {
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", worldname)));
-                                WorldCreator setupworld = new WorldCreator(worldname);
-                                setupworld.type(WorldType.FLAT);
-                                setupworld.generatorSettings("2;0;1;");
-                                setupworld.generateStructures(false);
-                                setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
-                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
-                                main.getWorlds().set("worlds." + worldname + ".build", true);
-                                main.getWorlds().set("worlds." + worldname + ".break", true);
-                                main.getWorlds().set("worlds." + worldname + ".pvp", true);
-                                main.getWorlds().set("worlds." + worldname + ".fall_damage", true);
-                                main.getWorlds().set("worlds." + worldname + ".interact", true);
-                                main.getWorlds().set("worlds." + worldname + ".drop_items", true);
-                                main.getWorlds().set("worlds." + worldname + ".mob_spawning", true);
-                                main.getWorlds().set("worlds." + worldname + ".difficulty", "VOID");
-                                main.getWorlds().set("worlds." + worldname + ".respawnWorld", "");
-                                main.getWorlds().set("worlds." + worldname + ".allowWeather", true);
-                                main.getWorlds().set("worlds." + worldname + ".seed", Bukkit.getWorld(worldname).getSeed());
-                                main.getWorlds().set("worlds." + worldname + ".generator", "");
-                                main.getWorlds().set("worlds." + worldname + ".environment", Bukkit.getWorld(worldname).getEnvironment().toString());
-                                main.getWorlds().set("worlds." + worldname + ".type", "FLAT");
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", 65.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", 0.0);
-                                main.saveWorlds();
-                                p.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world").replace("%worldmanager_worldname%", worldname)));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
+
+                    }
+                    if (args.length == 5) {
+                        if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
+                            if(args[3].equals("-t")) {
+                                if(args[4].equals("flat") || args[4].equals("large_biomes") || args[4].equals("normal") || args[4].equals("amplified")) {
+                                    try {
+                                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", args[1])));
+                                        WorldCreator setupworld = new WorldCreator(args[1]);
+                                        setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
+                                        setupworld.type(WorldType.valueOf(args[4].toUpperCase()));
+                                        setupworld.generateStructures(true);
+                                        setupworld.createWorld();
+                                        main.getWorlds().set("worlds." + args[1] + ".name", args[1]);
+                                        main.getWorlds().set("worlds." + args[1] + ".alias", "&a" + args[1].replace("_", " "));
+                                        main.getWorlds().set("worlds." + args[1] + ".build", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".break", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".pvp", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".fall_damage", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".interact", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".drop_items", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".mob_spawning", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".difficulty", "NORMAL");
+                                        main.getWorlds().set("worlds." + args[1] + ".respawnWorld", "");
+                                        main.getWorlds().set("worlds." + args[1] + ".allowWeather", true);
+                                        main.getWorlds().set("worlds." + args[1] + ".seed", Bukkit.getWorld(args[1]).getSeed());
+                                        main.getWorlds().set("worlds." + args[1] + ".generator", "");
+                                        main.getWorlds().set("worlds." + args[1] + ".generator", "");
+                                        main.getWorlds().set("worlds." + args[1] + ".environment", args[2].toUpperCase());
+                                        main.getWorlds().set("worlds." + args[1] + ".type", args[4].toLowerCase());
+                                        main.getWorlds().set("worlds." + args[1] + ".spawnlocation.x", 0.0);
+                                        main.getWorlds().set("worlds." + args[1] + ".spawnlocation.y", 65.0);
+                                        main.getWorlds().set("worlds." + args[1] + ".spawnlocation.z", 0.0);
+                                        main.getWorlds().set("worlds." + args[1] + ".spawnlocation.pitch", 0.0);
+                                        main.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
+                                        main.saveWorlds();
+                                        player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
+                                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world")).replace("%worldmanager_worldname%", args[1]));
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
+                                    }
+                                }
+                            } else if(args[3].equals("-g")) {
+                                if(args[4].isBlank()) {
+                                    player.sendMessage("pene");
+                                }
+                                try {
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", args[1])));
+                                    WorldCreator setupworld = new WorldCreator(args[1]);
+                                    setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
+                                    setupworld.type(WorldType.NORMAL);
+                                    setupworld.generateStructures(true);
+                                    setupworld.generator(args[4]);
+                                    setupworld.createWorld();
+                                    main.getWorlds().set("worlds." + args[1] + ".name", args[1]);
+                                    main.getWorlds().set("worlds." + args[1] + ".alias", "&a" + args[1].replace("_", " "));
+                                    main.getWorlds().set("worlds." + args[1] + ".build", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".break", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".pvp", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".fall_damage", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".interact", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".drop_items", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".mob_spawning", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".difficulty", "NORMAL");
+                                    main.getWorlds().set("worlds." + args[1] + ".respawnWorld", "");
+                                    main.getWorlds().set("worlds." + args[1] + ".allowWeather", true);
+                                    main.getWorlds().set("worlds." + args[1] + ".seed", Bukkit.getWorld(args[1]).getSeed());
+                                    main.getWorlds().set("worlds." + args[1] + ".generator", "");
+                                    main.getWorlds().set("worlds." + args[1] + ".generator", args[4]);
+                                    main.getWorlds().set("worlds." + args[1] + ".environment", args[2].toUpperCase());
+                                    main.getWorlds().set("worlds." + args[1] + ".type", "NORMAL");
+                                    main.getWorlds().set("worlds." + args[1] + ".spawnlocation.x", 0.0);
+                                    main.getWorlds().set("worlds." + args[1] + ".spawnlocation.y", 65.0);
+                                    main.getWorlds().set("worlds." + args[1] + ".spawnlocation.z", 0.0);
+                                    main.getWorlds().set("worlds." + args[1] + ".spawnlocation.pitch", 0.0);
+                                    main.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
+                                    main.saveWorlds();
+                                    player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world")).replace("%worldmanager_worldname%", args[1]));
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
+                                }
+                            } else {
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> || -t <type> || -g <generator>");
                             }
-                            return true;
+                        } else {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_args")));
                         }
-                        if (worldtype.equals("-large_biomes")) {
-                            try {
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", worldname)));
-                                WorldCreator setupworld = new WorldCreator(worldname);
-                                setupworld.type(WorldType.LARGE_BIOMES);
-                                setupworld.generateStructures(true);
-                                setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
-                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
-                                main.getWorlds().set("worlds." + worldname + ".build", true);
-                                main.getWorlds().set("worlds." + worldname + ".break", true);
-                                main.getWorlds().set("worlds." + worldname + ".pvp", true);
-                                main.getWorlds().set("worlds." + worldname + ".fall_damage", true);
-                                main.getWorlds().set("worlds." + worldname + ".interact", true);
-                                main.getWorlds().set("worlds." + worldname + ".drop_items", true);
-                                main.getWorlds().set("worlds." + worldname + ".mob_spawning", true);
-                                main.getWorlds().set("worlds." + worldname + ".difficulty", "NORMAL");
-                                main.getWorlds().set("worlds." + worldname + ".respawnWorld", "");
-                                main.getWorlds().set("worlds." + worldname + ".allowWeather", true);
-                                main.getWorlds().set("worlds." + worldname + ".seed", Bukkit.getWorld(worldname).getSeed());
-                                main.getWorlds().set("worlds." + worldname + ".generator", "");
-                                main.getWorlds().set("worlds." + worldname + ".environment", Bukkit.getWorld(worldname).getEnvironment().toString());
-                                main.getWorlds().set("worlds." + worldname + ".type", "LARGE_BIOMES");
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", 65.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", 0.0);
-                                main.saveWorlds();
-                                p.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world").replace("%worldmanager_worldname%", worldname)));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
-                            }
-                            return true;
-                        }
-                        if (worldtype.equals("-amplified")) {
-                            try {
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creating_world").replace("%worldmanager_worldname%", worldname)));
-                                WorldCreator setupworld = new WorldCreator(worldname);
-                                setupworld.type(WorldType.AMPLIFIED);
-                                setupworld.generateStructures(true);
-                                setupworld.createWorld();
-                                main.getWorlds().set("worlds." + worldname + ".name", worldname);
-                                main.getWorlds().set("worlds." + worldname + ".alias", "&a" + worldname.replace("_", " "));
-                                main.getWorlds().set("worlds." + worldname + ".build", true);
-                                main.getWorlds().set("worlds." + worldname + ".break", true);
-                                main.getWorlds().set("worlds." + worldname + ".pvp", true);
-                                main.getWorlds().set("worlds." + worldname + ".fall_damage", true);
-                                main.getWorlds().set("worlds." + worldname + ".interact", true);
-                                main.getWorlds().set("worlds." + worldname + ".drop_items", true);
-                                main.getWorlds().set("worlds." + worldname + ".mob_spawning", true);
-                                main.getWorlds().set("worlds." + worldname + ".difficulty", "NORMAL");
-                                main.getWorlds().set("worlds." + worldname + ".respawnWorld", "");
-                                main.getWorlds().set("worlds." + worldname + ".allowWeather", true);
-                                main.getWorlds().set("worlds." + worldname + ".seed", Bukkit.getWorld(worldname).getSeed());
-                                main.getWorlds().set("worlds." + worldname + ".generator", "");
-                                main.getWorlds().set("worlds." + worldname + ".environment", Bukkit.getWorld(worldname).getEnvironment().toString());
-                                main.getWorlds().set("worlds." + worldname + ".type", "AMPLIFIED");
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", 65.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", 0.0);
-                                main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", 0.0);
-                                main.saveWorlds();
-                                p.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_created_world").replace("%worldmanager_worldname%", worldname)));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
-                            }
-                            return true;
-                        }
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_worldtype")));
-                        return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("delete")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.delete") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.delete") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.RED + "Usage /wm remove <worldname>");
-                        p.sendMessage(ChatColor.DARK_AQUA + "Make sure all players are out of the world!");
+                        player.sendMessage(ChatColor.RED + "Usage /wm remove <worldname>");
+                        player.sendMessage(ChatColor.DARK_AQUA + "Make sure all players are out of the world!");
                         return true;
                     }
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
                             return true;
                         }
                         if (!Bukkit.getWorld(worldname).getPlayers().isEmpty()) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_players_in_world")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_players_in_world")));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, false);
                         try {
                             FileUtils.deleteDirectory(new File(worldname));
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_deleted_world".replace("%worldmanager_worldname%", worldname))));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_deleted_world".replace("%worldmanager_worldname%", worldname))));
                             main.getWorlds().set("worlds." + worldname, null);
                             main.saveWorlds();
                         } catch (IOException e) {
                             e.printStackTrace();
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_deletion_error")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_deletion_error")));
                         }
                         return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("setspawn")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.setspawn") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.setspawn") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.RED + "Usage: /wm setspawn <worldname>");
-                        return true;
-                    }
-                    if (args.length == 2) {
-                        String worldname = args[1];
+                        String worldname = player.getWorld().getName();
                         if (Bukkit.getWorld(worldname) == null) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
                             return true;
                         }
-                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", p.getLocation().getX());
-                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", p.getLocation().getY());
-                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", p.getLocation().getZ());
-                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", p.getLocation().getPitch());
-                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", p.getLocation().getYaw());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", player.getLocation().getX());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.y", player.getLocation().getY());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.z", player.getLocation().getZ());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.pitch", player.getLocation().getPitch());
+                        main.getWorlds().set("worlds." + worldname + ".spawnlocation.yaw", player.getLocation().getYaw());
                         main.saveWorlds();
+                        return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("spawn")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.spawn") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.spawn") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        String worldname = p.getPlayer().getWorld().getName();
+                        String worldname = player.getWorld().getName();
                         World world = Bukkit.getWorld(main.getWorlds().getString("worlds." + worldname + ".name"));
                         double x = Double.valueOf(main.getWorlds().getDouble("worlds." + worldname + ".spawnlocation.x"));
                         double y = Double.valueOf(main.getWorlds().getDouble("worlds." + worldname + ".spawnlocation.y"));
@@ -326,24 +282,24 @@ public class WorldManagerCommand implements CommandExecutor {
                         float pitch = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.pitch"));
                         float yaw = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.yaw"));
                         Location loc = new Location(world, x, y, z, yaw, pitch);
-                        p.teleport(loc);
+                        player.teleport(loc);
                         return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("goto")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.goto") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.goto") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.RED + "Usage /wm goto <worldname>");
+                        player.sendMessage(ChatColor.RED + "Usage /wm goto <worldname>");
                         return true;
                     }
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
                             return true;
                         }
                         World world = Bukkit.getWorld(main.getWorlds().getString("worlds." + worldname + ".name"));
@@ -353,121 +309,121 @@ public class WorldManagerCommand implements CommandExecutor {
                         float pitch = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.pitch"));
                         float yaw = Float.valueOf(main.getWorlds().getString("worlds." + worldname + ".spawnlocation.yaw"));
                         Location loc = new Location(world, x, y, z, yaw, pitch);
-                        p.teleport(loc);
+                        player.teleport(loc);
                         return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("unload")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.unload") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.unload") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.RED + "Usage: /wm unload <worldname>");
+                        player.sendMessage(ChatColor.RED + "Usage: /wm unload <worldname>");
                         return true;
                     }
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
                             return true;
                         }
                         if (!Bukkit.getWorld(worldname).getPlayers().isEmpty()) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_players_in_world")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_players_in_world")));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, false);
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_unloaded_world".replace("%worldmanager_worldname%", worldname))));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_unloaded_world".replace("%worldmanager_worldname%", worldname))));
                         return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("import")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.import") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.import") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.RED + "Usage: /wm import <worldname>");
+                        player.sendMessage(ChatColor.RED + "Usage: /wm import <worldname>");
                         return true;
                     }
                     if (args.length == 2) {
                         String worldname = args[1];
                         File worldfile = new File(Bukkit.getServer().getWorldContainer(), worldname);
                         if (!worldfile.exists()) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_world")));
                             return true;
                         }
                         if (Bukkit.getWorld(worldname) != null) {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_already_imported")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_already_imported")));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, true);
                         try {
                             WorldCreator setupworld = new WorldCreator(worldname);
                             setupworld.createWorld();
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_imported_world".replace("%worldmanager_worldname%", worldname))));
-                            p.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_imported_world".replace("%worldmanager_worldname%", worldname))));
+                            player.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
                         } catch (Exception e) {
                             e.printStackTrace();
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_imported_error")));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_imported_error")));
                         }
                         return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("list")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.list") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.list") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        p.sendMessage(ChatColor.GOLD + "worlds: [" + Bukkit.getWorlds().size() + "]");
-                        p.sendMessage("");
+                        player.sendMessage(ChatColor.GOLD + "worlds: [" + Bukkit.getWorlds().size() + "]");
+                        player.sendMessage("");
                         for (World worlds : Bukkit.getWorlds())
-                            p.sendMessage(ChatColor.YELLOW + worlds.getName() + ChatColor.GRAY + " - " + worlds.getWorldType());
+                            player.sendMessage(ChatColor.YELLOW + worlds.getName() + ChatColor.GRAY + " - " + worlds.getWorldType());
                         return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("types")){
-                if(p.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.worldmanager.types") ||
-                        sender.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("thenexus.*") ||
+                        player.hasPermission("thenexus.worldmanager.types") ||
+                        player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        sender.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
-                        p.sendMessage(ChatColor.GREEN + "Types:");
-                        p.sendMessage("");
-                        p.sendMessage(ChatColor.AQUA + "-normal = Minecraft Vanilla world");
-                        p.sendMessage(ChatColor.AQUA + "-flat = FlatLand world");
-                        p.sendMessage(ChatColor.AQUA + "-void = Completely air world");
-                        p.sendMessage(ChatColor.AQUA + "-large_biomes = large biomes world");
-                        p.sendMessage(ChatColor.AQUA + "-amplified = land-forms, biomes, and the size of all terrain in general is blown out of proportion");
+                        player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
+                        player.sendMessage(ChatColor.GREEN + "Types:");
+                        player.sendMessage("");
+                        player.sendMessage(ChatColor.AQUA + "-normal = Minecraft Vanilla world");
+                        player.sendMessage(ChatColor.AQUA + "-flat = FlatLand world");
+                        player.sendMessage(ChatColor.AQUA + "-void = Completely air world");
+                        player.sendMessage(ChatColor.AQUA + "-large_biomes = large biomes world");
+                        player.sendMessage(ChatColor.AQUA + "-amplified = land-forms, biomes, and the size of all terrain in general is blown out of proportion");
                         return true;
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
                 }
             }else{
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("unknown_command")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("unknown_command")));
             }
         }else{
-            if(sender.hasPermission("thenexus.admin.help") || sender.hasPermission("thenexus.admin.*")) {
-                sender.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
-                sender.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/thenexus/worldmanager");
-                sender.sendMessage("");
-                sender.sendMessage(ChatColor.AQUA + "/wm create <worldname> [-worldtype]" + ChatColor.GRAY + " - Creates a new world");
-                sender.sendMessage(ChatColor.AQUA + "/wm unload <worldname>" + ChatColor.GRAY + " - Unloads the world without deleting it");
-                sender.sendMessage(ChatColor.AQUA + "/wm delete <worldname>" + ChatColor.GRAY + " - Delete an alredy existing world");
-                sender.sendMessage(ChatColor.AQUA + "/wm import <worldname>" + ChatColor.GRAY + " - Import a world from server file");
-                sender.sendMessage(ChatColor.AQUA + "/wm setspawn <worldname>" + ChatColor.GRAY + " - Sets the spawn of a world");
-                sender.sendMessage(ChatColor.AQUA + "/wm goto <worldname>" + ChatColor.GRAY + " - Teleport to a world");
-                sender.sendMessage(ChatColor.AQUA + "/wm types <worldname>" + ChatColor.GRAY + " - List of world types");
-                sender.sendMessage(ChatColor.AQUA + "/wm list <worldname>" + ChatColor.GRAY + " - List of loaded worlds");
+            if(player.hasPermission("thenexus.admin.help") || player.hasPermission("thenexus.admin.*")) {
+                player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
+                player.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/thenexus/worldmanager");
+                player.sendMessage("");
+                player.sendMessage(ChatColor.AQUA + "/wm create <worldname> [-worldtype]" + ChatColor.GRAY + " - Creates a new world");
+                player.sendMessage(ChatColor.AQUA + "/wm unload <worldname>" + ChatColor.GRAY + " - Unloads the world without deleting it");
+                player.sendMessage(ChatColor.AQUA + "/wm delete <worldname>" + ChatColor.GRAY + " - Delete an alredy existing world");
+                player.sendMessage(ChatColor.AQUA + "/wm import <worldname>" + ChatColor.GRAY + " - Import a world from server file");
+                player.sendMessage(ChatColor.AQUA + "/wm goto <worldname>" + ChatColor.GRAY + " - Teleport to a world");
+                player.sendMessage(ChatColor.AQUA + "/wm setspawn" + ChatColor.GRAY + " - Sets the spawn of a world");
+                player.sendMessage(ChatColor.AQUA + "/wm types" + ChatColor.GRAY + " - List of world types");
+                player.sendMessage(ChatColor.AQUA + "/wm list" + ChatColor.GRAY + " - List of loaded worlds");
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
             }
         }
         return true;
