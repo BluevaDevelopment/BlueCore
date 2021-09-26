@@ -111,14 +111,14 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 4) {
                         if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             if(args[3].equals("-t")) {
-                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> || -g <generator>");
                             } else if(args[3].equals("-g")) {
-                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> || -g <generator>");
                             } else {
-                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> || -g <generator>");
                             }
                         } else {
-                            player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> -g <generator>");
+                            player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> || -g <generator>");
                         }
 
                     }
@@ -205,7 +205,7 @@ public class WorldManagerCommand implements CommandExecutor {
                                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_creation_error")));
                                 }
                             } else {
-                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> || -t <type> || -g <generator>");
+                                player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> || -g <generator>");
                             }
                         } else {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("wm_invalid_args")));

@@ -1,0 +1,34 @@
+package org.jachi.whirss.thenexus.events;
+
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.jachi.whirss.thenexus.Main;
+
+public class OnPlaceBlock implements Listener {
+
+    private Main main;
+
+    public OnPlaceBlock(Main main) {
+        this.main = main;
+    }
+
+    @EventHandler
+    public void OnPlayerPlaceBlock(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        World world = event.getPlayer().getWorld();
+        if(world.equals(main.getWorlds().getStringList("worlds")) && main.getWorlds().getBoolean("worlds." + world + ".build")) {
+            if(player.hasPermission("thenexus.*") ||
+                    player.hasPermission("thenexus.worldmanager.bypass") ||
+                    player.hasPermission("thenexus.worldmanager.*")){
+                event.setCancelled(false);
+            } else {
+                event.setCancelled(true);
+            }
+        }
+
+    }
+}

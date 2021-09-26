@@ -22,11 +22,7 @@ import org.jachi.whirss.thenexus.admins.ScoreboardAdmin;
 import org.jachi.whirss.thenexus.admins.TablistAdmin;
 import org.jachi.whirss.thenexus.commands.NexusCommand;
 import org.jachi.whirss.thenexus.commands.WorldManagerCommand;
-import org.jachi.whirss.thenexus.events.OnPlayerChatAsync;
-import org.jachi.whirss.thenexus.events.OnPlayerCommand;
-import org.jachi.whirss.thenexus.events.OnPlayerDeath;
-import org.jachi.whirss.thenexus.events.OnPlayerJoin;
-import org.jachi.whirss.thenexus.events.OnPlayerQuit;
+import org.jachi.whirss.thenexus.events.*;
 
 public final class Main extends JavaPlugin {
 	
@@ -97,11 +93,17 @@ public final class Main extends JavaPlugin {
 	public void RegisterEvents() {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new OnPlayerJoin(this), this);
-		pm.registerEvents(new OnPlayerQuit(this), this);
-		pm.registerEvents(new OnPlayerDeath(this), this);
+		pm.registerEvents(new OnEntityDamage(this), this);
+		pm.registerEvents(new OnEntitySpawn(this), this);
+		pm.registerEvents(new OnPlaceBlock(this), this);
 		pm.registerEvents(new OnPlayerChatAsync(this), this);
 		pm.registerEvents(new OnPlayerCommand(this), this);
-		
+		pm.registerEvents(new OnPlayerDeath(this), this);
+		pm.registerEvents(new OnPlayerDropItem(this), this);
+		pm.registerEvents(new OnPlayerInteract(this), this);
+		pm.registerEvents(new OnPlayerJoin(this), this);
+		pm.registerEvents(new OnPlayerQuit(this), this);
+
 	}
 	
 	public void RegisterPluginCommands() {
