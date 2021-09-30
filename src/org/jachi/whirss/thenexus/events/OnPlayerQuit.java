@@ -1,6 +1,5 @@
 package org.jachi.whirss.thenexus.events;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

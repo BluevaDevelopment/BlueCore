@@ -1,6 +1,5 @@
 package org.jachi.whirss.thenexus.events;
 
-import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
