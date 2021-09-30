@@ -18,11 +18,11 @@ public class OnEntityDamage implements Listener {
 
     @EventHandler
     public void OnEntityDamage(EntityDamageEvent event) {
-        if(event.getEntityType()== EntityType.PLAYER){
+        if(event.getEntity() instanceof Player) {
             {
                 Player player = (Player) event.getEntity();
-                World world = event.getEntity().getWorld();
-                if (world.equals(main.getWorlds().getStringList("worlds")) && main.getWorlds().getBoolean("worlds." + world + ".fall_damage")) {
+                String worldname = player.getWorld().getName();
+                if (!main.getWorlds().getBoolean("worlds." + worldname + ".fall_damage")) {
                     if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
                         if (player.hasPermission("thenexus.*") ||
                                 player.hasPermission("thenexus.worldmanager.bypass") ||
@@ -34,7 +34,7 @@ public class OnEntityDamage implements Listener {
                     }
                 }
 
-                if (world.equals(main.getWorlds().getStringList("worlds")) && main.getWorlds().getBoolean("worlds." + world + ".pvp")) {
+                if (!main.getWorlds().getBoolean("worlds." + worldname + ".pvp")) {
                     if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                         if (event.getEntityType() == EntityType.PLAYER) {
                             if (player.hasPermission("thenexus.*") ||

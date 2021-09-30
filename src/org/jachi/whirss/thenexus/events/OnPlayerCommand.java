@@ -12,15 +12,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import org.jachi.whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.MessageUtil;
 
 public class OnPlayerCommand implements Listener {
-	
+
 	private Main main;
-	
+
 	public OnPlayerCommand(Main main) {
 		this.main = main;
 	}
-	
+
 	@EventHandler
 	public void OnCommand(PlayerCommandPreprocessEvent event) {
 		Player player = event.getPlayer();
@@ -51,7 +52,7 @@ public class OnPlayerCommand implements Listener {
 								if (commandToSend.startsWith("console:")) {
 									if (commandToSend.contains("msg " + player.getName())) {
 										String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-										player.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+										player.sendMessage(MessageUtil.getColorMessage(msg));
 									} else {
 										Bukkit.dispatchCommand((CommandSender)consoleCommandSender, commandToSend.replace("console: ", ""));
 									}
@@ -62,9 +63,9 @@ public class OnPlayerCommand implements Listener {
 							return;
 						} else {
 							if(main.getCommands().isSet("commands." + key + ".not_executed")) {
-								player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getCommands().getString("commands." + key + ".not_executed")));
+								player.sendMessage(MessageUtil.getColorMessage(main.getCommands().getString("commands." + key + ".not_executed")));
 							} else {
-								player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("not_executed_default")));
+								player.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("not_executed_default")));
 							}
 						}
 					}
@@ -76,7 +77,7 @@ public class OnPlayerCommand implements Listener {
 						if (commandToSend.startsWith("console:")) {
 							if (commandToSend.contains("msg " + player.getName())) {
 								String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-								player.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+								player.sendMessage(MessageUtil.getColorMessage(msg));
 							} else {
 								Bukkit.dispatchCommand((CommandSender)consoleCommandSender, commandToSend.replace("console: ", ""));
 							}
@@ -90,16 +91,16 @@ public class OnPlayerCommand implements Listener {
 		}
 
 		if(main.getConfig().getBoolean("chat.command_blocker.enabled")) {
-	    	String[] arrayOfString;
-	        int j = (arrayOfString = event.getMessage().split(" ")).length;
-	        for (int i = 0; i < j; i++) {
-	          String bcmd = arrayOfString[i];
-	          if (main.getConfig().getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
-	            event.setCancelled(true);
-	            event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("no_perms")));
-	          } 
-	        }
-	    }
+			String[] arrayOfString;
+			int j = (arrayOfString = event.getMessage().split(" ")).length;
+			for (int i = 0; i < j; i++) {
+				String bcmd = arrayOfString[i];
+				if (main.getConfig().getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
+					event.setCancelled(true);
+					event.getPlayer().sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("no_perms")));
+				}
+			}
+		}
 	}
 
 }

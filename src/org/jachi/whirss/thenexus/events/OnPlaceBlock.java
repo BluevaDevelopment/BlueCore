@@ -1,12 +1,10 @@
 package org.jachi.whirss.thenexus.events;
 
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.jachi.whirss.thenexus.Main;
 
 public class OnPlaceBlock implements Listener {
@@ -21,7 +19,7 @@ public class OnPlaceBlock implements Listener {
     public void OnPlayerPlaceBlock(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(main.getWorlds().getBoolean("worlds." + worldname + ".build")) {
+        if(!main.getWorlds().getBoolean("worlds." + worldname + ".build")) {
             if(player.hasPermission("thenexus.*") ||
                     player.hasPermission("thenexus.worldmanager.bypass") ||
                     player.hasPermission("thenexus.worldmanager.*")){

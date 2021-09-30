@@ -19,6 +19,7 @@ The Nexus is a plugin that aims to include an all in one of the basic needs of a
 - Permissions manager
 - Hologram manager
 - Economy system
+- Auth System
 
 And it will surely end up with many more features!
 

@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import org.jachi.whirss.thenexus.Main;
+import org.jachi.whirss.thenexus.MessageUtil;
 
 public class OnPlayerChatAsync implements Listener {
 	
@@ -36,7 +37,7 @@ public class OnPlayerChatAsync implements Listener {
 							message = message.replace(blockedWords, a);
 						}
 						if(main.getConfig().getString("chat.antiswear.mode").equals("block")) {
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getMessages().getString("antiswear_block")));
+							player.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("antiswear_block")));
 							event.setCancelled(true);
 							return;
 						}
@@ -48,7 +49,7 @@ public class OnPlayerChatAsync implements Listener {
 		}
 		if(!main.getConfig().getString("chat.format").equals("none")) {
 			String formated_message = main.getConfig().getString("chat.format").replaceFirst("%player_displayname%", player.getDisplayName()).replaceFirst("%message%", message);
-			event.setFormat(ChatColor.translateAlternateColorCodes('&', formated_message));
+			event.setFormat(MessageUtil.getColorMessage(formated_message));
 		}
 		if(main.getConfig().getBoolean("chat.per_world")) {
 			Player sender = player;

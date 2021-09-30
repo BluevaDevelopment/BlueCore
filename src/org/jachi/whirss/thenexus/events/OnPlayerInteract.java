@@ -18,8 +18,8 @@ public class OnPlayerInteract implements Listener {
     @EventHandler
     public void OnPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        World world = event.getPlayer().getWorld();
-        if(world.equals(main.getWorlds().getStringList("worlds")) && main.getWorlds().getBoolean("worlds." + world + ".interact")) {
+        String worldname = event.getPlayer().getWorld().getName();
+        if(!main.getWorlds().getBoolean("worlds." + worldname + ".interact")) {
             if(player.hasPermission("thenexus.*") ||
                     player.hasPermission("thenexus.worldmanager.bypass") ||
                     player.hasPermission("thenexus.worldmanager.*")){
