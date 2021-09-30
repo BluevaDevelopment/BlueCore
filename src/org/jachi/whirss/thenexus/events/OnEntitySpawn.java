@@ -18,11 +18,12 @@ public class OnEntitySpawn implements Listener {
 
     @EventHandler
     public void OnEntitySpawn(EntitySpawnEvent event) {
-        Player player = (Player) event.getEntity();
-        World world = player.getWorld();
-        if(world.equals(main.getWorlds().getStringList("worlds")) && main.getWorlds().getBoolean("worlds." + world + ".mob_spawning") && !(event.getEntity() instanceof Player)) {
-            event.setCancelled(true);
+        if(event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            World world = player.getWorld();
+            if(world.equals(main.getWorlds().getStringList("worlds")) && main.getWorlds().getBoolean("worlds." + world + ".mob_spawning") && !(event.getEntity() instanceof Player)) {
+                event.setCancelled(true);
+            }
         }
-
     }
 }
