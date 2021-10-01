@@ -20,7 +20,8 @@ public class OnBreakBlock implements Listener {
         String worldname = event.getPlayer().getWorld().getName();
         if(main.getWorlds().getBoolean("worlds." + worldname + ".break")) {
             if(player.hasPermission("thenexus.*") ||
-                    player.hasPermission("thenexus.worldmanager.bypass") ||
+                    player.hasPermission("thenexus.worldmanager.bypass.*") ||
+                    player.hasPermission("thenexus.worldmanager.bypass.break") ||
                     player.hasPermission("thenexus.worldmanager.*")){
                 event.setCancelled(false);
             } else {

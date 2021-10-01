@@ -380,10 +380,11 @@ public class WorldManagerCommand implements CommandExecutor {
                         player.hasPermission("thenexus.worldmanager.list") ||
                         player.hasPermission("thenexus.worldmanager.*")){
                     if (args.length == 1) {
-                        player.sendMessage(ChatColor.GOLD + "worlds: [" + Bukkit.getWorlds().size() + "]");
+                        player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
+                        player.sendMessage(ChatColor.GREEN + "List of worlds [" + Bukkit.getWorlds().size() + "]");
                         player.sendMessage("");
                         for (World worlds : Bukkit.getWorlds())
-                            player.sendMessage(ChatColor.YELLOW + worlds.getName() + ChatColor.GRAY + " - " + worlds.getWorldType());
+                            player.sendMessage(ChatColor.AQUA + worlds.getName() + ChatColor.GRAY + " - " + worlds.getWorldType());
                         return true;
                     }
                 } else {

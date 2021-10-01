@@ -20,7 +20,8 @@ public class OnPlayerDropItem implements Listener {
         String worldname = event.getPlayer().getWorld().getName();
         if(!main.getWorlds().getBoolean("worlds." + worldname + ".drop_items")) {
             if(player.hasPermission("thenexus.*") ||
-                    player.hasPermission("thenexus.worldmanager.bypass") ||
+                    player.hasPermission("thenexus.worldmanager.bypass.*") ||
+                    player.hasPermission("thenexus.worldmanager.bypass.drop_items") ||
                     player.hasPermission("thenexus.worldmanager.*")){
                 event.setCancelled(false);
             } else {

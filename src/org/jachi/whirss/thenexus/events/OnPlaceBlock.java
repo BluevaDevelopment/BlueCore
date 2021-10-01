@@ -20,7 +20,8 @@ public class OnPlaceBlock implements Listener {
         String worldname = event.getPlayer().getWorld().getName();
         if(!main.getWorlds().getBoolean("worlds." + worldname + ".build")) {
             if(player.hasPermission("thenexus.*") ||
-                    player.hasPermission("thenexus.worldmanager.bypass") ||
+                    player.hasPermission("thenexus.worldmanager.bypass.*") ||
+                    player.hasPermission("thenexus.worldmanager.bypass.build") ||
                     player.hasPermission("thenexus.worldmanager.*")){
                 event.setCancelled(false);
             } else {
