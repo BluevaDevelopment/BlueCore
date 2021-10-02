@@ -45,18 +45,18 @@ public class NexusCommand implements CommandExecutor {
 					main.reloadWarps();
 					main.reloadCommands();
 					main.reloadWorlds();
-					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("reloaded_plugin")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.reloaded_plugin")));
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("no_perms")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
 				}
 			}else if(args[0].equalsIgnoreCase("wiki")){
 				if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
-					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("reloaded_plugin")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.reloaded_plugin")));
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("no_perms")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
 				}
 			}else{
-				sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("unknown_command")));
+				sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_command")));
 			}
 		}else{
 			if(sender.hasPermission("thenexus.help") || sender.hasPermission("thenexus.*")) {

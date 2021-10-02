@@ -36,7 +36,7 @@ public class OnPlayerChatAsync implements Listener {
 							message = message.replace(blockedWords, a);
 						}
 						if(main.getConfig().getString("chat.antiswear.mode").equals("block")) {
-							player.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("antiswear_block")));
+							player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.antiswear_block")));
 							event.setCancelled(true);
 							return;
 						}
