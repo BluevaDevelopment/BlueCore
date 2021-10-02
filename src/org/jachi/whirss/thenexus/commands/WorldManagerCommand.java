@@ -47,7 +47,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.AQUA + "/wm list" + ChatColor.GRAY + " - List of loaded worlds");
 
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("create")){
                 if(player.hasPermission("thenexus.*") ||
@@ -60,7 +60,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) != null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_alredy_exist").replace("%worldmanager_worldname%",  worldname)));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_alredy_exist").replace("%worldmanager_worldname%",  worldname), player));
                             return true;
                         } else {
                             player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment>");
@@ -70,7 +70,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 3) {
                         if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             try {
-                                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.wm_creating_world").replace("%worldmanager_worldname%", args[1])));
+                                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.wm_creating_world"), player).replace("%worldmanager_worldname%", args[1]));
                                 WorldCreator setupworld = new WorldCreator(args[1]);
                                 setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
                                 setupworld.generateStructures(true);
@@ -99,14 +99,14 @@ public class WorldManagerCommand implements CommandExecutor {
                                 main.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
                                 main.saveWorlds();
                                 player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_created_world")).replace("%worldmanager_worldname%", args[1]));
+                                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_created_world"), player).replace("%worldmanager_worldname%", args[1]));
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_creation_error")));
+                                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_creation_error"), player));
                             }
                             return true;
                         } else {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_args")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_args"), player));
                         }
                     }
                     if (args.length == 4) {
@@ -128,7 +128,7 @@ public class WorldManagerCommand implements CommandExecutor {
                             if(args[3].equals("-t")) {
                                 if(args[4].equals("flat") || args[4].equals("large_biomes") || args[4].equals("normal") || args[4].equals("amplified")) {
                                     try {
-                                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.wm_creating_world").replace("%worldmanager_worldname%", args[1])));
+                                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.wm_creating_world"), player).replace("%worldmanager_worldname%", args[1]));
                                         WorldCreator setupworld = new WorldCreator(args[1]);
                                         setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
                                         setupworld.type(WorldType.valueOf(args[4].toUpperCase()));
@@ -158,10 +158,10 @@ public class WorldManagerCommand implements CommandExecutor {
                                         main.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
                                         main.saveWorlds();
                                         player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_created_world")).replace("%worldmanager_worldname%", args[1]));
+                                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_created_world"), player).replace("%worldmanager_worldname%", args[1]));
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_creation_error")));
+                                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_creation_error"), player));
                                     }
                                 }
                             } else if(args[3].equals("-g")) {
@@ -169,7 +169,7 @@ public class WorldManagerCommand implements CommandExecutor {
                                     player.sendMessage("pene");
                                 }
                                 try {
-                                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.wm_creating_world").replace("%worldmanager_worldname%", args[1])));
+                                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.wm_creating_world"), player).replace("%worldmanager_worldname%", args[1]));
                                     WorldCreator setupworld = new WorldCreator(args[1]);
                                     setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
                                     setupworld.type(WorldType.NORMAL);
@@ -200,20 +200,20 @@ public class WorldManagerCommand implements CommandExecutor {
                                     main.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
                                     main.saveWorlds();
                                     player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_created_world")).replace("%worldmanager_worldname%", args[1]));
+                                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_created_world"), player).replace("%worldmanager_worldname%", args[1]));
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_creation_error")));
+                                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_creation_error"), player));
                                 }
                             } else {
                                 player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> || -g <generator>");
                             }
                         } else {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_args")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_args"), player));
                         }
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("delete")){
                 if(player.hasPermission("thenexus.*") ||
@@ -227,27 +227,27 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world"), player));
                             return true;
                         }
                         if (!Bukkit.getWorld(worldname).getPlayers().isEmpty()) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_players_in_world")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_players_in_world"), player));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, false);
                         try {
                             FileUtils.deleteDirectory(new File(worldname));
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_deleted_world".replace("%worldmanager_worldname%", worldname))));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_deleted_world"), player).replace("%worldmanager_worldname%", worldname));
                             main.getWorlds().set("worlds." + worldname, null);
                             main.saveWorlds();
                         } catch (IOException e) {
                             e.printStackTrace();
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_deletion_error")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_deletion_error"), player));
                         }
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("setspawn")){
                 if(player.hasPermission("thenexus.*") ||
@@ -256,7 +256,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 1) {
                         String worldname = player.getWorld().getName();
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world"), player));
                             return true;
                         }
                         main.getWorlds().set("worlds." + worldname + ".spawnlocation.x", player.getLocation().getX());
@@ -268,7 +268,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("spawn")){
                 if(player.hasPermission("thenexus.*") ||
@@ -287,7 +287,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("goto")){
                 if(player.hasPermission("thenexus.*") ||
@@ -300,7 +300,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world"), player));
                             return true;
                         }
                         World world = Bukkit.getWorld(main.getWorlds().getString("worlds." + worldname + ".name"));
@@ -314,7 +314,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("unload")){
                 if(player.hasPermission("thenexus.*") ||
@@ -327,19 +327,19 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world"), player));
                             return true;
                         }
                         if (!Bukkit.getWorld(worldname).getPlayers().isEmpty()) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_players_in_world")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_players_in_world"), player));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, false);
-                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_unloaded_world".replace("%worldmanager_worldname%", worldname))));
+                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_unloaded_world"), player).replace("%worldmanager_worldname%", worldname));
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("import")){
                 if(player.hasPermission("thenexus.*") ||
@@ -353,27 +353,27 @@ public class WorldManagerCommand implements CommandExecutor {
                         String worldname = args[1];
                         File worldfile = new File(Bukkit.getServer().getWorldContainer(), worldname);
                         if (!worldfile.exists()) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_invalid_world"), player));
                             return true;
                         }
                         if (Bukkit.getWorld(worldname) != null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_already_imported")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_already_imported"), player));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, true);
                         try {
                             WorldCreator setupworld = new WorldCreator(worldname);
                             setupworld.createWorld();
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_imported_world".replace("%worldmanager_worldname%", worldname))));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.wm_imported_world"), player).replace("%worldmanager_worldname%", worldname));
                             player.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
                         } catch (Exception e) {
                             e.printStackTrace();
-                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_imported_error")));
+                            player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.wm_imported_error"), player));
                         }
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("list")){
                 if(player.hasPermission("thenexus.*") ||
@@ -388,7 +388,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("types")){
                 if(player.hasPermission("thenexus.*") ||
@@ -406,10 +406,10 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else{
-                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_command")));
+                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_command"), player));
             }
         }else{
             if(player.hasPermission("thenexus.admin.help") || player.hasPermission("thenexus.admin.*")) {
@@ -425,7 +425,7 @@ public class WorldManagerCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.AQUA + "/wm types" + ChatColor.GRAY + " - List of world types");
                 player.sendMessage(ChatColor.AQUA + "/wm list" + ChatColor.GRAY + " - List of loaded worlds");
             } else {
-                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+                player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
             }
         }
         return true;

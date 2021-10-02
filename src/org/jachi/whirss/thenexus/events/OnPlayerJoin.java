@@ -32,7 +32,7 @@ public class OnPlayerJoin implements Listener {
 				public void run() {
 					for(int i=0;i<description.size();i++) {
 						String message = description.get(i);
-						event.getPlayer().sendMessage(MessageUtil.getColorMessage(message));
+						event.getPlayer().sendMessage(MessageUtil.getColorMessage(message, event.getPlayer()));
 					}
 				}
 			}, main.getConfig().getInt("welcome.message.wait"));
@@ -41,7 +41,7 @@ public class OnPlayerJoin implements Listener {
 		if(main.getConfig().getBoolean("welcome.title.enabled")) {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 				public void run() {
-					event.getPlayer().sendTitle(MessageUtil.getColorMessage(main.getConfig().getString("welcome.title.title")), MessageUtil.getColorMessage(main.getConfig().getString("welcome.title.subtitle")), main.getConfig().getInt("welcome.title.fade-in"), main.getConfig().getInt("welcome.title.stay"), main.getConfig().getInt("welcome.title.fade-out"));
+					event.getPlayer().sendTitle(MessageUtil.getColorMessage(main.getConfig().getString("welcome.title.title"), event.getPlayer()), MessageUtil.getColorMessage(main.getConfig().getString("welcome.title.subtitle"), event.getPlayer()), main.getConfig().getInt("welcome.title.fade-in"), main.getConfig().getInt("welcome.title.stay"), main.getConfig().getInt("welcome.title.fade-out"));
 				}
 			}, main.getConfig().getInt("welcome.title.wait"));
 
@@ -50,14 +50,14 @@ public class OnPlayerJoin implements Listener {
 		if(main.getConfig().getBoolean("welcome.actionbar.enabled")) {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 				public void run() {
-					TextComponent text_component = new TextComponent(MessageUtil.getColorMessage(main.getConfig().getString("welcome.actionbar.message")));
+					TextComponent text_component = new TextComponent(MessageUtil.getColorMessage(main.getConfig().getString("welcome.actionbar.message"), event.getPlayer()));
 					event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, text_component);
 				}
 			}, main.getConfig().getInt("welcome.actionbar.wait"));
 		}
 
 		if(main.getConfig().getBoolean("welcome.broadcast.join.enabled")) {
-			event.setJoinMessage(MessageUtil.getColorMessage(main.getConfig().getString("welcome.broadcast.join.message").replace("%player_name%", event.getPlayer().getDisplayName())));
+			event.setJoinMessage(MessageUtil.getColorMessage(main.getConfig().getString("welcome.broadcast.join.message"), event.getPlayer()).replace("%player_name%", event.getPlayer().getDisplayName()));
 		} else {
 			event.setJoinMessage("");
 		}

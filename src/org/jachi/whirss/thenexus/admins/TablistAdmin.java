@@ -33,8 +33,8 @@ public class TablistAdmin {
 	}
 
 	private void updateTablist(Player p) {
-		p.setPlayerListHeader(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.getConfig().getStringList("tablist.header"), "\n")));
-		p.setPlayerListFooter(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.getConfig().getStringList("tablist.footer"), "\n")).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
+		p.setPlayerListHeader(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.getConfig().getStringList("tablist.header"), "\n"), p));
+		p.setPlayerListFooter(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.getConfig().getStringList("tablist.footer"), "\n"), p).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
 	}
 
 

@@ -36,7 +36,7 @@ public class OnPlayerChatAsync implements Listener {
 							message = message.replace(blockedWords, a);
 						}
 						if(main.getConfig().getString("chat.antiswear.mode").equals("block")) {
-							player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.antiswear_block")));
+							player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.info.antiswear_block"), player));
 							event.setCancelled(true);
 							return;
 						}
@@ -48,7 +48,7 @@ public class OnPlayerChatAsync implements Listener {
 		}
 		if(!main.getConfig().getString("chat.format").equals("none")) {
 			String formated_message = main.getConfig().getString("chat.format").replaceFirst("%player_displayname%", player.getDisplayName()).replaceFirst("%message%", message);
-			event.setFormat(MessageUtil.getColorMessage(formated_message));
+			event.setFormat(MessageUtil.getColorMessage(formated_message, player));
 		}
 		if(main.getConfig().getBoolean("chat.per_world")) {
 			Player sender = player;

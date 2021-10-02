@@ -51,7 +51,7 @@ public class OnPlayerCommand implements Listener {
 								if (commandToSend.startsWith("console:")) {
 									if (commandToSend.contains("msg " + player.getName())) {
 										String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-										player.sendMessage(MessageUtil.getColorMessage(msg));
+										player.sendMessage(MessageUtil.getColorMessage(msg, player));
 									} else {
 										Bukkit.dispatchCommand((CommandSender)consoleCommandSender, commandToSend.replace("console: ", ""));
 									}
@@ -62,9 +62,9 @@ public class OnPlayerCommand implements Listener {
 							return;
 						} else {
 							if(main.getCommands().isSet("commands." + key + ".not_executed")) {
-								player.sendMessage(MessageUtil.getColorMessage(main.getCommands().getString("commands." + key + ".not_executed")));
+								player.sendMessage(MessageUtil.getColorMessage(main.getCommands().getString("commands." + key + ".not_executed"), player));
 							} else {
-								player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.not_executed_default")));
+								player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.not_executed_default"), player));
 							}
 						}
 					}
@@ -76,7 +76,7 @@ public class OnPlayerCommand implements Listener {
 						if (commandToSend.startsWith("console:")) {
 							if (commandToSend.contains("msg " + player.getName())) {
 								String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-								player.sendMessage(MessageUtil.getColorMessage(msg));
+								player.sendMessage(MessageUtil.getColorMessage(msg, player));
 							} else {
 								Bukkit.dispatchCommand((CommandSender)consoleCommandSender, commandToSend.replace("console: ", ""));
 							}
@@ -96,7 +96,7 @@ public class OnPlayerCommand implements Listener {
 				String bcmd = arrayOfString[i];
 				if (main.getConfig().getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));
+					event.getPlayer().sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
 				}
 			}
 		}

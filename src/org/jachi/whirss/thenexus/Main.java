@@ -43,6 +43,14 @@ public final class Main extends JavaPlugin {
 	private FileConfiguration es = null;
 	private File esFile = null;
 
+	//placeholderapi
+	public boolean placeholderapi = false;
+
+	//instance
+	private static Main instance;
+	public static Main getInstance() { return instance; }
+
+	//version
 	public String version = "1.0.0";
 
 	public void onEnable() {
@@ -52,6 +60,8 @@ public final class Main extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "");
+
+		instance = this;
 
 		RegisterEvents();
 		RegisterPluginCommands();
@@ -85,9 +95,17 @@ public final class Main extends JavaPlugin {
 		LastLocationAdmin lastlocation = new LastLocationAdmin(this);
 		lastlocation.createLastLocation();
 
+		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+			placeholderapi = true;
+		}
+
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 			@Override
 			public void run(){
+				if(!Bukkit.getVersion().contains("1.17")) {
+					Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[TheNexus] The version of the plugin you have installed is not compatible with your server. Download the correct version here: https://survcraft.org/thenexus");
+					Bukkit.shutdown();
+				}
 				LoadWorlds();
 			}
 		});
