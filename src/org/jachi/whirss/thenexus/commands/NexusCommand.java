@@ -41,10 +41,10 @@ public class NexusCommand implements CommandExecutor {
 				if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
 					main.reloadConfig();
 					main.reloadKits();
-					main.reloadLanguages();
 					main.reloadWarps();
 					main.reloadCommands();
 					main.reloadWorlds();
+					main.reloadLanguages();
 					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.reloaded_plugin")));
 				} else {
 					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms")));

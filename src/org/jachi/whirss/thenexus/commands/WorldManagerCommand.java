@@ -76,7 +76,7 @@ public class WorldManagerCommand implements CommandExecutor {
                                 setupworld.generateStructures(true);
                                 setupworld.createWorld();
                                 main.getWorlds().set("worlds." + args[1] + ".name", args[1]);
-                                main.getWorlds().set("worlds." + args[1] + ".alias", "&a" + args[1].replace("_", " "));
+                                main.getWorlds().set("worlds." + args[1] + ".alias", "&b" + args[1].replace("_", " "));
                                 main.getWorlds().set("worlds." + args[1] + ".build", true);
                                 main.getWorlds().set("worlds." + args[1] + ".break", true);
                                 main.getWorlds().set("worlds." + args[1] + ".pvp", true);
@@ -135,7 +135,7 @@ public class WorldManagerCommand implements CommandExecutor {
                                         setupworld.generateStructures(true);
                                         setupworld.createWorld();
                                         main.getWorlds().set("worlds." + args[1] + ".name", args[1]);
-                                        main.getWorlds().set("worlds." + args[1] + ".alias", "&a" + args[1].replace("_", " "));
+                                        main.getWorlds().set("worlds." + args[1] + ".alias", "&b" + args[1].replace("_", " "));
                                         main.getWorlds().set("worlds." + args[1] + ".build", true);
                                         main.getWorlds().set("worlds." + args[1] + ".break", true);
                                         main.getWorlds().set("worlds." + args[1] + ".pvp", true);
@@ -177,7 +177,7 @@ public class WorldManagerCommand implements CommandExecutor {
                                     setupworld.generator(args[4]);
                                     setupworld.createWorld();
                                     main.getWorlds().set("worlds." + args[1] + ".name", args[1]);
-                                    main.getWorlds().set("worlds." + args[1] + ".alias", "&a" + args[1].replace("_", " "));
+                                    main.getWorlds().set("worlds." + args[1] + ".alias", "&b" + args[1].replace("_", " "));
                                     main.getWorlds().set("worlds." + args[1] + ".build", true);
                                     main.getWorlds().set("worlds." + args[1] + ".break", true);
                                     main.getWorlds().set("worlds." + args[1] + ".pvp", true);

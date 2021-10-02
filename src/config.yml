@@ -22,8 +22,9 @@ no-modify: 100
 #      The Metrics version
 metrics: true
 
-# Languages:
+# Language:
 # Sets the language of all plugin messages
+# It is necessary to restart the server for it to take effect.
 #
 # Available languages:
 # English: en

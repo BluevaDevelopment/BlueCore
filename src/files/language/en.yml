@@ -22,4 +22,5 @@ messages:
     nexus_wiki: '&dCheck TheNexus wiki here: &fhttps://github.com/Whirss/TheNexus/wiki'
     antiswear_block: '&cPlease use appropriate language.'
     wm_creating_world: '&aCreating the world &b%worldmanager_worldname%&a.'
-  other: []
+  other:
+    loaded_language_console: 'The language English has been loaded successfully.'

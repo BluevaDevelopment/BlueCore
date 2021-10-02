@@ -25,7 +25,7 @@ import org.jachi.whirss.thenexus.commands.WorldManagerCommand;
 import org.jachi.whirss.thenexus.events.*;
 
 public final class Main extends JavaPlugin {
-	
+
 	private FileConfiguration commands = null;
 	private File commandsFile = null;
 	private FileConfiguration kits = null;
@@ -38,9 +38,13 @@ public final class Main extends JavaPlugin {
 	private File userdataFile = null;
 	private FileConfiguration worlds = null;
 	private File worldsFile = null;
-	
+
+	//languages
+	private FileConfiguration es = null;
+	private File esFile = null;
+
 	public String version = "1.0.0";
-	
+
 	public void onEnable() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " _____ _          _   _");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "|_   _| |__   ___| \\ | | _____  ___   _ ___");
@@ -48,10 +52,10 @@ public final class Main extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "");
-		
+
 		RegisterEvents();
 		RegisterPluginCommands();
-		
+
 		registerCommands();
 		registerConfig();
 		registerKits();
@@ -59,24 +63,25 @@ public final class Main extends JavaPlugin {
 		registerWorlds();
 		if(getConfig().getString("language").equals("en") || getConfig().getString("language").equals("es")) {
 			registerLanguages();
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Error getting the language set in config.yml");
+			registerEs();
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] " + getLanguages().getString("messages.other.loaded_language_console"));
 		} else {
 			Bukkit.getConsoleSender().sendMessage("[TheNexus] Error getting the language set in config.yml");
 			Bukkit.getConsoleSender().sendMessage("[TheNexus] Disabling the plugin...");
 			getServer().getPluginManager().disablePlugin(this);
 		}
-		
+
 		if(getConfig().getBoolean("metrics")) {
-			int pluginId = 12700; 
-	        new Metrics(this, pluginId);
+			int pluginId = 12700;
+			new Metrics(this, pluginId);
 		}
-		
+
 		ScoreboardAdmin scoreboard = new ScoreboardAdmin(this);
 		scoreboard.createScoreboard();
-		
+
 		TablistAdmin tablist = new TablistAdmin(this);
 		tablist.createTablist();
-		
+
 		LastLocationAdmin lastlocation = new LastLocationAdmin(this);
 		lastlocation.createLastLocation();
 
@@ -87,7 +92,7 @@ public final class Main extends JavaPlugin {
 			}
 		});
 	}
-	
+
 	public void onDisable() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + " _____ _          _   _");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "|_   _| |__   ___| \\ | | _____  ___   _ ___");
@@ -96,7 +101,7 @@ public final class Main extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "");
 	}
-	
+
 	public void RegisterEvents() {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new OnPlayerJoin(this), this);
@@ -112,7 +117,7 @@ public final class Main extends JavaPlugin {
 		pm.registerEvents(new OnPlayerQuit(this), this);
 
 	}
-	
+
 	public void RegisterPluginCommands() {
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
 		this.getCommand("worldmanager").setExecutor(new WorldManagerCommand(this));
@@ -130,7 +135,7 @@ public final class Main extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Importing worlds from the server to TheNexus World Manager");
 			for (World world : Bukkit.getWorlds()) {
 				getWorlds().set("worlds." + world.getName() + ".name", world.getName());
-				getWorlds().set("worlds." + world.getName() + ".alias", "&a" + world.getName().replace("_", " "));
+				getWorlds().set("worlds." + world.getName() + ".alias", "&b" + world.getName().replace("_", " "));
 				getWorlds().set("worlds." + world.getName() + ".build", true);
 				getWorlds().set("worlds." + world.getName() + ".break", true);
 				getWorlds().set("worlds." + world.getName() + ".pvp", true);
@@ -155,270 +160,221 @@ public final class Main extends JavaPlugin {
 			}
 		}
 	}
-	
+
 	//config.yml
 	public void registerConfig(){
 		File config = new File(this.getDataFolder(),"config.yml");
 		if(!config.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\config.yml");
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\config.yml");
 			this.getConfig().options().copyDefaults(true);
 			getConfig().options().header(" _____ _          _   _\r\n"
-  					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-  					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-  					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-  					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-  					+ "\r\n"
-  					+ "");
-			saveDefaultConfig();
-		}
-	}
-
-	//languages.yml:
-	public FileConfiguration getLanguages() {
-		if(languages == null) {
-			reloadLanguages();
-		}
-		return languages;
-	}
-
-	public void reloadLanguages(){
-		if(languages == null){
-			languagesFile = new File(getDataFolder(), "files/languages/language_" + getConfig().getString("language") + ".yml");
-		}
-		languages = YamlConfiguration.loadConfiguration(languagesFile);
-		Reader defConfigStream;
-		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/languages/language_" + getConfig().getString("language") + ".yml"),"UTF8");
-			if(defConfigStream != null){
-				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-				languages.setDefaults(defConfig);
-			}
-		}catch(UnsupportedEncodingException e){
-			e.printStackTrace();
-		}
-	}
-
-	public void saveLanguages(){
-		try{
-			languages.save(languagesFile);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}
-
-	public void registerLanguages(){
-		languagesFile = new File(this.getDataFolder(), "files/languages/language_" + getConfig().getString("language") + ".yml");
-		if(!languagesFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\language_" + getConfig().getString("language") + ".yml");
-			this.getLanguages().options().copyDefaults(true);
-			getLanguages().options().header(" _____ _          _   _\r\n"
 					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
 					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
 					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
 					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
 					+ "\r\n"
 					+ "");
-			saveLanguages();
+			saveDefaultConfig();
 		}
 	}
-  	
-  //kits.yml:
-  	public FileConfiguration getKits() {
-  		if(kits == null) {
-  			reloadKits();
-  		}
-  		return kits;
-  	}
-  	
-  	public void reloadKits(){
-  		if(kits == null){
-  			kitsFile = new File(getDataFolder(), "files/kits.yml");
-  		}
-  		kits = YamlConfiguration.loadConfiguration(kitsFile);
-  		Reader defConfigStream;
-  		try{
-  			defConfigStream = new InputStreamReader(this.getResource("files/kits.yml"),"UTF8");
-  			if(defConfigStream != null){
-  				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-  				kits.setDefaults(defConfig);
-  			}			
-  		}catch(UnsupportedEncodingException e){
-  			e.printStackTrace();
-  		}
-  	}
-  	
-  	public void saveKits(){
-  		try{
-  			kits.save(kitsFile);			
-  		}catch(IOException e){
-  			e.printStackTrace();
-  		}
-  	}
-   
-  	public void registerKits(){
-  		kitsFile = new File(this.getDataFolder(), "files/kits.yml");
-  		if(!kitsFile.exists()){
-  			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\kits.yml");
-  			this.getKits().options().copyDefaults(true);
-  			getKits().options().header(" _____ _          _   _\r\n"
-  					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-  					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-  					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-  					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-  					+ "\r\n"
-  					+ "");
-  			saveKits();
-  		}
-  	}
-  	
-  	
-  //warps.yml:
-  	public FileConfiguration getWarps() {
-  		if(warps == null) {
-  			reloadWarps();
-  		}
-  		return warps;
-  	}
-  	
-  	public void reloadWarps(){
-  		if(warps == null){
-  			warpsFile = new File(getDataFolder(), "files/warps.yml");
-  		}
-  		warps = YamlConfiguration.loadConfiguration(warpsFile);
-  		Reader defConfigStream;
-  		try{
-  			defConfigStream = new InputStreamReader(this.getResource("files/warps.yml"),"UTF8");
-  			if(defConfigStream != null){
-  				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-  				warps.setDefaults(defConfig);
-  			}			
-  		}catch(UnsupportedEncodingException e){
-  			e.printStackTrace();
-  		}
-  	}
-  	
-  	public void saveWarps(){
-  		try{
-  			warps.save(warpsFile);			
-  		}catch(IOException e){
-  			e.printStackTrace();
-  		}
-  	}
-   
-  	public void registerWarps(){
-  		warpsFile = new File(this.getDataFolder(), "files/warps.yml");
-  		if(!warpsFile.exists()){
-  			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\warps.yml");
-  			this.getWarps().options().copyDefaults(true);
-  			getWarps().options().header(" _____ _          _   _\r\n"
-  					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-  					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-  					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-  					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-  					+ "\r\n"
-  					+ "");
-  			saveWarps();
-  		}
-  	}
-  	
-  //userdata.yml:
-  	public FileConfiguration getUserdata(UUID uuid) {
-  		if(userdata == null) {
-  			reloadUserdata(uuid);
-  		}
-  		return userdata;
-  	}
-  	
-  	public void reloadUserdata(UUID uuid){
-  		if(userdata == null){
-  			userdataFile = new File(getDataFolder()+"/userdata",uuid+".yml");
-  		}
-  		userdata = YamlConfiguration.loadConfiguration(userdataFile);
-  		Reader defConfigStream;
-  		try{
-  			defConfigStream = new InputStreamReader(this.getResource("files/userdata.yml"),"UTF8");
-  			if(defConfigStream != null){
-  				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-  				userdata.setDefaults(defConfig);
-  			}			
-  		}catch(UnsupportedEncodingException e){
-  			e.printStackTrace();
-  		}
-  	}
-  	
-  	public void saveUserdata(){
-  		try{
-  			userdata.save(userdataFile);			
-  		}catch(IOException e){
-  			e.printStackTrace();
-  		}
-  	}
-   
-  	public void registerUserdata(UUID uuid){
-  		userdataFile = new File(this.getDataFolder()+"/userdata",uuid+".yml");
-  		if(!userdataFile.exists()){
-  			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\userdata\\"+uuid+".yml");
-  			Bukkit.getConsoleSender().sendMessage("");
-  			this.getUserdata(uuid).options().copyDefaults(true);
-  			getUserdata(uuid).options().header(" _____ _          _   _\r\n"
-  					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-  					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-  					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-  					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-  					+ "\r\n"
-  					+ "");
-  			saveUserdata();
-  		}
-  	}
-  	
-  //commands.yml:
-  	public FileConfiguration getCommands() {
-  		if(commands == null) {
-  			reloadCommands();
-  		}
-  		return commands;
-  	}
-  	
-  	public void reloadCommands(){
-  		if(commands == null){
-  			commandsFile = new File(getDataFolder(), "files/commands.yml");
-  		}
-  		commands = YamlConfiguration.loadConfiguration(commandsFile);
-  		Reader defConfigStream;
-  		try{
-  			defConfigStream = new InputStreamReader(this.getResource("files/commands.yml"),"UTF8");
-  			if(defConfigStream != null){
-  				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-  				commands.setDefaults(defConfig);
-  			}			
-  		}catch(UnsupportedEncodingException e){
-  			e.printStackTrace();
-  		}
-  	}
-  	
-  	public void saveCommands(){
-  		try{
-  			commands.save(commandsFile);			
-  		}catch(IOException e){
-  			e.printStackTrace();
-  		}
-  	}
-   
-  	public void registerCommands(){
-  		commandsFile = new File(this.getDataFolder(), "files/commands.yml");
-  		if(!commandsFile.exists()){
-  			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\commands.yml");
-  			this.getCommands().options().copyDefaults(true);
-  			getCommands().options().header(" _____ _          _   _\r\n"
-  					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-  					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-  					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-  					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-  					+ "\r\n"
-  					+ "");
-  			saveCommands();
-  		}
-  	}
+
+	//kits.yml:
+	public FileConfiguration getKits() {
+		if(kits == null) {
+			reloadKits();
+		}
+		return kits;
+	}
+
+	public void reloadKits(){
+		if(kits == null){
+			kitsFile = new File(getDataFolder(), "kits.yml");
+		}
+		kits = YamlConfiguration.loadConfiguration(kitsFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("files/kits.yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				kits.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveKits(){
+		try{
+			kits.save(kitsFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerKits(){
+		kitsFile = new File(this.getDataFolder(), "kits.yml");
+		if(!kitsFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\kits.yml");
+			this.getKits().options().copyDefaults(true);
+			getKits().options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveKits();
+		}
+	}
+
+
+	//warps.yml:
+	public FileConfiguration getWarps() {
+		if(warps == null) {
+			reloadWarps();
+		}
+		return warps;
+	}
+
+	public void reloadWarps(){
+		if(warps == null){
+			warpsFile = new File(getDataFolder(), "warps.yml");
+		}
+		warps = YamlConfiguration.loadConfiguration(warpsFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("files/warps.yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				warps.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveWarps(){
+		try{
+			warps.save(warpsFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerWarps(){
+		warpsFile = new File(this.getDataFolder(), "warps.yml");
+		if(!warpsFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\warps.yml");
+			this.getWarps().options().copyDefaults(true);
+			getWarps().options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveWarps();
+		}
+	}
+
+	//userdata.yml:
+	public FileConfiguration getUserdata(UUID uuid) {
+		if(userdata == null) {
+			reloadUserdata(uuid);
+		}
+		return userdata;
+	}
+
+	public void reloadUserdata(UUID uuid){
+		if(userdata == null){
+			userdataFile = new File(getDataFolder()+"/userdata",uuid+".yml");
+		}
+		userdata = YamlConfiguration.loadConfiguration(userdataFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("files/userdata.yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				userdata.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveUserdata(){
+		try{
+			userdata.save(userdataFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerUserdata(UUID uuid){
+		userdataFile = new File(this.getDataFolder()+"/userdata",uuid+".yml");
+		if(!userdataFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\userdata\\"+uuid+".yml");
+			Bukkit.getConsoleSender().sendMessage("");
+			this.getUserdata(uuid).options().copyDefaults(true);
+			getUserdata(uuid).options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveUserdata();
+		}
+	}
+
+	//commands.yml:
+	public FileConfiguration getCommands() {
+		if(commands == null) {
+			reloadCommands();
+		}
+		return commands;
+	}
+
+	public void reloadCommands(){
+		if(commands == null){
+			commandsFile = new File(getDataFolder(), "commands.yml");
+		}
+		commands = YamlConfiguration.loadConfiguration(commandsFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("files/commands.yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				commands.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveCommands(){
+		try{
+			commands.save(commandsFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerCommands(){
+		commandsFile = new File(this.getDataFolder(), "commands.yml");
+		if(!commandsFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\commands.yml");
+			this.getCommands().options().copyDefaults(true);
+			getCommands().options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveCommands();
+		}
+	}
 
 	//worlds.yml:
 	public FileConfiguration getWorlds() {
@@ -430,7 +386,7 @@ public final class Main extends JavaPlugin {
 
 	public void reloadWorlds(){
 		if(worlds == null){
-			worldsFile = new File(getDataFolder(), "files/worlds.yml");
+			worldsFile = new File(getDataFolder(), "worlds.yml");
 		}
 		worlds = YamlConfiguration.loadConfiguration(worldsFile);
 		Reader defConfigStream;
@@ -454,9 +410,9 @@ public final class Main extends JavaPlugin {
 	}
 
 	public void registerWorlds(){
-		worldsFile = new File(this.getDataFolder(), "files/worlds.yml");
+		worldsFile = new File(this.getDataFolder(), "worlds.yml");
 		if(!worldsFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\worlds.yml");
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\worlds.yml");
 			this.getWorlds().options().copyDefaults(true);
 			getWorlds().options().header(" _____ _          _   _\r\n"
 					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
@@ -466,6 +422,104 @@ public final class Main extends JavaPlugin {
 					+ "\r\n"
 					+ "");
 			saveWorlds();
+		}
+	}
+
+	//language_--.yml:
+	public FileConfiguration getLanguages() {
+		if(languages == null) {
+			reloadLanguages();
+		}
+		return languages;
+	}
+
+	public void reloadLanguages(){
+		if(languages == null){
+			languagesFile = new File(getDataFolder(), "/language/" + getConfig().getString("language") + ".yml");
+		}
+		languages = YamlConfiguration.loadConfiguration(languagesFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("files/language/" + getConfig().getString("language") + ".yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				languages.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveLanguages(){
+		try{
+			languages.save(languagesFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerLanguages(){
+		languagesFile = new File(this.getDataFolder(), "/language/" + getConfig().getString("language") + ".yml");
+		if(!languagesFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\language\\" + getConfig().getString("language") + ".yml");
+			this.getLanguages().options().copyDefaults(true);
+			getLanguages().options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveLanguages();
+		}
+	}
+
+	//es_--.yml:
+	public FileConfiguration getEs() {
+		if(es == null) {
+			reloadEs();
+		}
+		return es;
+	}
+
+	public void reloadEs(){
+		if(es == null){
+			esFile = new File(getDataFolder(), "/language/es.yml");
+		}
+		es = YamlConfiguration.loadConfiguration(esFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("files/language/es.yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				es.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveEs(){
+		try{
+			es.save(esFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerEs(){
+		esFile = new File(this.getDataFolder(), "/language/es.yml");
+		if(!esFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\language\\es.yml");
+			this.getEs().options().copyDefaults(true);
+			getEs().options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveEs();
 		}
 	}
 

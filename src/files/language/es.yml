@@ -22,4 +22,5 @@ messages:
     nexus_wiki: '&dMira la wiki de TheNexus aqui: &fhttps://github.com/Whirss/TheNexus/wiki'
     antiswear_block: '&cPor favor, usa un lenguaje apropiado.'
     wm_creating_world: '&aCreando el mundo &b%worldmanager_worldname%&a.'
-  other: []
+  other:
+    loaded_language_console: 'Se ha cargado el idioma Español correctamente.'
