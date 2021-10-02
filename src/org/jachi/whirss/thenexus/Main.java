@@ -176,12 +176,12 @@ public final class Main extends JavaPlugin {
 
 	public void reloadLanguages(){
 		if(languages == null){
-			languagesFile = new File(getDataFolder(), "files/languages/languages_" + getConfig().getString("language") + ".yml");
+			languagesFile = new File(getDataFolder(), "files/languages/language_" + getConfig().getString("language") + ".yml");
 		}
 		languages = YamlConfiguration.loadConfiguration(languagesFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/languages.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("files/languages/language_" + getConfig().getString("language") + ".yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				languages.setDefaults(defConfig);
