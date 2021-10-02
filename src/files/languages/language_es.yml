@@ -1,0 +1,25 @@
+language: 'Español'
+messages:
+  success:
+    reloaded_plugin: '&bTheNexus ha sido recargado.'
+    wm_creating_world: '&aCreando el mundo &b%worldmanager_worldname%&a.'
+    wm_created_world: '&aEl mundo &b%worldmanager_worldname% &aha sido creado correctamente.'
+    wm_deleted_world: '&aEl mundo &b%worldmanager_worldname% &aha sido eliminado correctamente.'
+    wm_unloaded_world: '&aEl mundo &b%worldmanager_worldname% &aha sido descargado correctamente.'
+    wm_imported_world: '&aEl mundo &b%worldmanager_worldname% &ahas sido importado correctamente.'
+  error:
+    no_perms: '&cNo tienes permisos para ejecutar ese comando.'
+    unknown_command: '&cEl comando que has introducido no existe.'
+    not_executed_default: '&cNo puedes ejecutar ese comando en el mundo en el que estas'
+    wm_alredy_exist: '&cEl mundo %worldmanager_worldname% ya existe'
+    wm_creation_error: '&cLa creación del mundo ha fallado, compruebe los errores en la consola.'
+    wm_deletion_error: '&cLa eliminación del mundo ha fallado, compruebe los errores en la consola.'
+    wm_imported_error: '&cLa importación del mundo ha fallado, compruebe los errores en la consola.'
+    wm_invalid_args: '&cHas puesto un tipo de mundo invalido. Encuentra los tipos con /wm types'
+    wm_invalid_world: '&cNo es posible acceder a ese mundo. ¿Has escrito bien el nombre?'
+    wm_players_in_world: '&cNo puedes borrar ese mundo porque hay jugadores dentro de él.'
+    wm_already_imported: '&cEse mundo ya ha sido importado.'
+  info:
+    nexus_wiki: '&dMira la wiki de TheNexus aqui: &fhttps://github.com/Whirss/TheNexus/wiki'
+    antiswear_block: '&cPor favor, usa un lenguaje apropiado.'
+  other: []

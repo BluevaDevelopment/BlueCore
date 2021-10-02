@@ -32,8 +32,8 @@ public final class Main extends JavaPlugin {
 	private File kitsFile = null;
 	private FileConfiguration warps = null;
 	private File warpsFile = null;
-	private FileConfiguration messages = null;
-	private File messagesFile = null;
+	private FileConfiguration languages = null;
+	private File languagesFile = null;
 	private FileConfiguration userdata = null;
 	private File userdataFile = null;
 	private FileConfiguration worlds = null;
@@ -55,7 +55,7 @@ public final class Main extends JavaPlugin {
 		registerCommands();
 		registerConfig();
 		registerKits();
-		registerMessages();
+		registerLanguages();
 		registerWarps();
 		registerWorlds();
 		
@@ -165,55 +165,55 @@ public final class Main extends JavaPlugin {
 			saveDefaultConfig();
 		}
 	}
-  	
-	//messages.yml:
-  	public FileConfiguration getMessages() {
-  		if(messages == null) {
-  			reloadMessages();
-  		}
-  		return messages;
-  	}
-  	
-  	public void reloadMessages(){
-  		if(messages == null){
-  			messagesFile = new File(getDataFolder(),"messages.yml");
-  		}
-  		messages = YamlConfiguration.loadConfiguration(messagesFile);
-  		Reader defConfigStream;
-  		try{
-  			defConfigStream = new InputStreamReader(this.getResource("messages.yml"),"UTF8");
-  			if(defConfigStream != null){
-  				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-  				messages.setDefaults(defConfig);
-  			}			
-  		}catch(UnsupportedEncodingException e){
-  			e.printStackTrace();
-  		}
-  	}
-  	
-  	public void saveMessages(){
-  		try{
-  			messages.save(messagesFile);			
-  		}catch(IOException e){
-  			e.printStackTrace();
-  		}
-  	}
-   
-  	public void registerMessages(){
-  		messagesFile = new File(this.getDataFolder(),"messages.yml");
-  		if(!messagesFile.exists()){
-  			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\messages.yml");
-  			this.getMessages().options().copyDefaults(true);
-  			getMessages().options().header(" _____ _          _   _\r\n"
-  					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-  					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-  					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-  					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-  					+ "\r\n"
-  					+ "");
-  			saveMessages();
-  		}
-  	}
+
+	//languages.yml:
+	public FileConfiguration getLanguages() {
+		if(languages == null) {
+			reloadLanguages();
+		}
+		return languages;
+	}
+
+	public void reloadLanguages(){
+		if(languages == null){
+			languagesFile = new File(getDataFolder(), "files/languages/languages_" + getConfig().getString("language") + ".yml");
+		}
+		languages = YamlConfiguration.loadConfiguration(languagesFile);
+		Reader defConfigStream;
+		try{
+			defConfigStream = new InputStreamReader(this.getResource("files/languages.yml"),"UTF8");
+			if(defConfigStream != null){
+				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+				languages.setDefaults(defConfig);
+			}
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void saveLanguages(){
+		try{
+			languages.save(languagesFile);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public void registerLanguages(){
+		languagesFile = new File(this.getDataFolder(), "files/languages/language_" + getConfig().getString("language") + ".yml");
+		if(!languagesFile.exists()){
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\languages_" + getConfig().getString("language") + ".yml");
+			this.getLanguages().options().copyDefaults(true);
+			getLanguages().options().header(" _____ _          _   _\r\n"
+					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
+					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
+					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
+					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
+					+ "\r\n"
+					+ "");
+			saveLanguages();
+		}
+	}
   	
   //kits.yml:
   	public FileConfiguration getKits() {
@@ -225,12 +225,12 @@ public final class Main extends JavaPlugin {
   	
   	public void reloadKits(){
   		if(kits == null){
-  			kitsFile = new File(getDataFolder(),"kits.yml");
+  			kitsFile = new File(getDataFolder(), "files/kits.yml");
   		}
   		kits = YamlConfiguration.loadConfiguration(kitsFile);
   		Reader defConfigStream;
   		try{
-  			defConfigStream = new InputStreamReader(this.getResource("kits.yml"),"UTF8");
+  			defConfigStream = new InputStreamReader(this.getResource("files/kits.yml"),"UTF8");
   			if(defConfigStream != null){
   				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
   				kits.setDefaults(defConfig);
@@ -249,7 +249,7 @@ public final class Main extends JavaPlugin {
   	}
    
   	public void registerKits(){
-  		kitsFile = new File(this.getDataFolder(),"kits.yml");
+  		kitsFile = new File(this.getDataFolder(), "files/kits.yml");
   		if(!kitsFile.exists()){
   			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\kits.yml");
   			this.getKits().options().copyDefaults(true);
@@ -275,12 +275,12 @@ public final class Main extends JavaPlugin {
   	
   	public void reloadWarps(){
   		if(warps == null){
-  			warpsFile = new File(getDataFolder(),"warps.yml");
+  			warpsFile = new File(getDataFolder(), "files/warps.yml");
   		}
   		warps = YamlConfiguration.loadConfiguration(warpsFile);
   		Reader defConfigStream;
   		try{
-  			defConfigStream = new InputStreamReader(this.getResource("warps.yml"),"UTF8");
+  			defConfigStream = new InputStreamReader(this.getResource("files/warps.yml"),"UTF8");
   			if(defConfigStream != null){
   				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
   				warps.setDefaults(defConfig);
@@ -299,7 +299,7 @@ public final class Main extends JavaPlugin {
   	}
    
   	public void registerWarps(){
-  		warpsFile = new File(this.getDataFolder(),"warps.yml");
+  		warpsFile = new File(this.getDataFolder(), "files/warps.yml");
   		if(!warpsFile.exists()){
   			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\warps.yml");
   			this.getWarps().options().copyDefaults(true);
@@ -329,7 +329,7 @@ public final class Main extends JavaPlugin {
   		userdata = YamlConfiguration.loadConfiguration(userdataFile);
   		Reader defConfigStream;
   		try{
-  			defConfigStream = new InputStreamReader(this.getResource("userdata.yml"),"UTF8");
+  			defConfigStream = new InputStreamReader(this.getResource("files/userdata.yml"),"UTF8");
   			if(defConfigStream != null){
   				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
   				userdata.setDefaults(defConfig);
@@ -374,12 +374,12 @@ public final class Main extends JavaPlugin {
   	
   	public void reloadCommands(){
   		if(commands == null){
-  			commandsFile = new File(getDataFolder(),"commands.yml");
+  			commandsFile = new File(getDataFolder(), "files/commands.yml");
   		}
   		commands = YamlConfiguration.loadConfiguration(commandsFile);
   		Reader defConfigStream;
   		try{
-  			defConfigStream = new InputStreamReader(this.getResource("commands.yml"),"UTF8");
+  			defConfigStream = new InputStreamReader(this.getResource("files/commands.yml"),"UTF8");
   			if(defConfigStream != null){
   				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
   				commands.setDefaults(defConfig);
@@ -398,7 +398,7 @@ public final class Main extends JavaPlugin {
   	}
    
   	public void registerCommands(){
-  		commandsFile = new File(this.getDataFolder(),"commands.yml");
+  		commandsFile = new File(this.getDataFolder(), "files/commands.yml");
   		if(!commandsFile.exists()){
   			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\commands.yml");
   			this.getCommands().options().copyDefaults(true);
@@ -423,12 +423,12 @@ public final class Main extends JavaPlugin {
 
 	public void reloadWorlds(){
 		if(worlds == null){
-			worldsFile = new File(getDataFolder(),"worlds.yml");
+			worldsFile = new File(getDataFolder(), "files/worlds.yml");
 		}
 		worlds = YamlConfiguration.loadConfiguration(worldsFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("worlds.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("files/worlds.yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				worlds.setDefaults(defConfig);
@@ -447,7 +447,7 @@ public final class Main extends JavaPlugin {
 	}
 
 	public void registerWorlds(){
-		worldsFile = new File(this.getDataFolder(),"worlds.yml");
+		worldsFile = new File(this.getDataFolder(), "files/worlds.yml");
 		if(!worldsFile.exists()){
 			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\worlds.yml");
 			this.getWorlds().options().copyDefaults(true);

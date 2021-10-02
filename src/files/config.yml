@@ -21,6 +21,14 @@ no-modify: 100
 #      The number of players online
 #      The Metrics version
 metrics: true
+
+# Languages:
+# Sets the language of all plugin messages
+#
+# Available languages:
+# English: en
+# Spanish: es
+language: en
  
 # Welcome:
 # Welcome all the users that enter the server.

@@ -35,28 +35,28 @@ public class NexusCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.AQUA + "/nexus reload");
 
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("no_perms")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("no_perms")));
 				}
 			}else if(args[0].equalsIgnoreCase("reload")){
 				if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
 					main.reloadConfig();
 					main.reloadKits();
-					main.reloadMessages();
+					main.reloadLanguages();
 					main.reloadWarps();
 					main.reloadCommands();
 					main.reloadWorlds();
-					sender.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("reloaded_plugin")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("reloaded_plugin")));
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("no_perms")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("no_perms")));
 				}
 			}else if(args[0].equalsIgnoreCase("wiki")){
 				if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
-					sender.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("reloaded_plugin")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("reloaded_plugin")));
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("no_perms")));
+					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("no_perms")));
 				}
 			}else{
-				sender.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("unknown_command")));
+				sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("unknown_command")));
 			}
 		}else{
 			if(sender.hasPermission("thenexus.help") || sender.hasPermission("thenexus.*")) {
@@ -67,7 +67,7 @@ public class NexusCommand implements CommandExecutor {
 				sender.sendMessage(ChatColor.AQUA + "/nexus wiki");
 				sender.sendMessage(ChatColor.AQUA + "/nexus reload");
 			} else {
-				sender.sendMessage(MessageUtil.getColorMessage(main.getMessages().getString("no_perms")));
+				sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("no_perms")));
 			}
 		}
 		return true;
