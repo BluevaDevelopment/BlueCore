@@ -55,9 +55,16 @@ public final class Main extends JavaPlugin {
 		registerCommands();
 		registerConfig();
 		registerKits();
-		registerLanguages();
 		registerWarps();
 		registerWorlds();
+		if(getConfig().getString("language").equals("en") || getConfig().getString("language").equals("es")) {
+			registerLanguages();
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Error getting the language set in config.yml");
+		} else {
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Error getting the language set in config.yml");
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Disabling the plugin...");
+			getServer().getPluginManager().disablePlugin(this);
+		}
 		
 		if(getConfig().getBoolean("metrics")) {
 			int pluginId = 12700; 
@@ -202,7 +209,7 @@ public final class Main extends JavaPlugin {
 	public void registerLanguages(){
 		languagesFile = new File(this.getDataFolder(), "files/languages/language_" + getConfig().getString("language") + ".yml");
 		if(!languagesFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\languages_" + getConfig().getString("language") + ".yml");
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: " + getDataFolder()+"\\language_" + getConfig().getString("language") + ".yml");
 			this.getLanguages().options().copyDefaults(true);
 			getLanguages().options().header(" _____ _          _   _\r\n"
 					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"

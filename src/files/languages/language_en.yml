@@ -2,7 +2,6 @@ language: 'English'
 messages:
   success:
     reloaded_plugin: '&bTheNexus has been reloaded.'
-    wm_creating_world: '&aCreating the world &b%worldmanager_worldname%&a.'
     wm_created_world: '&aThe world &b%worldmanager_worldname% &ahas been created successfully.'
     wm_deleted_world: '&aThe world &b%worldmanager_worldname% &ahas been deleted successfully.'
     wm_unloaded_world: '&aThe world &b%worldmanager_worldname% &ahas been unloaded successfully.'
@@ -22,4 +21,5 @@ messages:
   info:
     nexus_wiki: '&dCheck TheNexus wiki here: &fhttps://github.com/Whirss/TheNexus/wiki'
     antiswear_block: '&cPlease use appropriate language.'
+    wm_creating_world: '&aCreating the world &b%worldmanager_worldname%&a.'
   other: []
