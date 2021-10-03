@@ -1,15 +1,17 @@
 language: 'Español'
 messages:
   success:
-    reloaded_plugin: '&bTheNexus ha sido recargado.'
-    wm_created_world: '&aEl mundo &b%worldmanager_worldname% &aha sido creado correctamente.'
-    wm_deleted_world: '&aEl mundo &b%worldmanager_worldname% &aha sido eliminado correctamente.'
-    wm_unloaded_world: '&aEl mundo &b%worldmanager_worldname% &aha sido descargado correctamente.'
-    wm_imported_world: '&aEl mundo &b%worldmanager_worldname% &ahas sido importado correctamente.'
+    reloaded_plugin: '&dTheNexus ha sido recargado.'
+    gamemode_changed: '&dTu modo de juego ha cambiado a &b%gamemode%&d.'
+    other_player_gamemode_changed: '&dEl modo de juego de &b%player% &dha sido cambiado a &b%gamemode%&d.'
+    wm_created_world: '&dEl mundo &b%worldmanager_worldname% &dha sido creado correctamente.'
+    wm_deleted_world: '&dEl mundo &b%worldmanager_worldname% &dha sido eliminado correctamente.'
+    wm_unloaded_world: '&dEl mundo &b%worldmanager_worldname% &dha sido descargado correctamente.'
+    wm_imported_world: '&dEl mundo &b%worldmanager_worldname% &dhas sido importado correctamente.'
   error:
     no_perms: '&cNo tienes permisos para ejecutar ese comando.'
     unknown_command: '&cEl comando que has introducido no existe.'
-    not_executed_default: '&cNo puedes ejecutar ese comando en el mundo en el que estas'
+    player_offline: '&cEse jugador esta desconectado.'
     wm_alredy_exist: '&cEl mundo %worldmanager_worldname% ya existe'
     wm_creation_error: '&cLa creación del mundo ha fallado, compruebe los errores en la consola.'
     wm_deletion_error: '&cLa eliminación del mundo ha fallado, compruebe los errores en la consola.'
@@ -21,6 +23,20 @@ messages:
   info:
     nexus_wiki: '&dMira la wiki de TheNexus aqui: &fhttps://github.com/Whirss/TheNexus/wiki'
     antiswear_block: '&cPor favor, usa un lenguaje apropiado.'
-    wm_creating_world: '&aCreando el mundo &b%worldmanager_worldname%&a.'
+    wm_creating_world: '&dCreando el mundo &b%worldmanager_worldname%&d.'
   other:
-    loaded_language_console: 'Se ha cargado el idioma Español correctamente.'
+    use_gm_command: '&cUso: /gm [survival/creative/adventure/spectator] [jugador]'
+console:
+  success:
+    loaded_language: 'Se ha cargado el idioma Espa±ol correctamente.'
+    other_player_gamemode_changed: '&dEl modo de juego de &b%player% &dha sido cambiado a &b%gamemode%.'
+  error:
+    only_player: '&cYou must be a player to run this command.'
+    player_offline: '&cThat player is offline.'
+  info: []
+  other:
+    use_gm_command: '&cUso: /gm [survival/creative/adventure/spectator] [player]'
+    use_survival_command: '&cUso: /survival [player]'
+    use_creative_command: '&cUso: /creative [player]'
+    use_adventure_command: '&cUso: /adventure [player]'
+    use_spectator_command: '&cUso: /spectator [player]'

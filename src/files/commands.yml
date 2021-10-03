@@ -7,6 +7,5 @@ commands:
     command: /onlynether
     worlds:
     - 'world_nether'
-    not_executed: '&cYou cannot execute this command in the world you are in'
     run_commands:
     - 'console: msg %player% &aThis command only works in the nether world'

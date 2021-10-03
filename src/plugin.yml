@@ -6,11 +6,31 @@ load: STARTUP
 depend: [Vault]
 softdepend: [PlaceholderAPI]
 commands:
+   adventure:
+      aliases: [ nadventure, adven, adv, a, gma ]
+      description: Change your game mode
+      usage: /adventure [action]
+   creative:
+      aliases: [ ncreative, crea, cr, c, gmc ]
+      description: Change your game mode
+      usage: /creative [action]
+   gm:
+      aliases: [ ngamemode, ngm, gmode, gamem ]
+      description: Change your game mode
+      usage: /gamemode [action]
    nexus:
-      aliases: [thenexus, tn, nx, x]
+      aliases: [ thenexus, tn, nx, x ]
       description: Command for players
       usage: /nexus [action]
+   spectator:
+      aliases: [ nspectator, spec, sp, gmsp]
+      description: Change your game mode
+      usage: /spectator [action]
+   survival:
+      aliases: [ nsurvival, surv, srv, s, gms ]
+      description: Change your game mode
+      usage: /survival [action]
    worldmanager:
-      aliases: [ world, worlds, wm, w ]
+      aliases: [ nworld, world, worlds, wm, w ]
       description: World Manager
       usage: /worldmanager [action]

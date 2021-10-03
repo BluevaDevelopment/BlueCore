@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
@@ -21,7 +22,7 @@ public class OnPlayerCommand implements Listener {
 		this.main = main;
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void OnCommand(PlayerCommandPreprocessEvent event) {
 		Player player = event.getPlayer();
 		String message = event.getMessage().toLowerCase();
@@ -60,12 +61,6 @@ public class OnPlayerCommand implements Listener {
 								}
 							}
 							return;
-						} else {
-							if(main.getCommands().isSet("commands." + key + ".not_executed")) {
-								player.sendMessage(MessageUtil.getColorMessage(main.getCommands().getString("commands." + key + ".not_executed"), player));
-							} else {
-								player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.not_executed_default"), player));
-							}
 						}
 					}
 				} else {

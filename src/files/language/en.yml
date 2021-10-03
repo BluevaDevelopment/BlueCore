@@ -1,15 +1,17 @@
 language: 'English'
 messages:
   success:
-    reloaded_plugin: '&bTheNexus has been reloaded.'
-    wm_created_world: '&aThe world &b%worldmanager_worldname% &ahas been created successfully.'
-    wm_deleted_world: '&aThe world &b%worldmanager_worldname% &ahas been deleted successfully.'
-    wm_unloaded_world: '&aThe world &b%worldmanager_worldname% &ahas been unloaded successfully.'
-    wm_imported_world: '&aThe world &b%worldmanager_worldname% &ahas been imported successfully.'
+    reloaded_plugin: '&dTheNexus has been reloaded.'
+    gamemode_changed: '&dYour game mode has been changed to &b%gamemode%&d.'
+    other_player_gamemode_changed: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
+    wm_created_world: '&dThe world &b%worldmanager_worldname% &dhas been created successfully.'
+    wm_deleted_world: '&dThe world &b%worldmanager_worldname% &dhas been deleted successfully.'
+    wm_unloaded_world: '&dThe world &b%worldmanager_worldname% &dhas been unloaded successfully.'
+    wm_imported_world: '&dThe world &b%worldmanager_worldname% &dhas been imported successfully.'
   error:
     no_perms: '&cYou do not have permissions to execute this command.'
     unknown_command: '&cThe command you entered does not exist.'
-    not_executed_default: '&cYou cannot execute this command in the world you are in'
+    player_offline: '&cThat player is offline.'
     wm_alredy_exist: '&c%worldmanager_worldname% already exists as a world!'
     wm_creation_error: '&cCreation world failed, Please check console for errors!'
     wm_deletion_error: '&cDeletion world failed, Please check console for errors!'
@@ -17,10 +19,24 @@ messages:
     wm_invalid_args: '&cYou''ve put an invaild worldtype! Find at /wm types'
     wm_invalid_world: '&cIt is not possible to access that world. Did you write the name right?'
     wm_players_in_world: '&cYou can''t erase that world because there are players inside it.'
-    wm_already_imported: '&cThat world has already been imported'
+    wm_already_imported: '&cThat world has already been imported.'
   info:
     nexus_wiki: '&dCheck TheNexus wiki here: &fhttps://github.com/Whirss/TheNexus/wiki'
     antiswear_block: '&cPlease use appropriate language.'
-    wm_creating_world: '&aCreating the world &b%worldmanager_worldname%&a.'
+    wm_creating_world: '&dCreating the world &b%worldmanager_worldname%&d.'
   other:
-    loaded_language_console: 'The language English has been loaded successfully.'
+    use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
+console:
+  success:
+    loaded_language: 'The language English has been loaded successfully.'
+    other_player_gamemode_changed: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
+  error:
+    only_player: '&cYou must be a player to run this command.'
+    player_offline: '&cThat player is offline.'
+  info: []
+  other:
+    use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
+    use_survival_command: '&cUse: /survival [player]'
+    use_creative_command: '&cUse: /creative [player]'
+    use_adventure_command: '&cUse: /adventure [player]'
+    use_spectator_command: '&cUse: /spectator [player]'

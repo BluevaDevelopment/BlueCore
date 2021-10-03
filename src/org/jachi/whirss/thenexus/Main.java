@@ -20,8 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jachi.whirss.thenexus.admins.LastLocationAdmin;
 import org.jachi.whirss.thenexus.admins.ScoreboardAdmin;
 import org.jachi.whirss.thenexus.admins.TablistAdmin;
-import org.jachi.whirss.thenexus.commands.NexusCommand;
-import org.jachi.whirss.thenexus.commands.WorldManagerCommand;
+import org.jachi.whirss.thenexus.commands.*;
 import org.jachi.whirss.thenexus.events.*;
 
 public final class Main extends JavaPlugin {
@@ -74,7 +73,7 @@ public final class Main extends JavaPlugin {
 		if(getConfig().getString("language").equals("en") || getConfig().getString("language").equals("es")) {
 			registerLanguages();
 			registerEs();
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] " + getLanguages().getString("messages.other.loaded_language_console"));
+			Bukkit.getConsoleSender().sendMessage("[TheNexus] " + getLanguages().getString("console.success.loaded_language"));
 		} else {
 			Bukkit.getConsoleSender().sendMessage("[TheNexus] Error getting the language set in config.yml");
 			Bukkit.getConsoleSender().sendMessage("[TheNexus] Disabling the plugin...");
@@ -137,7 +136,12 @@ public final class Main extends JavaPlugin {
 	}
 
 	public void RegisterPluginCommands() {
+		this.getCommand("adventure").setExecutor(new AdventureCommand(this));
+		this.getCommand("creative").setExecutor(new CreativeCommand(this));
+		this.getCommand("gm").setExecutor(new GMCommand(this));
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
+		this.getCommand("spectator").setExecutor(new SpectatorCommand(this));
+		this.getCommand("survival").setExecutor(new SurvivalCommand(this));
 		this.getCommand("worldmanager").setExecutor(new WorldManagerCommand(this));
 	}
 
