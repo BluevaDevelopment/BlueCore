@@ -3,7 +3,11 @@ messages:
   success:
     reloaded_plugin: '&dTheNexus has been reloaded.'
     gamemode_changed: '&dYour game mode has been changed to &b%gamemode%&d.'
-    other_player_gamemode_changed: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
+    gamemode_changed_others: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
+    satisfied_appetite: '&dYour appetite is now satisfied.'
+    satisfied_appetite_others: '&b%player% &dappetite is now satisfied.'
+    healed_player: '&dYou have been healed.'
+    healed_player_others: '&b%player% &dhas been healed.'
     wm_created_world: '&dThe world &b%worldmanager_worldname% &dhas been created successfully.'
     wm_deleted_world: '&dThe world &b%worldmanager_worldname% &dhas been deleted successfully.'
     wm_unloaded_world: '&dThe world &b%worldmanager_worldname% &dhas been unloaded successfully.'
@@ -26,10 +30,16 @@ messages:
     wm_creating_world: '&dCreating the world &b%worldmanager_worldname%&d.'
   other:
     use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
+    use_survival_command: '&cUse: /survival [player]'
+    use_creative_command: '&cUse: /creative [player]'
+    use_adventure_command: '&cUse: /adventure [player]'
+    use_spectator_command: '&cUse: /spectator [player]'
 console:
   success:
     loaded_language: 'The language English has been loaded successfully.'
-    other_player_gamemode_changed: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
+    gamemode_changed_others: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
+    satisfied_appetite_others: '&b%player% &dappetite is now satisfied.'
+    healed_player_others: '&b%player% &dhas been healed.'
   error:
     only_player: '&cYou must be a player to run this command.'
     player_offline: '&cThat player is offline.'

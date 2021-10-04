@@ -14,10 +14,18 @@ commands:
       aliases: [ ncreative, crea, cr, c, gmc ]
       description: Change your game mode
       usage: /creative [action]
+   feed:
+      aliases: [ nfeed, neat, eat ]
+      description: Satisfy the hunger.
+      usage: /feed [action]
    gm:
       aliases: [ ngamemode, ngm, gmode, gamem ]
       description: Change your game mode
-      usage: /gamemode [action]
+      usage: /gm [action]
+   heal:
+      aliases: [ nheal ]
+      description: Heals you or the given player.
+      usage: /heal [action]
    nexus:
       aliases: [ thenexus, tn, nx, x ]
       description: Command for players

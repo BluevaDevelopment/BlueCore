@@ -1,7 +1,6 @@
 package org.jachi.whirss.thenexus.commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,11 +10,11 @@ import net.md_5.bungee.api.ChatColor;
 import org.jachi.whirss.thenexus.Main;
 import org.jachi.whirss.thenexus.MessageUtil;
 
-public class SpectatorCommand implements CommandExecutor {
+public class FeedCommand implements CommandExecutor {
 
     private Main main;
 
-    public SpectatorCommand(Main main) {
+    public FeedCommand(Main main) {
         this.main = main;
     }
 
@@ -25,9 +24,9 @@ public class SpectatorCommand implements CommandExecutor {
                 if(args.length == 1){
                     Player target = Bukkit.getPlayer(args[0]);
                     if(target != null){
-                        target.setGameMode(GameMode.SPECTATOR);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.other_player_gamemode_changed")).replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()));
+                        target.setFoodLevel(20);
+                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed"), target));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.satisfied_appetite_others")).replace("%player%", target.getName()));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                     }
@@ -35,37 +34,35 @@ public class SpectatorCommand implements CommandExecutor {
                 return true;
             }
             if(sender.hasPermission("thenexus.*") ||
-                    sender.hasPermission("thenexus.gamemode.spectator") ||
-                    sender.hasPermission("thenexus.gamemode.*")){
+                    sender.hasPermission("thenexus.feed") ||
+                    sender.hasPermission("thenexus.feed.others")){
                 if(args.length == 1){
                     Player target = Bukkit.getPlayer(args[0]);
                     if(target != null){
-                        target.setGameMode(GameMode.SPECTATOR);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
-                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.other_player_gamemode_changed").replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()), target));
+                        target.setFoodLevel(20);
+                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), target));
+                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite_others").replace("%player%", target.getName()), target));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                     }
                 }
-
             } else {
                 sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
             }
         }else{
             if ((sender instanceof Player)) {
                 if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.spectator") ||
-                        sender.hasPermission("thenexus.gamemode.*")){
-                    ((Player) sender).setGameMode(GameMode.SPECTATOR);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), ((Player) sender)));
+                        sender.hasPermission("thenexus.feed") ||
+                        sender.hasPermission("thenexus.feed.others")){
+                    ((Player) sender).setFoodLevel(20);
+                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), ((Player) sender)));
                 } else {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_spectator_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_creative_command")));
             }
         }
         return true;
     }
-
 }

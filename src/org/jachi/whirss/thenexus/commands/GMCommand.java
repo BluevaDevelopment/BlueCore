@@ -20,8 +20,6 @@ public class GMCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        //final Player player = (Player)sender;
-
         if(args.length > 0){
             if(args[0].equalsIgnoreCase("survival") ||
                     args[0].equalsIgnoreCase("surv") ||
@@ -36,7 +34,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.SURVIVAL);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.other_player_gamemode_changed")).replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -55,7 +53,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.SURVIVAL);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.other_player_gamemode_changed").replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()), target));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -77,7 +75,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.CREATIVE);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE"), target));
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.other_player_gamemode_changed")).replace("%gamemode%", "CREATIVE").replace("%player%", target.getName()));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "CREATIVE").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -96,7 +94,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.CREATIVE);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.other_player_gamemode_changed").replace("%gamemode%", "CREATIVE").replace("%player%", target.getName()), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "CREATIVE").replace("%player%", target.getName()), target));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -119,7 +117,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.ADVENTURE);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.other_player_gamemode_changed")).replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -138,7 +136,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.ADVENTURE);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.other_player_gamemode_changed").replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()), target));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -159,7 +157,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.SPECTATOR);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.other_player_gamemode_changed")).replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -178,7 +176,7 @@ public class GMCommand implements CommandExecutor {
                         if(target != null){
                             target.setGameMode(GameMode.SPECTATOR);
                             target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.other_player_gamemode_changed").replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()), target));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }

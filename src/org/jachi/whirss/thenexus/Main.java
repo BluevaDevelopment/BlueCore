@@ -138,7 +138,9 @@ public final class Main extends JavaPlugin {
 	public void RegisterPluginCommands() {
 		this.getCommand("adventure").setExecutor(new AdventureCommand(this));
 		this.getCommand("creative").setExecutor(new CreativeCommand(this));
+		this.getCommand("feed").setExecutor(new FeedCommand(this));
 		this.getCommand("gm").setExecutor(new GMCommand(this));
+		this.getCommand("heal").setExecutor(new HealCommand(this));
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
 		this.getCommand("spectator").setExecutor(new SpectatorCommand(this));
 		this.getCommand("survival").setExecutor(new SurvivalCommand(this));

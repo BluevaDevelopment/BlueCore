@@ -20,8 +20,6 @@ public class CreativeCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        //final Player player = (Player)sender;
-
         if(args.length > 0){
             if (!(sender instanceof Player)) {
                 if(args.length == 1){
