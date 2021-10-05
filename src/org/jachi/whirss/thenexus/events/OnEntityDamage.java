@@ -18,14 +18,27 @@ public class OnEntityDamage implements Listener {
     @EventHandler
     public void OnEntityDamage(EntityDamageEvent event) {
         if(event.getEntity() instanceof Player) {
-            {
-                Player player = (Player) event.getEntity();
-                String worldname = player.getWorld().getName();
-                if (!main.getWorlds().getBoolean("worlds." + worldname + ".fall_damage")) {
-                    if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            Player player = (Player) event.getEntity();
+            String worldname = player.getWorld().getName();
+            if (!main.getWorlds().getBoolean("worlds." + worldname + ".fall_damage")) {
+                if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                    if (player.hasPermission("thenexus.*") ||
+                            player.hasPermission("thenexus.worldmanager.bypass.*") ||
+                            player.hasPermission("thenexus.worldmanager.bypass.fall_damage") ||
+                            player.hasPermission("thenexus.worldmanager.*")) {
+                        event.setCancelled(false);
+                    } else {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+
+            if (!main.getWorlds().getBoolean("worlds." + worldname + ".pvp")) {
+                if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+                    if (event.getEntityType() == EntityType.PLAYER) {
                         if (player.hasPermission("thenexus.*") ||
                                 player.hasPermission("thenexus.worldmanager.bypass.*") ||
-                                player.hasPermission("thenexus.worldmanager.bypass.fall_damage") ||
+                                player.hasPermission("thenexus.worldmanager.bypass.pvp") ||
                                 player.hasPermission("thenexus.worldmanager.*")) {
                             event.setCancelled(false);
                         } else {
@@ -33,21 +46,10 @@ public class OnEntityDamage implements Listener {
                         }
                     }
                 }
+            }
 
-                if (!main.getWorlds().getBoolean("worlds." + worldname + ".pvp")) {
-                    if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
-                        if (event.getEntityType() == EntityType.PLAYER) {
-                            if (player.hasPermission("thenexus.*") ||
-                                    player.hasPermission("thenexus.worldmanager.bypass.*") ||
-                                    player.hasPermission("thenexus.worldmanager.bypass.pvp") ||
-                                    player.hasPermission("thenexus.worldmanager.*")) {
-                                event.setCancelled(false);
-                            } else {
-                                event.setCancelled(true);
-                            }
-                        }
-                    }
-                }
+            if(main.getUserdata(player.getUniqueId()).getBoolean("godMode")) {
+                event.setCancelled(true);
             }
         }
     }
