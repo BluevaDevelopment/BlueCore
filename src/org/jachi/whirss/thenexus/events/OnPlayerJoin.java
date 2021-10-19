@@ -63,7 +63,8 @@ public class OnPlayerJoin implements Listener {
 		}
 
 		if(main.getConfig().getBoolean("welcome.broadcast.first_join.enabled")) {
-			if(main.getUserdata(event.getPlayer().getUniqueId()).getBoolean("")) {
+			if(!main.getUserdata(event.getPlayer().getUniqueId()).isSet("logoutlocation")) {
+				Bukkit.broadcastMessage(main.getConfig().getString("welcome.broadcast.first_join.message"));
 
 			}
 		}
