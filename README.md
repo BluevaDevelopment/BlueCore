@@ -8,6 +8,7 @@ The Nexus is a plugin that aims to include an all in one of the basic needs of a
 - Actionbar
 - Tablist
 - Scoreboard
+- Warps
 - Chat utilities [Chat Format, AntiSwear, CMDBlocker, etc...].
 - Custom Commands
 - World manager
@@ -15,7 +16,6 @@ The Nexus is a plugin that aims to include an all in one of the basic needs of a
 ## Planned features
 - +300 commands. [For players, moderation, etc...].
 - Kits
-- Warps
 - Permissions manager
 - Hologram manager
 - Economy system
