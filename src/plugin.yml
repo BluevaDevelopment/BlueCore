@@ -10,6 +10,10 @@ commands:
       aliases: [ nadventure, adven, adv, a, gma ]
       description: Change your game mode
       usage: /adventure [action]
+   clearchat:
+      aliases: [ nclearchat, ncc, cc ]
+      description: Clears the chat of one or all players
+      usage: /clearchat [action]
    creative:
       aliases: [ ncreative, crea, cr, c, gmc ]
       description: Change your game mode
@@ -22,6 +26,10 @@ commands:
       aliases: [ ngamemode, ngm, gmode, gamem ]
       description: Change your game mode
       usage: /gm [action]
+   god:
+      aliases: [ ngod ]
+      description: Enable god mode
+      usage: /god [action]
    heal:
       aliases: [ nheal ]
       description: Heals you or the given player.

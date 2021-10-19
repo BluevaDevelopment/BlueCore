@@ -12,6 +12,8 @@ messages:
     god_mode_enabled_others: '&dGod mode enabled to %player%.'
     god_mode_disabled: '&dGod mode disabled.'
     god_mode_disabled_others: '&dGod mode disabled to %player%.'
+    chat_cleared: '&dYour chat has been cleared'
+    chat_cleared_others: '&dYou have cleared %player% chat'
     wm_created_world: '&dThe world &b%worldmanager_worldname% &dhas been created successfully.'
     wm_deleted_world: '&dThe world &b%worldmanager_worldname% &dhas been deleted successfully.'
     wm_unloaded_world: '&dThe world &b%worldmanager_worldname% &dhas been unloaded successfully.'
@@ -34,12 +36,16 @@ messages:
     wm_creating_world: '&dCreating the world &b%worldmanager_worldname%&d.'
     god_mode_enabled_others: '&dGod mode enabled to %player%.'
     god_mode_disabled_others: '&dGod mode disabled to %player%.'
+    chat_cleared_others: '&dYou have cleared %player% chat'
   other:
     use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
     use_survival_command: '&cUse: /survival [player]'
     use_creative_command: '&cUse: /creative [player]'
     use_adventure_command: '&cUse: /adventure [player]'
     use_spectator_command: '&cUse: /spectator [player]'
+    use_heal_command: '&cUse: /heal [player]'
+    use_feed_command: '&cUse: /feed [player]'
+    use_clearchat_command: '&cUse: /clearchat [player]'
 console:
   success:
     loaded_language: 'The language English has been loaded successfully.'
@@ -56,3 +62,7 @@ console:
     use_creative_command: '&cUse: /creative [player]'
     use_adventure_command: '&cUse: /adventure [player]'
     use_spectator_command: '&cUse: /spectator [player]'
+    use_heal_command: '&cUse: /heal [player]'
+    use_feed_command: '&cUse: /feed [player]'
+    use_clearchat_command: '&cUse: /clearchat [player]'
+    use_god_command: '&cUse: /god [player]'

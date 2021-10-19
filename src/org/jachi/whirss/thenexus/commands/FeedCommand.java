@@ -19,38 +19,27 @@ public class FeedCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        if(args.length > 0){
-            if (!(sender instanceof Player)) {
-                if(args.length == 1){
-                    Player target = Bukkit.getPlayer(args[0]);
-                    if(target != null){
-                        target.setFoodLevel(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed"), target));
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.satisfied_appetite_others")).replace("%player%", target.getName()));
-                    } else {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+
+        //player:
+        if((sender instanceof Player)) {
+            if(args.length > 0){
+                if(sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.feed") ||
+                        sender.hasPermission("thenexus.feed.others")){
+                    if(args.length == 1){
+                        Player target = Bukkit.getPlayer(args[0]);
+                        if(target != null){
+                            target.setFoodLevel(20);
+                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite_others").replace("%player%", target.getName()), target));
+                        } else {
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                        }
                     }
+                } else {
+                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
-                return true;
-            }
-            if(sender.hasPermission("thenexus.*") ||
-                    sender.hasPermission("thenexus.feed") ||
-                    sender.hasPermission("thenexus.feed.others")){
-                if(args.length == 1){
-                    Player target = Bukkit.getPlayer(args[0]);
-                    if(target != null){
-                        target.setFoodLevel(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), target));
-                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite_others").replace("%player%", target.getName()), target));
-                    } else {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
-                    }
-                }
-            } else {
-                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
-            }
-        }else{
-            if ((sender instanceof Player)) {
+            }else{
                 if(sender.hasPermission("thenexus.*") ||
                         sender.hasPermission("thenexus.feed") ||
                         sender.hasPermission("thenexus.feed.others")){
@@ -59,8 +48,23 @@ public class FeedCommand implements CommandExecutor {
                 } else {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
+            }
+        } else {
+
+            //console:
+            if(args.length > 0){
+                if(args.length == 1) {
+                    Player target = Bukkit.getPlayer(args[0]);
+                    if (target != null) {
+                        target.setFoodLevel(20);
+                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed"), target));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.satisfied_appetite_others")).replace("%player%", target.getName()));
+                    } else {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                    }
+                }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_creative_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_feed_command")));
             }
         }
         return true;

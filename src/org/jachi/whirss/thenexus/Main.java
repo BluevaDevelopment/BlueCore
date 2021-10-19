@@ -137,6 +137,7 @@ public final class Main extends JavaPlugin {
 
 	public void RegisterPluginCommands() {
 		this.getCommand("adventure").setExecutor(new AdventureCommand(this));
+		this.getCommand("clearchat").setExecutor(new ClearChatCommand(this));
 		this.getCommand("creative").setExecutor(new CreativeCommand(this));
 		this.getCommand("feed").setExecutor(new FeedCommand(this));
 		this.getCommand("gm").setExecutor(new GMCommand(this));
