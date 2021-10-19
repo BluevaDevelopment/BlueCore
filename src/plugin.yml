@@ -18,6 +18,10 @@ commands:
       aliases: [ ncreative, crea, cr, c, gmc ]
       description: Change your game mode
       usage: /creative [action]
+   deletewarp:
+      aliases: [ ndeletewarp, ndelwarp, delwarp ]
+      description: Deletes a warp
+      usage: /deletewarp [action]
    feed:
       aliases: [ nfeed, neat, eat ]
       description: Satisfy the hunger.
@@ -38,6 +42,10 @@ commands:
       aliases: [ thenexus, tn, nx, x ]
       description: Command for players
       usage: /nexus [action]
+   setwarp:
+      aliases: [ nsetwarp ]
+      description: Sets a warp
+      usage: /setwarp [action]
    spectator:
       aliases: [ nspectator, spec, sp, gmsp]
       description: Change your game mode
@@ -46,6 +54,14 @@ commands:
       aliases: [ nsurvival, surv, srv, s, gms ]
       description: Change your game mode
       usage: /survival [action]
+   updatewarp:
+      aliases: [ nupdatewarp, nupdwarp, updwarp ]
+      description: Update a warp
+      usage: /updatewarp [action]
+   warp:
+      aliases: [ nwarp ]
+      description: Teleport to a warp
+      usage: /warp [action]
    worldmanager:
       aliases: [ nworld, world, worlds, wm, w ]
       description: World Manager

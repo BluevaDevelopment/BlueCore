@@ -139,13 +139,17 @@ public final class Main extends JavaPlugin {
 		this.getCommand("adventure").setExecutor(new AdventureCommand(this));
 		this.getCommand("clearchat").setExecutor(new ClearChatCommand(this));
 		this.getCommand("creative").setExecutor(new CreativeCommand(this));
+		this.getCommand("deletewarp").setExecutor(new DeleteWarpCommand(this));
 		this.getCommand("feed").setExecutor(new FeedCommand(this));
 		this.getCommand("gm").setExecutor(new GMCommand(this));
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
+		this.getCommand("setwarp").setExecutor(new SetWarpCommand(this));
 		this.getCommand("spectator").setExecutor(new SpectatorCommand(this));
 		this.getCommand("survival").setExecutor(new SurvivalCommand(this));
+		this.getCommand("updatewarp").setExecutor(new UpdateWarpCommand(this));
+		this.getCommand("warp").setExecutor(new WarpCommand(this));
 		this.getCommand("worldmanager").setExecutor(new WorldManagerCommand(this));
 	}
 
