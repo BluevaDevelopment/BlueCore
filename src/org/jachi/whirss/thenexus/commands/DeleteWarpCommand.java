@@ -29,7 +29,7 @@ public class DeleteWarpCommand implements CommandExecutor {
                     sender.hasPermission("thenexus.updatewarp")) {
                 if(args.length == 1){
                     if(main.getWarps().isSet("warps."+ args[1])) {
-                        main.getWarps().set("warps", null);
+                        main.getWarps().set("warps."+ args[1], null);
                         player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.warp_deleted").replace("%warp%", args[1]), player));
                     } else {
                         player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), player));
