@@ -66,6 +66,7 @@ console:
   error:
     only_player: '&cYou must be a player to run this command.'
     player_offline: '&cThat player is offline.'
+    unknown_warp: '&cThis warp does not exist.'
   info: []
   other:
     use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'

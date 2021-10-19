@@ -30,31 +30,40 @@ public class WarpCommand implements CommandExecutor {
                         String warp = args[0];
                         Player target = Bukkit.getPlayer(args[1]);
 
-                        String world = main.getWorlds().getString("warps."+warp+".world");
-                        double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
-                        double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
-                        double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
-                        float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
-                        float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
-                        Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                        if (target != null) {
-                            target.teleport(loc);
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName()), target));
+                        if(main.getWarps().isSet("warps."+warp+".world")) {
+                            String world = main.getWarps().getString("warps."+warp+".world");
+                            double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
+                            double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
+                            double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
+                            float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
+                            float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
+                            Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+                            if (target != null) {
+                                target.teleport(loc);
+                                target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp), target));
+                                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName()), target));
+                            } else {
+                                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                            }
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), (Player) sender));
                         }
                     } else if (args.length == 1) {
                         String warp = args[0];
-                        String world = main.getWorlds().getString("warps."+warp+".world");
-                        double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
-                        double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
-                        double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
-                        float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
-                        float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
-                        Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                        ((Player) sender).teleport(loc);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp), ((Player) sender)));
+                        String world = main.getWarps().getString("warps."+warp+".world");
+
+                        if(main.getWarps().isSet("warps."+warp+".world")) {
+                            double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
+                            double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
+                            double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
+                            float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
+                            float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
+                            Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+                            ((Player) sender).teleport(loc);
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp), ((Player) sender)));
+                        } else {
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), (Player) sender));
+                        }
                     } else {
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.other.use_warp_command").replace("%warp%", args[0]), ((Player) sender).getPlayer()));
                     }
@@ -70,19 +79,23 @@ public class WarpCommand implements CommandExecutor {
                     String warp = args[0];
                     Player target = Bukkit.getPlayer(args[1]);
 
-                    String world = main.getWorlds().getString("warps."+warp+".world");
-                    double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
-                    double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
-                    double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
-                    float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
-                    float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
-                    Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                    if (target != null) {
-                        target.teleport(loc);
-                        target.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName())));
+                    if(main.getWarps().isSet("warps."+warp+".world")) {
+                        String world = main.getWarps().getString("warps."+warp+".world");
+                        double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
+                        double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
+                        double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
+                        float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
+                        float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
+                        Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+                        if (target != null) {
+                            target.teleport(loc);
+                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName())));
+                        } else {
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                        }
                     } else {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.unknown_warp")));
                     }
                 } else {
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_warp_command")));

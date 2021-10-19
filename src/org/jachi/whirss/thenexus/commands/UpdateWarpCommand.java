@@ -28,7 +28,7 @@ public class UpdateWarpCommand implements CommandExecutor {
             if(sender.hasPermission("thenexus.*") ||
                     sender.hasPermission("thenexus.updatewarp")) {
                 if(args.length == 1){
-                    if(main.getWarps().isSet("warps."+ args[1])) {
+                    if(main.getWarps().isSet("warps."+ args[0])) {
                         Location l = player.getLocation();
                         String world = l.getWorld().getName();
                         double x = l.getX();
@@ -36,14 +36,15 @@ public class UpdateWarpCommand implements CommandExecutor {
                         double z = l.getZ();
                         float yaw = l.getYaw();
                         float pitch = l.getPitch();
-                        main.getWarps().set("warps." + args[1] + ".world", world);
-                        main.getWarps().set("warps." + args[1] + ".x", x);
-                        main.getWarps().set("warps." + args[1] + ".y", y);
-                        main.getWarps().set("warps." + args[1] + ".z", z);
-                        main.getWarps().set("warps." + args[1] + ".yaw", yaw);
-                        main.getWarps().set("warps." + args[1] + ".pitch", pitch);
+                        main.getWarps().set("warps." + args[0] + ".world", world);
+                        main.getWarps().set("warps." + args[0] + ".x", x);
+                        main.getWarps().set("warps." + args[0] + ".y", y);
+                        main.getWarps().set("warps." + args[0] + ".z", z);
+                        main.getWarps().set("warps." + args[0] + ".yaw", yaw);
+                        main.getWarps().set("warps." + args[0] + ".pitch", pitch);
                         main.saveWarps();
-                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.warp_updated").replace("%warp%", args[1]), player));
+                        main.reloadWarps();
+                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.warp_updated").replace("%warp%", args[0]), player));
                     } else {
                         player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), player));
                     }

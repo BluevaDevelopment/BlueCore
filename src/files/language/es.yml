@@ -66,6 +66,7 @@ console:
   error:
     only_player: '&cTienes que ser un jugador para poder ejecutar este comando.'
     player_offline: '&cEse jugador esta desconectado.'
+    unknown_warp: '&cEse warp no existe.'
   info: []
   other:
     use_gm_command: '&cUso: /gm [survival/creative/adventure/spectator] [jugador]'
