@@ -17,8 +17,11 @@ messages:
     warp_set: '&dThe warp &b%warp% &dhas been set at your location.'
     warp_updated: '&dThe warp &b%warp% &dhas been updated at your location.'
     warp_deleted: '&dThe warp &b%warp% &dhas been deleted.'
+    spawn_set: '&dThe spawn has been set to warp &b%warp%&d.'
     teleported_to_warp: '&dYou have been teleported to warp &b%warp%&d.'
     teleported_to_warp_others: '&dThe player &b%player% &dhas been teleported to warp &b%warp%&d.'
+    teleported_to_spawn: '&dYou have been teleported to the spawn.'
+    teleported_to_spawn_others: '&dThe player &b%player% &dhas been teleported to the spawn.'
     wm_created_world: '&dThe world &b%worldmanager_worldname% &dhas been created successfully.'
     wm_deleted_world: '&dThe world &b%worldmanager_worldname% &dhas been deleted successfully.'
     wm_unloaded_world: '&dThe world &b%worldmanager_worldname% &dhas been unloaded successfully.'
@@ -29,6 +32,7 @@ messages:
     player_offline: '&cThat player is offline.'
     warp_already_set: '&cThis warp already exists.'
     unknown_warp: '&cThis warp does not exist.'
+    spawn_not_set: '&cThe spawn has not been defined. Contact an administrator'
     wm_alredy_exist: '&c%worldmanager_worldname% already exists as a world!'
     wm_creation_error: '&cCreation world failed, Please check console for errors!'
     wm_deletion_error: '&cDeletion world failed, Please check console for errors!'
@@ -57,16 +61,19 @@ messages:
     use_updatewarp_command: '&cUse: /updwarp [warp]'
     use_deletewarp_command: '&cUse: /delwarp [warp]'
     use_warp_command: '&cUse: /warp [warp] [player]'
+    use_setspawn_command: '&cUse: /setspawn [warp]'
 console:
   success:
     loaded_language: 'The language English has been loaded successfully.'
     gamemode_changed_others: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
     satisfied_appetite_others: '&b%player% &dappetite is now satisfied.'
     healed_player_others: '&b%player% &dhas been healed.'
+    teleported_to_spawn_others: '&dThe player &b%player% &dhas been teleported to the spawn.'
   error:
     only_player: '&cYou must be a player to run this command.'
     player_offline: '&cThat player is offline.'
     unknown_warp: '&cThis warp does not exist.'
+    spawn_not_set: '&cThe spawn has not been defined. Login to the server and set the spawn with /setspawn [warp].'
   info: []
   other:
     use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
@@ -79,3 +86,4 @@ console:
     use_clearchat_command: '&cUse: /clearchat [player]'
     use_god_command: '&cUse: /god [player]'
     use_warp_command: '&cUse: /warp [warp] [player]'
+    use_spawn_command: '&cUse: /spawn [player]'

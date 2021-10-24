@@ -2,6 +2,7 @@ name: TheNexus
 version: 1.0.0
 main: org.jachi.whirss.thenexus.Main
 author: Whirss
+api-version: 1.17
 load: STARTUP
 depend: [Vault]
 softdepend: [PlaceholderAPI]
@@ -42,10 +43,18 @@ commands:
       aliases: [ thenexus, tn, nx, x ]
       description: Command for players
       usage: /nexus [action]
+   setspawn:
+      aliases: [ nsetspawn ]
+      description: Sets the spawn
+      usage: /setspawn [action]
    setwarp:
       aliases: [ nsetwarp ]
       description: Sets a warp
       usage: /setwarp [action]
+   spawn:
+      aliases: [ nspawn ]
+      description: Teleport to the spawn
+      usage: /spawn [action]
    spectator:
       aliases: [ nspectator, spec, sp, gmsp]
       description: Change your game mode

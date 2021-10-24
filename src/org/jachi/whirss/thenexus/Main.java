@@ -121,7 +121,7 @@ public final class Main extends JavaPlugin {
 
 	public void RegisterEvents() {
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new OnPlayerJoin(this), this);
+		pm.registerEvents(new OnBreakBlock(this), this);
 		pm.registerEvents(new OnEntityDamage(this), this);
 		pm.registerEvents(new OnEntitySpawn(this), this);
 		pm.registerEvents(new OnPlaceBlock(this), this);
@@ -145,7 +145,9 @@ public final class Main extends JavaPlugin {
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
+		this.getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
 		this.getCommand("setwarp").setExecutor(new SetWarpCommand(this));
+		this.getCommand("spawn").setExecutor(new SpawnCommand(this));
 		this.getCommand("spectator").setExecutor(new SpectatorCommand(this));
 		this.getCommand("survival").setExecutor(new SurvivalCommand(this));
 		this.getCommand("updatewarp").setExecutor(new UpdateWarpCommand(this));

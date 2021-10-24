@@ -2,6 +2,7 @@ package org.jachi.whirss.thenexus.events;
 
 import java.util.List;
 
+import com.mojang.brigadier.Message;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -64,7 +65,7 @@ public class OnPlayerJoin implements Listener {
 
 		if(main.getConfig().getBoolean("welcome.broadcast.first_join.enabled")) {
 			if(!main.getUserdata(event.getPlayer().getUniqueId()).isSet("logoutlocation")) {
-				Bukkit.broadcastMessage(main.getConfig().getString("welcome.broadcast.first_join.message"));
+				Bukkit.broadcastMessage(MessageUtil.getColorMessage(main.getConfig().getString("welcome.broadcast.first_join.message"), event.getPlayer()));
 
 			}
 		}
