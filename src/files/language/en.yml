@@ -30,6 +30,7 @@ messages:
     enderchest_open_others: '&dThe enderchest of &b%player% &dhas been opened.'
     workbench_open: '&dYour workbench has been opened.'
     workbench_open_others: '&dThe workbench of &b%player% &dhas been opened.'
+    changed_time: '&dThe world time of &b%world% &dhas been changed to &b%time%&d. &b(%ticks% ticks)'
     wm_created_world: '&dThe world &b%worldmanager_worldname% &dhas been created successfully.'
     wm_deleted_world: '&dThe world &b%worldmanager_worldname% &dhas been deleted successfully.'
     wm_unloaded_world: '&dThe world &b%worldmanager_worldname% &dhas been unloaded successfully.'
@@ -41,6 +42,7 @@ messages:
     warp_already_set: '&cThis warp already exists.'
     unknown_warp: '&cThis warp does not exist.'
     spawn_not_set: '&cThe spawn has not been defined. Contact an administrator'
+    invalid_world: '&cThat world does not exist. Did you write the name correctly?'
     wm_alredy_exist: '&c%worldmanager_worldname% already exists as a world!'
     wm_creation_error: '&cCreation world failed, Please check console for errors!'
     wm_deletion_error: '&cDeletion world failed, Please check console for errors!'
@@ -83,11 +85,13 @@ console:
     chat_cleared_others: '&dYou have cleared %player% chat'
     enderchest_open_others: '&dThe enderchest of &b%player% &dhas been opened.'
     workbench_open_others: '&dThe workbench of &b%player% &dhas been opened.'
+    changed_time: '&dThe world time of &b%world% &dhas been changed to &b%time%&d. &b(%ticks% ticks)'
   error:
     only_player: '&cYou must be a player to run this command.'
     player_offline: '&cThat player is offline.'
     unknown_warp: '&cThis warp does not exist.'
     spawn_not_set: '&cThe spawn has not been defined. Login to the server and set the spawn with /setspawn [warp].'
+    invalid_world: '&cThat world does not exist. Did you write the name correctly?'
   info: []
   other:
     use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
@@ -104,3 +108,7 @@ console:
     use_spawn_command: '&cUse: /spawn [player]'
     use_enderchest_command: '&cUse: /enderchest [player]'
     use_workbench_command: '&cUse: /workbench [player]'
+    use_day_command: '&cUse: /day [world]'
+    use_midnight_command: '&cUse: /midnight [world]'
+    use_night_command: '&cUse: /night [world]'
+    use_noon_command: '&cUse: /noon [world]'

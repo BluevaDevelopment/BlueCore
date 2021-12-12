@@ -138,6 +138,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("adventure").setExecutor(new AdventureCommand(this));
 		this.getCommand("clearchat").setExecutor(new ClearChatCommand(this));
 		this.getCommand("creative").setExecutor(new CreativeCommand(this));
+		this.getCommand("day").setExecutor(new DayCommand(this));
 		this.getCommand("deletewarp").setExecutor(new DeleteWarpCommand(this));
 		this.getCommand("enderchest").setExecutor(new EnderChestCommand(this));
 		this.getCommand("feed").setExecutor(new FeedCommand(this));
@@ -145,7 +146,10 @@ public final class Main extends JavaPlugin {
 		this.getCommand("gm").setExecutor(new GMCommand(this));
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));
+		this.getCommand("midnight").setExecutor(new MidnightCommand(this));
 		this.getCommand("nexus").setExecutor(new NexusCommand(this));
+		this.getCommand("night").setExecutor(new NightCommand(this));
+		this.getCommand("noon").setExecutor(new NoonCommand(this));
 		this.getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
 		this.getCommand("setwarp").setExecutor(new SetWarpCommand(this));
 		this.getCommand("spawn").setExecutor(new SpawnCommand(this));

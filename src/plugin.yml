@@ -19,6 +19,10 @@ commands:
       aliases: [ ncreative, crea, cr, c, gmc ]
       description: Change your game mode
       usage: /creative [action]
+   day:
+      aliases: [ nday ]
+      description: Change the world's time to day
+      usage: /day [action]
    deletewarp:
       aliases: [ ndeletewarp, ndelwarp, delwarp ]
       description: Deletes a warp
@@ -47,10 +51,22 @@ commands:
       aliases: [ nheal ]
       description: Heals you or the given player.
       usage: /heal [action]
+   midnight:
+      aliases: [ nmidnight ]
+      description: Change the world's time to midnight
+      usage: /midnight [action]
    nexus:
       aliases: [ thenexus, tn, nx, x ]
       description: Command for players
       usage: /nexus [action]
+   night:
+      aliases: [ nnight ]
+      description: Change the world's time to night
+      usage: /night [action]
+   noon:
+      aliases: [ nnoon ]
+      description: Change the world's time to noon
+      usage: /noon [action]
    setspawn:
       aliases: [ nsetspawn ]
       description: Sets the spawn
