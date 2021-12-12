@@ -16,14 +16,13 @@ public class SetWarpCommand implements CommandExecutor {
         this.main = main;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        final Player player = (Player)sender;
-
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("You must be a player to run this command.");
             return true;
         }
 
+        final Player player = (Player)sender;
         if(args.length > 0){
             if(sender.hasPermission("thenexus.*") ||
                     sender.hasPermission("thenexus.setwarp")) {

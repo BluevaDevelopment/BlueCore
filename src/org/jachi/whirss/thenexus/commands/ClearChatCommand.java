@@ -59,7 +59,7 @@ public class ClearChatCommand implements CommandExecutor {
                     for(int i=0;i<200;i++) {
                         target.sendMessage("");
                     }
-                    target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.chat_cleared"), target));
+                    target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("console.success.chat_cleared"), target));
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.chat_cleared_others")).replace("%player%", target.getName()));
                 } else {
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));

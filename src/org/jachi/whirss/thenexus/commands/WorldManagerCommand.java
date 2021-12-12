@@ -22,13 +22,12 @@ public class WorldManagerCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        final Player player = (Player)sender;
-
         if (!(sender instanceof Player)) {
-            player.sendMessage("You must be a player to run this command.");
+            sender.sendMessage("You must be a player to run this command.");
             return true;
         }
 
+        final Player player = (Player)sender;
         if(args.length > 0){
             if(args[0].equalsIgnoreCase("help")){
                 if(player.hasPermission("thenexus.*") ||

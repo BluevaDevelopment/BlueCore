@@ -57,7 +57,7 @@ public class FeedCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         target.setFoodLevel(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed"), target));
+                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), target));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.satisfied_appetite_others")).replace("%player%", target.getName()));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));

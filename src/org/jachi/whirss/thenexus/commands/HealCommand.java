@@ -57,7 +57,7 @@ public class HealCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         target.setHealth(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed"), target));
+                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.healed_player"), target));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.healed_player_others")).replace("%player%", target.getName()));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));

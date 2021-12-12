@@ -49,8 +49,7 @@ public class GodCommand implements CommandExecutor {
                 }
             }else{
                 if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.god") ||
-                        sender.hasPermission("thenexus.god.others")){
+                        sender.hasPermission("thenexus.god")) {
                     ((Player) sender).setFoodLevel(20);
                     if(main.getUserdata(((Player) sender).getUniqueId()).getBoolean("godMode")) {
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.god_mode_disabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
@@ -59,10 +58,8 @@ public class GodCommand implements CommandExecutor {
                     } else {
                         main.getUserdata(((Player) sender).getUniqueId()).set("godMode", true);
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.god_mode_enabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
-                        main.getUserdata(((Player) sender).getUniqueId()).set("godMode", false);
                         main.saveUserdata();
                     }
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), ((Player) sender)));
                 } else {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
@@ -75,13 +72,15 @@ public class GodCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if(target != null){
                         if(main.getUserdata(target.getUniqueId()).getBoolean("godMode")) {
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.god_mode_disabled"), target));
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.god_mode_disabled_other")).replace("%player%", target.getName()));
                             main.getUserdata(target.getUniqueId()).set("godMode", false);
                             main.saveUserdata();
+                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.god_mode_disabled"), target));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.god_mode_disabled_others")).replace("%player%", target.getName()));
                         } else {
                             main.getUserdata(target.getUniqueId()).set("godMode", true);
                             main.saveUserdata();
+                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.god_mode_enabled"), target));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.god_mode_enabled_others")).replace("%player%", target.getName()));
                         }
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));

@@ -68,7 +68,11 @@ console:
     gamemode_changed_others: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
     satisfied_appetite_others: '&b%player% &dappetite is now satisfied.'
     healed_player_others: '&b%player% &dhas been healed.'
+    teleported_to_warp_others: '&dThe player &b%player% &dhas been teleported to warp &b%warp%&d.'
     teleported_to_spawn_others: '&dThe player &b%player% &dhas been teleported to the spawn.'
+    god_mode_enabled_others: '&dGod mode enabled to %player%.'
+    god_mode_disabled_others: '&dGod mode disabled to %player%.'
+    chat_cleared_others: '&dYou have cleared %player% chat'
   error:
     only_player: '&cYou must be a player to run this command.'
     player_offline: '&cThat player is offline.'
