@@ -79,6 +79,10 @@ commands:
       aliases: [ nwarp ]
       description: Teleport to a warp
       usage: /warp [action]
+   workbench:
+      aliases: [ nworkbench, nwb, ncraftingtable, ncraft, wb, craftingtable, craft ]
+      description: Open the Crafting Table
+      usage: /workbench [action]
    worldmanager:
       aliases: [ nworld, world, worlds, wm, w ]
       description: World Manager

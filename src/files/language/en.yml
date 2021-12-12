@@ -28,6 +28,8 @@ messages:
     teleported_to_spawn_others: '&dThe player &b%player% &dhas been teleported to the spawn.'
     enderchest_open: '&dYour enderchest has been opened.'
     enderchest_open_others: '&dThe enderchest of &b%player% &dhas been opened.'
+    workbench_open: '&dYour workbench has been opened.'
+    workbench_open_others: '&dThe workbench of &b%player% &dhas been opened.'
     wm_created_world: '&dThe world &b%worldmanager_worldname% &dhas been created successfully.'
     wm_deleted_world: '&dThe world &b%worldmanager_worldname% &dhas been deleted successfully.'
     wm_unloaded_world: '&dThe world &b%worldmanager_worldname% &dhas been unloaded successfully.'
@@ -79,6 +81,8 @@ console:
     fly_mode_enabled_others: '&dFly mode enabled to %player%.'
     fly_mode_disabled_others: '&dFly mode disabled to %player%.'
     chat_cleared_others: '&dYou have cleared %player% chat'
+    enderchest_open_others: '&dThe enderchest of &b%player% &dhas been opened.'
+    workbench_open_others: '&dThe workbench of &b%player% &dhas been opened.'
   error:
     only_player: '&cYou must be a player to run this command.'
     player_offline: '&cThat player is offline.'
@@ -99,3 +103,4 @@ console:
     use_warp_command: '&cUse: /warp [warp] [player]'
     use_spawn_command: '&cUse: /spawn [player]'
     use_enderchest_command: '&cUse: /enderchest [player]'
+    use_workbench_command: '&cUse: /workbench [player]'

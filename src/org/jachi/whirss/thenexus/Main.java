@@ -153,6 +153,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("survival").setExecutor(new SurvivalCommand(this));
 		this.getCommand("updatewarp").setExecutor(new UpdateWarpCommand(this));
 		this.getCommand("warp").setExecutor(new WarpCommand(this));
+		this.getCommand("workbench").setExecutor(new WorkbenchCommand(this));
 		this.getCommand("worldmanager").setExecutor(new WorldManagerCommand(this));
 	}
 

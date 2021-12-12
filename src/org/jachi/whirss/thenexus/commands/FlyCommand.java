@@ -51,7 +51,6 @@ public class FlyCommand implements CommandExecutor {
                 if(sender.hasPermission("thenexus.*") ||
                         sender.hasPermission("thenexus.fly.*") ||
                         sender.hasPermission("thenexus.fly")) {
-                    ((Player) sender).setFoodLevel(20);
                     if(((Player) sender).isFlying()) {
                         ((Player) sender).setAllowFlight(false);
                         ((Player) sender).setFlying(false);
