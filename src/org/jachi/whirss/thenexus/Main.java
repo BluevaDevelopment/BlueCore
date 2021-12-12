@@ -141,6 +141,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("creative").setExecutor(new CreativeCommand(this));
 		this.getCommand("deletewarp").setExecutor(new DeleteWarpCommand(this));
 		this.getCommand("feed").setExecutor(new FeedCommand(this));
+		this.getCommand("fly").setExecutor(new FlyCommand(this));
 		this.getCommand("gm").setExecutor(new GMCommand(this));
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));

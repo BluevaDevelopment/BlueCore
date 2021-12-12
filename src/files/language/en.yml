@@ -12,6 +12,10 @@ messages:
     god_mode_enabled_others: '&dGod mode enabled to %player%.'
     god_mode_disabled: '&dGod mode disabled.'
     god_mode_disabled_others: '&dGod mode disabled to %player%.'
+    fly_mode_enabled: '&dFly mode enabled.'
+    fly_mode_enabled_others: '&dFly mode enabled to %player%.'
+    fly_mode_disabled: '&dFly mode disabled.'
+    fly_mode_disabled_others: '&dFly mode disabled to %player%.'
     chat_cleared: '&dYour chat has been cleared'
     chat_cleared_others: '&dYou have cleared %player% chat'
     warp_set: '&dThe warp &b%warp% &dhas been set at your location.'
@@ -45,8 +49,6 @@ messages:
     nexus_wiki: '&dCheck TheNexus wiki here: &fhttps://github.com/Whirss/TheNexus/wiki'
     antiswear_block: '&cPlease use appropriate language.'
     wm_creating_world: '&dCreating the world &b%worldmanager_worldname%&d.'
-    god_mode_enabled_others: '&dGod mode enabled to %player%.'
-    god_mode_disabled_others: '&dGod mode disabled to %player%.'
     chat_cleared_others: '&dYou have cleared %player% chat'
   other:
     use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
@@ -72,6 +74,8 @@ console:
     teleported_to_spawn_others: '&dThe player &b%player% &dhas been teleported to the spawn.'
     god_mode_enabled_others: '&dGod mode enabled to %player%.'
     god_mode_disabled_others: '&dGod mode disabled to %player%.'
+    fly_mode_enabled_others: '&dFly mode enabled to %player%.'
+    fly_mode_disabled_others: '&dFly mode disabled to %player%.'
     chat_cleared_others: '&dYou have cleared %player% chat'
   error:
     only_player: '&cYou must be a player to run this command.'
