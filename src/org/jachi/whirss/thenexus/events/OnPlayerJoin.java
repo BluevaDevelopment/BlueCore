@@ -14,6 +14,7 @@ import org.bukkit.Bukkit;
 
 import org.jachi.whirss.thenexus.Main;
 import org.jachi.whirss.thenexus.MessageUtil;
+import org.jetbrains.annotations.NotNull;
 
 public class OnPlayerJoin implements Listener {
 
@@ -24,7 +25,7 @@ public class OnPlayerJoin implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
+	public void onPlayerJoin(@NotNull PlayerJoinEvent event) {
 		main.registerUserdata(event.getPlayer().getUniqueId());
 
 		if(main.getConfig().getBoolean("welcome.message.enabled")) {

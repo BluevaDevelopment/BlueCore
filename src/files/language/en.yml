@@ -31,6 +31,7 @@ messages:
     workbench_open: '&dYour workbench has been opened.'
     workbench_open_others: '&dThe workbench of &b%player% &dhas been opened.'
     changed_time: '&dThe world time of &b%world% &dhas been changed to &b%time%&d. &b(%ticks% ticks)'
+    changed_weather: '&dThe weather of the world &b%world% &dhas been changed to &b%weather%&d.'
     wm_created_world: '&dThe world &b%worldmanager_worldname% &dhas been created successfully.'
     wm_deleted_world: '&dThe world &b%worldmanager_worldname% &dhas been deleted successfully.'
     wm_unloaded_world: '&dThe world &b%worldmanager_worldname% &dhas been unloaded successfully.'
@@ -86,6 +87,7 @@ console:
     enderchest_open_others: '&dThe enderchest of &b%player% &dhas been opened.'
     workbench_open_others: '&dThe workbench of &b%player% &dhas been opened.'
     changed_time: '&dThe world time of &b%world% &dhas been changed to &b%time%&d. &b(%ticks% ticks)'
+    changed_weather: '&dThe weather of the world &b%world% &dhas been changed to &b%weather%&d.'
   error:
     only_player: '&cYou must be a player to run this command.'
     player_offline: '&cThat player is offline.'
@@ -112,3 +114,5 @@ console:
     use_midnight_command: '&cUse: /midnight [world]'
     use_night_command: '&cUse: /night [world]'
     use_noon_command: '&cUse: /noon [world]'
+    use_sun_command: '&cUse: /sun [world]'
+    use_storm_command: '&cUse: /sun [world]'

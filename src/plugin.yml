@@ -21,7 +21,7 @@ commands:
       usage: /creative [action]
    day:
       aliases: [ nday ]
-      description: Change the world's time to day
+      description: Change the world time to day
       usage: /day [action]
    deletewarp:
       aliases: [ ndeletewarp, ndelwarp, delwarp ]
@@ -53,7 +53,7 @@ commands:
       usage: /heal [action]
    midnight:
       aliases: [ nmidnight ]
-      description: Change the world's time to midnight
+      description: Change the world time to midnight
       usage: /midnight [action]
    nexus:
       aliases: [ thenexus, tn, nx, x ]
@@ -61,11 +61,11 @@ commands:
       usage: /nexus [action]
    night:
       aliases: [ nnight ]
-      description: Change the world's time to night
+      description: Change the world time to night
       usage: /night [action]
    noon:
       aliases: [ nnoon ]
-      description: Change the world's time to noon
+      description: Change the world time to noon
       usage: /noon [action]
    setspawn:
       aliases: [ nsetspawn ]
@@ -83,6 +83,14 @@ commands:
       aliases: [ nspectator, spec, sp, gmsp]
       description: Change your game mode
       usage: /spectator [action]
+   storm:
+      aliases: [ nstorm, nrain, rain]
+      description: Change the climate from one world to storm
+      usage: /storm [action]
+   sun:
+      aliases: [ nsun, nclear, clear ]
+      description: Change the climate from one world to clear
+      usage: /sun [action]
    survival:
       aliases: [ nsurvival, surv, srv, s, gms ]
       description: Change your game mode
