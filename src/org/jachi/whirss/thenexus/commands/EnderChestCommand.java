@@ -10,11 +10,11 @@ import net.md_5.bungee.api.ChatColor;
 import org.jachi.whirss.thenexus.Main;
 import org.jachi.whirss.thenexus.MessageUtil;
 
-public class HealCommand implements CommandExecutor {
+public class EnderChestCommand implements CommandExecutor {
 
     private Main main;
 
-    public HealCommand(Main main) {
+    public EnderChestCommand(Main main) {
         this.main = main;
     }
 
@@ -24,14 +24,14 @@ public class HealCommand implements CommandExecutor {
         if((sender instanceof Player)) {
             if(args.length > 0){
                 if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.heal") ||
-                        sender.hasPermission("thenexus.heal.others")){
+                        sender.hasPermission("thenexus.enderchest.others") ||
+                        sender.hasPermission("thenexus.enderchest.*")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
-                            target.setHealth(20);
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.healed_player"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.healed_player_others").replace("%player%", target.getName()), target));
+                            ((Player) sender).openInventory(target.getEnderChest());
+                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.enderchest_open"), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.enderchest_open_others").replace("%player%", target.getName()), target));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                         }
@@ -41,10 +41,10 @@ public class HealCommand implements CommandExecutor {
                 }
             }else{
                 if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.heal.*") ||
-                        sender.hasPermission("thenexus.heal")){
-                    ((Player) sender).setHealth(20);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.healed_player"), ((Player) sender)));
+                        sender.hasPermission("thenexus.enderchest") ||
+                        sender.hasPermission("thenexus.enderchest.*")){
+                    ((Player) sender).openInventory(((Player) sender).getEnderChest());
+                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.enderchest_open"), ((Player) sender)));
                 } else {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
@@ -56,15 +56,15 @@ public class HealCommand implements CommandExecutor {
                 if(args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
-                        target.setHealth(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.healed_player"), target));
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.healed_player_others")).replace("%player%", target.getName()));
+                        target.openInventory(target.getEnderChest());
+                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.enderchest_open"), target));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.enderchest_open_others")).replace("%player%", target.getName()));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
                     }
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_heal_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_enderchest_command")));
             }
         }
         return true;

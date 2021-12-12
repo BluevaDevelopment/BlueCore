@@ -16,7 +16,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 import org.jachi.whirss.thenexus.admins.LastLocationAdmin;
 import org.jachi.whirss.thenexus.admins.ScoreboardAdmin;
 import org.jachi.whirss.thenexus.admins.TablistAdmin;
@@ -140,6 +139,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("clearchat").setExecutor(new ClearChatCommand(this));
 		this.getCommand("creative").setExecutor(new CreativeCommand(this));
 		this.getCommand("deletewarp").setExecutor(new DeleteWarpCommand(this));
+		this.getCommand("enderchest").setExecutor(new EnderChestCommand(this));
 		this.getCommand("feed").setExecutor(new FeedCommand(this));
 		this.getCommand("fly").setExecutor(new FlyCommand(this));
 		this.getCommand("gm").setExecutor(new GMCommand(this));

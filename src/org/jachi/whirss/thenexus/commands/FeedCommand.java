@@ -24,6 +24,7 @@ public class FeedCommand implements CommandExecutor {
         if((sender instanceof Player)) {
             if(args.length > 0){
                 if(sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.feed.*") ||
                         sender.hasPermission("thenexus.feed") ||
                         sender.hasPermission("thenexus.feed.others")){
                     if(args.length == 1){
@@ -41,8 +42,8 @@ public class FeedCommand implements CommandExecutor {
                 }
             }else{
                 if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.feed") ||
-                        sender.hasPermission("thenexus.feed.others")){
+                        sender.hasPermission("thenexus.feed.*") ||
+                        sender.hasPermission("thenexus.feed")){
                     ((Player) sender).setFoodLevel(20);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), ((Player) sender)));
                 } else {

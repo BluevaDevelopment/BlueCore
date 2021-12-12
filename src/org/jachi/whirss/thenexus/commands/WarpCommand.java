@@ -23,10 +23,10 @@ public class WarpCommand implements CommandExecutor {
         //player:
         if ((sender instanceof Player)) {
             if (args.length > 0) {
-                if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.warp.*") ||
-                        sender.hasPermission("thenexus.warp."+args[0])) {
                     if (args.length == 2) {
+                        if (sender.hasPermission("thenexus.*") ||
+                                sender.hasPermission("thenexus.warp.*") ||
+                                sender.hasPermission("thenexus.warp."+args[0])) {
                         String warp = args[0];
                         Player target = Bukkit.getPlayer(args[1]);
 
@@ -48,28 +48,34 @@ public class WarpCommand implements CommandExecutor {
                         } else {
                             sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), (Player) sender));
                         }
-                    } else if (args.length == 1) {
-                        String warp = args[0];
-                        String world = main.getWarps().getString("warps."+warp+".world");
+                    } else {
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                        }
+                } else if (args.length == 1) {
+                        if (sender.hasPermission("thenexus.*") ||
+                                sender.hasPermission("thenexus.warp.*") ||
+                                sender.hasPermission("thenexus.warp."+args[0])) {
+                            String warp = args[0];
+                            String world = main.getWarps().getString("warps."+warp+".world");
 
-                        if(main.getWarps().isSet("warps."+warp+".world")) {
-                            double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
-                            double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
-                            double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
-                            float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
-                            float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
-                            Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                            ((Player) sender).teleport(loc);
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp), ((Player) sender)));
+                            if(main.getWarps().isSet("warps."+warp+".world")) {
+                                double x = Double.valueOf(main.getWarps().getString("warps."+warp+".x"));
+                                double y = Double.valueOf(main.getWarps().getString("warps."+warp+".y"));
+                                double z = Double.valueOf(main.getWarps().getString("warps."+warp+".z"));
+                                float yaw = Float.valueOf(main.getWarps().getString("warps."+warp+".yaw"));
+                                float pitch = Float.valueOf(main.getWarps().getString("warps."+warp+".pitch"));
+                                Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+                                ((Player) sender).teleport(loc);
+                                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.teleported_to_warp").replace("%warp%", warp), ((Player) sender)));
+                            } else {
+                                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), (Player) sender));
+                            }
                         } else {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), (Player) sender));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                         }
                     } else {
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.other.use_warp_command").replace("%warp%", args[0]), ((Player) sender).getPlayer()));
                     }
-                } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
-                }
             }
         } else {
 

@@ -42,8 +42,7 @@ public class ClearChatCommand implements CommandExecutor {
             }else{
                 if(sender.hasPermission("thenexus.*") ||
                         sender.hasPermission("thenexus.clearchat.*") ||
-                        sender.hasPermission("thenexus.clearchat") ||
-                        sender.hasPermission("thenexus.clearchat.others")){
+                        sender.hasPermission("thenexus.clearchat")){
                     for(int i=0;i<200;i++) {
                         Bukkit.broadcastMessage("");
                     }

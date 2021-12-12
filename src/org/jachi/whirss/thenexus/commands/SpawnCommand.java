@@ -26,6 +26,7 @@ public class SpawnCommand implements CommandExecutor {
         if ((sender instanceof Player)) {
             if (args.length > 0) {
                 if (sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.spawn.*") ||
                         sender.hasPermission("thenexus.spawn") ||
                         sender.hasPermission("thenexus.spawn.others")) {
                     if (args.length == 1) {
@@ -55,6 +56,7 @@ public class SpawnCommand implements CommandExecutor {
                 }
             } else {
                 if (sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.spawn.*") ||
                         sender.hasPermission("thenexus.spawn")) {
                     String spawn = main.getWarps().getString("spawn");
                     if(main.getWarps().isSet("warps."+spawn+".world")) {

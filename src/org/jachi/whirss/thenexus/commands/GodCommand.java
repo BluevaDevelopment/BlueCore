@@ -24,6 +24,7 @@ public class GodCommand implements CommandExecutor {
         if((sender instanceof Player)) {
             if(args.length > 0){
                 if(sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.god.*") ||
                         sender.hasPermission("thenexus.god") ||
                         sender.hasPermission("thenexus.god.others")){
                     if(args.length == 1){
@@ -49,6 +50,7 @@ public class GodCommand implements CommandExecutor {
                 }
             }else{
                 if(sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.god.*") ||
                         sender.hasPermission("thenexus.god")) {
                     ((Player) sender).setFoodLevel(20);
                     if(main.getUserdata(((Player) sender).getUniqueId()).getBoolean("godMode")) {

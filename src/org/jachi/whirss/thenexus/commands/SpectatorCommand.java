@@ -25,8 +25,9 @@ public class SpectatorCommand implements CommandExecutor {
         if ((sender instanceof Player)) {
             if (args.length > 0) {
                 if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.spectator") ||
-                        sender.hasPermission("thenexus.gamemode.*")) {
+                        sender.hasPermission("thenexus.gamemode.*") ||
+                        sender.hasPermission("thenexus.gamemode.spectator.*") ||
+                        sender.hasPermission("thenexus.gamemode.spectator.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
@@ -42,8 +43,9 @@ public class SpectatorCommand implements CommandExecutor {
                 }
             } else {
                 if (sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.gamemode.*") ||
                         sender.hasPermission("thenexus.gamemode.spectator") ||
-                        sender.hasPermission("thenexus.gamemode.*")) {
+                        sender.hasPermission("thenexus.gamemode.spectator.*")) {
                     ((Player) sender).setGameMode(GameMode.SPECTATOR);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), ((Player) sender)));
                 } else {

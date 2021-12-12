@@ -23,6 +23,10 @@ commands:
       aliases: [ ndeletewarp, ndelwarp, delwarp ]
       description: Deletes a warp
       usage: /deletewarp [action]
+   enderchest:
+      aliases: [ nenderchest, nec, ec ]
+      description: Open the Ender Chest
+      usage: /enderchest [action]
    feed:
       aliases: [ nfeed, neat, eat ]
       description: Satisfy the hunger.

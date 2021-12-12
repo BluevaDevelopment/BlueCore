@@ -25,8 +25,9 @@ public class AdventureCommand implements CommandExecutor {
         if ((sender instanceof Player)) {
             if (args.length > 0) {
                 if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.adventure") ||
-                        sender.hasPermission("thenexus.gamemode.*")) {
+                        sender.hasPermission("thenexus.gamemode.*") ||
+                        sender.hasPermission("thenexus.gamemode.adventure.*") ||
+                        sender.hasPermission("thenexus.gamemode.adventure.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
@@ -42,8 +43,9 @@ public class AdventureCommand implements CommandExecutor {
                 }
             } else {
                 if (sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.gamemode.*") ||
                         sender.hasPermission("thenexus.gamemode.adventure") ||
-                        sender.hasPermission("thenexus.gamemode.*")) {
+                        sender.hasPermission("thenexus.gamemode.adventure.*")) {
                     ((Player) sender).setGameMode(GameMode.ADVENTURE);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), ((Player) sender)));
                 } else {

@@ -30,15 +30,15 @@ public class FlyCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
                             if(target.isFlying()) {
-                                target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_disabled"), target));
-                                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_disabled_other"), target).replace("%player%", target.getName()));
                                 target.setFlying(false);
                                 target.setAllowFlight(false);
+                                target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_disabled"), target));
+                                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_disabled_other"), target).replace("%player%", target.getName()));
                             } else {
-                                target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_enabled"), target));
-                                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_enabled_other"), target).replace("%player%", target.getName()));
                                 target.setAllowFlight(true);
                                 target.setFlying(true);
+                                target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_enabled"), target));
+                                sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_enabled_other"), target).replace("%player%", target.getName()));
                             }
                         } else {
                             sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("console.error.player_offline"), ((Player) sender)));
@@ -49,16 +49,17 @@ public class FlyCommand implements CommandExecutor {
                 }
             }else{
                 if(sender.hasPermission("thenexus.*") ||
+                        sender.hasPermission("thenexus.fly.*") ||
                         sender.hasPermission("thenexus.fly")) {
                     ((Player) sender).setFoodLevel(20);
                     if(((Player) sender).isFlying()) {
-                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_disabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
                         ((Player) sender).setAllowFlight(false);
                         ((Player) sender).setFlying(false);
+                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_disabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
                     } else {
-                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_enabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
                         ((Player) sender).setAllowFlight(true);
                         ((Player) sender).setFlying(true);
+                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_enabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
                     }
                 } else {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
@@ -78,7 +79,7 @@ public class FlyCommand implements CommandExecutor {
                         } else {
                             target.setAllowFlight(true);
                             target.setFlying(true);
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.god_mode_enabled"), target));
+                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.fly_mode_enabled"), target));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.fly_mode_enabled_others")).replace("%player%", target.getName()));
                         }
                     } else {
@@ -86,7 +87,7 @@ public class FlyCommand implements CommandExecutor {
                     }
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_god_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_fly_command")));
             }
         }
         return true;
