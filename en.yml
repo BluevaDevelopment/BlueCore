@@ -1,7 +1,14 @@
+# __  ___                            ____
+# \ \/ | |_ _ __ ___ _ __ ___   ___ / ___|___  _ __ ___
+#  \  /| __| '__/ _ | '_ ` _ \ / _ | |   / _ \| '__/ _ \
+#  /  \| |_| | |  __| | | | | |  __| |__| (_) | | |  __/
+# /_/\_\\__|_|  \___|_| |_| |_|\___|\____\___/|_|  \___|
+#
+
 language: 'English'
 messages:
   success:
-    reloaded_plugin: '&dTheNexus has been reloaded.'
+    reloaded_plugin: '&dXtremeCore has been reloaded.'
     gamemode_changed: '&dYour game mode has been changed to &b%gamemode%&d.'
     gamemode_changed_others: '&dThe &b%player% &dgame mode has been changed to &b%gamemode%&d.'
     satisfied_appetite: '&dYour appetite is now satisfied.'
@@ -53,7 +60,7 @@ messages:
     wm_players_in_world: '&cYou can''t erase that world because there are players inside it.'
     wm_already_imported: '&cThat world has already been imported.'
   info:
-    nexus_wiki: '&dCheck TheNexus wiki here: &fhttps://github.com/Whirss/TheNexus/wiki'
+    core_wiki: '&dCheck XtremeCore wiki here: &fhttps://github.com/XtremePlugins/XtremeCore/wiki'
     antiswear_block: '&cPlease use appropriate language.'
     wm_creating_world: '&dCreating the world &b%worldmanager_worldname%&d.'
     chat_cleared_others: '&dYou have cleared %player% chat'

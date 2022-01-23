@@ -1,8 +1,8 @@
-#  _____ _          _   _
-# |_   _| |__   ___| \ | | _____  ___   _ ___
-#   | | | '_ \ / _ |  \| |/ _ \ \/ | | | / __|
-#   | | | | | |  __| |\  |  __/>  <| |_| \__ \
-#   |_| |_| |_|\___|_| \_|\___/_/\_\\__,_|___/
+# __  ___                            ____
+# \ \/ | |_ _ __ ___ _ __ ___   ___ / ___|___  _ __ ___
+#  \  /| __| '__/ _ | '_ ` _ \ / _ | |   / _ \| '__/ _ \
+#  /  \| |_| | |  __| | | | | |  __| |__| (_) | | |  __/
+# /_/\_\\__|_|  \___|_| |_| |_|\___|\____\___/|_|  \___|
 #
 # Configuration generated in version 1.0.0
 
@@ -33,7 +33,7 @@ language: en
  
 # Welcome:
 # Welcome all the users that enter the server.
-# You can use the placeholders of the plugin (https://github.com/Whirss/TheNexus/wiki) or all PlaceHolderAPI placeholders.
+# You can use the placeholders of the plugin (https://github.com/XtremePlugins/XtremeCore/wiki) or all PlaceHolderAPI placeholders.
 welcome:
 
   # This is the message that appears when you enter a server. 
@@ -138,7 +138,7 @@ scoreboard:
 
   # The title displayed at the very top of the scoreboard
   # WARNING! (Only for 1.12 or earlier) The title must be 35 characters or less. (Including color codes).
-  title: '&d&lThe &5&lNexus'
+  title: '&d&lXtreme &5&lCore'
 
   # The lines of the scoreboard. (Maximum 15 lines)
   lines: 
@@ -171,7 +171,7 @@ tablist:
   # Sets the header of the tablist. Add or remove the lines you want.
   header:
   - ''
-  - '&d&lTheNexus'
+  - '&d&lXtremeCore'
   - '&fwww.servername.com'
   - ''
 

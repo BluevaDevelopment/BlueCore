@@ -1,3 +1,10 @@
+# __  ___                            ____
+# \ \/ | |_ _ __ ___ _ __ ___   ___ / ___|___  _ __ ___
+#  \  /| __| '__/ _ | '_ ` _ \ / _ | |   / _ \| '__/ _ \
+#  /  \| |_| | |  __| | | | | |  __| |__| (_) | | |  __/
+# /_/\_\\__|_|  \___|_| |_| |_|\___|\____\___/|_|  \___|
+#
+
 language: 'Español'
 messages:
   success:
@@ -12,6 +19,10 @@ messages:
     god_mode_enabled_others: '&dModo dios activado a %player%.'
     god_mode_disabled: '&dModo dios desactivado.'
     god_mode_disabled_others: '&dModo dios desactivado a %player%.'
+    fly_mode_enabled: '&dModo de vuelo activado.'
+    fly_mode_enabled_others: '&dModo de vuelo activado a %player%.'
+    fly_mode_disabled: '&dModo de vuelo desactivado.'
+    fly_mode_disabled_others: '&dModo de vuelo desactivado a %player%.'
     chat_cleared: '&dTu chat ha sido limpiado.'
     chat_cleared_others: '&dHas limpiado el chat de %player%.'
     warp_set: '&dEl warp %name% ha sido establecido en tu ubicación.'
@@ -22,6 +33,12 @@ messages:
     teleported_to_warp_others: '&dEl jugador &b%player% &dha sido teletransportado al warp &b%warp%&d.'
     teleported_to_spawn: '&dHas sido teletransportado al spawn.'
     teleported_to_spawn_others: '&dEl jugador &b%player% &dha sido teletransportado al spawn.'
+    enderchest_open: '&dTu cofre de ender se ha abierto.'
+    enderchest_open_others: '&dEl cofre de ender de &b%player% &dse ha abierto.'
+    workbench_open: '&dTu mesa de crafteo se ha abierto.'
+    workbench_open_others: '&dLa mesa de crafteo de &b%player% &dse ha abierto..'
+    changed_time: '&dEl tiempo del mundo &b%world% &dha sido cambiado a &b%time%&d. &b(%ticks% ticks)'
+    changed_weather: '&dEl clima del mundo &b%world% &dha sido cambiado a &b%weather%&d.'
     wm_created_world: '&dEl mundo &b%worldmanager_worldname% &dha sido creado correctamente.'
     wm_deleted_world: '&dEl mundo &b%worldmanager_worldname% &dha sido eliminado correctamente.'
     wm_unloaded_world: '&dEl mundo &b%worldmanager_worldname% &dha sido descargado correctamente.'
@@ -32,6 +49,8 @@ messages:
     player_offline: '&cEse jugador esta desconectado.'
     warp_already_set: '&cEse warp ya existe.'
     unknown_warp: '&cEse warp no existe.'
+    spawn_not_set: '&cEl spawn no ha sido definido. Contacta a un administrador.'
+    invalid_world: '&cEl mundo no existe. Has escrito el nombre correctamente?'
     wm_alredy_exist: '&cEl mundo %worldmanager_worldname% ya existe'
     wm_creation_error: '&cLa creación del mundo ha fallado, compruebe los errores en la consola.'
     wm_deletion_error: '&cLa eliminación del mundo ha fallado, compruebe los errores en la consola.'
@@ -41,11 +60,9 @@ messages:
     wm_players_in_world: '&cNo puedes borrar ese mundo porque hay jugadores dentro de él.'
     wm_already_imported: '&cEse mundo ya ha sido importado.'
   info:
-    nexus_wiki: '&dMira la wiki de TheNexus aqui: &fhttps://github.com/Whirss/TheNexus/wiki'
+    core_wiki: '&dMira la wiki de XtremeCore aqui: &fhttps://github.com/XtremePlugins/XtremeCore/wiki'
     antiswear_block: '&cPor favor, usa un lenguaje apropiado.'
     wm_creating_world: '&dCreando el mundo &b%worldmanager_worldname%&d.'
-    god_mode_enabled_others: '&dModo dios activado a %player%.'
-    god_mode_disabled_others: '&dModo dios desactivado a %player%.'
     chat_cleared_others: '&dHas limpiado el chat de %player%.'
   other:
     use_gm_command: '&cUso: /gm [survival/creative/adventure/spectator] [jugador]'
@@ -67,11 +84,23 @@ console:
     gamemode_changed_others: '&dEl modo de juego de &b%player% &dha sido cambiado a &b%gamemode%.'
     satisfied_appetite_others: '&dEl apetito de &b%player% &dahora esta satisfecho.'
     healed_player_others: '&b%player% &dha sido curado.'
+    teleported_to_warp_others: '&dEl jugador &b%player% &dha sido teletransportado al warp &b%warp%&d.'
     teleported_to_spawn_others: '&dEl jugador &b%player% &dha sido teletransportado al spawn.'
+    god_mode_enabled_others: '&dModo dios activado a %player%.'
+    god_mode_disabled_others: '&dModo dios desactivado a %player%.'
+    fly_mode_enabled_others: '&dModo de vuelo activado a %player%.'
+    fly_mode_disabled_others: '&dModo de vuelo desactivado a %player%.'
+    chat_cleared_others: '&dHas limpiado el chat de &b%player%.'
+    enderchest_open_others: '&dEl cofre de ender de &b%player% &dse ha abierto.'
+    workbench_open_others: '&dLa mesa de crafteo de &b%player% &dse ha abierto.'
+    changed_time: '&dEl tiempo del mundo &b%world% &dha sido cambiado a &b%time%&d. &b(%ticks% ticks)'
+    changed_weather: '&dEl clima del mundo &b%world% &dha sido cambiado a &b%weather%&d.'
   error:
     only_player: '&cTienes que ser un jugador para poder ejecutar este comando.'
     player_offline: '&cEse jugador esta desconectado.'
     unknown_warp: '&cEse warp no existe.'
+    spawn_not_set: '&cEl spawn no ha sido definido. Entra al servidor y setealo con /setspawn [warp].'
+    invalid_world: '&cEse mundo no existe. Has escrito el nombre correctamente?'
   info: []
   other:
     use_gm_command: '&cUso: /gm [survival/creative/adventure/spectator] [jugador]'
@@ -79,9 +108,18 @@ console:
     use_creative_command: '&cUso: /creative [jugador]'
     use_adventure_command: '&cUso: /adventure [jugador]'
     use_spectator_command: '&cUso: /spectator [jugador]'
-    use_heal_command: '&cUso: /heal [player]'
-    use_feed_command: '&cUso: /feed [player]'
+    use_heal_command: '&cUso: /heal [jugador]'
+    use_feed_command: '&cUso: /feed [jugador]'
     use_clearchat_command: '&cUso: /clearchat [jugador]'
     use_god_command: '&cUso: /god [player]'
+    use_fly_command: '&cUso: /fly [player]'
     use_warp_command: '&cUso: /warp [warp] [jugador]'
-    use_spawn_command: '&cUso: /spawn [player]'
+    use_spawn_command: '&cUso: /spawn [jugador]'
+    use_enderchest_command: '&cUso: /enderchest [jugador]'
+    use_workbench_command: '&cUso: /workbench [jugador]'
+    use_day_command: '&cUso: /day [mundo]'
+    use_midnight_command: '&cUso: /midnight [mundo]'
+    use_night_command: '&cUso: /night [mundo]'
+    use_noon_command: '&cUso: /noon [mundo]'
+    use_sun_command: '&cUso: /sun [mundo]'
+    use_storm_command: '&cUso: /sun [mundo]'
