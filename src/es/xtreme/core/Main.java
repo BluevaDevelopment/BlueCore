@@ -31,7 +31,7 @@ import es.xtreme.core.commands.GMCommand;
 import es.xtreme.core.commands.GodCommand;
 import es.xtreme.core.commands.HealCommand;
 import es.xtreme.core.commands.MidnightCommand;
-import es.xtreme.core.commands.NexusCommand;
+import es.xtreme.core.commands.CoreCommand;
 import es.xtreme.core.commands.NightCommand;
 import es.xtreme.core.commands.NoonCommand;
 import es.xtreme.core.commands.SetSpawnCommand;
@@ -55,6 +55,7 @@ import es.xtreme.core.events.OnPlayerDropItem;
 import es.xtreme.core.events.OnPlayerInteract;
 import es.xtreme.core.events.OnPlayerJoin;
 import es.xtreme.core.events.OnPlayerQuit;
+import es.xtreme.core.metrics.Metrics;
 
 public final class Main extends JavaPlugin {
 
@@ -86,11 +87,11 @@ public final class Main extends JavaPlugin {
 	public String version = "1.0.0";
 
 	public void onEnable() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " _____ _          _   _");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "|_   _| |__   ___| \\ | | _____  ___   _ ___");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "__  ___                            ____");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "\\ \\/ | |_ _ __ ___ _ __ ___   ___ / ___|___  _ __ ___");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " \\  /| __| '__/ _ | '_ ` _ \\ / _ | |   / _ \\| '__/ _ \\");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " /  \\| |_| | |  __| | | | | |  __| |__| (_) | | |  __/");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "/_/\\_\\\\__|_|  \\___|_| |_| |_|\\___|\\____\\___/|_|  \\___|");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "");
 
 		instance = this;
@@ -106,10 +107,10 @@ public final class Main extends JavaPlugin {
 		if(getConfig().getString("language").equals("en") || getConfig().getString("language").equals("es")) {
 			registerLanguages();
 			registerEs();
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] " + getLanguages().getString("console.success.loaded_language"));
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] " + getLanguages().getString("console.success.loaded_language"));
 		} else {
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Error getting the language set in config.yml");
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Disabling the plugin...");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Error getting the language set in config.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Disabling the plugin...");
 			getServer().getPluginManager().disablePlugin(this);
 		}
 
@@ -135,7 +136,7 @@ public final class Main extends JavaPlugin {
 			@Override
 			public void run(){
 				if(!Bukkit.getVersion().contains("1.17")) {
-					Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[TheNexus] The version of the plugin you have installed is not compatible with your server. Download the correct version here: https://survcraft.org/thenexus");
+					Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[XtremeCore] The version of the plugin you have installed is not compatible with your server. Download the correct version here: https://survcraft.org/XtremeCore");
 					Bukkit.shutdown();
 				}
 				LoadWorlds();
@@ -144,11 +145,11 @@ public final class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + " _____ _          _   _");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "|_   _| |__   ___| \\ | | _____  ___   _ ___");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "__  ___                            ____");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "\\ \\/ | |_ _ __ ___ _ __ ___   ___ / ___|___  _ __ ___");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + " \\  /| __| '__/ _ | '_ ` _ \\ / _ | |   / _ \\| '__/ _ \\");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + " /  \\| |_| | |  __| | | | | |  __| |__| (_) | | |  __/");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "/_/\\_\\\\__|_|  \\___|_| |_| |_|\\___|\\____\\___/|_|  \\___|");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "");
 	}
 
@@ -181,7 +182,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));
 		this.getCommand("midnight").setExecutor(new MidnightCommand(this));
-		this.getCommand("nexus").setExecutor(new NexusCommand(this));
+		this.getCommand("core").setExecutor(new CoreCommand(this));
 		this.getCommand("night").setExecutor(new NightCommand(this));
 		this.getCommand("noon").setExecutor(new NoonCommand(this));
 		this.getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
@@ -198,14 +199,14 @@ public final class Main extends JavaPlugin {
 
 	public void LoadWorlds() {
 		if(getWorlds().isSet("worlds")) {
-			Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Loading worlds from \\plugins\\TheNexus\\worlds.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore/WorldManager] Loading worlds from \\plugins\\XtremeCore\\worlds.yml");
 			for (String key : getWorlds().getConfigurationSection("worlds").getKeys(false)) {
-				Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Loading world " + key.toString());
+				Bukkit.getConsoleSender().sendMessage("[XtremeCore/WorldManager] Loading world " + key.toString());
 				WorldCreator setupworld = new WorldCreator(key);
 				setupworld.createWorld();
 			}
 		} else {
-			Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Importing worlds from the server to TheNexus World Manager");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore/WorldManager] Importing worlds from the server to XtremeCore World Manager");
 			for (World world : Bukkit.getWorlds()) {
 				getWorlds().set("worlds." + world.getName() + ".name", world.getName());
 				getWorlds().set("worlds." + world.getName() + ".alias", "&b" + world.getName().replace("_", " "));
@@ -229,7 +230,7 @@ public final class Main extends JavaPlugin {
 				getWorlds().set("worlds." + world.getName() + ".spawnlocation.pitch", 0.0);
 				getWorlds().set("worlds." + world.getName() + ".spawnlocation.yaw", 0.0);
 				saveWorlds();
-				Bukkit.getConsoleSender().sendMessage("[TheNexus/WorldManager] Imported world: " + world.getName());
+				Bukkit.getConsoleSender().sendMessage("[XtremeCore/WorldManager] Imported world: " + world.getName());
 			}
 		}
 	}
@@ -238,15 +239,8 @@ public final class Main extends JavaPlugin {
 	public void registerConfig(){
 		File config = new File(this.getDataFolder(),"config.yml");
 		if(!config.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\config.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\config.yml");
 			this.getConfig().options().copyDefaults(true);
-			getConfig().options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveDefaultConfig();
 		}
 	}
@@ -266,7 +260,7 @@ public final class Main extends JavaPlugin {
 		kits = YamlConfiguration.loadConfiguration(kitsFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/kits.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("kits.yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				kits.setDefaults(defConfig);
@@ -287,15 +281,8 @@ public final class Main extends JavaPlugin {
 	public void registerKits(){
 		kitsFile = new File(this.getDataFolder(), "kits.yml");
 		if(!kitsFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\kits.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\kits.yml");
 			this.getKits().options().copyDefaults(true);
-			getKits().options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveKits();
 		}
 	}
@@ -316,7 +303,7 @@ public final class Main extends JavaPlugin {
 		warps = YamlConfiguration.loadConfiguration(warpsFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/warps.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("warps.yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				warps.setDefaults(defConfig);
@@ -337,15 +324,8 @@ public final class Main extends JavaPlugin {
 	public void registerWarps(){
 		warpsFile = new File(this.getDataFolder(), "warps.yml");
 		if(!warpsFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\warps.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\warps.yml");
 			this.getWarps().options().copyDefaults(true);
-			getWarps().options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveWarps();
 		}
 	}
@@ -365,7 +345,7 @@ public final class Main extends JavaPlugin {
 		userdata = YamlConfiguration.loadConfiguration(userdataFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/userdata.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("userdata.yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				userdata.setDefaults(defConfig);
@@ -386,16 +366,9 @@ public final class Main extends JavaPlugin {
 	public void registerUserdata(UUID uuid){
 		userdataFile = new File(this.getDataFolder()+"/userdata",uuid+".yml");
 		if(!userdataFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\userdata\\"+uuid+".yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\userdata\\"+uuid+".yml");
 			Bukkit.getConsoleSender().sendMessage("");
 			this.getUserdata(uuid).options().copyDefaults(true);
-			getUserdata(uuid).options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveUserdata();
 		}
 	}
@@ -415,7 +388,7 @@ public final class Main extends JavaPlugin {
 		commands = YamlConfiguration.loadConfiguration(commandsFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/commands.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("commands.yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				commands.setDefaults(defConfig);
@@ -436,15 +409,8 @@ public final class Main extends JavaPlugin {
 	public void registerCommands(){
 		commandsFile = new File(this.getDataFolder(), "commands.yml");
 		if(!commandsFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\commands.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\commands.yml");
 			this.getCommands().options().copyDefaults(true);
-			getCommands().options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveCommands();
 		}
 	}
@@ -464,7 +430,7 @@ public final class Main extends JavaPlugin {
 		worlds = YamlConfiguration.loadConfiguration(worldsFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/worlds.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("worlds.yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				worlds.setDefaults(defConfig);
@@ -485,15 +451,8 @@ public final class Main extends JavaPlugin {
 	public void registerWorlds(){
 		worldsFile = new File(this.getDataFolder(), "worlds.yml");
 		if(!worldsFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\worlds.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\worlds.yml");
 			this.getWorlds().options().copyDefaults(true);
-			getWorlds().options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveWorlds();
 		}
 	}
@@ -513,7 +472,7 @@ public final class Main extends JavaPlugin {
 		languages = YamlConfiguration.loadConfiguration(languagesFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/language/" + getConfig().getString("language") + ".yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("language/" + getConfig().getString("language") + ".yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				languages.setDefaults(defConfig);
@@ -534,15 +493,8 @@ public final class Main extends JavaPlugin {
 	public void registerLanguages(){
 		languagesFile = new File(this.getDataFolder(), "/language/" + getConfig().getString("language") + ".yml");
 		if(!languagesFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\language\\" + getConfig().getString("language") + ".yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\language\\" + getConfig().getString("language") + ".yml");
 			this.getLanguages().options().copyDefaults(true);
-			getLanguages().options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveLanguages();
 		}
 	}
@@ -562,7 +514,7 @@ public final class Main extends JavaPlugin {
 		es = YamlConfiguration.loadConfiguration(esFile);
 		Reader defConfigStream;
 		try{
-			defConfigStream = new InputStreamReader(this.getResource("files/language/es.yml"),"UTF8");
+			defConfigStream = new InputStreamReader(this.getResource("es.yml"),"UTF8");
 			if(defConfigStream != null){
 				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 				es.setDefaults(defConfig);
@@ -583,15 +535,8 @@ public final class Main extends JavaPlugin {
 	public void registerEs(){
 		esFile = new File(this.getDataFolder(), "/language/es.yml");
 		if(!esFile.exists()){
-			Bukkit.getConsoleSender().sendMessage("[TheNexus] Creating new file: \\plugins\\TheNexus\\language\\es.yml");
+			Bukkit.getConsoleSender().sendMessage("[XtremeCore] Creating new file: \\plugins\\XtremeCore\\language\\es.yml");
 			this.getEs().options().copyDefaults(true);
-			getEs().options().header(" _____ _          _   _\r\n"
-					+ "|_   _| |__   ___| \\ | | _____  ___   _ ___\r\n"
-					+ "  | | | '_ \\ / _ |  \\| |/ _ \\ \\/ | | | / __|\r\n"
-					+ "  | | | | | |  __| |\\  |  __/>  <| |_| \\__ \\\r\n"
-					+ "  |_| |_| |_|\\___|_| \\_|\\___/_/\\_\\\\__,_|___/\r\n"
-					+ "\r\n"
-					+ "");
 			saveEs();
 		}
 	}

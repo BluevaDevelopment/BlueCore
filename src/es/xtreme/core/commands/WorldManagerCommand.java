@@ -28,11 +28,11 @@ public class WorldManagerCommand implements CommandExecutor {
         final Player player = (Player)sender;
         if(args.length > 0){
             if(args[0].equalsIgnoreCase("help")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.help") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.help") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
-                    player.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/thenexus/worldmanager");
+                    player.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/xtremecore/worldmanager");
                     player.sendMessage("");
                     player.sendMessage(ChatColor.AQUA + "/wm create <worldname> [-worldtype]" + ChatColor.GRAY + " - Creates a new world");
                     player.sendMessage(ChatColor.AQUA + "/wm unload <worldname>" + ChatColor.GRAY + " - Unloads the world without deleting it");
@@ -47,9 +47,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("create")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.create") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.create") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> <type>");
                         return true;
@@ -213,9 +213,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("delete")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.delete") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.delete") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         player.sendMessage(ChatColor.RED + "Usage /wm remove <worldname>");
                         player.sendMessage(ChatColor.DARK_AQUA + "Make sure all players are out of the world!");
@@ -247,9 +247,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("setspawn")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.setspawn") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.setspawn") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         String worldname = player.getWorld().getName();
                         if (Bukkit.getWorld(worldname) == null) {
@@ -268,9 +268,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("spawn")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.spawn") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.spawn") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         String worldname = player.getWorld().getName();
                         World world = Bukkit.getWorld(main.getWorlds().getString("worlds." + worldname + ".name"));
@@ -287,9 +287,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("goto")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.goto") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.goto") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         player.sendMessage(ChatColor.RED + "Usage /wm goto <worldname>");
                         return true;
@@ -314,9 +314,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("unload")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.unload") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.unload") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         player.sendMessage(ChatColor.RED + "Usage: /wm unload <worldname>");
                         return true;
@@ -339,9 +339,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("import")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.import") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.import") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         player.sendMessage(ChatColor.RED + "Usage: /wm import <worldname>");
                         return true;
@@ -373,9 +373,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("list")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.list") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.list") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
                         player.sendMessage(ChatColor.GREEN + "List of worlds [" + Bukkit.getWorlds().size() + "]");
@@ -388,9 +388,9 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
                 }
             }else if(args[0].equalsIgnoreCase("types")){
-                if(player.hasPermission("thenexus.*") ||
-                        player.hasPermission("thenexus.worldmanager.types") ||
-                        player.hasPermission("thenexus.worldmanager.*")){
+                if(player.hasPermission("xtremecore.*") ||
+                        player.hasPermission("xtremecore.worldmanager.types") ||
+                        player.hasPermission("xtremecore.worldmanager.*")){
                     if (args.length == 1) {
                         player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
                         player.sendMessage(ChatColor.GREEN + "Types:");
@@ -409,9 +409,9 @@ public class WorldManagerCommand implements CommandExecutor {
                 player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_command"), player));
             }
         }else{
-            if(player.hasPermission("thenexus.admin.help") || player.hasPermission("thenexus.admin.*")) {
+            if(player.hasPermission("xtremecore.admin.help") || player.hasPermission("xtremecore.admin.*")) {
                 player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
-                player.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/thenexus/worldmanager");
+                player.sendMessage(ChatColor.GRAY + "Wiki: survcraft.org/wiki/xtremecore/worldmanager");
                 player.sendMessage("");
                 player.sendMessage(ChatColor.AQUA + "/wm create <worldname> [-worldtype]" + ChatColor.GRAY + " - Creates a new world");
                 player.sendMessage(ChatColor.AQUA + "/wm unload <worldname>" + ChatColor.GRAY + " - Unloads the world without deleting it");

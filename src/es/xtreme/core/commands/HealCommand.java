@@ -23,9 +23,9 @@ public class HealCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.heal") ||
-                        sender.hasPermission("thenexus.heal.others")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.heal") ||
+                        sender.hasPermission("xtremecore.heal.others")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
@@ -40,9 +40,9 @@ public class HealCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.heal.*") ||
-                        sender.hasPermission("thenexus.heal")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.heal.*") ||
+                        sender.hasPermission("xtremecore.heal")){
                     ((Player) sender).setHealth(20);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.healed_player"), ((Player) sender)));
                 } else {

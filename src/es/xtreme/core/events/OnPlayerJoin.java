@@ -69,7 +69,7 @@ public class OnPlayerJoin implements Listener {
 			}
 		}
 
-		if(event.getPlayer().hasPermission("thenexus.fly.safelogin")) {
+		if(event.getPlayer().hasPermission("xtremecore.fly.safelogin")) {
 			event.getPlayer().setAllowFlight(true);
 			event.getPlayer().setFlying(true);
 		}

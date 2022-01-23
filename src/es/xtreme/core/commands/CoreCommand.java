@@ -9,11 +9,11 @@ import org.bukkit.entity.Player;
 import es.xtreme.core.Main;
 import es.xtreme.core.utils.MessageUtil;
 
-public class NexusCommand implements CommandExecutor {
+public class CoreCommand implements CommandExecutor {
 
 	private Main main;
 
-	public NexusCommand(Main main) {
+	public CoreCommand(Main main) {
 		this.main = main;
 	}
 
@@ -26,7 +26,7 @@ public class NexusCommand implements CommandExecutor {
 
 		if(args.length > 0){
 			if(args[0].equalsIgnoreCase("help")){
-				if(p.hasPermission("thenexus.help") || sender.hasPermission("thenexus.*")){
+				if(p.hasPermission("xtremecore.help") || sender.hasPermission("xtremecore.*")){
 					sender.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "The" + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Nexus");
 					sender.sendMessage(ChatColor.GRAY + "Version: " + main.version + " | By Whirss");
 					sender.sendMessage("");
@@ -38,7 +38,7 @@ public class NexusCommand implements CommandExecutor {
 					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("no_perms"), p));
 				}
 			}else if(args[0].equalsIgnoreCase("reload")){
-				if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
+				if(p.hasPermission("xtremecore.reload") || sender.hasPermission("xtremecore.*")){
 					main.reloadConfig();
 					main.reloadKits();
 					main.reloadWarps();
@@ -50,7 +50,7 @@ public class NexusCommand implements CommandExecutor {
 					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), p));
 				}
 			}else if(args[0].equalsIgnoreCase("wiki")){
-				if(p.hasPermission("thenexus.reload") || sender.hasPermission("thenexus.*")){
+				if(p.hasPermission("xtremecore.reload") || sender.hasPermission("xtremecore.*")){
 					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.reloaded_plugin"), p));
 				} else {
 					sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), p));
@@ -59,7 +59,7 @@ public class NexusCommand implements CommandExecutor {
 				sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_command"), p));
 			}
 		}else{
-			if(sender.hasPermission("thenexus.help") || sender.hasPermission("thenexus.*")) {
+			if(sender.hasPermission("xtremecore.help") || sender.hasPermission("xtremecore.*")) {
 				sender.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "The" + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Nexus");
 				sender.sendMessage(ChatColor.GRAY + "Version: " + main.version + " | By Whirss");
 				sender.sendMessage("");

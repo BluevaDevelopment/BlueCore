@@ -23,10 +23,10 @@ public class GodCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.god.*") ||
-                        sender.hasPermission("thenexus.god") ||
-                        sender.hasPermission("thenexus.god.others")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.god.*") ||
+                        sender.hasPermission("xtremecore.god") ||
+                        sender.hasPermission("xtremecore.god.others")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
@@ -49,9 +49,9 @@ public class GodCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.god.*") ||
-                        sender.hasPermission("thenexus.god")) {
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.god.*") ||
+                        sender.hasPermission("xtremecore.god")) {
                     ((Player) sender).setFoodLevel(20);
                     if(main.getUserdata(((Player) sender).getUniqueId()).getBoolean("godMode")) {
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.god_mode_disabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));

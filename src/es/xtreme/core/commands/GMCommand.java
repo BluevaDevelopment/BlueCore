@@ -41,9 +41,9 @@ public class GMCommand implements CommandExecutor {
                     }
                     return true;
                 }
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.survival") ||
-                        sender.hasPermission("thenexus.gamemode.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.survival") ||
+                        sender.hasPermission("xtremecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.SURVIVAL);
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), ((Player) sender)));
@@ -82,9 +82,9 @@ public class GMCommand implements CommandExecutor {
                     }
                     return true;
                 }
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.creative") ||
-                        sender.hasPermission("thenexus.gamemode.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.creative") ||
+                        sender.hasPermission("xtremecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.CREATIVE);
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE"), ((Player) sender)));
@@ -124,9 +124,9 @@ public class GMCommand implements CommandExecutor {
                     }
                     return true;
                 }
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.adventure") ||
-                        sender.hasPermission("thenexus.gamemode.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.adventure") ||
+                        sender.hasPermission("xtremecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.ADVENTURE);
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), ((Player) sender)));
@@ -164,9 +164,9 @@ public class GMCommand implements CommandExecutor {
                     }
                     return true;
                 }
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.spectator") ||
-                        sender.hasPermission("thenexus.gamemode.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.spectator") ||
+                        sender.hasPermission("xtremecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.SPECTATOR);
                         sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), ((Player) sender)));

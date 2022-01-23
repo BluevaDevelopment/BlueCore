@@ -23,9 +23,9 @@ public class EnderChestCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.enderchest.others") ||
-                        sender.hasPermission("thenexus.enderchest.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.enderchest.others") ||
+                        sender.hasPermission("xtremecore.enderchest.*")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
@@ -40,9 +40,9 @@ public class EnderChestCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.enderchest") ||
-                        sender.hasPermission("thenexus.enderchest.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.enderchest") ||
+                        sender.hasPermission("xtremecore.enderchest.*")){
                     ((Player) sender).openInventory(((Player) sender).getEnderChest());
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.enderchest_open"), ((Player) sender)));
                 } else {

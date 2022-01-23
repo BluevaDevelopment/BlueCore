@@ -23,9 +23,9 @@ public class WorkbenchCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.workbench.others") ||
-                        sender.hasPermission("thenexus.workbench.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.workbench.others") ||
+                        sender.hasPermission("xtremecore.workbench.*")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
@@ -40,9 +40,9 @@ public class WorkbenchCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.workbench") ||
-                        sender.hasPermission("thenexus.workbench.*")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.workbench") ||
+                        sender.hasPermission("xtremecore.workbench.*")){
                     ((Player) sender).openInventory(((Player) sender).openWorkbench(null, true));
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.workbench_open"), ((Player) sender)));
                 } else {

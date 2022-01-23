@@ -23,8 +23,8 @@ public class SetSpawnCommand implements CommandExecutor {
 
         final Player player = (Player)sender;
         if(args.length > 0){
-            if(sender.hasPermission("thenexus.*") ||
-                    sender.hasPermission("thenexus.setspawn")) {
+            if(sender.hasPermission("xtremecore.*") ||
+                    sender.hasPermission("xtremecore.setspawn")) {
                 if(args.length == 1){
                     if(main.getWarps().isSet("warps."+ args[0])) {
                         main.getWarps().set("spawn", args[0]);

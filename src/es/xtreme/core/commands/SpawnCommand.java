@@ -24,10 +24,10 @@ public class SpawnCommand implements CommandExecutor {
         //player:
         if ((sender instanceof Player)) {
             if (args.length > 0) {
-                if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.spawn.*") ||
-                        sender.hasPermission("thenexus.spawn") ||
-                        sender.hasPermission("thenexus.spawn.others")) {
+                if (sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.spawn.*") ||
+                        sender.hasPermission("xtremecore.spawn") ||
+                        sender.hasPermission("xtremecore.spawn.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         String spawn = main.getWarps().getString("spawn");
@@ -54,9 +54,9 @@ public class SpawnCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             } else {
-                if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.spawn.*") ||
-                        sender.hasPermission("thenexus.spawn")) {
+                if (sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.spawn.*") ||
+                        sender.hasPermission("xtremecore.spawn")) {
                     String spawn = main.getWarps().getString("spawn");
                     if(main.getWarps().isSet("warps."+spawn+".world")) {
                         String world = main.getWarps().getString("warps."+spawn+".world");

@@ -25,7 +25,7 @@ public class OnPlayerChatAsync implements Listener {
 		String message = event.getMessage();
 		
 		if(main.getConfig().getBoolean("chat.antiswear.enabled")) {
-			if(!player.hasPermission("thenexus.chat.antiswear.bypass")) {
+			if(!player.hasPermission("xtremecore.chat.antiswear.bypass")) {
 				for(String blockedWords : main.getConfig().getStringList("chat.antiswear.list")) {
 					if(message.toLowerCase().replaceAll("[-_*. ]", "").contains(blockedWords.toLowerCase())) {
 						if(main.getConfig().getString("chat.antiswear.mode").equals("replace")) {

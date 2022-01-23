@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class MessageUtil {
 
     public static String getColorMessage(String text, Player player) {
-        if(Bukkit.getVersion().contains("1.17")) {
+        if(Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18")) {
             Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
             if(Main.getInstance().placeholderapi) {
                 Matcher match = pattern.matcher(PlaceholderAPI.setPlaceholders(player, text));

@@ -23,10 +23,10 @@ public class FeedCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.feed.*") ||
-                        sender.hasPermission("thenexus.feed") ||
-                        sender.hasPermission("thenexus.feed.others")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.feed.*") ||
+                        sender.hasPermission("xtremecore.feed") ||
+                        sender.hasPermission("xtremecore.feed.others")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
@@ -41,9 +41,9 @@ public class FeedCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.feed.*") ||
-                        sender.hasPermission("thenexus.feed")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.feed.*") ||
+                        sender.hasPermission("xtremecore.feed")){
                     ((Player) sender).setFoodLevel(20);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), ((Player) sender)));
                 } else {

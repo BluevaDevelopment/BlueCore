@@ -1,11 +1,10 @@
-name: TheNexus
+name: XtremeCore
 version: 1.0.0
-main: org.jachi.whirss.thenexus.Main
-author: Whirss
-api-version: 1.17
+main: es.xtreme.core.Main
+author: Xtreme
+api-version: 1.18
 load: STARTUP
-depend: [Vault]
-softdepend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI, Vault]
 commands:
    adventure:
       aliases: [ nadventure, adven, adv, a, gma ]
@@ -15,6 +14,10 @@ commands:
       aliases: [ nclearchat, ncc, cc ]
       description: Clears the chat of one or all players
       usage: /clearchat [action]
+   core:
+      aliases: [ xtremecore, xc, xcore, xtremec ]
+      description: Main command
+      usage: /core [action]
    creative:
       aliases: [ ncreative, crea, cr, c, gmc ]
       description: Change your game mode
@@ -55,10 +58,6 @@ commands:
       aliases: [ nmidnight ]
       description: Change the world time to midnight
       usage: /midnight [action]
-   nexus:
-      aliases: [ thenexus, tn, nx, x ]
-      description: Command for players
-      usage: /nexus [action]
    night:
       aliases: [ nnight ]
       description: Change the world time to night

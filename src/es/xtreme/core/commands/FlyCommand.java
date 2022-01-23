@@ -23,9 +23,9 @@ public class FlyCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.fly") ||
-                        sender.hasPermission("thenexus.fly.others")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.fly") ||
+                        sender.hasPermission("xtremecore.fly.others")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
@@ -48,9 +48,9 @@ public class FlyCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.fly.*") ||
-                        sender.hasPermission("thenexus.fly")) {
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.fly.*") ||
+                        sender.hasPermission("xtremecore.fly")) {
                     if(((Player) sender).isFlying()) {
                         ((Player) sender).setAllowFlight(false);
                         ((Player) sender).setFlying(false);

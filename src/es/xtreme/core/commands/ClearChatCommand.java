@@ -21,9 +21,9 @@ public class ClearChatCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.clearchat.*") ||
-                        sender.hasPermission("thenexus.clearchat.others")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.clearchat.*") ||
+                        sender.hasPermission("xtremecore.clearchat.others")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
@@ -40,9 +40,9 @@ public class ClearChatCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.clearchat.*") ||
-                        sender.hasPermission("thenexus.clearchat")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.clearchat.*") ||
+                        sender.hasPermission("xtremecore.clearchat")){
                     for(int i=0;i<200;i++) {
                         Bukkit.broadcastMessage("");
                     }

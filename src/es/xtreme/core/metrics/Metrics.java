@@ -1,4 +1,4 @@
-package es.xtreme.core;
+package es.xtreme.core.metrics;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

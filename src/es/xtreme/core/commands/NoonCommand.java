@@ -24,9 +24,9 @@ public class NoonCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.time.*") ||
-                        sender.hasPermission("thenexus.time.noon.others")){
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.time.*") ||
+                        sender.hasPermission("xtremecore.time.noon.others")){
                     if(args.length == 1){
                         World world = Bukkit.getWorld(args[0]);
                         if (world == null) {
@@ -43,9 +43,9 @@ public class NoonCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.time.*") ||
-                        sender.hasPermission("thenexus.time.noon")) {
+                if(sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.time.*") ||
+                        sender.hasPermission("xtremecore.time.noon")) {
                     ((Player) sender).getWorld().setTime(6000);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.changed_time"), ((Player) sender))
                             .replace("%world%", ((Player) sender).getWorld().getName())

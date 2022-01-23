@@ -24,8 +24,8 @@ public class SetWarpCommand implements CommandExecutor {
 
         final Player player = (Player)sender;
         if(args.length > 0){
-            if(sender.hasPermission("thenexus.*") ||
-                    sender.hasPermission("thenexus.setwarp")) {
+            if(sender.hasPermission("xtremecore.*") ||
+                    sender.hasPermission("xtremecore.setwarp")) {
                 if(args.length == 1){
                     if(!main.getWarps().isSet("warps."+ args[0])) {
                         Location l = player.getLocation();

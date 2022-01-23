@@ -24,10 +24,10 @@ public class SpectatorCommand implements CommandExecutor {
         //player:
         if ((sender instanceof Player)) {
             if (args.length > 0) {
-                if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.*") ||
-                        sender.hasPermission("thenexus.gamemode.spectator.*") ||
-                        sender.hasPermission("thenexus.gamemode.spectator.others")) {
+                if (sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.*") ||
+                        sender.hasPermission("xtremecore.gamemode.spectator.*") ||
+                        sender.hasPermission("xtremecore.gamemode.spectator.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
@@ -42,10 +42,10 @@ public class SpectatorCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             } else {
-                if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.*") ||
-                        sender.hasPermission("thenexus.gamemode.spectator") ||
-                        sender.hasPermission("thenexus.gamemode.spectator.*")) {
+                if (sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.*") ||
+                        sender.hasPermission("xtremecore.gamemode.spectator") ||
+                        sender.hasPermission("xtremecore.gamemode.spectator.*")) {
                     ((Player) sender).setGameMode(GameMode.SPECTATOR);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), ((Player) sender)));
                 } else {

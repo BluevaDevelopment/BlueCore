@@ -24,10 +24,10 @@ public class CreativeCommand implements CommandExecutor {
         //player:
         if ((sender instanceof Player)) {
             if (args.length > 0) {
-                if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.*") ||
-                        sender.hasPermission("thenexus.gamemode.creative.*") ||
-                        sender.hasPermission("thenexus.gamemode.creative.others")) {
+                if (sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.*") ||
+                        sender.hasPermission("xtremecore.gamemode.creative.*") ||
+                        sender.hasPermission("xtremecore.gamemode.creative.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
@@ -42,10 +42,10 @@ public class CreativeCommand implements CommandExecutor {
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             } else {
-                if (sender.hasPermission("thenexus.*") ||
-                        sender.hasPermission("thenexus.gamemode.*") ||
-                        sender.hasPermission("thenexus.gamemode.creative") ||
-                        sender.hasPermission("thenexus.gamemode.creative.*")) {
+                if (sender.hasPermission("xtremecore.*") ||
+                        sender.hasPermission("xtremecore.gamemode.*") ||
+                        sender.hasPermission("xtremecore.gamemode.creative") ||
+                        sender.hasPermission("xtremecore.gamemode.creative.*")) {
                     ((Player) sender).setGameMode(GameMode.CREATIVE);
                     sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE"), ((Player) sender)));
                 } else {

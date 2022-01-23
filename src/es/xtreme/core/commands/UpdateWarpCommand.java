@@ -24,8 +24,8 @@ public class UpdateWarpCommand implements CommandExecutor {
 
         final Player player = (Player)sender;
         if(args.length > 0){
-            if(sender.hasPermission("thenexus.*") ||
-                    sender.hasPermission("thenexus.updatewarp")) {
+            if(sender.hasPermission("xtremecore.*") ||
+                    sender.hasPermission("xtremecore.updatewarp")) {
                 if(args.length == 1){
                     if(main.getWarps().isSet("warps."+ args[0])) {
                         Location l = player.getLocation();

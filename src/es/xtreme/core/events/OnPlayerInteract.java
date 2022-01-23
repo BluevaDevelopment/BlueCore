@@ -19,10 +19,10 @@ public class OnPlayerInteract implements Listener {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
         if(!main.getWorlds().getBoolean("worlds." + worldname + ".interact")) {
-            if(player.hasPermission("thenexus.*") ||
-                    player.hasPermission("thenexus.worldmanager.bypass.*") ||
-                    player.hasPermission("thenexus.worldmanager.bypass.interact") ||
-                    player.hasPermission("thenexus.worldmanager.*")){
+            if(player.hasPermission("xtremecore.*") ||
+                    player.hasPermission("xtremecore.worldmanager.bypass.*") ||
+                    player.hasPermission("xtremecore.worldmanager.bypass.interact") ||
+                    player.hasPermission("xtremecore.worldmanager.*")){
                 event.setCancelled(false);
             } else {
                 event.setCancelled(true);

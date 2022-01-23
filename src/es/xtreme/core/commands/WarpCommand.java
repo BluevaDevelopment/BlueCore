@@ -24,9 +24,9 @@ public class WarpCommand implements CommandExecutor {
         if ((sender instanceof Player)) {
             if (args.length > 0) {
                     if (args.length == 2) {
-                        if (sender.hasPermission("thenexus.*") ||
-                                sender.hasPermission("thenexus.warp.*") ||
-                                sender.hasPermission("thenexus.warp."+args[0])) {
+                        if (sender.hasPermission("xtremecore.*") ||
+                                sender.hasPermission("xtremecore.warp.*") ||
+                                sender.hasPermission("xtremecore.warp."+args[0])) {
                         String warp = args[0];
                         Player target = Bukkit.getPlayer(args[1]);
 
@@ -52,9 +52,9 @@ public class WarpCommand implements CommandExecutor {
                             sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
                         }
                 } else if (args.length == 1) {
-                        if (sender.hasPermission("thenexus.*") ||
-                                sender.hasPermission("thenexus.warp.*") ||
-                                sender.hasPermission("thenexus.warp."+args[0])) {
+                        if (sender.hasPermission("xtremecore.*") ||
+                                sender.hasPermission("xtremecore.warp.*") ||
+                                sender.hasPermission("xtremecore.warp."+args[0])) {
                             String warp = args[0];
                             String world = main.getWarps().getString("warps."+warp+".world");
 
