@@ -1,5 +1,5 @@
-# XtremeCore
-Xtreme Core is a plugin that aims to include an all in one of the basic needs of all minecraft servers.
+# Blue Core
+Blue Core is a plugin that aims to include an all in one of the basic needs of all minecraft servers.
 
 ## Features already added
 

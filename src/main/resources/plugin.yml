@@ -1,0 +1,112 @@
+name: BlueCore
+version: 1.0.0
+main: net.blueva.core.Main
+author: Blueva
+api-version: 1.19
+load: STARTUP
+softdepend: [PlaceholderAPI, Vault]
+commands:
+   adventure:
+      aliases: [ nadventure, adven, adv, a, gma ]
+      description: Change your game mode
+      usage: /adventure [action]
+   clearchat:
+      aliases: [ nclearchat, ncc, cc ]
+      description: Clears the chat of one or all players
+      usage: /clearchat [action]
+   core:
+      aliases: [ xtremecore, xc, xcore, xtremec ]
+      description: Main command
+      usage: /core [action]
+   creative:
+      aliases: [ ncreative, crea, cr, c, gmc ]
+      description: Change your game mode
+      usage: /creative [action]
+   day:
+      aliases: [ nday ]
+      description: Change the world time to day
+      usage: /day [action]
+   deletewarp:
+      aliases: [ ndeletewarp, ndelwarp, delwarp ]
+      description: Deletes a warp
+      usage: /deletewarp [action]
+   enderchest:
+      aliases: [ nenderchest, nec, ec ]
+      description: Open the Ender Chest
+      usage: /enderchest [action]
+   feed:
+      aliases: [ nfeed, neat, eat ]
+      description: Satisfy the hunger.
+      usage: /feed [action]
+   fly:
+      aliases: [ nfly ]
+      description: Activate fly mode.
+      usage: /fly [action]
+   gm:
+      aliases: [ ngamemode, ngm, gmode, gamem ]
+      description: Change your game mode
+      usage: /gm [action]
+   god:
+      aliases: [ ngod ]
+      description: Enable god mode
+      usage: /god [action]
+   heal:
+      aliases: [ nheal ]
+      description: Heals you or the given player.
+      usage: /heal [action]
+   midnight:
+      aliases: [ nmidnight ]
+      description: Change the world time to midnight
+      usage: /midnight [action]
+   night:
+      aliases: [ nnight ]
+      description: Change the world time to night
+      usage: /night [action]
+   noon:
+      aliases: [ nnoon ]
+      description: Change the world time to noon
+      usage: /noon [action]
+   setspawn:
+      aliases: [ nsetspawn ]
+      description: Sets the spawn
+      usage: /setspawn [action]
+   setwarp:
+      aliases: [ nsetwarp ]
+      description: Sets a warp
+      usage: /setwarp [action]
+   spawn:
+      aliases: [ nspawn ]
+      description: Teleport to the spawn
+      usage: /spawn [action]
+   spectator:
+      aliases: [ nspectator, spec, sp, gmsp]
+      description: Change your game mode
+      usage: /spectator [action]
+   storm:
+      aliases: [ nstorm, nrain, rain]
+      description: Change the climate from one world to storm
+      usage: /storm [action]
+   sun:
+      aliases: [ nsun, nclear, clear ]
+      description: Change the climate from one world to clear
+      usage: /sun [action]
+   survival:
+      aliases: [ nsurvival, surv, srv, s, gms ]
+      description: Change your game mode
+      usage: /survival [action]
+   updatewarp:
+      aliases: [ nupdatewarp, nupdwarp, updwarp ]
+      description: Update a warp
+      usage: /updatewarp [action]
+   warp:
+      aliases: [ nwarp ]
+      description: Teleport to a warp
+      usage: /warp [action]
+   workbench:
+      aliases: [ nworkbench, nwb, ncraftingtable, ncraft, wb, craftingtable, craft ]
+      description: Open the Crafting Table
+      usage: /workbench [action]
+   worldmanager:
+      aliases: [ nworld, world, worlds, wm, w ]
+      description: World Manager
+      usage: /worldmanager [action]
