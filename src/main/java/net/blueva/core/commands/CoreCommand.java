@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class CoreCommand implements CommandExecutor {
@@ -36,7 +36,7 @@ public class CoreCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.AQUA + "/nexus reload");
 
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("no_perms"), p));
+					sender.sendMessage(MessagesUtil.format(p, main.configManager.getLang().getString("no_perms")));
 				}
 			}else if(args[0].equalsIgnoreCase("reload")){
 				if(p.hasPermission("bluecore.reload") || sender.hasPermission("bluecore.*")){
@@ -45,18 +45,18 @@ public class CoreCommand implements CommandExecutor {
 					main.configManager.reloadCommands();
 					main.configManager.reloadWorlds();
 					main.configManager.reloadLang();
-					sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.reloaded_plugin"), p));
+					sender.sendMessage(MessagesUtil.format(p, main.configManager.getLang().getString("messages.success.reloaded_plugin")));
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), p));
+					sender.sendMessage(MessagesUtil.format(p, main.configManager.getLang().getString("messages.error.no_perms")));
 				}
 			}else if(args[0].equalsIgnoreCase("wiki")){
 				if(p.hasPermission("bluecore.reload") || sender.hasPermission("bluecore.*")){
-					sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.reloaded_plugin"), p));
+					sender.sendMessage(MessagesUtil.format(p, main.configManager.getLang().getString("messages.success.reloaded_plugin")));
 				} else {
-					sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), p));
+					sender.sendMessage(MessagesUtil.format(p, main.configManager.getLang().getString("messages.error.no_perms")));
 				}
 			}else{
-				sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.unknown_command"), p));
+				sender.sendMessage(MessagesUtil.format(p, main.configManager.getLang().getString("messages.error.unknown_command")));
 			}
 		}else{
 			if(sender.hasPermission("bluecore.help") || sender.hasPermission("bluecore.*")) {
@@ -67,7 +67,7 @@ public class CoreCommand implements CommandExecutor {
 				sender.sendMessage(ChatColor.AQUA + "/nexus wiki");
 				sender.sendMessage(ChatColor.AQUA + "/nexus reload");
 			} else {
-				sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("no_perms"), p));
+				sender.sendMessage(MessagesUtil.format(p, main.configManager.getLang().getString("no_perms")));
 			}
 		}
 		return true;

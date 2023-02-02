@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ public class OnPlayerQuit implements Listener {
 	@EventHandler
 	public void OPQ(PlayerQuitEvent event) {
 		if(main.configManager.getSettings().getBoolean("welcome.broadcast.leave.enabled")) {
-			event.setQuitMessage(MessageUtil.getColorMessage(main.configManager.getSettings().getString("welcome.broadcast.leave.message"), event.getPlayer()).replace("%player_name%", event.getPlayer().getDisplayName()));
+			event.setQuitMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.leave.message")));
 		} else {
 			event.setQuitMessage("");
 		}

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -41,17 +41,17 @@ public class SpawnCommand implements CommandExecutor {
                             Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
                             if (target != null) {
                                 target.teleport(loc);
-                                target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.teleported_to_spawn").replace("%warp%", spawn), target));
-                                sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.teleported_to_spawn_others").replace("%warp%", spawn).replace("%player%", target.getName()), target));
+                                target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_spawn").replace("%warp%", spawn)));
+                                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_spawn_others").replace("%warp%", spawn).replace("%player%", target.getName())));
                             } else {
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                             }
                         } else {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.unknown_warp"), (Player) sender));
+                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.unknown_warp")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             } else {
                 if (sender.hasPermission("bluecore.*") ||
@@ -67,12 +67,12 @@ public class SpawnCommand implements CommandExecutor {
                         float pitch = Float.valueOf(main.configManager.getWarps().getString("warps."+spawn+".pitch"));
                         Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
                         ((Player) sender).teleport(loc);
-                        ((Player) sender).sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.teleported_to_spawn").replace("%warp%", spawn), ((Player) sender)));
+                        ((Player) sender).sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.teleported_to_spawn").replace("%warp%", spawn)));
                     } else {
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.spawn_not_set"), (Player) sender));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.spawn_not_set")));
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }
         } else {
@@ -91,13 +91,13 @@ public class SpawnCommand implements CommandExecutor {
                     Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
                     if (target != null) {
                         target.teleport(loc);
-                        target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.teleported_to_spawn").replace("%warp%", spawn), target));
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("console.success.teleported_to_spawn_others").replace("%warp%", spawn).replace("%player%", target.getName()), target));
+                        target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_spawn").replace("%warp%", spawn)));
+                        sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("console.success.teleported_to_spawn_others").replace("%warp%", spawn).replace("%player%", target.getName())));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("console.error.spawn_not_set"), (Player) sender));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("console.error.spawn_not_set")));
                 }
             } else {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_spawn_command")));

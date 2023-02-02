@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class StormCommand implements CommandExecutor {
 
@@ -30,27 +30,27 @@ public class StormCommand implements CommandExecutor {
                     if(args.length == 1){
                         World world = Bukkit.getWorld(args[0]);
                         if (world == null) {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.invalid_world"), ((Player) sender)));
+                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.invalid_world")));
                         } else {
                             world.setStorm(true);
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_weather"), ((Player) sender))
+                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_weather"))
                                     .replace("%world%", args[0])
                                     .replace("%weather%", "Storm"));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
                 if(sender.hasPermission("bluecore.*") ||
                         sender.hasPermission("bluecore.weather.*") ||
                         sender.hasPermission("bluecore.weather.storm") ){
                     ((Player) sender).getWorld().setStorm(true);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_weather"), ((Player) sender))
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_weather"))
                             .replace("%world%", ((Player) sender).getWorld().getName())
                             .replace("%weather%", "Storm"));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }
         } else {
@@ -63,7 +63,7 @@ public class StormCommand implements CommandExecutor {
                     } else {
                         world.setTime(1000);
                         world.setStorm(true);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("console.success.changed_weather"), ((Player) sender))
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("console.success.changed_weather"))
                                 .replace("%world%", ((Player) sender).getWorld().getName())
                                 .replace("%weather%", "Storm"));
                     }

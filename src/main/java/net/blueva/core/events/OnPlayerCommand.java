@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class OnPlayerCommand implements Listener {
 
@@ -54,7 +54,7 @@ public class OnPlayerCommand implements Listener {
 								if (commandToSend.startsWith("console:")) {
 									if (commandToSend.contains("msg " + player.getName())) {
 										String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-										player.sendMessage(MessageUtil.getColorMessage(msg, player));
+										player.sendMessage(MessagesUtil.format(player, msg));
 									} else {
 										Bukkit.dispatchCommand((CommandSender) consoleCommandSender, commandToSend.replace("console: ", ""));
 									}
@@ -73,7 +73,7 @@ public class OnPlayerCommand implements Listener {
 						if (commandToSend.startsWith("console:")) {
 							if (commandToSend.contains("msg " + player.getName())) {
 								String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-								player.sendMessage(MessageUtil.getColorMessage(msg, player));
+								player.sendMessage(MessagesUtil.format(player, msg));
 							} else {
 								Bukkit.dispatchCommand((CommandSender) consoleCommandSender, commandToSend.replace("console: ", ""));
 							}
@@ -93,7 +93,7 @@ public class OnPlayerCommand implements Listener {
 				String bcmd = arrayOfString[i];
 				if (main.configManager.getSettings().getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+					event.getPlayer().sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
 				}
 			}
 		}

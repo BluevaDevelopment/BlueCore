@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class SetSpawnCommand implements CommandExecutor {
 
@@ -22,21 +22,19 @@ public class SetSpawnCommand implements CommandExecutor {
         }
 
         final Player player = (Player)sender;
-        if(args.length > 0){
-            if(sender.hasPermission("bluecore.*") ||
-                    sender.hasPermission("bluecore.setspawn")) {
-                if(args.length == 1){
-                    if(main.configManager.getWarps().isSet("warps."+ args[0])) {
-                        main.configManager.getWarps().set("spawn", args[0]);
-                        main.configManager.saveWarps();
-                        main.configManager.reloadWarps();
-                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.spawn_set").replace("%warp%", args[0]), player));
-                    } else {
-                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.unknown_warp"), player));
-                    }
+        if(sender.hasPermission("bluecore.*") ||
+                sender.hasPermission("bluecore.setspawn")) {
+            if(args.length == 1){
+                if(main.configManager.getWarps().isSet("warps."+ args[0])) {
+                    main.configManager.getWarps().set("spawn", args[0]);
+                    main.configManager.saveWarps();
+                    main.configManager.reloadWarps();
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.spawn_set").replace("%warp%", args[0])));
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.other.use_setspawn_command"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.unknown_warp")));
                 }
+            } else {
+                player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_setspawn_command")));
             }
         }
         return true;

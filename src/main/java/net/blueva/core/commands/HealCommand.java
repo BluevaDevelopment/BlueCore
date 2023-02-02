@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class HealCommand implements CommandExecutor {
 
@@ -30,23 +30,23 @@ public class HealCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
                             target.setHealth(20);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.healed_player"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.healed_player_others").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.healed_player")));
+                            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.healed_player_others").replace("%player%", target.getName())));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
                 if(sender.hasPermission("bluecore.*") ||
                         sender.hasPermission("bluecore.heal.*") ||
                         sender.hasPermission("bluecore.heal")){
                     ((Player) sender).setHealth(20);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.healed_player"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.healed_player")));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }
         } else {
@@ -57,7 +57,7 @@ public class HealCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         target.setHealth(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.healed_player"), target));
+                        target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.healed_player")));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.healed_player_others")).replace("%player%", target.getName()));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));

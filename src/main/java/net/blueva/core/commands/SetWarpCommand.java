@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class SetWarpCommand implements CommandExecutor {
 
@@ -43,12 +43,12 @@ public class SetWarpCommand implements CommandExecutor {
                         main.configManager.getWarps().set("warps." + args[0] + ".pitch", pitch);
                         main.configManager.saveWarps();
                         main.configManager.reloadWarps();
-                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.warp_set").replace("%warp%", args[0]), player));
+                        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.warp_set").replace("%warp%", args[0])));
                     } else {
-                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.warp_already_set"), player));
+                        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.warp_already_set")));
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.other.use_setwarp_command"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_setwarp_command")));
                 }
             }
         }

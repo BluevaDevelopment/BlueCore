@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class FlyCommand implements CommandExecutor {
 
@@ -32,20 +32,20 @@ public class FlyCommand implements CommandExecutor {
                             if(target.isFlying()) {
                                 target.setFlying(false);
                                 target.setAllowFlight(false);
-                                target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_disabled"), target));
-                                sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_disabled_other"), target).replace("%player%", target.getName()));
+                                target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.fly_mode_disabled")));
+                                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.fly_mode_disabled_other")).replace("%player%", target.getName()));
                             } else {
                                 target.setAllowFlight(true);
                                 target.setFlying(true);
-                                target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_enabled"), target));
-                                sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_enabled_other"), target).replace("%player%", target.getName()));
+                                target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.fly_mode_enabled")));
+                                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.fly_mode_enabled_other")).replace("%player%", target.getName()));
                             }
                         } else {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("console.error.player_offline"), ((Player) sender)));
+                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
                 if(sender.hasPermission("bluecore.*") ||
@@ -54,14 +54,14 @@ public class FlyCommand implements CommandExecutor {
                     if(((Player) sender).isFlying()) {
                         ((Player) sender).setAllowFlight(false);
                         ((Player) sender).setFlying(false);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_disabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.fly_mode_disabled")).replace("%player%", ((Player) sender).getName()));
                     } else {
                         ((Player) sender).setAllowFlight(true);
                         ((Player) sender).setFlying(true);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_enabled"), ((Player) sender)).replace("%player%", ((Player) sender).getName()));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.fly_mode_enabled")).replace("%player%", ((Player) sender).getName()));
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }
         } else {
@@ -73,12 +73,12 @@ public class FlyCommand implements CommandExecutor {
                         if(target.isFlying()) {
                             target.setAllowFlight(false);
                             target.setFlying(false);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_disabled"), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.fly_mode_disabled")));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.fly_mode_disabled_others")).replace("%player%", target.getName()));
                         } else {
                             target.setAllowFlight(true);
                             target.setFlying(true);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.fly_mode_enabled"), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.fly_mode_enabled")));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.fly_mode_enabled_others")).replace("%player%", target.getName()));
                         }
                     } else {

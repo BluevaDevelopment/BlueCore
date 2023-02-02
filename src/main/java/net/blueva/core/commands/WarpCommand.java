@@ -9,11 +9,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class WarpCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public WarpCommand(Main main) {
         this.main = main;
@@ -40,16 +40,16 @@ public class WarpCommand implements CommandExecutor {
                             Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
                             if (target != null) {
                                 target.teleport(loc);
-                                target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp), target));
-                                sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName()), target));
+                                target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
+                                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName())));
                             } else {
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                             }
                         } else {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.unknown_warp"), (Player) sender));
+                            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.unknown_warp")));
                         }
                     } else {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                         }
                 } else if (args.length == 1) {
                         if (sender.hasPermission("bluecore.*") ||
@@ -66,15 +66,15 @@ public class WarpCommand implements CommandExecutor {
                                 float pitch = Float.valueOf(main.configManager.getWarps().getString("warps."+warp+".pitch"));
                                 Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
                                 ((Player) sender).teleport(loc);
-                                sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp), ((Player) sender)));
+                                sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
                             } else {
-                                sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.unknown_warp"), (Player) sender));
+                                sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.unknown_warp")));
                             }
                         } else {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                         }
                     } else {
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.other.use_warp_command").replace("%warp%", args[0]), ((Player) sender).getPlayer()));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender).getPlayer(), main.configManager.getLang().getString("messages.other.use_warp_command").replace("%warp%", args[0])));
                     }
             }
         } else {

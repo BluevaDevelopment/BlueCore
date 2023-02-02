@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 import java.io.File;
 
@@ -44,7 +44,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.AQUA + "/wm list" + ChatColor.GRAY + " - List of loaded worlds");
 
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("create")){
                 if(player.hasPermission("bluecore.*") ||
@@ -57,7 +57,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) != null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_alredy_exist").replace("%worldmanager_worldname%",  worldname), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_alredy_exist").replace("%worldmanager_worldname%",  worldname)));
                             return true;
                         } else {
                             player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment>");
@@ -67,7 +67,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 3) {
                         if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             try {
-                                player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.info.wm_creating_world"), player).replace("%worldmanager_worldname%", args[1]));
+                                player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.info.wm_creating_world")).replace("%worldmanager_worldname%", args[1]));
                                 WorldCreator setupworld = new WorldCreator(args[1]);
                                 setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
                                 setupworld.generateStructures(true);
@@ -96,14 +96,14 @@ public class WorldManagerCommand implements CommandExecutor {
                                 main.configManager.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
                                 main.configManager.saveWorlds();
                                 player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                                player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.wm_created_world"), player).replace("%worldmanager_worldname%", args[1]));
+                                player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.wm_created_world")).replace("%worldmanager_worldname%", args[1]));
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_creation_error"), player));
+                                player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_creation_error")));
                             }
                             return true;
                         } else {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_invalid_args"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_invalid_args")));
                         }
                     }
                     if (args.length == 4) {
@@ -125,7 +125,7 @@ public class WorldManagerCommand implements CommandExecutor {
                             if(args[3].equals("-t")) {
                                 if(args[4].equals("flat") || args[4].equals("large_biomes") || args[4].equals("normal") || args[4].equals("amplified")) {
                                     try {
-                                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.info.wm_creating_world"), player).replace("%worldmanager_worldname%", args[1]));
+                                        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.info.wm_creating_world")).replace("%worldmanager_worldname%", args[1]));
                                         WorldCreator setupworld = new WorldCreator(args[1]);
                                         setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
                                         setupworld.type(WorldType.valueOf(args[4].toUpperCase()));
@@ -155,10 +155,10 @@ public class WorldManagerCommand implements CommandExecutor {
                                         main.configManager.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
                                         main.configManager.saveWorlds();
                                         player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.wm_created_world"), player).replace("%worldmanager_worldname%", args[1]));
+                                        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.wm_created_world")).replace("%worldmanager_worldname%", args[1]));
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_creation_error"), player));
+                                        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_creation_error")));
                                     }
                                 }
                             } else if(args[3].equals("-g")) {
@@ -166,7 +166,7 @@ public class WorldManagerCommand implements CommandExecutor {
                                     //generator code
                                 }
                                 try {
-                                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.info.wm_creating_world"), player).replace("%worldmanager_worldname%", args[1]));
+                                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.info.wm_creating_world")).replace("%worldmanager_worldname%", args[1]));
                                     WorldCreator setupworld = new WorldCreator(args[1]);
                                     setupworld.environment(World.Environment.valueOf(args[2].toUpperCase()));
                                     setupworld.type(WorldType.NORMAL);
@@ -197,20 +197,20 @@ public class WorldManagerCommand implements CommandExecutor {
                                     main.configManager.getWorlds().set("worlds." + args[1] + ".spawnlocation.yaw", 0.0);
                                     main.configManager.saveWorlds();
                                     player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.wm_created_world"), player).replace("%worldmanager_worldname%", args[1]));
+                                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.wm_created_world")).replace("%worldmanager_worldname%", args[1]));
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_creation_error"), player));
+                                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_creation_error")));
                                 }
                             } else {
                                 player.sendMessage(ChatColor.RED + "Usage: /wm create <worldname> <environment> -t <type> || -g <generator>");
                             }
                         } else {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_invalid_args"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_invalid_args")));
                         }
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("delete")){
                 if(player.hasPermission("bluecore.*") ||
@@ -224,27 +224,18 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_invalid_world"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_invalid_world")));
                             return true;
                         }
                         if (!Bukkit.getWorld(worldname).getPlayers().isEmpty()) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_players_in_world"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_players_in_world")));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, false);
-                        /*try {
-                            FileUtils.deleteDirectory(new File(worldname));
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.wm_deleted_world"), player).replace("%worldmanager_worldname%", worldname));
-                            main.configManager.getWorlds().set("worlds." + worldname, null);
-                            main.configManager.saveWorlds();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_deletion_error"), player));
-                        }*/
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("setspawn")){
                 if(player.hasPermission("bluecore.*") ||
@@ -253,7 +244,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 1) {
                         String worldname = player.getWorld().getName();
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_invalid_world"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_invalid_world")));
                             return true;
                         }
                         main.configManager.getWorlds().set("worlds." + worldname + ".spawnlocation.x", player.getLocation().getX());
@@ -265,7 +256,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("spawn")){
                 if(player.hasPermission("bluecore.*") ||
@@ -284,7 +275,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("goto")){
                 if(player.hasPermission("bluecore.*") ||
@@ -297,7 +288,7 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_invalid_world"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_invalid_world")));
                             return true;
                         }
                         World world = Bukkit.getWorld(main.configManager.getWorlds().getString("worlds." + worldname + ".name"));
@@ -311,7 +302,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("unload")){
                 if(player.hasPermission("bluecore.*") ||
@@ -324,19 +315,19 @@ public class WorldManagerCommand implements CommandExecutor {
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) == null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_invalid_world"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_invalid_world")));
                             return true;
                         }
                         if (!Bukkit.getWorld(worldname).getPlayers().isEmpty()) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_players_in_world"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_players_in_world")));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, false);
-                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.wm_unloaded_world"), player).replace("%worldmanager_worldname%", worldname));
+                        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.wm_unloaded_world")).replace("%worldmanager_worldname%", worldname));
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("import")){
                 if(player.hasPermission("bluecore.*") ||
@@ -350,27 +341,27 @@ public class WorldManagerCommand implements CommandExecutor {
                         String worldname = args[1];
                         File worldfile = new File(Bukkit.getServer().getWorldContainer(), worldname);
                         if (!worldfile.exists()) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_invalid_world"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_invalid_world")));
                             return true;
                         }
                         if (Bukkit.getWorld(worldname) != null) {
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_already_imported"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_already_imported")));
                             return true;
                         }
                         Bukkit.unloadWorld(worldname, true);
                         try {
                             WorldCreator setupworld = new WorldCreator(worldname);
                             setupworld.createWorld();
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.wm_imported_world"), player).replace("%worldmanager_worldname%", worldname));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.wm_imported_world")).replace("%worldmanager_worldname%", worldname));
                             player.teleport(Bukkit.getWorld(worldname).getSpawnLocation());
                         } catch (Exception e) {
                             e.printStackTrace();
-                            player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.wm_imported_error"), player));
+                            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.wm_imported_error")));
                         }
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("list")){
                 if(player.hasPermission("bluecore.*") ||
@@ -385,7 +376,7 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("types")){
                 if(player.hasPermission("bluecore.*") ||
@@ -403,10 +394,10 @@ public class WorldManagerCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
-                player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.unknown_command"), player));
+                player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.unknown_command")));
             }
         }else{
             if(player.hasPermission("bluecore.admin.help") || player.hasPermission("bluecore.admin.*")) {
@@ -422,7 +413,7 @@ public class WorldManagerCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.AQUA + "/wm types" + ChatColor.GRAY + " - List of world types");
                 player.sendMessage(ChatColor.AQUA + "/wm list" + ChatColor.GRAY + " - List of loaded worlds");
             } else {
-                player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
+                player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
             }
         }
         return true;

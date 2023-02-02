@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class GMCommand implements CommandExecutor {
 
@@ -33,7 +33,7 @@ public class GMCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.SURVIVAL);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL")));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
@@ -46,21 +46,21 @@ public class GMCommand implements CommandExecutor {
                         sender.hasPermission("bluecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.SURVIVAL);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), ((Player) sender)));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL")));
                     }
                     if(args.length == 2){
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.SURVIVAL);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL")));
+                            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName())));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
 
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("creative") ||
                     args[0].equalsIgnoreCase("crea") ||
@@ -74,7 +74,7 @@ public class GMCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.CREATIVE);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE"), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE")));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "CREATIVE").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
@@ -87,21 +87,21 @@ public class GMCommand implements CommandExecutor {
                         sender.hasPermission("bluecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.CREATIVE);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE"), ((Player) sender)));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE")));
                     }
                     if(args.length == 2){
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.CREATIVE);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "CREATIVE").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE")));
+                            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "CREATIVE").replace("%player%", target.getName())));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
 
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("adventure") ||
                     args[0].equalsIgnoreCase("adven") ||
@@ -116,7 +116,7 @@ public class GMCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.ADVENTURE);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE")));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
@@ -129,21 +129,21 @@ public class GMCommand implements CommandExecutor {
                         sender.hasPermission("bluecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.ADVENTURE);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), ((Player) sender)));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE")));
                     }
                     if(args.length == 2){
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.ADVENTURE);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE")));
+                            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName())));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
 
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("spectator") ||
                     args[0].equalsIgnoreCase("spec") ||
@@ -156,7 +156,7 @@ public class GMCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.SPECTATOR);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR")));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
@@ -169,21 +169,21 @@ public class GMCommand implements CommandExecutor {
                         sender.hasPermission("bluecore.gamemode.*")){
                     if(args.length == 1) {
                         ((Player) sender).setGameMode(GameMode.SPECTATOR);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), ((Player) sender)));
+                        sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR")));
                     }
                     if(args.length == 2){
                         Player target = Bukkit.getPlayer(args[1]);
                         if(target != null){
                             target.setGameMode(GameMode.SPECTATOR);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR")));
+                            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName())));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
 
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
                 if (!(sender instanceof Player)) {

@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class OnPlayerChatAsync implements Listener {
 	
@@ -37,7 +37,7 @@ public class OnPlayerChatAsync implements Listener {
 							message = message.replace(blockedWords, a.toString());
 						}
 						if(Objects.equals(main.configManager.getSettings().getString("chat.antiswear.mode"), "block")) {
-							player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.info.antiswear_block"), player));
+							player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.info.antiswear_block")));
 							event.setCancelled(true);
 							return;
 						}
@@ -49,7 +49,7 @@ public class OnPlayerChatAsync implements Listener {
 		}
 		if(!Objects.equals(main.configManager.getSettings().getString("chat.format"), "none")) {
 			String formated_message = Objects.requireNonNull(main.configManager.getSettings().getString("chat.format")).replaceFirst("%player_displayname%", player.getDisplayName()).replaceFirst("%message%", message);
-			event.setFormat(MessageUtil.getColorMessage(formated_message, player));
+			event.setFormat(MessagesUtil.format(player, formated_message));
 		}
 		if(main.configManager.getSettings().getBoolean("chat.per_world")) {
 			Set<Player> r = event.getRecipients();

@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class DayCommand implements CommandExecutor {
 
@@ -30,29 +30,29 @@ public class DayCommand implements CommandExecutor {
                     if(args.length == 1){
                         World world = Bukkit.getWorld(args[0]);
                         if (world == null) {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.invalid_world"), ((Player) sender)));
+                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.invalid_world")));
                         } else {
                             world.setTime(1000);
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_time"), ((Player) sender))
+                            sender.sendMessage(MessagesUtil.format( ((Player) sender), main.configManager.getLang().getString("messages.success.changed_time"))
                                     .replace("%world%", args[0])
                                     .replace("%time%", "Day")
                                     .replace("%ticks%", "1000"));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
                 if(sender.hasPermission("bluecore.*") ||
                         sender.hasPermission("bluecore.time.*") ||
                         sender.hasPermission("bluecore.time.day")) {
                     ((Player) sender).getWorld().setTime(1000);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_time"), ((Player) sender))
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_time"))
                             .replace("%world%", ((Player) sender).getWorld().getName())
                             .replace("%time%", "Day")
                             .replace("%ticks%", "1000"));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }
         } else {

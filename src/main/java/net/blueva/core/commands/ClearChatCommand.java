@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class ClearChatCommand implements CommandExecutor {
 
@@ -30,14 +30,14 @@ public class ClearChatCommand implements CommandExecutor {
                             for(int i=0;i<200;i++) {
                                 target.sendMessage("");
                             }
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.chat_cleared"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.chat_cleared_others").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.chat_cleared")));
+                            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.chat_cleared_others").replace("%player%", target.getName())));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
                 if(sender.hasPermission("bluecore.*") ||
@@ -46,9 +46,9 @@ public class ClearChatCommand implements CommandExecutor {
                     for(int i=0;i<200;i++) {
                         Bukkit.broadcastMessage("");
                     }
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.chat_cleared"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.chat_cleared")));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }
         } else {
@@ -58,7 +58,7 @@ public class ClearChatCommand implements CommandExecutor {
                     for(int i=0;i<200;i++) {
                         target.sendMessage("");
                     }
-                    target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("console.success.chat_cleared"), target));
+                    target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("console.success.chat_cleared")));
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.chat_cleared_others")).replace("%player%", target.getName()));
                 } else {
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));

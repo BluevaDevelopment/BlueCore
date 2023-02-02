@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
+import net.blueva.core.utils.MessagesUtil;
 
 public class FeedCommand implements CommandExecutor {
 
@@ -31,23 +31,23 @@ public class FeedCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
                             target.setFoodLevel(20);
-                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite_others").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.satisfied_appetite")));
+                            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.satisfied_appetite_others").replace("%player%", target.getName())));
                         } else {
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }else{
                 if(sender.hasPermission("bluecore.*") ||
                         sender.hasPermission("bluecore.feed.*") ||
                         sender.hasPermission("bluecore.feed")){
                     ((Player) sender).setFoodLevel(20);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.satisfied_appetite")));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 }
             }
         } else {
@@ -58,7 +58,7 @@ public class FeedCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         target.setFoodLevel(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite"), target));
+                        target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.satisfied_appetite")));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.satisfied_appetite_others")).replace("%player%", target.getName()));
                     } else {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));

@@ -16,9 +16,9 @@ public class StringUtil {
       if (i == list.size() - 1) {
         sb.append(list.get(i));
       } else if (i == list.size() - 2) {
-        sb.append(String.valueOf(list.get(i)) + lastspacer);
+        sb.append(list.get(i)).append(lastspacer);
       } else {
-        sb.append(String.valueOf(list.get(i)) + spacer);
+        sb.append(list.get(i)).append(spacer);
       } 
     } 
     return sb.toString();
