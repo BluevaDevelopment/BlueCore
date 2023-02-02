@@ -30,26 +30,17 @@ And more to come!
 
 Blue Core is an open source project and the source code is available on [GitHub](https://github.com/BluevaDevelopment/BlueCore). To build the plugin from source, you will need to have [Java Development Kit (JDK) 8](https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot) installed on your machine. 
 
-### On Linux
-Open a terminal and run the following command to compile the plugin:
+With an IDE like IntelliJ IDEA or Eclipse, you can easily import the source code and build the plugin using Maven. Here are the steps to build Blue Core using IntelliJ IDEA:
 
-```./gradlew build```
-
-The compiled plugin can be found in the `/build/libs` directory. 
-
-### On Mac
-Open a terminal and run the following command to compile the plugin:
-
-```./gradlew build```
-
-The compiled plugin can be found in the `/build/libs` directory. 
-
-### On Windows
-Open a command prompt and run the following command to compile the plugin:
-
-```gradlew.bat build```
-
-The compiled plugin can be found in the `\build\libs` directory.
+1. Download and install IntelliJ IDEA on your computer.
+2. Clone the Blue Core repository to your local machine.
+3. Open IntelliJ IDEA and click on "Open" or "Import Project".
+4. Navigate to the location where you cloned the Blue Core repository.
+5. Choose "Import project from external model" and then "Maven".
+6. Follow the instructions on the screen and configure any additional options as needed.
+7. Click on "Finish" to import the project.
+8. Once imported, open the "pom.xml" file to verify that all dependencies are resolved correctly.
+9. Compile the project by clicking on "Build".
 
 ## Support Blue Core
 Blue Core is maintained by developers in their spare time. If you enjoy using Blue Core and would like to support its development, consider [making a donation](https://ko-fi.com/bluecore). Your support will help us continue to improve and maintain this project.
