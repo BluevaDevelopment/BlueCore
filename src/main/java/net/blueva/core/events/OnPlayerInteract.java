@@ -8,25 +8,21 @@ import net.blueva.core.Main;
 
 public class OnPlayerInteract implements Listener {
 
-    private Main main;
+    private final Main main;
 
     public OnPlayerInteract(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void OnPlayerInteract(PlayerInteractEvent event) {
+    public void OPI(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(!main.getWorlds().getBoolean("worlds." + worldname + ".interact")) {
-            if(player.hasPermission("xtremecore.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.interact") ||
-                    player.hasPermission("xtremecore.worldmanager.*")){
-                event.setCancelled(false);
-            } else {
-                event.setCancelled(true);
-            }
+        if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".interact")) {
+            event.setCancelled(!player.hasPermission("bluecore.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.interact") &&
+                    !player.hasPermission("bluecore.worldmanager.*"));
         }
 
     }

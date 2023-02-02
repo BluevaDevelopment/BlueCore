@@ -8,25 +8,21 @@ import net.blueva.core.Main;
 
 public class OnBreakBlock implements Listener {
 
-    private Main main;
+    private final Main main;
 
     public OnBreakBlock(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void OnBreakBlock(BlockBreakEvent event) {
+    public void OBB(BlockBreakEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(main.getWorlds().getBoolean("worlds." + worldname + ".break")) {
-            if(player.hasPermission("xtremecore.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.break") ||
-                    player.hasPermission("xtremecore.worldmanager.*")){
-                event.setCancelled(false);
-            } else {
-                event.setCancelled(true);
-            }
+        if(main.configManager.getWorlds().getBoolean("worlds." + worldname + ".break")) {
+            event.setCancelled(!player.hasPermission("bluecore.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.break") &&
+                    !player.hasPermission("bluecore.worldmanager.*"));
         }
 
     }

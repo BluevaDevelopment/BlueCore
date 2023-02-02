@@ -24,33 +24,33 @@ public class StormCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.weather.*") ||
-                        sender.hasPermission("xtremecore.weather.storm") ){
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.weather.*") ||
+                        sender.hasPermission("bluecore.weather.storm") ){
                     if(args.length == 1){
                         World world = Bukkit.getWorld(args[0]);
                         if (world == null) {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.invalid_world"), ((Player) sender)));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.invalid_world"), ((Player) sender)));
                         } else {
                             world.setStorm(true);
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.changed_weather"), ((Player) sender))
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_weather"), ((Player) sender))
                                     .replace("%world%", args[0])
                                     .replace("%weather%", "Storm"));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.weather.*") ||
-                        sender.hasPermission("xtremecore.weather.storm") ){
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.weather.*") ||
+                        sender.hasPermission("bluecore.weather.storm") ){
                     ((Player) sender).getWorld().setStorm(true);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.changed_weather"), ((Player) sender))
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_weather"), ((Player) sender))
                             .replace("%world%", ((Player) sender).getWorld().getName())
                             .replace("%weather%", "Storm"));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }
         } else {
@@ -59,17 +59,17 @@ public class StormCommand implements CommandExecutor {
                 if(args.length == 1){
                     World world = Bukkit.getWorld(args[0]);
                     if (world == null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.invalid_world")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.invalid_world")));
                     } else {
                         world.setTime(1000);
                         world.setStorm(true);
-                        sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("console.success.changed_weather"), ((Player) sender))
+                        sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("console.success.changed_weather"), ((Player) sender))
                                 .replace("%world%", ((Player) sender).getWorld().getName())
                                 .replace("%weather%", "Storm"));
                     }
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_storm_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_storm_command")));
             }
         }
         return true;

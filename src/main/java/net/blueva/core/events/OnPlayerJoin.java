@@ -16,22 +16,21 @@ import net.blueva.core.utils.MessageUtil;
 
 public class OnPlayerJoin implements Listener {
 
-	private Main main;
+	private final Main main;
 
 	public OnPlayerJoin(Main main) {
 		this.main = main;
 	}
 
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
-		main.registerUserdata(event.getPlayer().getUniqueId());
+	public void OPJ(PlayerJoinEvent event) {
+		main.configManager.registerUser(event.getPlayer().getUniqueId());
 
 		if(main.getConfig().getBoolean("welcome.message.enabled")) {
 			List<String> description = main.getConfig().getStringList("welcome.message.list");
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 				public void run() {
-					for(int i=0;i<description.size();i++) {
-						String message = description.get(i);
+					for (String message : description) {
 						event.getPlayer().sendMessage(MessageUtil.getColorMessage(message, event.getPlayer()));
 					}
 				}
@@ -63,13 +62,13 @@ public class OnPlayerJoin implements Listener {
 		}
 
 		if(main.getConfig().getBoolean("welcome.broadcast.first_join.enabled")) {
-			if(!main.getUserdata(event.getPlayer().getUniqueId()).isSet("logoutlocation")) {
+			if(!main.configManager.getUser(event.getPlayer().getUniqueId()).isSet("logoutlocation")) {
 				Bukkit.broadcastMessage(MessageUtil.getColorMessage(main.getConfig().getString("welcome.broadcast.first_join.message"), event.getPlayer()));
 
 			}
 		}
 
-		if(event.getPlayer().hasPermission("xtremecore.fly.safelogin")) {
+		if(event.getPlayer().hasPermission("bluecore.fly.safelogin")) {
 			event.getPlayer().setAllowFlight(true);
 			event.getPlayer().setFlying(true);
 		}

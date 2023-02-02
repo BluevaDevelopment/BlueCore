@@ -24,32 +24,32 @@ public class SpectatorCommand implements CommandExecutor {
         //player:
         if ((sender instanceof Player)) {
             if (args.length > 0) {
-                if (sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.gamemode.*") ||
-                        sender.hasPermission("xtremecore.gamemode.spectator.*") ||
-                        sender.hasPermission("xtremecore.gamemode.spectator.others")) {
+                if (sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.gamemode.*") ||
+                        sender.hasPermission("bluecore.gamemode.spectator.*") ||
+                        sender.hasPermission("bluecore.gamemode.spectator.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
                             target.setGameMode(GameMode.SPECTATOR);
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()), target));
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             } else {
-                if (sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.gamemode.*") ||
-                        sender.hasPermission("xtremecore.gamemode.spectator") ||
-                        sender.hasPermission("xtremecore.gamemode.spectator.*")) {
+                if (sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.gamemode.*") ||
+                        sender.hasPermission("bluecore.gamemode.spectator") ||
+                        sender.hasPermission("bluecore.gamemode.spectator.*")) {
                     ((Player) sender).setGameMode(GameMode.SPECTATOR);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), ((Player) sender)));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }
         } else {
@@ -59,13 +59,13 @@ public class SpectatorCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if(target != null){
                     target.setGameMode(GameMode.SPECTATOR);
-                    target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()));
+                    target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SPECTATOR"), target));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SPECTATOR").replace("%player%", target.getName()));
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_spectator_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_spectator_command")));
             }
         }
         return true;

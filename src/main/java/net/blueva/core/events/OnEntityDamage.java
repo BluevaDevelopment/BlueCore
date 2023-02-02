@@ -16,39 +16,31 @@ public class OnEntityDamage implements Listener {
     }
 
     @EventHandler
-    public void OnEntityDamage(EntityDamageEvent event) {
+    public void OED(EntityDamageEvent event) {
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             String worldname = player.getWorld().getName();
-            if (!main.getWorlds().getBoolean("worlds." + worldname + ".fall_damage")) {
+            if (!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".fall_damage")) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                    if (player.hasPermission("xtremecore.*") ||
-                            player.hasPermission("xtremecore.worldmanager.bypass.*") ||
-                            player.hasPermission("xtremecore.worldmanager.bypass.fall_damage") ||
-                            player.hasPermission("xtremecore.worldmanager.*")) {
-                        event.setCancelled(false);
-                    } else {
-                        event.setCancelled(true);
-                    }
+                    event.setCancelled(!player.hasPermission("bluecore.*") &&
+                            !player.hasPermission("bluecore.worldmanager.bypass.*") &&
+                            !player.hasPermission("bluecore.worldmanager.bypass.fall_damage") &&
+                            !player.hasPermission("bluecore.worldmanager.*"));
                 }
             }
 
-            if (!main.getWorlds().getBoolean("worlds." + worldname + ".pvp")) {
+            if (!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".pvp")) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                     if (event.getEntityType() == EntityType.PLAYER) {
-                        if (player.hasPermission("xtremecore.*") ||
-                                player.hasPermission("xtremecore.worldmanager.bypass.*") ||
-                                player.hasPermission("xtremecore.worldmanager.bypass.pvp") ||
-                                player.hasPermission("xtremecore.worldmanager.*")) {
-                            event.setCancelled(false);
-                        } else {
-                            event.setCancelled(true);
-                        }
+                        event.setCancelled(!player.hasPermission("bluecore.*") &&
+                                !player.hasPermission("bluecore.worldmanager.bypass.*") &&
+                                !player.hasPermission("bluecore.worldmanager.bypass.pvp") &&
+                                !player.hasPermission("bluecore.worldmanager.*"));
                     }
                 }
             }
 
-            if(main.getUserdata(player.getUniqueId()).getBoolean("godMode")) {
+            if(main.configManager.getUser(player.getUniqueId()).getBoolean("godMode")) {
                 event.setCancelled(true);
             }
         }

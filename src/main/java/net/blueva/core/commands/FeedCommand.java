@@ -23,31 +23,31 @@ public class FeedCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.feed.*") ||
-                        sender.hasPermission("xtremecore.feed") ||
-                        sender.hasPermission("xtremecore.feed.others")){
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.feed.*") ||
+                        sender.hasPermission("bluecore.feed") ||
+                        sender.hasPermission("bluecore.feed.others")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
                             target.setFoodLevel(20);
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite_others").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite"), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite_others").replace("%player%", target.getName()), target));
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.feed.*") ||
-                        sender.hasPermission("xtremecore.feed")){
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.feed.*") ||
+                        sender.hasPermission("bluecore.feed")){
                     ((Player) sender).setFoodLevel(20);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite"), ((Player) sender)));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }
         } else {
@@ -58,14 +58,14 @@ public class FeedCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         target.setFoodLevel(20);
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.satisfied_appetite"), target));
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.satisfied_appetite_others")).replace("%player%", target.getName()));
+                        target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.satisfied_appetite"), target));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.satisfied_appetite_others")).replace("%player%", target.getName()));
                     } else {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                     }
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_feed_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_feed_command")));
             }
         }
         return true;

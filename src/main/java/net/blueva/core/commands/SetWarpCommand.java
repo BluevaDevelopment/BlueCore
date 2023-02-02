@@ -24,10 +24,10 @@ public class SetWarpCommand implements CommandExecutor {
 
         final Player player = (Player)sender;
         if(args.length > 0){
-            if(sender.hasPermission("xtremecore.*") ||
-                    sender.hasPermission("xtremecore.setwarp")) {
+            if(sender.hasPermission("bluecore.*") ||
+                    sender.hasPermission("bluecore.setwarp")) {
                 if(args.length == 1){
-                    if(!main.getWarps().isSet("warps."+ args[0])) {
+                    if(!main.configManager.getWarps().isSet("warps."+ args[0])) {
                         Location l = player.getLocation();
                         String world = l.getWorld().getName();
                         double x = l.getX();
@@ -35,20 +35,20 @@ public class SetWarpCommand implements CommandExecutor {
                         double z = l.getZ();
                         float yaw = l.getYaw();
                         float pitch = l.getPitch();
-                        main.getWarps().set("warps." + args[0] + ".world", world);
-                        main.getWarps().set("warps." + args[0] + ".x", x);
-                        main.getWarps().set("warps." + args[0] + ".y", y);
-                        main.getWarps().set("warps." + args[0] + ".z", z);
-                        main.getWarps().set("warps." + args[0] + ".yaw", yaw);
-                        main.getWarps().set("warps." + args[0] + ".pitch", pitch);
-                        main.saveWarps();
-                        main.reloadWarps();
-                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.warp_set").replace("%warp%", args[0]), player));
+                        main.configManager.getWarps().set("warps." + args[0] + ".world", world);
+                        main.configManager.getWarps().set("warps." + args[0] + ".x", x);
+                        main.configManager.getWarps().set("warps." + args[0] + ".y", y);
+                        main.configManager.getWarps().set("warps." + args[0] + ".z", z);
+                        main.configManager.getWarps().set("warps." + args[0] + ".yaw", yaw);
+                        main.configManager.getWarps().set("warps." + args[0] + ".pitch", pitch);
+                        main.configManager.saveWarps();
+                        main.configManager.reloadWarps();
+                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.warp_set").replace("%warp%", args[0]), player));
                     } else {
-                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.warp_already_set"), player));
+                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.warp_already_set"), player));
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.other.use_setwarp_command"), player));
+                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.other.use_setwarp_command"), player));
                 }
             }
         }

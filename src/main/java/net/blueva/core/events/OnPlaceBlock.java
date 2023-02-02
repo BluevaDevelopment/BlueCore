@@ -8,25 +8,21 @@ import net.blueva.core.Main;
 
 public class OnPlaceBlock implements Listener {
 
-    private Main main;
+    private final Main main;
 
     public OnPlaceBlock(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void OnPlayerPlaceBlock(BlockPlaceEvent event) {
+    public void OPB(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(!main.getWorlds().getBoolean("worlds." + worldname + ".build")) {
-            if(player.hasPermission("xtremecore.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.build") ||
-                    player.hasPermission("xtremecore.worldmanager.*")){
-                event.setCancelled(false);
-            } else {
-                event.setCancelled(true);
-            }
+        if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".build")) {
+            event.setCancelled(!player.hasPermission("bluecore.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.build") &&
+                    !player.hasPermission("bluecore.worldmanager.*"));
         }
 
     }

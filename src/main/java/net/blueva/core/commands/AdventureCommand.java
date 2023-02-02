@@ -24,32 +24,32 @@ public class AdventureCommand implements CommandExecutor {
         //player:
         if ((sender instanceof Player)) {
             if (args.length > 0) {
-                if (sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.gamemode.*") ||
-                        sender.hasPermission("xtremecore.gamemode.adventure.*") ||
-                        sender.hasPermission("xtremecore.gamemode.adventure.others")) {
+                if (sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.gamemode.*") ||
+                        sender.hasPermission("bluecore.gamemode.adventure.*") ||
+                        sender.hasPermission("bluecore.gamemode.adventure.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
                             target.setGameMode(GameMode.ADVENTURE);
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()), target));
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             } else {
-                if (sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.gamemode.*") ||
-                        sender.hasPermission("xtremecore.gamemode.adventure") ||
-                        sender.hasPermission("xtremecore.gamemode.adventure.*")) {
+                if (sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.gamemode.*") ||
+                        sender.hasPermission("bluecore.gamemode.adventure") ||
+                        sender.hasPermission("bluecore.gamemode.adventure.*")) {
                     ((Player) sender).setGameMode(GameMode.ADVENTURE);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), ((Player) sender)));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }
         } else {
@@ -59,13 +59,13 @@ public class AdventureCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if(target != null){
                     target.setGameMode(GameMode.ADVENTURE);
-                    target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()));
+                    target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "ADVENTURE"), target));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "ADVENTURE").replace("%player%", target.getName()));
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_adventure_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_adventure_command")));
             }
         }
         return true;

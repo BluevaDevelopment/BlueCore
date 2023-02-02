@@ -23,30 +23,30 @@ public class WorkbenchCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.workbench.others") ||
-                        sender.hasPermission("xtremecore.workbench.*")){
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.workbench.others") ||
+                        sender.hasPermission("bluecore.workbench.*")){
                     if(args.length == 1){
                         Player target = Bukkit.getPlayer(args[0]);
                         if(target != null){
                             target.openInventory(target.openWorkbench(null, true));
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.workbench_open"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.workbench_open_others").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.workbench_open"), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.workbench_open_others").replace("%player%", target.getName()), target));
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.workbench") ||
-                        sender.hasPermission("xtremecore.workbench.*")){
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.workbench") ||
+                        sender.hasPermission("bluecore.workbench.*")){
                     ((Player) sender).openInventory(((Player) sender).openWorkbench(null, true));
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.workbench_open"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.workbench_open"), ((Player) sender)));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }
         } else {
@@ -57,14 +57,14 @@ public class WorkbenchCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
                         target.openInventory(target.openWorkbench(null, true));
-                        target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.workbench_open"), target));
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.workbench_open_others")).replace("%player%", target.getName()));
+                        target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.workbench_open"), target));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.workbench_open_others")).replace("%player%", target.getName()));
                     } else {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                     }
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_workbench_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_workbench_command")));
             }
         }
         return true;

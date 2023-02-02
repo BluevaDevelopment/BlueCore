@@ -8,18 +8,18 @@ import net.blueva.core.Main;
 
 public class OnEntitySpawn implements Listener {
 
-    private Main main;
+    private final Main main;
 
     public OnEntitySpawn(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void OnEntitySpawn(EntitySpawnEvent event) {
+    public void OES(EntitySpawnEvent event) {
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             String worldname = player.getWorld().getName();
-            if(!main.getWorlds().getBoolean("worlds." + worldname + ".mob_spawning") && !(event.getEntity() instanceof Player)) {
+            if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".mob_spawning") && !(event.getEntity() instanceof Player)) {
                 event.setCancelled(true);
             }
         }

@@ -1,14 +1,13 @@
-# __  ___                            ____
-# \ \/ | |_ _ __ ___ _ __ ___   ___ / ___|___  _ __ ___
-#  \  /| __| '__/ _ | '_ ` _ \ / _ | |   / _ \| '__/ _ \
-#  /  \| |_| | |  __| | | | | |  __| |__| (_) | | |  __/
-# /_/\_\\__|_|  \___|_| |_| |_|\___|\____\___/|_|  \___|
-#
+#  ____  _             ____
+# | __ )| |_   _  ___ / ___|___  _ __ ___
+# |  _ \| | | | |/ _ | |   / _ \| '__/ _ \
+# | |_) | | |_| |  __| |__| (_) | | |  __/
+# |____/|_|\__,_|\___|\____\___/|_|  \___|
 
 language: 'Español'
 messages:
   success:
-    reloaded_plugin: '&dTheNexus ha sido recargado.'
+    reloaded_plugin: '&dBlueCore ha sido recargado.'
     gamemode_changed: '&dTu modo de juego ha cambiado a &b%gamemode%&d.'
     gamemode_changed_others: '&dEl modo de juego de &b%player% &dha sido cambiado a &b%gamemode%&d.'
     satisfied_appetite: '&dTu apetito ahora esta satisfecho.'
@@ -60,7 +59,7 @@ messages:
     wm_players_in_world: '&cNo puedes borrar ese mundo porque hay jugadores dentro de él.'
     wm_already_imported: '&cEse mundo ya ha sido importado.'
   info:
-    core_wiki: '&dMira la wiki de XtremeCore aqui: &fhttps://github.com/XtremePlugins/XtremeCore/wiki'
+    core_wiki: '&dMira la wiki de BlueCore aqui: &fhttps://github.com/BlueDevelopment/BlueCore/wiki'
     antiswear_block: '&cPor favor, usa un lenguaje apropiado.'
     wm_creating_world: '&dCreando el mundo &b%worldmanager_worldname%&d.'
     chat_cleared_others: '&dHas limpiado el chat de %player%.'

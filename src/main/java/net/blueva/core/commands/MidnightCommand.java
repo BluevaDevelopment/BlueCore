@@ -24,35 +24,35 @@ public class MidnightCommand implements CommandExecutor {
         //player:
         if((sender instanceof Player)) {
             if(args.length > 0){
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.time.*") ||
-                        sender.hasPermission("xtremecore.time.midnight.others")){
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.time.*") ||
+                        sender.hasPermission("bluecore.time.midnight.others")){
                     if(args.length == 1){
                         World world = Bukkit.getWorld(args[0]);
                         if (world == null) {
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.invalid_world"), ((Player) sender)));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.invalid_world"), ((Player) sender)));
                         } else {
                             world.setTime(18000);
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.changed_time"), ((Player) sender))
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_time"), ((Player) sender))
                                     .replace("%world%", args[0])
                                     .replace("%time%", "Midnight")
                                     .replace("%ticks%", "18000"));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }else{
-                if(sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.time.*") ||
-                        sender.hasPermission("xtremecore.time.midnight")) {
+                if(sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.time.*") ||
+                        sender.hasPermission("bluecore.time.midnight")) {
                     ((Player) sender).getWorld().setTime(18000);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.changed_time"), ((Player) sender))
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.changed_time"), ((Player) sender))
                             .replace("%world%", ((Player) sender).getWorld().getName())
                             .replace("%time%", "Midnight")
                             .replace("%ticks%", "18000"));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }
         } else {
@@ -61,17 +61,17 @@ public class MidnightCommand implements CommandExecutor {
                 if(args.length == 1){
                     World world = Bukkit.getWorld(args[0]);
                     if (world == null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.invalid_world")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.invalid_world")));
                     } else {
                         world.setTime(18000);
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.changed_time"))
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.changed_time"))
                                 .replace("%world%", args[0])
                                 .replace("%time%", "Midnight")
                                 .replace("%ticks%", "18000"));
                     }
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_midnight_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_midnight_command")));
             }
         }
         return true;

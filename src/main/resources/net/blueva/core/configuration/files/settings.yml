@@ -1,8 +1,8 @@
-# __  ___                            ____
-# \ \/ | |_ _ __ ___ _ __ ___   ___ / ___|___  _ __ ___
-#  \  /| __| '__/ _ | '_ ` _ \ / _ | |   / _ \| '__/ _ \
-#  /  \| |_| | |  __| | | | | |  __| |__| (_) | | |  __/
-# /_/\_\\__|_|  \___|_| |_| |_|\___|\____\___/|_|  \___|
+#  ____  _             ____
+# | __ )| |_   _  ___ / ___|___  _ __ ___
+# |  _ \| | | | |/ _ | |   / _ \| '__/ _ \
+# | |_) | | |_| |  __| |__| (_) | | |  __/
+# |____/|_|\__,_|\___|\____\___/|_|  \___|
 #
 # Configuration generated in version 1.0.0
 
@@ -27,9 +27,14 @@ metrics: true
 # It is necessary to restart the server for it to take effect.
 #
 # Available languages:
-# English: en
-# Spanish: es
+# English: en_UK
+# Spanish: es_ES
 language: en
+
+# Check for updates:
+# Check if your server is using the latest version of the plugin.
+# We recommend always using the latest version of the plugin for the best experience.
+check_for_updates: true
  
 # Welcome:
 # Welcome all the users that enter the server.

@@ -24,7 +24,7 @@ public class LastLocationAdmin {
 					updateLocation(player);
 				}
 			}
-			}, 0, 1200); //1200 Ticks = 60 Seconds (It will be possible to customize it in the config.yml in the future)
+			}, 0, 1200); //1200 Ticks = 60 Seconds (It will be possible to customize it in the settings.yml in the future)
 }
 
 	private void updateLocation(Player p) {

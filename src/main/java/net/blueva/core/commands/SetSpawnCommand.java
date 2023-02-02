@@ -23,19 +23,19 @@ public class SetSpawnCommand implements CommandExecutor {
 
         final Player player = (Player)sender;
         if(args.length > 0){
-            if(sender.hasPermission("xtremecore.*") ||
-                    sender.hasPermission("xtremecore.setspawn")) {
+            if(sender.hasPermission("bluecore.*") ||
+                    sender.hasPermission("bluecore.setspawn")) {
                 if(args.length == 1){
-                    if(main.getWarps().isSet("warps."+ args[0])) {
-                        main.getWarps().set("spawn", args[0]);
-                        main.saveWarps();
-                        main.reloadWarps();
-                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.spawn_set").replace("%warp%", args[0]), player));
+                    if(main.configManager.getWarps().isSet("warps."+ args[0])) {
+                        main.configManager.getWarps().set("spawn", args[0]);
+                        main.configManager.saveWarps();
+                        main.configManager.reloadWarps();
+                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.spawn_set").replace("%warp%", args[0]), player));
                     } else {
-                        player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.unknown_warp"), player));
+                        player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.unknown_warp"), player));
                     }
                 } else {
-                    player.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.other.use_setspawn_command"), player));
+                    player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.other.use_setspawn_command"), player));
                 }
             }
         }

@@ -24,32 +24,32 @@ public class SurvivalCommand implements CommandExecutor {
         //player:
         if ((sender instanceof Player)) {
             if (args.length > 0) {
-                if (sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.gamemode.*") ||
-                        sender.hasPermission("xtremecore.gamemode.survival.*") ||
-                        sender.hasPermission("xtremecore.gamemode.survival.others")) {
+                if (sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.gamemode.*") ||
+                        sender.hasPermission("bluecore.gamemode.survival.*") ||
+                        sender.hasPermission("bluecore.gamemode.survival.others")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
                             target.setGameMode(GameMode.SURVIVAL);
-                            target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
-                            sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()), target));
+                            target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
+                            sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()), target));
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                         }
                     }
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             } else {
-                if (sender.hasPermission("xtremecore.*") ||
-                        sender.hasPermission("xtremecore.gamemode.*") ||
-                        sender.hasPermission("xtremecore.gamemode.survival") ||
-                        sender.hasPermission("xtremecore.gamemode.survival.*")) {
+                if (sender.hasPermission("bluecore.*") ||
+                        sender.hasPermission("bluecore.gamemode.*") ||
+                        sender.hasPermission("bluecore.gamemode.survival") ||
+                        sender.hasPermission("bluecore.gamemode.survival.*")) {
                     ((Player) sender).setGameMode(GameMode.SURVIVAL);
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), ((Player) sender)));
                 } else {
-                    sender.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), ((Player) sender)));
+                    sender.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), ((Player) sender)));
                 }
             }
         } else {
@@ -59,13 +59,13 @@ public class SurvivalCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if(target != null){
                     target.setGameMode(GameMode.SURVIVAL);
-                    target.sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()));
+                    target.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "SURVIVAL"), target));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.success.gamemode_changed_others")).replace("%gamemode%", "SURVIVAL").replace("%player%", target.getName()));
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.error.player_offline")));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_survival_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_survival_command")));
             }
         }
         return true;

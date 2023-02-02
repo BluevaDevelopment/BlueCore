@@ -10,6 +10,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -29,6 +37,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Daniel\Documents\IdeaProjects\BlueCore\src\main\resources\net\blueva\core\configuration\files\data" />
+      <recent name="C:\Users\Daniel\Documents\IdeaProjects\BlueCore\src\main\resources\net\blueva\core\configuration\files\language" />
+      <recent name="C:\Users\Daniel\Documents\IdeaProjects\BlueCore\src\main\resources\net\blueva\core\configuration\files" />
       <recent name="C:\Users\Daniel\Documents\IdeaProjects\BlueCore\src\main\java\net\blueva\core" />
       <recent name="C:\Users\Daniel\Documents\IdeaProjects\BlueCore\src\main\resources" />
     </key>

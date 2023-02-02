@@ -8,25 +8,21 @@ import net.blueva.core.Main;
 
 public class OnPlayerDropItem implements Listener {
 
-    private Main main;
+    private final Main main;
 
     public OnPlayerDropItem(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void OnPlayerDropItem(PlayerDropItemEvent event) {
+    public void OPDI(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(!main.getWorlds().getBoolean("worlds." + worldname + ".drop_items")) {
-            if(player.hasPermission("xtremecore.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.*") ||
-                    player.hasPermission("xtremecore.worldmanager.bypass.drop_items") ||
-                    player.hasPermission("xtremecore.worldmanager.*")){
-                event.setCancelled(false);
-            } else {
-                event.setCancelled(true);
-            }
+        if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".drop_items")) {
+            event.setCancelled(!player.hasPermission("bluecore.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.*") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.drop_items") &&
+                    !player.hasPermission("bluecore.worldmanager.*"));
         }
 
     }

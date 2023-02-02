@@ -1,6 +1,7 @@
 package net.blueva.core.events;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -16,19 +17,20 @@ import net.blueva.core.utils.MessageUtil;
 
 public class OnPlayerCommand implements Listener {
 
-	private Main main;
+	private final Main main;
 
 	public OnPlayerCommand(Main main) {
 		this.main = main;
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	public void OnCommand(PlayerCommandPreprocessEvent event) {
+	public void OPC(PlayerCommandPreprocessEvent event) {
 		Player player = event.getPlayer();
 		String message = event.getMessage().toLowerCase();
-		for (String key : main.getCommands().getConfigurationSection("commands").getKeys(false)) {
-			String command = main.getCommands().getString("commands." + key + ".command");
-			List<String> worlds = main.getCommands().getStringList("commands." + key + ".worlds");
+		for (String key : Objects.requireNonNull(main.configManager.getCommands().getConfigurationSection("commands")).getKeys(false)) {
+			String command = main.configManager.getCommands().getString("commands." + key + ".command");
+			List<String> worlds = main.configManager.getCommands().getStringList("commands." + key + ".worlds");
+			assert command != null;
 			String[] separatedCommands = command.split(" ");
 			String[] separatedMessages = message.split(" ");
 			if (separatedMessages.length >= separatedCommands.length) {
@@ -42,19 +44,19 @@ public class OnPlayerCommand implements Listener {
 				if (ContinueB)
 					continue;
 				event.setCancelled(true);
-				if(main.getCommands().isSet("commands." + key + ".worlds")) {
-					for (int c = 0; c < worlds.size(); c++) {
-						if (player.getWorld().getName().equals(worlds.get(c))) {
-							List<String> commands = main.getCommands().getStringList("commands." + key + ".run_commands");
+				if(main.configManager.getCommands().isSet("commands." + key + ".worlds")) {
+					for (String world : worlds) {
+						if (player.getWorld().getName().equals(world)) {
+							List<String> commands = main.configManager.getCommands().getStringList("commands." + key + ".run_commands");
 							ConsoleCommandSender consoleCommandSender = Bukkit.getServer().getConsoleSender();
-							for (int j = 0; j < commands.size(); j++) {
-								String commandToSend = ((String)commands.get(j)).replaceAll("%player%", player.getName());
+							for (String s : commands) {
+								String commandToSend = ((String) s).replaceAll("%player%", player.getName());
 								if (commandToSend.startsWith("console:")) {
 									if (commandToSend.contains("msg " + player.getName())) {
 										String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
 										player.sendMessage(MessageUtil.getColorMessage(msg, player));
 									} else {
-										Bukkit.dispatchCommand((CommandSender)consoleCommandSender, commandToSend.replace("console: ", ""));
+										Bukkit.dispatchCommand((CommandSender) consoleCommandSender, commandToSend.replace("console: ", ""));
 									}
 								} else {
 									player.chat("/" + commandToSend.replace("player: ", ""));
@@ -64,16 +66,16 @@ public class OnPlayerCommand implements Listener {
 						}
 					}
 				} else {
-					List<String> commands = main.getCommands().getStringList("commands." + key + ".run_commands");
+					List<String> commands = main.configManager.getCommands().getStringList("commands." + key + ".run_commands");
 					ConsoleCommandSender consoleCommandSender = Bukkit.getServer().getConsoleSender();
-					for (int j = 0; j < commands.size(); j++) {
-						String commandToSend = ((String)commands.get(j)).replaceAll("%player%", player.getName());
+					for (String s : commands) {
+						String commandToSend = ((String) s).replaceAll("%player%", player.getName());
 						if (commandToSend.startsWith("console:")) {
 							if (commandToSend.contains("msg " + player.getName())) {
 								String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
 								player.sendMessage(MessageUtil.getColorMessage(msg, player));
 							} else {
-								Bukkit.dispatchCommand((CommandSender)consoleCommandSender, commandToSend.replace("console: ", ""));
+								Bukkit.dispatchCommand((CommandSender) consoleCommandSender, commandToSend.replace("console: ", ""));
 							}
 						} else {
 							player.chat("/" + commandToSend.replace("player: ", ""));
@@ -91,7 +93,7 @@ public class OnPlayerCommand implements Listener {
 				String bcmd = arrayOfString[i];
 				if (main.getConfig().getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(MessageUtil.getColorMessage(main.getLanguages().getString("messages.error.no_perms"), player));
+					event.getPlayer().sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.error.no_perms"), player));
 				}
 			}
 		}

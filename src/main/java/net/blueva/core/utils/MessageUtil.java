@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
 public class MessageUtil {
 
     public static String getColorMessage(String text, Player player) {
-        if(Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18")) {
+        if(Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18") || Bukkit.getVersion().contains("1.19")) {
             Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-            if(Main.getInstance().placeholderapi) {
+            if(Main.placeholderapi) {
                 Matcher match = pattern.matcher(PlaceholderAPI.setPlaceholders(player, text));
 
                 while(match.find()) {
@@ -36,7 +36,7 @@ public class MessageUtil {
             }
         }
 
-        if(Main.getInstance().placeholderapi) {
+        if(Main.placeholderapi) {
             return PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', text));
         } else {
             return ChatColor.translateAlternateColorCodes('&', text);

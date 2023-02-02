@@ -8,16 +8,18 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessageUtil;
 
+import java.util.Objects;
+
 public class OnPlayerQuit implements Listener {
 
-	private Main main;
+	private final Main main;
 
 	public OnPlayerQuit(Main main) {
 		this.main = main;
 	}
 
 	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent event) {
+	public void OPQ(PlayerQuitEvent event) {
 		if(main.getConfig().getBoolean("welcome.broadcast.leave.enabled")) {
 			event.setQuitMessage(MessageUtil.getColorMessage(main.getConfig().getString("welcome.broadcast.leave.message"), event.getPlayer()).replace("%player_name%", event.getPlayer().getDisplayName()));
 		} else {
@@ -25,19 +27,19 @@ public class OnPlayerQuit implements Listener {
 		}
 
 		Location l = event.getPlayer().getLocation();
-		String world = l.getWorld().getName();
+		String world = Objects.requireNonNull(l.getWorld()).getName();
 		double x = l.getX();
 		double y = l.getY();
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
-		main.getUserdata(event.getPlayer().getUniqueId()).set("logoutlocation.world", world);
-		main.getUserdata(event.getPlayer().getUniqueId()).set("logoutlocation.x", x);
-		main.getUserdata(event.getPlayer().getUniqueId()).set("logoutlocation.y", y);
-		main.getUserdata(event.getPlayer().getUniqueId()).set("logoutlocation.z", z);
-		main.getUserdata(event.getPlayer().getUniqueId()).set("logoutlocation.yaw", yaw);
-		main.getUserdata(event.getPlayer().getUniqueId()).set("logoutlocation.pitch", pitch);
-		main.saveUserdata();
+		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.world", world);
+		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.x", x);
+		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.y", y);
+		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.z", z);
+		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.yaw", yaw);
+		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.pitch", pitch);
+		main.configManager.saveUser(event.getPlayer().getUniqueId());
 
 	}
 
