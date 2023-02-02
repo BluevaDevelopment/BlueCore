@@ -208,7 +208,7 @@ public class ConfigManager {
         main.userFile = new File(main.getDataFolder()+"/data/users/",uuid+".yml");
         main.user = YamlConfiguration.loadConfiguration(main.userFile);
         Reader defConfigStream;
-        defConfigStream = new InputStreamReader(main.getResource("net/blueva/arcade/configuration/files/data/userdatadefault.yml"), StandardCharsets.UTF_8);
+        defConfigStream = new InputStreamReader(main.getResource("net/blueva/core/configuration/files/data/userdatadefault.yml"), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
         main.user.setDefaults(defConfig);
     }

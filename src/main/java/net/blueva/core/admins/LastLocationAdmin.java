@@ -35,13 +35,13 @@ public class LastLocationAdmin {
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
-		main.getUserdata(p.getUniqueId()).set("lastlocation.world", world);
-		main.getUserdata(p.getUniqueId()).set("lastlocation.x", x);
-		main.getUserdata(p.getUniqueId()).set("lastlocation.y", y);
-		main.getUserdata(p.getUniqueId()).set("lastlocation.z", z);
-		main.getUserdata(p.getUniqueId()).set("lastlocation.yaw", yaw);
-		main.getUserdata(p.getUniqueId()).set("lastlocation.pitch", pitch);
-		main.saveUserdata();
+		main.configManager.getUser(p.getUniqueId()).set("lastlocation.world", world);
+		main.configManager.getUser(p.getUniqueId()).set("lastlocation.x", x);
+		main.configManager.getUser(p.getUniqueId()).set("lastlocation.y", y);
+		main.configManager.getUser(p.getUniqueId()).set("lastlocation.z", z);
+		main.configManager.getUser(p.getUniqueId()).set("lastlocation.yaw", yaw);
+		main.configManager.getUser(p.getUniqueId()).set("lastlocation.pitch", pitch);
+		main.configManager.saveUser(p.getUniqueId());
 	}
 
 }
