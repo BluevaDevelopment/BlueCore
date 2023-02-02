@@ -68,7 +68,7 @@ public final class Main extends JavaPlugin {
 
 
 		if(getConfig().getBoolean("metrics")) {
-			int pluginId = 12700;
+			int pluginId = 17623;
 			new Metrics(this, pluginId);
 		}
 

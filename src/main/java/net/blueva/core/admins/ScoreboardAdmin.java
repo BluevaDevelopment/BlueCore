@@ -31,7 +31,7 @@ public class ScoreboardAdmin {
 					updateScoreboard(player);
 				}
 			}
-		}, 0, Integer.valueOf(main.getConfig().getInt("scoreboard.ticks")));
+		}, 0, Integer.valueOf(main.configManager.getSettings().getInt("scoreboard.ticks")));
 	}
 
 	private void updateScoreboard(Player p) {
@@ -39,8 +39,8 @@ public class ScoreboardAdmin {
 		Scoreboard scoreboard = manager.getNewScoreboard();
 		Objective objetive = scoreboard.registerNewObjective("TheNexus", "dummy", "TNScore");
 		objetive.setDisplaySlot(DisplaySlot.SIDEBAR);
-		objetive.setDisplayName(MessageUtil.getColorMessage(main.getConfig().getString("scoreboard.title"), p));
-		List<String> lines = main.getConfig().getStringList("scoreboard.lines");
+		objetive.setDisplayName(MessageUtil.getColorMessage(main.configManager.getSettings().getString("scoreboard.title"), p));
+		List<String> lines = main.configManager.getSettings().getStringList("scoreboard.lines");
 		for(int i=0;i<lines.size();i++) {
 			Score score = objetive.getScore(MessageUtil.getColorMessage(lines.get(i), p));
 			score.setScore(lines.size()-(i));

@@ -29,12 +29,12 @@ public class TablistAdmin {
 					updateTablist(player);
 				}
 			}
-		}, 0, Integer.valueOf(main.getConfig().getInt("tablist.ticks")));
+		}, 0, Integer.valueOf(main.configManager.getSettings().getInt("tablist.ticks")));
 	}
 
 	private void updateTablist(Player p) {
-		p.setPlayerListHeader(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.getConfig().getStringList("tablist.header"), "\n"), p));
-		p.setPlayerListFooter(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.getConfig().getStringList("tablist.footer"), "\n"), p).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
+		p.setPlayerListHeader(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.header"), "\n"), p));
+		p.setPlayerListFooter(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.footer"), "\n"), p).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
 	}
 
 

@@ -20,8 +20,8 @@ public class OnPlayerQuit implements Listener {
 
 	@EventHandler
 	public void OPQ(PlayerQuitEvent event) {
-		if(main.getConfig().getBoolean("welcome.broadcast.leave.enabled")) {
-			event.setQuitMessage(MessageUtil.getColorMessage(main.getConfig().getString("welcome.broadcast.leave.message"), event.getPlayer()).replace("%player_name%", event.getPlayer().getDisplayName()));
+		if(main.configManager.getSettings().getBoolean("welcome.broadcast.leave.enabled")) {
+			event.setQuitMessage(MessageUtil.getColorMessage(main.configManager.getSettings().getString("welcome.broadcast.leave.message"), event.getPlayer()).replace("%player_name%", event.getPlayer().getDisplayName()));
 		} else {
 			event.setQuitMessage("");
 		}

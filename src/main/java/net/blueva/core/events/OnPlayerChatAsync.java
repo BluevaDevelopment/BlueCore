@@ -25,18 +25,18 @@ public class OnPlayerChatAsync implements Listener {
 		Player player = event.getPlayer();
 		String message = event.getMessage();
 		
-		if(main.getConfig().getBoolean("chat.antiswear.enabled")) {
+		if(main.configManager.getSettings().getBoolean("chat.antiswear.enabled")) {
 			if(!player.hasPermission("bluecore.chat.antiswear.bypass")) {
-				for(String blockedWords : main.getConfig().getStringList("chat.antiswear.list")) {
+				for(String blockedWords : main.configManager.getSettings().getStringList("chat.antiswear.list")) {
 					if(message.toLowerCase().replaceAll("[-_*. ]", "").contains(blockedWords.toLowerCase())) {
-						if(Objects.equals(main.getConfig().getString("chat.antiswear.mode"), "replace")) {
+						if(Objects.equals(main.configManager.getSettings().getString("chat.antiswear.mode"), "replace")) {
 							StringBuilder a = new StringBuilder();
 							for(int c=0;c<blockedWords.length();c++) {
 								a.append("*");
 							}
 							message = message.replace(blockedWords, a.toString());
 						}
-						if(Objects.equals(main.getConfig().getString("chat.antiswear.mode"), "block")) {
+						if(Objects.equals(main.configManager.getSettings().getString("chat.antiswear.mode"), "block")) {
 							player.sendMessage(MessageUtil.getColorMessage(main.configManager.getLang().getString("messages.info.antiswear_block"), player));
 							event.setCancelled(true);
 							return;
@@ -47,11 +47,11 @@ public class OnPlayerChatAsync implements Listener {
 				event.setMessage(message);
 			}
 		}
-		if(!Objects.equals(main.getConfig().getString("chat.format"), "none")) {
-			String formated_message = Objects.requireNonNull(main.getConfig().getString("chat.format")).replaceFirst("%player_displayname%", player.getDisplayName()).replaceFirst("%message%", message);
+		if(!Objects.equals(main.configManager.getSettings().getString("chat.format"), "none")) {
+			String formated_message = Objects.requireNonNull(main.configManager.getSettings().getString("chat.format")).replaceFirst("%player_displayname%", player.getDisplayName()).replaceFirst("%message%", message);
 			event.setFormat(MessageUtil.getColorMessage(formated_message, player));
 		}
-		if(main.getConfig().getBoolean("chat.per_world")) {
+		if(main.configManager.getSettings().getBoolean("chat.per_world")) {
 			Set<Player> r = event.getRecipients();
 		    for (Player pls : Bukkit.getServer().getOnlinePlayers()) {
 		      if (!pls.getWorld().getName().equals(player.getWorld().getName()))
