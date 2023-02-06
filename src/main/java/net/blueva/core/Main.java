@@ -1,8 +1,8 @@
 package net.blueva.core;
 
-import net.blueva.core.admins.LastLocationAdmin;
-import net.blueva.core.admins.ScoreboardAdmin;
-import net.blueva.core.admins.TablistAdmin;
+import net.blueva.core.managers.LocationManager;
+import net.blueva.core.managers.ScoreboardManager;
+import net.blueva.core.managers.TablistManager;
 import net.blueva.core.commands.*;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.events.*;
@@ -72,13 +72,13 @@ public final class Main extends JavaPlugin {
 			new Metrics(this, pluginId);
 		}
 
-		ScoreboardAdmin scoreboard = new ScoreboardAdmin(this);
+		ScoreboardManager scoreboard = new ScoreboardManager(this);
 		scoreboard.createScoreboard();
 
-		TablistAdmin tablist = new TablistAdmin(this);
+		TablistManager tablist = new TablistManager(this);
 		tablist.createTablist();
 
-		LastLocationAdmin lastlocation = new LastLocationAdmin(this);
+		LocationManager lastlocation = new LocationManager(this);
 		lastlocation.createLastLocation();
 
 		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {

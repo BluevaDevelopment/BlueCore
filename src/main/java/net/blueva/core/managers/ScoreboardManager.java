@@ -1,7 +1,8 @@
-package net.blueva.core.admins;
+package net.blueva.core.managers;
 
 import java.util.List;
 
+import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -9,17 +10,15 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
 
-public class ScoreboardAdmin {
+public class ScoreboardManager {
 
 	private Main main;
 	int taskID;
 
-	public ScoreboardAdmin(Main main) {
+	public ScoreboardManager(Main main) {
 		this.main = main;
 	}
 
@@ -35,14 +34,14 @@ public class ScoreboardAdmin {
 	}
 
 	private void updateScoreboard(Player p) {
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
+		org.bukkit.scoreboard.ScoreboardManager manager = Bukkit.getScoreboardManager();
 		Scoreboard scoreboard = manager.getNewScoreboard();
 		Objective objetive = scoreboard.registerNewObjective("TheNexus", "dummy", "TNScore");
 		objetive.setDisplaySlot(DisplaySlot.SIDEBAR);
-		objetive.setDisplayName(MessageUtil.getColorMessage(main.configManager.getSettings().getString("scoreboard.title"), p));
+		objetive.setDisplayName(MessagesUtil.format(p, main.configManager.getSettings().getString("scoreboard.title")));
 		List<String> lines = main.configManager.getSettings().getStringList("scoreboard.lines");
 		for(int i=0;i<lines.size();i++) {
-			Score score = objetive.getScore(MessageUtil.getColorMessage(lines.get(i), p));
+			Score score = objetive.getScore(MessagesUtil.format(p, lines.get(i)));
 			score.setScore(lines.size()-(i));
 		}
 		p.setScoreboard(scoreboard);

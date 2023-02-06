@@ -1,23 +1,23 @@
-package net.blueva.core.admins;
+package net.blueva.core.managers;
 
 import java.util.ArrayList;
 
+import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessageUtil;
 import net.blueva.core.utils.StringUtil;
 
 
 
-public class TablistAdmin {
+public class TablistManager {
 
 	private Main main;
 	int taskID;
 
-	public TablistAdmin(Main main) {
+	public TablistManager(Main main) {
 		this.main = main;
 	}
 
@@ -33,8 +33,8 @@ public class TablistAdmin {
 	}
 
 	private void updateTablist(Player p) {
-		p.setPlayerListHeader(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.header"), "\n"), p));
-		p.setPlayerListFooter(MessageUtil.getColorMessage(StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.footer"), "\n"), p).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
+		p.setPlayerListHeader(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.header"), "\n")));
+		p.setPlayerListFooter(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.footer"), "\n")).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
 	}
 
 

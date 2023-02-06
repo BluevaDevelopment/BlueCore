@@ -53,16 +53,16 @@ welcome:
 
     # This is the message that will be sent to the players. Modify it to your liking, you can add or remove the lines you want.
     list:
-    - '&5&m--------------------------------------'
+    - '&9&m--------------------------------------'
     - ''
-    - '        &5✦ &d&lWELCOME TO &nSERVERNAME&5 ✦'
-    - '   &b✵ &fThe best server in all of minecraft &b✵'
+    - '        &9✦ &b&lWELCOME TO &nSERVERNAME&9 ✦'
+    - '   &f✵ &fThe best server in all of minecraft &f✵'
     - ''
-    - ' &d➦ &fStore: &bstore.servername.com'
-    - ' &d➦ &fWeb: &bwww.servername.com'
-    - ' &d➦ &fDiscord: &bdiscord.servername.com'
+    - ' &b➦ &fStore: &7store.servername.com'
+    - ' &b➦ &fWeb: &7www.servername.com'
+    - ' &b➦ &fDiscord: &7discord.servername.com'
     - ''
-    - '&5&m--------------------------------------'
+    - '&9&m--------------------------------------'
 
   # Title that will be sent to the players when they join to the server.
   # (Does not work in versions lower than 1.12)
@@ -75,7 +75,7 @@ welcome:
     wait: 10 # 20 Ticks = 1 Second
 
     # Set the welcome title
-    title: '&d&lServer Name'
+    title: '&b&lServer Name'
 
     # Sets the welcome subtitle. Appears below the title
     subtitle: '&fwww.servername.com'
@@ -99,7 +99,7 @@ welcome:
     wait: 10 # 20 Ticks = 1 Second
 
     # Message to appear in the welcome actionbar
-    message: '&dWelcome to YourServer'
+    message: '&bWelcome to YourServer'
 
   # Announces to all players when a player joins or leaves.
   broadcast:
@@ -111,7 +111,7 @@ welcome:
       enabled: true
 
       # Message that will appear in this broadcast
-      message: '&f%player_name% &dhas logged into the server for the first time. Welcome to the server!'
+      message: '&f%player_name% &bhas logged into the server for the first time. Welcome to the server!'
 
     # Announces to all players when a player joins.
     join:
@@ -143,22 +143,21 @@ scoreboard:
 
   # The title displayed at the very top of the scoreboard
   # WARNING! (Only for 1.12 or earlier) The title must be 35 characters or less. (Including color codes).
-  title: '&d&lXtreme &5&lCore'
+  title: '&b&lBlue Core'
 
   # The lines of the scoreboard. (Maximum 15 lines)
   lines: 
   - '&a'
-  - '&d&l➦ Player Name'
-  - ' &b● &f%player_name%'
+  - '&b&l➦ Player Name'
+  - ' &9● &f%player_name%'
   - '&b'
-  - '&d&l➦ Ping'
-  - ' &b● &f%player_ping%'
+  - '&b&l➦ Ping'
+  - ' &9● &f%player_ping%'
   - '&c'
-  - '&d&l➦ Money'
-  - ' &b● &f%player_money%'
+  - '&b&l➦ Money'
+  - ' &9● &f%player_money%'
   - '&d'
-  - 'play.servername.com'
-  
+  - 'blueva.net'
 
   disabled-worlds:
   - 'world_the_end'
@@ -176,8 +175,8 @@ tablist:
   # Sets the header of the tablist. Add or remove the lines you want.
   header:
   - ''
-  - '&d&lXtremeCore'
-  - '&fwww.servername.com'
+  - '&b&lBlue Core'
+  - '&fblueva.net'
   - ''
 
   # Sets the footer of the tablist. Add or remove the lines you want.

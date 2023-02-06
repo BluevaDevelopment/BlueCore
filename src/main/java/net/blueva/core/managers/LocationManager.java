@@ -1,4 +1,4 @@
-package net.blueva.core.admins;
+package net.blueva.core.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -7,12 +7,12 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import net.blueva.core.Main;
 
-public class LastLocationAdmin {
+public class LocationManager {
 	
 	private Main main;
 	int taskID;
 	
-	public LastLocationAdmin(Main main) {
+	public LocationManager(Main main) {
 		this.main = main;
 	}
 	
