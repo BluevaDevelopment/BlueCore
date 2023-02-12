@@ -17,7 +17,7 @@ public class DeleteWarpCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
         if (!(sender instanceof Player)) {
-            sender.sendMessage("You must be a player to run this command.");
+            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
             return true;
         }
 

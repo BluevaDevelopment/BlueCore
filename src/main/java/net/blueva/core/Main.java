@@ -38,10 +38,6 @@ public final class Main extends JavaPlugin {
 	public FileConfiguration worlds = null;
 	public File worldsFile = null;
 
-	//languages
-	public FileConfiguration es = null;
-	public File esFile = null;
-
 	// other things
 	public String pluginversion = getDescription().getVersion();
 	public static boolean placeholderapi = false;
@@ -147,11 +143,11 @@ public final class Main extends JavaPlugin {
 		this.getCommand("enderchest").setExecutor(new EnderChestCommand(this));
 		this.getCommand("feed").setExecutor(new FeedCommand(this));
 		this.getCommand("fly").setExecutor(new FlyCommand(this));
-		this.getCommand("gm").setExecutor(new GMCommand(this));
+		this.getCommand("gamemode").setExecutor(new GamemodeCommand(this));
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));
 		this.getCommand("midnight").setExecutor(new MidnightCommand(this));
-		this.getCommand("core").setExecutor(new CoreCommand(this));
+		this.getCommand("bluecore").setExecutor(new BlueCoreCommand(this));
 		this.getCommand("night").setExecutor(new NightCommand(this));
 		this.getCommand("noon").setExecutor(new NoonCommand(this));
 		this.getCommand("setspawn").setExecutor(new SetSpawnCommand(this));

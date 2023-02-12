@@ -14,10 +14,10 @@ commands:
       aliases: [ nclearchat, ncc, cc ]
       description: Clears the chat of one or all players
       usage: /clearchat [action]
-   core:
-      aliases: [ xtremecore, xc, xcore, xtremec ]
+   bluecore:
+      aliases: [ bc, bcore, bluec, core ]
       description: Main command
-      usage: /core [action]
+      usage: /bluecore [action]
    creative:
       aliases: [ ncreative, crea, cr, c, gmc ]
       description: Change your game mode
@@ -42,10 +42,10 @@ commands:
       aliases: [ nfly ]
       description: Activate fly mode.
       usage: /fly [action]
-   gm:
-      aliases: [ ngamemode, ngm, gmode, gamem ]
+   gamemode:
+      aliases: [ gm, gmode, gamem ]
       description: Change your game mode
-      usage: /gm [action]
+      usage: /gamemode [action]
    god:
       aliases: [ ngod ]
       description: Enable god mode

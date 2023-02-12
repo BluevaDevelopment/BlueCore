@@ -7,6 +7,7 @@
 language: 'English'
 messages:
   success:
+    loaded_language: 'The language English has been loaded successfully.'
     reloaded_plugin: '&bBlueCore has been reloaded.'
     gamemode_changed: '&bYour game mode has been changed to &f%gamemode%&b.'
     gamemode_changed_others: '&bThe &f%player% &bgame mode has been changed to &f%gamemode%&b.'
@@ -43,6 +44,7 @@ messages:
     wm_unloaded_world: '&bThe world &f%worldmanager_worldname% &bhas been unloaded successfully.'
     wm_imported_world: '&bThe world &f%worldmanager_worldname% &bhas been imported successfully.'
   error:
+    only_player: '&cYou must be a player to run this command.'
     no_perms: '&cYou do not have permissions to execute this command.'
     unknown_command: '&cThe command you entered does not exist.'
     player_offline: '&cThat player is offline.'
@@ -72,47 +74,11 @@ messages:
     use_heal_command: '&cUse: /heal [player]'
     use_feed_command: '&cUse: /feed [player]'
     use_clearchat_command: '&cUse: /clearchat [player]'
-    use_setwarp_command: '&cUse: /setwarp [warp]'
-    use_updatewarp_command: '&cUse: /updwarp [warp]'
-    use_deletewarp_command: '&cUse: /delwarp [warp]'
-    use_warp_command: '&cUse: /warp [warp] [player]'
-    use_setspawn_command: '&cUse: /setspawn [warp]'
-console:
-  success:
-    loaded_language: 'The language English has been loaded successfully.'
-    gamemode_changed_others: '&bThe &f%player% &bgame mode has been changed to &f%gamemode%&b.'
-    satisfied_appetite_others: '&f%player% &bappetite is now satisfied.'
-    healed_player_others: '&f%player% &bhas been healed.'
-    teleported_to_warp_others: '&bThe player &f%player% &bhas been teleported to warp &f%warp%&b.'
-    teleported_to_spawn_others: '&bThe player &f%player% &bhas been teleported to the spawn.'
-    god_mode_enabled_others: '&bGod mode enabled to %player%.'
-    god_mode_disabled_others: '&bGod mode disabled to %player%.'
-    fly_mode_enabled_others: '&bFly mode enabled to %player%.'
-    fly_mode_disabled_others: '&bFly mode disabled to %player%.'
-    chat_cleared_others: '&bYou have cleared %player% chat'
-    enderchest_open_others: '&bThe enderchest of &f%player% &bhas been opened.'
-    workbench_open_others: '&bThe workbench of &f%player% &bhas been opened.'
-    changed_time: '&bThe world time of &f%world% &bhas been changed to &f%time%&b. &f(%ticks% ticks)'
-    changed_weather: '&bThe weather of the world &f%world% &bhas been changed to &f%weather%&b.'
-  error:
-    only_player: '&cYou must be a player to run this command.'
-    player_offline: '&cThat player is offline.'
-    unknown_warp: '&cThis warp does not exist.'
-    spawn_not_set: '&cThe spawn has not been defined. Login to the server and set the spawn with /setspawn [warp].'
-    invalid_world: '&cThat world does not exist. Did you write the name correctly?'
-  info: []
-  other:
-    use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
-    use_survival_command: '&cUse: /survival [player]'
-    use_creative_command: '&cUse: /creative [player]'
-    use_adventure_command: '&cUse: /adventure [player]'
-    use_spectator_command: '&cUse: /spectator [player]'
-    use_heal_command: '&cUse: /heal [player]'
-    use_feed_command: '&cUse: /feed [player]'
-    use_clearchat_command: '&cUse: /clearchat [player]'
     use_god_command: '&cUse: /god [player]'
     use_fly_command: '&cUse: /fly [player]'
+    use_setwarp_command: '&cUse: /setwarp [warp]'
     use_warp_command: '&cUse: /warp [warp] [player]'
+    use_setspawn_command: '&cUse: /setspawn [warp]'
     use_spawn_command: '&cUse: /spawn [player]'
     use_enderchest_command: '&cUse: /enderchest [player]'
     use_workbench_command: '&cUse: /workbench [player]'
@@ -122,3 +88,10 @@ console:
     use_noon_command: '&cUse: /noon [world]'
     use_sun_command: '&cUse: /sun [world]'
     use_storm_command: '&cUse: /sun [world]'
+commands:
+  bluecore:
+    info:
+      - '&b&lBlueCore &8- &fThe All-In-One Minecraft Server Solution'
+      - '&7Running version &b{version} &8- &7Get help with &b/bc help'
+    help:
+      - ''

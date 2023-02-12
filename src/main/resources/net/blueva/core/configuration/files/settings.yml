@@ -182,7 +182,7 @@ tablist:
   # Sets the footer of the tablist. Add or remove the lines you want.
   footer:
   - ''
-  - '&7You are playing with &d%online% players'
+  - '&7You are playing with &b%online% players'
   - '&7                                                  &7'
   
 # Chat:

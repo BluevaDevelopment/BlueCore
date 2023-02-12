@@ -20,94 +20,48 @@ public class WarpCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        //player:
-        if ((sender instanceof Player)) {
-            if (args.length > 0) {
-                    if (args.length == 2) {
-                        if (sender.hasPermission("bluecore.*") ||
-                                sender.hasPermission("bluecore.warp.*") ||
-                                sender.hasPermission("bluecore.warp."+args[0])) {
-                        String warp = args[0];
-                        Player target = Bukkit.getPlayer(args[1]);
+        Player finalsender = null;
+        if(sender instanceof Player) {
+            finalsender = (Player) sender;
+        }
 
-                        if(main.configManager.getWarps().isSet("warps."+warp+".world")) {
-                            String world = main.configManager.getWarps().getString("warps."+warp+".world");
-                            double x = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".x"));
-                            double y = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".y"));
-                            double z = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".z"));
-                            float yaw = Float.valueOf(main.configManager.getWarps().getString("warps."+warp+".yaw"));
-                            float pitch = Float.valueOf(main.configManager.getWarps().getString("warps."+warp+".pitch"));
-                            Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                            if (target != null) {
-                                target.teleport(loc);
-                                target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
-                                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName())));
-                            } else {
-                                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
-                            }
-                        } else {
-                            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.unknown_warp")));
-                        }
-                    } else {
-                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
-                        }
-                } else if (args.length == 1) {
-                        if (sender.hasPermission("bluecore.*") ||
-                                sender.hasPermission("bluecore.warp.*") ||
-                                sender.hasPermission("bluecore.warp."+args[0])) {
-                            String warp = args[0];
-                            String world = main.configManager.getWarps().getString("warps."+warp+".world");
-
-                            if(main.configManager.getWarps().isSet("warps."+warp+".world")) {
-                                double x = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".x"));
-                                double y = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".y"));
-                                double z = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".z"));
-                                float yaw = Float.valueOf(main.configManager.getWarps().getString("warps."+warp+".yaw"));
-                                float pitch = Float.valueOf(main.configManager.getWarps().getString("warps."+warp+".pitch"));
-                                Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                                ((Player) sender).teleport(loc);
-                                sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
-                            } else {
-                                sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.unknown_warp")));
-                            }
-                        } else {
-                            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
-                        }
-                    } else {
-                        sender.sendMessage(MessagesUtil.format(((Player) sender).getPlayer(), main.configManager.getLang().getString("messages.other.use_warp_command").replace("%warp%", args[0])));
-                    }
+        if (args.length > 0) {
+            if (args.length == 2) {
+                String warp = args[0];
+                Player target = Bukkit.getPlayer(args[1]);
+                teleportWarp(sender, target, warp);
+                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName())));
+            } else if (args.length == 1) {
+                if (sender instanceof Player) {
+                    String warp = args[0];
+                    Player player = (Player) sender;
+                    teleportWarp(sender, player, warp);
+                } else {
+                    sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_warp_command")));
+                }
+            } else {
+                sender.sendMessage(MessagesUtil.format(finalsender, main.configManager.getLang().getString("messages.other.use_warp_command")));
             }
         } else {
+            sender.sendMessage(MessagesUtil.format(finalsender, main.configManager.getLang().getString("messages.other.use_warp_command")));
+        }
 
-            //console:
-            if (args.length > 0){
-                if (args.length == 2) {
-                    String warp = args[0];
-                    Player target = Bukkit.getPlayer(args[1]);
+        return true;
+    }
 
-                    if(main.configManager.getWarps().isSet("warps."+warp+".world")) {
-                        String world = main.configManager.getWarps().getString("warps."+warp+".world");
-                        double x = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".x"));
-                        double y = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".y"));
-                        double z = Double.valueOf(main.configManager.getWarps().getString("warps."+warp+".z"));
-                        float yaw = Float.valueOf(main.configManager.getWarps().getString("warps."+warp+".yaw"));
-                        float pitch = Float.valueOf(main.configManager.getWarps().getString("warps."+warp+".pitch"));
-                        Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                        if (target != null) {
-                            target.teleport(loc);
-                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName())));
-                        } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.player_offline")));
-                        }
-                    } else {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.error.unknown_warp")));
-                    }
-                } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.configManager.getLang().getString("console.other.use_warp_command")));
-                }
+    private void teleportWarp(CommandSender sender, Player target, String warp) {
+        if (sender.hasPermission("bluecore.*") || sender.hasPermission("bluecore.warp.*") || sender.hasPermission("bluecore.warp." + warp)) {
+            if (main.configManager.getWarps().isSet("warps." + warp + ".world")) {
+                String world = main.configManager.getWarps().getString("warps." + warp + ".world");
+                double x = Double.parseDouble(main.configManager.getWarps().getString("warps." + warp + ".x"));
+                double y = Double.parseDouble(main.configManager.getWarps().getString("warps." + warp + ".y"));
+                double z = Double.parseDouble(main.configManager.getWarps().getString("warps." + warp + ".z"));
+                float yaw = Float.parseFloat(main.configManager.getWarps().getString("warps." + warp + ".yaw"));
+                float pitch = Float.parseFloat(main.configManager.getWarps().getString("warps." + warp + ".pitch"));
+                Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+                target.teleport(loc);
+                target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
             }
         }
-        return true;
     }
 }

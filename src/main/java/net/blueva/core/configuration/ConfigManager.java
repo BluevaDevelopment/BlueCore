@@ -148,7 +148,7 @@ public class ConfigManager {
     public void saveWarps(){
         try{
             main.warps.save(main.warpsFile);
-            ConfigUpdater.update(main, "net/blueva/core/configuration/files/warps.yml", new File(main.getDataFolder()+"/warps.yml"));
+            //ConfigUpdater.update(main, "net/blueva/core/configuration/files/warps.yml", new File(main.getDataFolder()+"/warps.yml"));
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -184,7 +184,7 @@ public class ConfigManager {
     public void saveWorlds(){
         try{
             main.worlds.save(main.worldsFile);
-            ConfigUpdater.update(main, "net/blueva/core/configuration/files/worlds.yml", new File(main.getDataFolder()+"/worlds.yml"));
+            //ConfigUpdater.update(main, "net/blueva/core/configuration/files/worlds.yml", new File(main.getDataFolder()+"/worlds.yml"));
         }catch(IOException e){
             e.printStackTrace();
         }
