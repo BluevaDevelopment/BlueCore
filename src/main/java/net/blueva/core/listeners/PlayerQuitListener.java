@@ -1,4 +1,4 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
@@ -10,11 +10,11 @@ import net.blueva.core.utils.MessagesUtil;
 
 import java.util.Objects;
 
-public class OnPlayerQuit implements Listener {
+public class PlayerQuitListener implements Listener {
 
 	private final Main main;
 
-	public OnPlayerQuit(Main main) {
+	public PlayerQuitListener(Main main) {
 		this.main = main;
 	}
 

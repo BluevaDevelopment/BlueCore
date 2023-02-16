@@ -5,7 +5,7 @@ import net.blueva.core.managers.ScoreboardManager;
 import net.blueva.core.managers.TablistManager;
 import net.blueva.core.commands.*;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.events.*;
+import net.blueva.core.listeners.*;
 import net.blueva.core.managers.WorldManager;
 import net.blueva.core.metrics.Metrics;
 import net.blueva.core.multiversion.Version;
@@ -124,17 +124,17 @@ public final class Main extends JavaPlugin {
 
 	private void RegisterEvents() {
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new OnBreakBlock(this), this);
-		pm.registerEvents(new OnEntityDamage(this), this);
-		pm.registerEvents(new OnEntitySpawn(this), this);
-		pm.registerEvents(new OnPlaceBlock(this), this);
-		pm.registerEvents(new OnPlayerChatAsync(this), this);
-		pm.registerEvents(new OnPlayerCommand(this), this);
-		pm.registerEvents(new OnPlayerDeath(this), this);
-		pm.registerEvents(new OnPlayerDropItem(this), this);
-		pm.registerEvents(new OnPlayerInteract(this), this);
-		pm.registerEvents(new OnPlayerJoin(this), this);
-		pm.registerEvents(new OnPlayerQuit(this), this);
+		pm.registerEvents(new BlockBreakListener(this), this);
+		pm.registerEvents(new EntityDamageListener(this), this);
+		pm.registerEvents(new EntitySpawnListener(this), this);
+		pm.registerEvents(new BlockPlaceListener(this), this);
+		pm.registerEvents(new AsyncPlayerChatListener(this), this);
+		pm.registerEvents(new PlayerCommandPreprocessListener(this), this);
+		pm.registerEvents(new PlayerDeathListener(this), this);
+		pm.registerEvents(new PlayerDropItemListener(this), this);
+		pm.registerEvents(new PlayerInteractListener(this), this);
+		pm.registerEvents(new PlayerJoinListener(this), this);
+		pm.registerEvents(new PlayerQuitListener(this), this);
 
 	}
 

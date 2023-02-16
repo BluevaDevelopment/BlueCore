@@ -1,4 +1,4 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,11 +15,11 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 
-public class OnPlayerCommand implements Listener {
+public class PlayerCommandPreprocessListener implements Listener {
 
 	private final Main main;
 
-	public OnPlayerCommand(Main main) {
+	public PlayerCommandPreprocessListener(Main main) {
 		this.main = main;
 	}
 

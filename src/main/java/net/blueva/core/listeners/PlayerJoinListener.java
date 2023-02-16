@@ -1,4 +1,4 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ import org.bukkit.Bukkit;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 
-public class OnPlayerJoin implements Listener {
+public class PlayerJoinListener implements Listener {
 
 	private final Main main;
 
-	public OnPlayerJoin(Main main) {
+	public PlayerJoinListener(Main main) {
 		this.main = main;
 	}
 

@@ -1,4 +1,4 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import java.util.Objects;
 import java.util.Set;
@@ -12,11 +12,11 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 
-public class OnPlayerChatAsync implements Listener {
+public class AsyncPlayerChatListener implements Listener {
 	
 	private final Main main;
 	
-	public OnPlayerChatAsync(Main main) {
+	public AsyncPlayerChatListener(Main main) {
 		this.main = main;
 	}
 	

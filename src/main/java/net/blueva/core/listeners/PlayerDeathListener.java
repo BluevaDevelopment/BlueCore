@@ -1,4 +1,4 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -11,11 +11,11 @@ import net.blueva.core.Main;
 
 import java.util.Objects;
 
-public class OnPlayerDeath implements Listener {
+public class PlayerDeathListener implements Listener {
 	
 	private final Main main;
 	
-	public OnPlayerDeath(Main main) {
+	public PlayerDeathListener(Main main) {
 		this.main = main;
 	}
 	

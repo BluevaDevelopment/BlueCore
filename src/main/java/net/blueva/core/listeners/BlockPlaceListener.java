@@ -1,27 +1,27 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import net.blueva.core.Main;
 
-public class OnPlayerDropItem implements Listener {
+public class BlockPlaceListener implements Listener {
 
     private final Main main;
 
-    public OnPlayerDropItem(Main main) {
+    public BlockPlaceListener(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void OPDI(PlayerDropItemEvent event) {
+    public void OPB(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".drop_items")) {
+        if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".build")) {
             event.setCancelled(!player.hasPermission("bluecore.*") &&
                     !player.hasPermission("bluecore.worldmanager.bypass.*") &&
-                    !player.hasPermission("bluecore.worldmanager.bypass.drop_items") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.build") &&
                     !player.hasPermission("bluecore.worldmanager.*"));
         }
 

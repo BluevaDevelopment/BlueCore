@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e89124f2-be5e-433f-b0a1-eb4cd6c8efc3" name="Changes" comment="Completely improved commands.">
+    <list default="true" id="e89124f2-be5e-433f-b0a1-eb4cd6c8efc3" name="Changes" comment="Reorganised events.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorldManagerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorldCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerQuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerQuit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/LocationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/LocationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/language/en_UK.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/language/en_UK.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnBreakBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/BlockBreakListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnEntityDamage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/EntityDamageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnEntitySpawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/EntitySpawnListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlaceBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/BlockPlaceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerChatAsync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/AsyncPlayerChatListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerCommandPreprocessListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerDeath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerDeathListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerDropItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerDropItemListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerInteract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerInteractListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerQuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerQuitListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676166563301</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Improved world manager.">
+      <created>1676515624612</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676515624612</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -107,6 +120,8 @@
     <MESSAGE value="Improved message format." />
     <MESSAGE value="Changed colour palette and other changes..." />
     <MESSAGE value="Completely improved commands." />
-    <option name="LAST_COMMIT_MESSAGE" value="Completely improved commands." />
+    <MESSAGE value="Improved world manager." />
+    <MESSAGE value="Reorganised events." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reorganised events." />
   </component>
 </project>

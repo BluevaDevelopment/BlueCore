@@ -1,4 +1,4 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -6,11 +6,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import net.blueva.core.Main;
 
-public class OnEntitySpawn implements Listener {
+public class EntitySpawnListener implements Listener {
 
     private final Main main;
 
-    public OnEntitySpawn(Main main) {
+    public EntitySpawnListener(Main main) {
         this.main = main;
     }
 

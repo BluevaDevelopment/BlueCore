@@ -1,4 +1,4 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -7,11 +7,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import net.blueva.core.Main;
 
-public class OnEntityDamage implements Listener {
+public class EntityDamageListener implements Listener {
 
     private Main main;
 
-    public OnEntityDamage(Main main) {
+    public EntityDamageListener(Main main) {
         this.main = main;
     }
 

@@ -1,27 +1,27 @@
-package net.blueva.core.events;
+package net.blueva.core.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import net.blueva.core.Main;
 
-public class OnBreakBlock implements Listener {
+public class PlayerInteractListener implements Listener {
 
     private final Main main;
 
-    public OnBreakBlock(Main main) {
+    public PlayerInteractListener(Main main) {
         this.main = main;
     }
 
     @EventHandler
-    public void OBB(BlockBreakEvent event) {
+    public void OPI(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(main.configManager.getWorlds().getBoolean("worlds." + worldname + ".break")) {
+        if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".interact")) {
             event.setCancelled(!player.hasPermission("bluecore.*") &&
                     !player.hasPermission("bluecore.worldmanager.bypass.*") &&
-                    !player.hasPermission("bluecore.worldmanager.bypass.break") &&
+                    !player.hasPermission("bluecore.worldmanager.bypass.interact") &&
                     !player.hasPermission("bluecore.worldmanager.*"));
         }
 
