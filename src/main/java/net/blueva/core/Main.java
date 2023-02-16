@@ -6,6 +6,7 @@ import net.blueva.core.managers.TablistManager;
 import net.blueva.core.commands.*;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.events.*;
+import net.blueva.core.managers.WorldManager;
 import net.blueva.core.metrics.Metrics;
 import net.blueva.core.multiversion.Version;
 import org.bukkit.Bukkit;
@@ -20,8 +21,9 @@ import java.io.File;
 
 public final class Main extends JavaPlugin {
 
-	//config files
+	//managers
 	public ConfigManager configManager;
+	public WorldManager worldManager;
 
 	public FileConfiguration settings = null;
 	public File settingsFile = null;
@@ -76,6 +78,8 @@ public final class Main extends JavaPlugin {
 
 		LocationManager lastlocation = new LocationManager(this);
 		lastlocation.createLastLocation();
+
+		worldManager = new WorldManager(this);
 
 		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 			placeholderapi = true;
@@ -159,7 +163,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("updatewarp").setExecutor(new UpdateWarpCommand(this));
 		this.getCommand("warp").setExecutor(new WarpCommand(this));
 		this.getCommand("workbench").setExecutor(new WorkbenchCommand(this));
-		this.getCommand("worldmanager").setExecutor(new WorldManagerCommand(this));
+		this.getCommand("world").setExecutor(new WorldCommand(this));
 	}
 
 	public void LoadWorlds() {

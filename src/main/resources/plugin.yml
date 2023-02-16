@@ -106,7 +106,7 @@ commands:
       aliases: [ nworkbench, nwb, ncraftingtable, ncraft, wb, craftingtable, craft ]
       description: Open the Crafting Table
       usage: /workbench [action]
-   worldmanager:
-      aliases: [ nworld, world, worlds, wm, w ]
-      description: World Manager
-      usage: /worldmanager [action]
+   world:
+      aliases: [ worlds, wm, w ]
+      description: Manage your server worlds
+      usage: /world [action]

@@ -65,6 +65,7 @@ messages:
     antiswear_block: '&cPlease use appropriate language.'
     wm_creating_world: '&bCreating the world &f%worldmanager_worldname%&b.'
     chat_cleared_others: '&bYou have cleared %player% chat'
+    more_information: '&bGet more information on the wiki: &f{url}'
   other:
     use_gm_command: '&cUse: /gm [survival/creative/adventure/spectator] [player]'
     use_survival_command: '&cUse: /survival [player]'
@@ -77,6 +78,8 @@ messages:
     use_god_command: '&cUse: /god [player]'
     use_fly_command: '&cUse: /fly [player]'
     use_setwarp_command: '&cUse: /setwarp [warp]'
+    use_updatewarp_command: '&cUse: /updwarp [warp]'
+    use_deletewarp_command: '&cUse: /delwarp [warp]'
     use_warp_command: '&cUse: /warp [warp] [player]'
     use_setspawn_command: '&cUse: /setspawn [warp]'
     use_spawn_command: '&cUse: /spawn [player]'
@@ -88,10 +91,12 @@ messages:
     use_noon_command: '&cUse: /noon [world]'
     use_sun_command: '&cUse: /sun [world]'
     use_storm_command: '&cUse: /sun [world]'
+    use_world_command: '&cUse: /world [create/import/delete/goto/info/spawn] [world]'
+    use_world_create_command: '&cUse: /world create [world] [environment] -t [type] || -g [generator]'
 commands:
   bluecore:
     info:
       - '&b&lBlueCore &8- &fThe All-In-One Minecraft Server Solution'
-      - '&7Running version &b{version} &8- &7Get help with &b/bc help'
+      - '&7Running version &b{plugin_version} &8- &7Get help with &b/bc help'
     help:
       - ''

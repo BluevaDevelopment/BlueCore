@@ -36,12 +36,18 @@ public class LocationManager {
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
 		main.configManager.getUser(p.getUniqueId()).set("lastlocation.world", world);
+		main.configManager.saveUser(p.getUniqueId());
 		main.configManager.getUser(p.getUniqueId()).set("lastlocation.x", x);
+		main.configManager.saveUser(p.getUniqueId());
 		main.configManager.getUser(p.getUniqueId()).set("lastlocation.y", y);
+		main.configManager.saveUser(p.getUniqueId());
 		main.configManager.getUser(p.getUniqueId()).set("lastlocation.z", z);
+		main.configManager.saveUser(p.getUniqueId());
 		main.configManager.getUser(p.getUniqueId()).set("lastlocation.yaw", yaw);
+		main.configManager.saveUser(p.getUniqueId());
 		main.configManager.getUser(p.getUniqueId()).set("lastlocation.pitch", pitch);
 		main.configManager.saveUser(p.getUniqueId());
+		main.configManager.reloadUser(p.getUniqueId());
 	}
 
 }

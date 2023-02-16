@@ -34,12 +34,18 @@ public class OnPlayerQuit implements Listener {
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
 		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.world", world);
+		main.configManager.saveUser(event.getPlayer().getUniqueId());
 		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.x", x);
+		main.configManager.saveUser(event.getPlayer().getUniqueId());
 		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.y", y);
+		main.configManager.saveUser(event.getPlayer().getUniqueId());
 		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.z", z);
+		main.configManager.saveUser(event.getPlayer().getUniqueId());
 		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.yaw", yaw);
+		main.configManager.saveUser(event.getPlayer().getUniqueId());
 		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.pitch", pitch);
 		main.configManager.saveUser(event.getPlayer().getUniqueId());
+		main.configManager.reloadUser(event.getPlayer().getUniqueId());
 
 	}
 

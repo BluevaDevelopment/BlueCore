@@ -4,38 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e89124f2-be5e-433f-b0a1-eb4cd6c8efc3" name="Changes" comment="Changed colour palette and other changes...">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GamemodeCommand.java" afterDir="false" />
+    <list default="true" id="e89124f2-be5e-433f-b0a1-eb4cd6c8efc3" name="Changes" comment="Completely improved commands.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/AdventureCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/AdventureCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/ClearChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/ClearChatCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CoreCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/BlueCoreCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CreativeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CreativeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DayCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DayCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DeleteWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DeleteWarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/EnderChestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/EnderChestCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/FeedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/FeedCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/FlyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/FlyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GMCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GodCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GodCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/HealCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/HealCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/MidnightCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/MidnightCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/NightCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/NightCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/NoonCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/NoonCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetSpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetSpawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetWarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpectatorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpectatorCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/StormCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/StormCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SunCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SurvivalCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SurvivalCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/UpdateWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/UpdateWarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorkbenchCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorkbenchCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorldManagerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorldCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerQuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/events/OnPlayerQuit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/LocationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/LocationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/language/en_UK.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/language/en_UK.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/settings.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/settings.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675719216355</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Completely improved commands.">
+      <created>1676166563301</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676166563301</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +106,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Improved message format." />
     <MESSAGE value="Changed colour palette and other changes..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed colour palette and other changes..." />
+    <MESSAGE value="Completely improved commands." />
+    <option name="LAST_COMMIT_MESSAGE" value="Completely improved commands." />
   </component>
 </project>
