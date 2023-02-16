@@ -2,8 +2,11 @@ package net.blueva.core.managers;
 
 import java.util.List;
 
+import net.blueva.core.netherboard.BPlayerBoard;
+import net.blueva.core.netherboard.Netherboard;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -23,28 +26,31 @@ public class ScoreboardManager {
 	}
 
 	public void createScoreboard() {
-		BukkitScheduler schedule = Bukkit.getServer().getScheduler();
-		taskID = schedule.scheduleSyncRepeatingTask(main, new Runnable() {
-			public void run() {
-				for(Player player : Bukkit.getOnlinePlayers()) {
-					updateScoreboard(player);
-				}
+		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		taskID = scheduler.scheduleSyncRepeatingTask(main, () -> {
+			for(Player player : Bukkit.getOnlinePlayers()) {
+				updateScoreboard(player);
 			}
-		}, 0, Integer.valueOf(main.configManager.getSettings().getInt("scoreboard.ticks")));
+		}, 0L, 20L);
 	}
 
 	private void updateScoreboard(Player p) {
-		org.bukkit.scoreboard.ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard scoreboard = manager.getNewScoreboard();
-		Objective objetive = scoreboard.registerNewObjective("TheNexus", "dummy", "TNScore");
-		objetive.setDisplaySlot(DisplaySlot.SIDEBAR);
-		objetive.setDisplayName(MessagesUtil.format(p, main.configManager.getSettings().getString("scoreboard.title")));
-		List<String> lines = main.configManager.getSettings().getStringList("scoreboard.lines");
-		for(int i=0;i<lines.size();i++) {
-			Score score = objetive.getScore(MessagesUtil.format(p, lines.get(i)));
-			score.setScore(lines.size()-(i));
+		if(main.configManager.getSettings().getBoolean("scoreboard.enabled") && !main.configManager.getSettings().getStringList("scoreboard.disabled_worlds").contains(p.getWorld().getName())) {
+			BPlayerBoard board = Netherboard.instance().getBoard(p);
+			if(board == null) {
+				board = Netherboard.instance().createBoard(p, MessagesUtil.format(p, main.configManager.getSettings().getString("scoreboard.title")));
+			}
+			board.setName(MessagesUtil.format(p, main.configManager.getSettings().getString("scoreboard.title")));
+			List<String> lines = main.configManager.getSettings().getStringList("scoreboard.lines");
+			for(int i = lines.size() - 1; i >= 0; i--) {
+				int pos = lines.size() - 1 - i;
+				board.set(MessagesUtil.format(p, lines.get(i)), pos);
+			}
+		} else {
+			if(Netherboard.instance().getBoard(p) != null) {
+				Netherboard.instance().deleteBoard(p);
+			}
 		}
-		p.setScoreboard(scoreboard);
 	}
 
 }

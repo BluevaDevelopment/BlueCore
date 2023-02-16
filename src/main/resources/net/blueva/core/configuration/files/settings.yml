@@ -159,7 +159,7 @@ scoreboard:
   - '&d'
   - 'blueva.net'
 
-  disabled-worlds:
+  disabled_worlds:
   - 'world_the_end'
 
 # TabList:
