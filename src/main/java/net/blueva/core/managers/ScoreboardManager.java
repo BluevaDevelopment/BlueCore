@@ -31,7 +31,7 @@ public class ScoreboardManager {
 			for(Player player : Bukkit.getOnlinePlayers()) {
 				updateScoreboard(player);
 			}
-		}, 0L, 20L);
+		}, 0L, main.configManager.getSettings().getInt("scoreboard.ticks"));
 	}
 
 	private void updateScoreboard(Player p) {

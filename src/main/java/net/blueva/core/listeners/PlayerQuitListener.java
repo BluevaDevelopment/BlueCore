@@ -21,7 +21,7 @@ public class PlayerQuitListener implements Listener {
 	@EventHandler
 	public void OPQ(PlayerQuitEvent event) {
 		if(main.configManager.getSettings().getBoolean("welcome.broadcast.leave.enabled")) {
-			event.setQuitMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.leave.message")));
+			event.setQuitMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.leave.message").replace("%player_name%", event.getPlayer().getDisplayName())));
 		} else {
 			event.setQuitMessage("");
 		}

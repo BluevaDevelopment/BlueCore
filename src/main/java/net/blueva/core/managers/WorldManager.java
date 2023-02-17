@@ -16,6 +16,44 @@ public class WorldManager {
         this.main = main;
     }
 
+    public void loadWorlds() {
+        if(main.configManager.getWorlds().isSet("worlds")) {
+            Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Loading worlds from \\plugins\\BlueCore\\worlds.yml");
+            for (String key : main.configManager.getWorlds().getConfigurationSection("worlds").getKeys(false)) {
+                Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Loading world " + key.toString());
+                WorldCreator setupworld = new WorldCreator(key);
+                setupworld.createWorld();
+            }
+        } else {
+            Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Importing worlds from the server to BlueCore World Manager");
+            for (World world : Bukkit.getWorlds()) {
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".name", world.getName());
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".alias", "&b" + world.getName().replace("_", " "));
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".build", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".break", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".pvp", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".fall_damage", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".interact", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".drop_items", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".mob_spawning", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".difficulty", world.getDifficulty().toString());
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".respawnWorld", "");
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".allowWeather", true);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".seed", world.getSeed());
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".generator", world.getGenerator().toString());
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".environment", world.getEnvironment().toString());
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".type", world.getWorldType().toString());
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.x", 0.0);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.y", 65.0);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.z", 0.0);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.pitch", 0.0);
+                main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.yaw", 0.0);
+                main.configManager.saveWorlds();
+                Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Imported world: " + world.getName());
+            }
+        }
+    }
+
     public void createWorld(Player player, String name, String environment, String type, String generator) {
         if(environment == null) {
             environment = "normal";

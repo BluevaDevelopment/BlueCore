@@ -6,7 +6,7 @@
 #
 # Configuration generated in version 1.0.0
 
-no-modify: 100
+no_modify: 100
 
 # Metrics:
 # This plugin uses the bStats metrics system. If you want your data not to be collected, you can disable this system here. 
@@ -38,7 +38,7 @@ check_for_updates: true
  
 # Welcome:
 # Welcome all the users that enter the server.
-# You can use the placeholders of the plugin (https://github.com/XtremePlugins/XtremeCore/wiki) or all PlaceHolderAPI placeholders.
+# You can use the placeholders of the plugin (https://github.com/BluevaDevelopment/BlueCore/wiki) or all PlaceHolderAPI placeholders.
 welcome:
 
   # This is the message that appears when you enter a server. 
@@ -81,13 +81,13 @@ welcome:
     subtitle: '&fwww.servername.com'
 
     # The time it takes for the title to fade into the screen. (In ticks)
-    fade-in: 10
+    fade_in: 10
 
     #The time it takes for the title to stay on the screen. (In ticks)
     stay: 80
 
     #The time it takes for the title to fade out of the screen. (In ticks)
-    fade-out: 10
+    fade_out: 10
 
   # Actionbar that is sent to the player when they join the server.
   actionbar:
@@ -139,7 +139,7 @@ scoreboard:
   enabled: true
 
   # Every how many ticks will the scoreboard be updated
-  ticks: 10
+  ticks: 20
 
   # The title displayed at the very top of the scoreboard
   # WARNING! (Only for 1.12 or earlier) The title must be 35 characters or less. (Including color codes).

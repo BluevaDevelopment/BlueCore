@@ -32,7 +32,7 @@ public class BlueCoreCommand implements CommandExecutor {
 				sender.sendMessage(MessagesUtil.format(player, message.replace("{plugin_version}", main.pluginversion)));
 			}
 		}
-		return false;
+		return true;
 	}
 
 }

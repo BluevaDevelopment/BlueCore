@@ -2,9 +2,13 @@ name: BlueCore
 version: 1.0.0
 main: net.blueva.core.Main
 author: Blueva
+description: Everything you need for your server is in this plugin.
 api-version: 1.19
 load: STARTUP
-softdepend: [PlaceholderAPI, Vault]
+website: blueva.net
+softdepend:
+- PlaceholderAPI
+- Vault
 commands:
    adventure:
       aliases: [ nadventure, adven, adv, a, gma ]
@@ -90,6 +94,10 @@ commands:
       aliases: [ nsun, nclear, clear ]
       description: Change the climate from one world to clear
       usage: /sun [action]
+   teleport:
+      aliases: [ tp, goto ]
+      description: Teleport to a player or location.
+      usage: /teleport [action]
    survival:
       aliases: [ nsurvival, surv, srv, s, gms ]
       description: Change your game mode

@@ -59,5 +59,4 @@ public class AsyncPlayerChatListener implements Listener {
 		    } 
 		}
 	}
-
 }
