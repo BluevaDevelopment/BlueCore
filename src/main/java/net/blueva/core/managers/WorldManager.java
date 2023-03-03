@@ -40,7 +40,7 @@ public class WorldManager {
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".respawnWorld", "");
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".allowWeather", true);
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".seed", world.getSeed());
-                main.configManager.getWorlds().set("worlds." + world.getName() + ".generator", world.getGenerator().toString());
+                if(world.getGenerator() != null) main.configManager.getWorlds().set("worlds." + world.getName() + ".generator", world.getGenerator().toString().split("\\(")[0].trim());
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".environment", world.getEnvironment().toString());
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".type", world.getWorldType().toString());
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.x", 0.0);

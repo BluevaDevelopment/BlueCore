@@ -23,6 +23,11 @@ public class TeleportCommand implements CommandExecutor {
             splayer = (Player) sender;
         }
 
+        if (!sender.hasPermission("bluecore.teleport")) {
+            sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.error.no_perms")));
+            return true;
+        }
+
         if (args.length == 0) {
             sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.other.use_teleport_command")));
             return true;
@@ -49,6 +54,11 @@ public class TeleportCommand implements CommandExecutor {
             }
         } else if (args.length == 2) {
             // Teleport one player to another player
+            if (!sender.hasPermission("bluecore.teleport.others")) {
+                sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.error.no_perms")));
+                return true;
+            }
+
             Player player1 = Bukkit.getPlayer(args[0]);
             Player player2 = Bukkit.getPlayer(args[1]);
 
@@ -79,8 +89,14 @@ public class TeleportCommand implements CommandExecutor {
             }
         } else if (args.length == 4) {
             // Teleport player to coordinates
+            if (!sender.hasPermission("bluecore.teleport.others")) {
+                sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.error.no_permission")));
+                return true;
+            }
+
             Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {
+
                 double x = Double.parseDouble(args[1]);
                 double y = Double.parseDouble(args[2]);
                 double z = Double.parseDouble(args[3]);

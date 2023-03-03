@@ -8,11 +8,8 @@ import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.listeners.*;
 import net.blueva.core.managers.WorldManager;
 import net.blueva.core.metrics.Metrics;
-import net.blueva.core.multiversion.Version;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,13 +43,8 @@ public final class Main extends JavaPlugin {
 	public String actualLang;
 	public String langPath;
 	private static Main plugin;
-	private static final Version version = Version.valueOf(Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3]);
 	public static Main getPlugin() {
 		return plugin;
-	}
-
-	public Version getVersion() {
-		return version;
 	}
 
 	public void onEnable() {
