@@ -11,11 +11,11 @@ softdepend:
 - Vault
 commands:
    adventure:
-      aliases: [ nadventure, adven, adv, a, gma ]
+      aliases: [ badventure, adven, adv, a, gma ]
       description: Change your game mode
       usage: /adventure [action]
    clearchat:
-      aliases: [ nclearchat, ncc, cc ]
+      aliases: [ bclearchat, ncc, cc ]
       description: Clears the chat of one or all players
       usage: /clearchat [action]
    bluecore:
@@ -23,7 +23,7 @@ commands:
       description: Main command
       usage: /bluecore [action]
    creative:
-      aliases: [ ncreative, crea, cr, c, gmc ]
+      aliases: [ bcreative, crea, cr, c, gmc ]
       description: Change your game mode
       usage: /creative [action]
    day:
@@ -31,90 +31,94 @@ commands:
       description: Change the world time to day
       usage: /day [action]
    deletewarp:
-      aliases: [ ndeletewarp, ndelwarp, delwarp ]
+      aliases: [ bdeletewarp, bdelwarp, delwarp ]
       description: Deletes a warp
       usage: /deletewarp [action]
    enderchest:
-      aliases: [ nenderchest, nec, ec ]
+      aliases: [ benderchest, bec, ec ]
       description: Open the Ender Chest
       usage: /enderchest [action]
    feed:
-      aliases: [ nfeed, neat, eat ]
+      aliases: [ bfeed, beat, eat ]
       description: Satisfy the hunger.
       usage: /feed [action]
    fly:
-      aliases: [ nfly ]
+      aliases: [ bfly ]
       description: Activate fly mode.
       usage: /fly [action]
    gamemode:
-      aliases: [ gm, gmode, gamem ]
+      aliases: [ bgamemode, bgm, gm, gmode, gamem ]
       description: Change your game mode
       usage: /gamemode [action]
    god:
-      aliases: [ ngod ]
+      aliases: [ bgod ]
       description: Enable god mode
       usage: /god [action]
    heal:
-      aliases: [ nheal ]
+      aliases: [ bheal ]
       description: Heals you or the given player.
       usage: /heal [action]
    midnight:
-      aliases: [ nmidnight ]
+      aliases: [ bmidnight ]
       description: Change the world time to midnight
       usage: /midnight [action]
    night:
-      aliases: [ nnight ]
+      aliases: [ bnight ]
       description: Change the world time to night
       usage: /night [action]
    noon:
-      aliases: [ nnoon ]
+      aliases: [ bnoon ]
       description: Change the world time to noon
       usage: /noon [action]
    setspawn:
-      aliases: [ nsetspawn ]
+      aliases: [ bsetspawn ]
       description: Sets the spawn
       usage: /setspawn [action]
    setwarp:
-      aliases: [ nsetwarp ]
+      aliases: [ bsetwarp ]
       description: Sets a warp
       usage: /setwarp [action]
    spawn:
-      aliases: [ nspawn ]
+      aliases: [ bspawn ]
       description: Teleport to the spawn
       usage: /spawn [action]
    spectator:
-      aliases: [ nspectator, spec, sp, gmsp]
+      aliases: [ bspectator, spec, sp, gmsp ]
       description: Change your game mode
       usage: /spectator [action]
+   speed:
+      aliases: [ bspeed ]
+      description: Change your speed
+      usage: /spectator [action]
    storm:
-      aliases: [ nstorm, nrain, rain]
+      aliases: [ bstorm, brain, rain]
       description: Change the climate from one world to storm
       usage: /storm [action]
    sun:
-      aliases: [ nsun, nclear, clear ]
+      aliases: [ bsun, bclear, clear ]
       description: Change the climate from one world to clear
       usage: /sun [action]
    teleport:
-      aliases: [ tp, goto ]
+      aliases: [ bteleport, tp, goto ]
       description: Teleport to a player or location.
       usage: /teleport [action]
    survival:
-      aliases: [ nsurvival, surv, srv, s, gms ]
+      aliases: [ bsurvival, surv, srv, s, gms ]
       description: Change your game mode
       usage: /survival [action]
    updatewarp:
-      aliases: [ nupdatewarp, nupdwarp, updwarp ]
+      aliases: [ bupdatewarp, bupdwarp, updwarp ]
       description: Update a warp
       usage: /updatewarp [action]
    warp:
-      aliases: [ nwarp ]
+      aliases: [ bwarp ]
       description: Teleport to a warp
       usage: /warp [action]
    workbench:
-      aliases: [ nworkbench, nwb, ncraftingtable, ncraft, wb, craftingtable, craft ]
+      aliases: [ bworkbench, bwb, bcraftingtable, bcraft, wb, craftingtable, craft ]
       description: Open the Crafting Table
       usage: /workbench [action]
    world:
-      aliases: [ worlds, wm, w ]
+      aliases: [ bworld, worlds, wm, w ]
       description: Manage your server worlds
       usage: /world [action]

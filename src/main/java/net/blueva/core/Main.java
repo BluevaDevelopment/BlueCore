@@ -150,6 +150,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("setwarp").setExecutor(new SetWarpCommand(this));
 		this.getCommand("spawn").setExecutor(new SpawnCommand(this));
 		this.getCommand("spectator").setExecutor(new SpectatorCommand(this));
+		this.getCommand("speed").setExecutor(new SpeedCommand(this));
 		this.getCommand("sun").setExecutor(new SunCommand(this));
 		this.getCommand("survival").setExecutor(new SurvivalCommand(this));
 		this.getCommand("teleport").setExecutor(new TeleportCommand(this));
