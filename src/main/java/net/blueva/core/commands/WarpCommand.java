@@ -50,7 +50,7 @@ public class WarpCommand implements CommandExecutor {
     }
 
     private void teleportWarp(CommandSender sender, Player target, String warp) {
-        if (sender.hasPermission("bluecore.*") || sender.hasPermission("bluecore.warp.*") || sender.hasPermission("bluecore.warp." + warp)) {
+        if (sender.hasPermission("bluecore.warp." + warp)) {
             if (main.configManager.getWarps().isSet("warps." + warp + ".world")) {
                 String world = main.configManager.getWarps().getString("warps." + warp + ".world");
                 double x = Double.parseDouble(main.configManager.getWarps().getString("warps." + warp + ".x"));

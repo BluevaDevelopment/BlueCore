@@ -32,13 +32,13 @@ public class SurvivalCommand implements CommandExecutor {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
-            if (!sender.hasPermission("bluecore.gamemode.survival.others") || !sender.hasPermission("bluecore.gamemode.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.gamemode.survival.others")) {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
-            if (!sender.hasPermission("bluecore.gamemode.survival") || !sender.hasPermission("bluecore.gamemode.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.gamemode.survival")) {
                 sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

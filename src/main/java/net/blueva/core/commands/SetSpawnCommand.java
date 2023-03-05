@@ -21,8 +21,7 @@ public class SetSpawnCommand implements CommandExecutor {
             player = (Player)sender;
         }
 
-        if(!sender.hasPermission("bluecore.*") &&
-                !sender.hasPermission("bluecore.setspawn")) {
+        if(!sender.hasPermission("bluecore.setspawn")) {
             sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_permission")));
             return true;
         }

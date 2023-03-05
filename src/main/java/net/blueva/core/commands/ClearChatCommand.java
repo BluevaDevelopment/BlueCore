@@ -32,13 +32,13 @@ public class ClearChatCommand implements CommandExecutor {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
-            if (!sender.hasPermission("bluecore.clearchat.others") || !sender.hasPermission("bluecore.clearchat.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.clearchat.others")) {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
-            if (!sender.hasPermission("bluecore.clearchat") || !sender.hasPermission("bluecore.clearchat.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.clearchat")) {
                 sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

@@ -34,9 +34,7 @@ public class WorldCommand implements CommandExecutor {
         }
 
         if(args[0].equalsIgnoreCase("create")){
-            if(player.hasPermission("bluecore.*") ||
-                    player.hasPermission("bluecore.worldmanager.create") ||
-                    player.hasPermission("bluecore.worldmanager.*")){
+            if(player.hasPermission("bluecore.worldmanager.create")){
                 if (args.length == 1) {
                     player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_world_command")));
                     return true;
@@ -94,9 +92,7 @@ public class WorldCommand implements CommandExecutor {
                 player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
             }
         }else if(args[0].equalsIgnoreCase("delete")){
-            if(player.hasPermission("bluecore.*") ||
-                    player.hasPermission("bluecore.worldmanager.delete") ||
-                    player.hasPermission("bluecore.worldmanager.*")){
+            if(player.hasPermission("bluecore.worldmanager.delete")){
                 if (args.length == 1) {
                     player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_world_command")));
                     return true;
@@ -109,9 +105,7 @@ public class WorldCommand implements CommandExecutor {
                 player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
             }
         }else if(args[0].equalsIgnoreCase("setspawn")){
-            if(player.hasPermission("bluecore.*") ||
-                    player.hasPermission("bluecore.worldmanager.setspawn") ||
-                    player.hasPermission("bluecore.worldmanager.*")){
+            if(player.hasPermission("bluecore.worldmanager.setspawn")){
                 if (args.length == 1) {
                     main.worldManager.setWorldSpawn(player);
                     return true;
@@ -120,9 +114,7 @@ public class WorldCommand implements CommandExecutor {
                 player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
             }
         }else if(args[0].equalsIgnoreCase("spawn")){
-            if(player.hasPermission("bluecore.*") ||
-                    player.hasPermission("bluecore.worldmanager.spawn") ||
-                    player.hasPermission("bluecore.worldmanager.*")){
+            if(player.hasPermission("bluecore.worldmanager.spawn")){
                 if (args.length == 1) {
                     main.worldManager.gotoWorldSpawn(player);
                     return true;
@@ -131,9 +123,7 @@ public class WorldCommand implements CommandExecutor {
                 player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
             }
         }else if(args[0].equalsIgnoreCase("goto")){
-            if(player.hasPermission("bluecore.*") ||
-                    player.hasPermission("bluecore.worldmanager.goto") ||
-                    player.hasPermission("bluecore.worldmanager.*")){
+            if(player.hasPermission("bluecore.worldmanager.goto")){
                 if (args.length == 1) {
                     player.sendMessage(ChatColor.RED + "Usage /wm goto <worldname>");
                     return true;
@@ -146,9 +136,7 @@ public class WorldCommand implements CommandExecutor {
                 player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
             }
         }else if(args[0].equalsIgnoreCase("import")){
-            if(player.hasPermission("bluecore.*") ||
-                    player.hasPermission("bluecore.worldmanager.import") ||
-                    player.hasPermission("bluecore.worldmanager.*")){
+            if(player.hasPermission("bluecore.worldmanager.import")){
                 if (args.length == 1) {
                     player.sendMessage(ChatColor.RED + "Usage: /wm import <worldname>");
                     return true;
@@ -161,9 +149,7 @@ public class WorldCommand implements CommandExecutor {
                 player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
             }
         }else if(args[0].equalsIgnoreCase("list")){
-            if(player.hasPermission("bluecore.*") ||
-                    player.hasPermission("bluecore.worldmanager.list") ||
-                    player.hasPermission("bluecore.worldmanager.*")){
+            if(player.hasPermission("bluecore.worldmanager.list")){
                 if (args.length == 1) {
                     player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
                     player.sendMessage(ChatColor.GREEN + "List of worlds [" + Bukkit.getWorlds().size() + "]");

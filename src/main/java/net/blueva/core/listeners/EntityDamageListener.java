@@ -22,20 +22,14 @@ public class EntityDamageListener implements Listener {
             String worldname = player.getWorld().getName();
             if (!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".fall_damage")) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                    event.setCancelled(!player.hasPermission("bluecore.*") &&
-                            !player.hasPermission("bluecore.worldmanager.bypass.*") &&
-                            !player.hasPermission("bluecore.worldmanager.bypass.fall_damage") &&
-                            !player.hasPermission("bluecore.worldmanager.*"));
+                    event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.fall_damage"));
                 }
             }
 
             if (!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".pvp")) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                     if (event.getEntityType() == EntityType.PLAYER) {
-                        event.setCancelled(!player.hasPermission("bluecore.*") &&
-                                !player.hasPermission("bluecore.worldmanager.bypass.*") &&
-                                !player.hasPermission("bluecore.worldmanager.bypass.pvp") &&
-                                !player.hasPermission("bluecore.worldmanager.*"));
+                        event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.pvp"));
                     }
                 }
             }

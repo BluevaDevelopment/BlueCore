@@ -19,10 +19,7 @@ public class PlayerDropItemListener implements Listener {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
         if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".drop_items")) {
-            event.setCancelled(!player.hasPermission("bluecore.*") &&
-                    !player.hasPermission("bluecore.worldmanager.bypass.*") &&
-                    !player.hasPermission("bluecore.worldmanager.bypass.drop_items") &&
-                    !player.hasPermission("bluecore.worldmanager.*"));
+            event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.drop_items"));
         }
 
     }

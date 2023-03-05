@@ -19,10 +19,7 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
         if(main.configManager.getWorlds().getBoolean("worlds." + worldname + ".break")) {
-            event.setCancelled(!player.hasPermission("bluecore.*") &&
-                    !player.hasPermission("bluecore.worldmanager.bypass.*") &&
-                    !player.hasPermission("bluecore.worldmanager.bypass.break") &&
-                    !player.hasPermission("bluecore.worldmanager.*"));
+            event.setCancelled(player.hasPermission("bluecore.worldmanager.bypass.break"));
         }
 
     }

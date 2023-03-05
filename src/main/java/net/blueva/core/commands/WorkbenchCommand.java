@@ -31,13 +31,13 @@ public class WorkbenchCommand implements CommandExecutor {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
-            if (!sender.hasPermission("bluecore.workbench.others") || !sender.hasPermission("bluecore.workbench.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.workbench.others")) {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
-            if (!sender.hasPermission("bluecore.workbench") || !sender.hasPermission("bluecore.workbench.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.workbench")) {
                 sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

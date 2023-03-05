@@ -27,9 +27,7 @@ public class DayCommand implements CommandExecutor {
             if (world == null) {
                 world = ((Player) sender).getWorld();
             }
-            if (!sender.hasPermission("bluecore.*") &&
-                    !sender.hasPermission("bluecore.time.*") &&
-                    !sender.hasPermission("bluecore.time.day" + (world == ((Player) sender).getWorld() ? "" : ".others"))) {
+            if (!sender.hasPermission("bluecore.time.day" + (world == ((Player) sender).getWorld() ? "" : ".others"))) {
                 sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

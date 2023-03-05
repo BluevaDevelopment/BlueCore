@@ -24,8 +24,7 @@ public class UpdateWarpCommand implements CommandExecutor {
 
         final Player player = (Player)sender;
         if(args.length > 0){
-            if(sender.hasPermission("bluecore.*") ||
-                    sender.hasPermission("bluecore.updatewarp")) {
+            if(sender.hasPermission("bluecore.updatewarp")) {
                 if(args.length == 1){
                     if(main.configManager.getWarps().isSet("warps."+ args[0])) {
                         Location l = player.getLocation();

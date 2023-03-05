@@ -25,6 +25,11 @@ public class SpeedCommand implements CommandExecutor {
             return true;
         }
 
+        if (!sender.hasPermission("bluecore.speed")) {
+            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.no_perms")));
+            return true;
+        }
+
         float speed;
         try {
             speed = Float.parseFloat(args[0]);
@@ -44,12 +49,11 @@ public class SpeedCommand implements CommandExecutor {
                 sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
-        } else {
+        } else if (sender instanceof Player) {
             target = (Player) sender;
-            if (!sender.hasPermission("bluecore.speed")) {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.no_perms")));
-                return true;
-            }
+        } else {
+            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_speed_command")));
+            return true;
         }
 
         target.setWalkSpeed(speed);

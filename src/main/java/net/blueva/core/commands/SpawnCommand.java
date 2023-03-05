@@ -34,13 +34,13 @@ public class SpawnCommand implements CommandExecutor {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
-            if (!sender.hasPermission("bluecore.spawn.others") || !sender.hasPermission("bluecore.spawn.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.spawn.others")) {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
-            if (!sender.hasPermission("bluecore.spawn") || !sender.hasPermission("bluecore.spawn.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.spawn")) {
                 sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

@@ -32,13 +32,13 @@ public class HealCommand implements CommandExecutor {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
-            if (!sender.hasPermission("bluecore.heal.others") || !sender.hasPermission("bluecore.heal.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.heal.others")) {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
-            if (!sender.hasPermission("bluecore.heal") || !sender.hasPermission("bluecore.heal.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.heal")) {
                 sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

@@ -27,9 +27,7 @@ public class SunCommand implements CommandExecutor {
             if (world == null) {
                 world = ((Player) sender).getWorld();
             }
-            if (!sender.hasPermission("bluecore.*") &&
-                    !sender.hasPermission("bluecore.weather.*") &&
-                    !sender.hasPermission("bluecore.weather.clear")) {
+            if (!sender.hasPermission("bluecore.weather.clear")) {
                 sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

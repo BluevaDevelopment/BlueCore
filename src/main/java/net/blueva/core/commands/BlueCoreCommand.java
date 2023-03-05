@@ -21,7 +21,7 @@ public class BlueCoreCommand implements CommandExecutor {
 	}
 
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
-		if(sender.hasPermission("bluecore.info") || sender.hasPermission("bluecore.*")) {
+		if(sender.hasPermission("bluecore.info")) {
 			List<String> bcinfo = main.configManager.getLang().getStringList("commands.bluecore.info");
 			for(int i=0;i<bcinfo.size();i++) {
 				String message = bcinfo.get(i);

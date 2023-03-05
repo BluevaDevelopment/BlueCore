@@ -32,13 +32,13 @@ public class FeedCommand implements CommandExecutor {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
-            if (!sender.hasPermission("bluecore.feed.others") || !sender.hasPermission("bluecore.feed.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.feed.others")) {
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
-            if (!sender.hasPermission("bluecore.feed") || !sender.hasPermission("bluecore.feed.*") || !sender.hasPermission("bluecore.*")) {
+            if (!sender.hasPermission("bluecore.feed")) {
                 sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
