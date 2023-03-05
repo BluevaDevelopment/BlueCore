@@ -45,6 +45,7 @@ messages:
     workbench_open_others: '&bThe workbench of &f%player% &bhas been opened.'
     changed_time: '&bThe world time of &f%world% &bhas been changed to &f%time%&b. &f(%ticks% ticks)'
     changed_weather: '&bThe weather of the world &f%world% &bhas been changed to &f%weather%&b.'
+    completed_suicide: '&bYou have committed suicide...'
     wm_created_world: '&bThe world &f%worldmanager_worldname% &bhas been created successfully.'
     wm_deleted_world: '&bThe world &f%worldmanager_worldname% &bhas been deleted successfully.'
     wm_unloaded_world: '&bThe world &f%worldmanager_worldname% &bhas been unloaded successfully.'
