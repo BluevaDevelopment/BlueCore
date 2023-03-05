@@ -33,14 +33,15 @@ public class SpeedCommand implements CommandExecutor {
         float speed;
         try {
             speed = Float.parseFloat(args[0]);
-            if (speed < 0 || speed > 1) {
-                throw new NumberFormatException();
-            }
         } catch (NumberFormatException e) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.invalid_speed")));
             return true;
         }
 
+        if (speed < 0 || speed > 1) {
+            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.invalid_speed")));
+            return true;
+        }
 
         Player target;
         if (args.length == 2) {

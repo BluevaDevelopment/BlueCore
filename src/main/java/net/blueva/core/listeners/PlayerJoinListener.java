@@ -55,7 +55,7 @@ public class PlayerJoinListener implements Listener {
 
 		if(main.configManager.getSettings().getBoolean("welcome.broadcast.first_join.enabled")) {
 			if(!main.configManager.getUser(event.getPlayer().getUniqueId()).isSet("logoutlocation")) {
-				Bukkit.broadcastMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.first_join.message")));
+				Bukkit.broadcastMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.first_join.message").replace("%player_name%", event.getPlayer().getName())));
 
 			}
 		}

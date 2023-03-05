@@ -149,13 +149,13 @@ scoreboard:
   lines: 
   - '&a'
   - '&b&l➦ Player Name'
-  - ' &9● &f%player_name%'
+  - ' &9● &f{player_name}'
   - '&b'
   - '&b&l➦ Ping'
-  - ' &9● &f%player_ping%'
+  - ' &9● &f{player_ping}'
   - '&c'
-  - '&b&l➦ Money'
-  - ' &9● &f%player_money%'
+  - '&b&l➦ Location'
+  - ' &9● &fX: {player_location_x} | Y: {player_location_y} | Z: {player_location_z}'
   - '&d'
   - 'blueva.net'
 

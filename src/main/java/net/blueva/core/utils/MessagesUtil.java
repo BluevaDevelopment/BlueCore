@@ -19,6 +19,20 @@ public class MessagesUtil {
 
     public static String formatPlaceholders(Player player, String text) {
         if(player != null) {
+            text = text
+                    .replace("{player_name}", player.getName())
+                    .replace("{player_displayname}", player.getDisplayName())
+                    .replace("{player_ping}", String.valueOf(player.getPing()))
+                    .replace("{player_exp}", String.valueOf(player.getExp()))
+                    .replace("{player_health}", String.valueOf(player.getHealth()))
+                    .replace("{player_level}", String.valueOf(player.getLevel()))
+                    .replace("{player_location_x}", String.valueOf(Math.round(player.getLocation().getX())))
+                    .replace("{player_location_y}", String.valueOf(Math.round(player.getLocation().getY())))
+                    .replace("{player_location_z}", String.valueOf(Math.round(player.getLocation().getZ())))
+                    .replace("{server_name}", Bukkit.getServer().getName())
+                    .replace("{server_max_players}", String.valueOf(Bukkit.getServer().getMaxPlayers()))
+                    .replace("{server_version}", Bukkit.getServer().getVersion());
+
             if(Main.placeholderapi) {
                 return PlaceholderAPI.setPlaceholders(player, text);
             }
