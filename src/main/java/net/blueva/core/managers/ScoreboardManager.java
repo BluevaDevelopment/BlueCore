@@ -6,14 +6,8 @@ import net.blueva.core.netherboard.BPlayerBoard;
 import net.blueva.core.netherboard.Netherboard;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-
 import net.blueva.core.Main;
 
 public class ScoreboardManager {

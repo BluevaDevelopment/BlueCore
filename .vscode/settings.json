@@ -1,0 +1,6 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.jdt.ls.java.home": "C:\\Program Files\\Amazon Corretto\\jdk17.0.5_8",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "maven.executable.path": "C:\\Program Files\\apache-maven-3.9.0\\bin\\mvn"
+}
