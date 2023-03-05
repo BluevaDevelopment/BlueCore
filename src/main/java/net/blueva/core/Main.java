@@ -142,6 +142,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("gamemode").setExecutor(new GamemodeCommand(this));
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));
+		this.getCommand("kill").setExecutor(new KillCommand(this));
 		this.getCommand("midnight").setExecutor(new MidnightCommand(this));
 		this.getCommand("bluecore").setExecutor(new BlueCoreCommand(this));
 		this.getCommand("night").setExecutor(new NightCommand(this));

@@ -58,6 +58,10 @@ commands:
       aliases: [ bheal ]
       description: Heals you or the given player.
       usage: /heal [action]
+   kill:
+      aliases: [ bkill, murder ]
+      description: Kill a player
+      usage: /kill [action]
    midnight:
       aliases: [ bmidnight ]
       description: Change the world time to midnight
