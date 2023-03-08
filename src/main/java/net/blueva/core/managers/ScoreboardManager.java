@@ -2,13 +2,13 @@ package net.blueva.core.managers;
 
 import java.util.List;
 
-import net.blueva.core.netherboard.BPlayerBoard;
-import net.blueva.core.netherboard.Netherboard;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import net.blueva.core.Main;
+import net.blueva.core.libraries.netherboard.BPlayerBoard;
+import net.blueva.core.libraries.netherboard.Netherboard;
 
 public class ScoreboardManager {
 

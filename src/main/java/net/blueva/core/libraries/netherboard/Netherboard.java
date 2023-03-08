@@ -1,13 +1,13 @@
 /*
  * This code uses part of the code from the Netherbord project, developed by MinusKube.
- * You can find more information about the project at https://github.com/MinusKube/Netherbord.
+ * You can find more information about the project at https://github.com/MinusKube/Netherboard.
  *
  * Copyright (c) 2023, MinusKube
  * This software is subject to the Apache License, Version 2.0. You may obtain a copy of the license at
  * https://www.apache.org/licenses/LICENSE-2.0.html.
  *
  */
-package net.blueva.core.netherboard;
+package net.blueva.core.libraries.netherboard;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;

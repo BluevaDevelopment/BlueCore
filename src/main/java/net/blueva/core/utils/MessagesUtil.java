@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
+import net.blueva.core.libraries.iridiumcolor.IridiumColorAPI;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
@@ -42,7 +44,7 @@ public class MessagesUtil {
     }
 
     public static @NotNull String formatColors(String text) {
-        if (Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18") || Bukkit.getVersion().contains("1.19")) {
+        /*if (Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18") || Bukkit.getVersion().contains("1.19")) {
             Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
             Matcher match = pattern.matcher(text);
 
@@ -50,9 +52,14 @@ public class MessagesUtil {
                 String color = text.substring(match.start(), match.end());
                 text = text.replace(color, ChatColor.of(color) + "");
 
-                match = pattern.matcher(text);
+                match = pattern.matcher(text); jonita crees que tiene sentido poner un gestor de permisos en bluecore :v?
             }
         }
-        return ChatColor.translateAlternateColorCodes('&', text);
+        return ChatColor.translateAlternateColorCodes('&', text);*/ 
+        if(text == null) {
+            return "";
+        }
+
+        return IridiumColorAPI.process(text);
     }
 }
