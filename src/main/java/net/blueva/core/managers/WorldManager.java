@@ -18,14 +18,14 @@ public class WorldManager {
 
     public void loadWorlds() {
         if(main.configManager.getWorlds().isSet("worlds")) {
-            Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Loading worlds from \\plugins\\BlueCore\\worlds.yml");
+            Bukkit.getConsoleSender().sendMessage("[BlueCore] [WorldManager] Loading worlds from \\plugins\\BlueCore\\worlds.yml");
             for (String key : main.configManager.getWorlds().getConfigurationSection("worlds").getKeys(false)) {
-                Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Loading world " + key.toString());
+                Bukkit.getConsoleSender().sendMessage("[BlueCore] [WorldManager] Loading world " + key.toString());
                 WorldCreator setupworld = new WorldCreator(key);
                 setupworld.createWorld();
             }
         } else {
-            Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Importing worlds from the server to BlueCore World Manager");
+            Bukkit.getConsoleSender().sendMessage("[BlueCore] [WorldManager] Importing worlds from the server to BlueCore World Manager");
             for (World world : Bukkit.getWorlds()) {
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".name", world.getName());
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".alias", "&b" + world.getName().replace("_", " "));
@@ -49,7 +49,7 @@ public class WorldManager {
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.pitch", 0.0);
                 main.configManager.getWorlds().set("worlds." + world.getName() + ".spawnlocation.yaw", 0.0);
                 main.configManager.saveWorlds();
-                Bukkit.getConsoleSender().sendMessage("[BlueCore/WorldManager] Imported world: " + world.getName());
+                Bukkit.getConsoleSender().sendMessage("[BlueCore] [WorldManager] Imported world: " + world.getName());
             }
         }
     }

@@ -1,3 +1,12 @@
+/*
+ * This code uses part of the code from the IridiumColorAPI project, developed by Iridium-Development.
+ * You can find more information about the project at https://github.com/Iridium-Development/IridiumColorAPI.
+ *
+ * Copyright (c) 2023, Iridium-Development
+ * This software is subject to the GNU General Public License, Version 3.0. You may obtain a copy of the license at
+ * https://www.gnu.org/licenses/gpl-3.0.en.html.
+ *
+ */
 package net.blueva.core.libraries.iridiumcolor;
 
 import com.google.common.collect.ImmutableMap;

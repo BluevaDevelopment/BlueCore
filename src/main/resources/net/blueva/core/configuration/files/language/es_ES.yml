@@ -4,6 +4,8 @@
 # | |_) | | |_| |  __| |__| (_) | | |  __/
 # |____/|_|\__,_|\___|\____\___/|_|  \___|
 
+# WARNING: File is out of date. Wait until the final release of BlueCore.
+
 language: 'Español'
 messages:
   success:

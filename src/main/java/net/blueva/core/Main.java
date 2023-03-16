@@ -15,6 +15,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 
 public final class Main extends JavaPlugin {
 
@@ -34,6 +35,8 @@ public final class Main extends JavaPlugin {
 	public File languageFile = null;
 	public FileConfiguration user = null;
 	public File userFile = null;
+	public FileConfiguration kit = null;
+	public File kitFile = null;
 	public FileConfiguration worlds = null;
 	public File worldsFile = null;
 
@@ -57,7 +60,7 @@ public final class Main extends JavaPlugin {
 		RegisterPluginCommands();
 
 
-		if(getConfig().getBoolean("metrics")) {
+		if(configManager.getSettings().getBoolean("metrics")) {
 			int pluginId = 17623;
 			new Metrics(this, pluginId);
 		}
@@ -78,6 +81,7 @@ public final class Main extends JavaPlugin {
 		}
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
+			worldManager.loadWorlds();
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " ____  _             ____");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "| __ )| |_   _  ___ / ___|___  _ __ ___");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "|  _ \\| | | | |/ _ | |   / _ \\| '__/ _ \\");
@@ -85,7 +89,6 @@ public final class Main extends JavaPlugin {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "|____/|_|\\__,_|\\___|\\____\\___/|_|  \\___|");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "V. " + pluginversion + " | Plugin enabled successfully | blueva.net");
-			worldManager.loadWorlds();
 		});
 	}
 
@@ -133,6 +136,7 @@ public final class Main extends JavaPlugin {
 	private void RegisterPluginCommands() {
 		this.getCommand("adventure").setExecutor(new AdventureCommand(this));
 		this.getCommand("clearchat").setExecutor(new ClearChatCommand(this));
+		this.getCommand("createkit").setExecutor(new CreateKitCommand(this));
 		this.getCommand("creative").setExecutor(new CreativeCommand(this));
 		this.getCommand("day").setExecutor(new DayCommand(this));
 		this.getCommand("deletewarp").setExecutor(new DeleteWarpCommand(this));
@@ -143,7 +147,9 @@ public final class Main extends JavaPlugin {
 		this.getCommand("god").setExecutor(new GodCommand(this));
 		this.getCommand("heal").setExecutor(new HealCommand(this));
 		this.getCommand("kill").setExecutor(new KillCommand(this));
+		this.getCommand("kit").setExecutor(new KitCommand(this));
 		this.getCommand("midnight").setExecutor(new MidnightCommand(this));
+		this.getCommand("modifykit").setExecutor(new ModifyKitCommand(this));
 		this.getCommand("bluecore").setExecutor(new BlueCoreCommand(this));
 		this.getCommand("night").setExecutor(new NightCommand(this));
 		this.getCommand("noon").setExecutor(new NoonCommand(this));

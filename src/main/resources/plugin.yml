@@ -7,8 +7,8 @@ api-version: 1.19
 load: STARTUP
 website: blueva.net
 softdepend:
-- PlaceholderAPI
-- Vault
+   - PlaceholderAPI
+   - Vault
 commands:
    adventure:
       aliases: [ badventure, adven, adv, a, gma ]
@@ -18,6 +18,10 @@ commands:
       aliases: [ bclearchat, ncc, cc ]
       description: Clears the chat of one or all players
       usage: /clearchat [action]
+   createkit:
+      aliases: [ bcreatekit, ck ]
+      description: Create a new kit on the server.
+      usage: /createkit [action]
    bluecore:
       aliases: [ bc, bcore, bluec, core ]
       description: Main command
@@ -62,10 +66,18 @@ commands:
       aliases: [ bkill, murder ]
       description: Kill a player
       usage: /kill [action]
+   kit:
+      aliases: [ bkit, kits ]
+      description: Receive or give a kit.
+      usage: /kit [action]
    midnight:
       aliases: [ bmidnight ]
       description: Change the world time to midnight
       usage: /midnight [action]
+   modifykit:
+      aliases: [ bmodifykit, modifyk ]
+      description: Modify a kit already created
+      usage: /modifykit [action]
    night:
       aliases: [ bnight ]
       description: Change the world time to night

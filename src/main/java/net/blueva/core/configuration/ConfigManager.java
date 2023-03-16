@@ -52,6 +52,12 @@ public class ConfigManager {
         if(!usersf.exists()) {
             usersf.mkdirs();
         }
+
+        // kitsf folder
+        File kitsf = new File(main.getDataFolder()+"/data/kits");
+        if(!kitsf.exists()) {
+            kitsf.mkdirs();
+        }
     }
 
     //commands.yml file
@@ -205,7 +211,7 @@ public class ConfigManager {
     }
 
     public void reloadUser(UUID uuid){
-        main.userFile = new File(main.getDataFolder()+"/data/users/",uuid+".yml");
+        main.userFile = new File(main.getDataFolder()+"/data/users/"+uuid+".yml");
         main.user = YamlConfiguration.loadConfiguration(main.userFile);
         Reader defConfigStream;
         defConfigStream = new InputStreamReader(main.getResource("net/blueva/core/configuration/files/data/userdatadefault.yml"), StandardCharsets.UTF_8);
@@ -223,10 +229,41 @@ public class ConfigManager {
     }
 
     public void registerUser(UUID uuid){
-        main.userFile = new File(main.getDataFolder()+"/data/users/",uuid+".yml");
+        main.userFile = new File(main.getDataFolder()+"/data/users/"+uuid+".yml");
         if(!main.userFile.exists()){
             this.getUser(uuid).options().copyDefaults(true);
             saveUser(uuid);
+        }
+    }
+
+    //individual kit file
+    public FileConfiguration getKit(String name) {
+        reloadKit(name);
+        return main.kit;
+    }
+
+    public void reloadKit(String name){
+        main.kitFile = new File(main.getDataFolder()+"/data/kits/"+name+".yml");
+        main.kit = YamlConfiguration.loadConfiguration(main.kitFile);
+        Reader defConfigStream;
+        defConfigStream = new InputStreamReader(main.getResource("net/blueva/core/configuration/files/data/kitdatadefault.yml"), StandardCharsets.UTF_8);
+        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+        main.kit.setDefaults(defConfig);
+    }
+
+    public void saveKit(String name){
+        try{
+            main.kit.save(main.kitFile);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void registerKit(String name){
+        main.kitFile = new File(main.getDataFolder()+"/data/kits/"+name+".yml");
+        if(!main.kitFile.exists()){
+            this.getKit(name).options().copyDefaults(true);
+            saveKit(name);
         }
     }
 

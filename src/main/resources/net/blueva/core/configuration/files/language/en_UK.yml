@@ -47,6 +47,10 @@ messages:
     changed_weather: '&bThe weather of the world &f%world% &bhas been changed to &f%weather%&b.'
     player_killed: '&bPlayer &f%player% &bhas been killed.'
     completed_suicide: '&bYou have committed suicide...'
+    kit_created: '&bThe kit &f%kit_name% &bhas been successfully created.'
+    kit_modified: '&bThe kit &f%kit_name% &bhas been successfully modified.'
+    kit_given: '&bYou have received the kit &f%kit_name%&b.'
+    kit_given_others: '&bYou have given the kit &f%kit_name% &bto &f%player%&b.'
     wm_created_world: '&bThe world &f%worldmanager_worldname% &bhas been created successfully.'
     wm_deleted_world: '&bThe world &f%worldmanager_worldname% &bhas been deleted successfully.'
     wm_unloaded_world: '&bThe world &f%worldmanager_worldname% &bhas been unloaded successfully.'
@@ -64,6 +68,9 @@ messages:
     spawn_not_set: '&cThe spawn has not been defined. Contact an administrator'
     invalid_world: '&cThat world does not exist. Did you write the name correctly?'
     invalid_speed: '&cInvalid speed value. Please enter a value between 0 and 1. (Example: 0.5)'
+    existing_kit: '&cThe kit %kit_name% already exists. Modify it with /modifykit [name] [delay]'
+    kit_not_found: '&cThe kit %kit_name% does not exist.'
+    kit_delay: '&cYou will be able to reclaim the %kit_name% kit in &4&l%kit_delay_year% year(s), %kit_delay_month% month(s), %kit_delay_day% day(s), %kit_delay_hour% hour(s), %kit_delay_minute% minute(s) and %kit_delay_second% second(s)&c.'
     wm_alredy_exist: '&c%worldmanager_worldname% already exists as a world!'
     wm_creation_error: '&cCreation world failed, Please check console for errors!'
     wm_deletion_error: '&cDeletion world failed, Please check console for errors!'
@@ -108,6 +115,9 @@ messages:
     use_world_command: '&cUse: /world [create/import/delete/goto/info/spawn] [world]'
     use_world_create_command: '&cUse: /world create [world] [environment] -t [type] || -g [generator]'
     use_kill_command: '&cUse: /kill [player]'
+    use_createkit_command: '&cUse: /createkit [name] [delay]'
+    use_kit_command: '&cUse: /kit [name] [player]'
+    use_modifykit_command: '&cUse: /modifykit [name] [delay]'
 commands:
   bluecore:
     info:

@@ -15,10 +15,10 @@ With Blue Core, you'll have all the essential tools a Minecraft server needs. Th
 - Chat Utilities: Enhance your chat experience with features like chat formatting, anti-swearing, command blocking, and more.
 - Custom Commands: Create custom commands to help players navigate your server.
 - World Manager: Easily manage and switch between different worlds on your server.
+- Kits: Create and manage pre-configured sets of items for players to quickly access.
 
 ### Planned Features
 - Over 300 commands: A wide range of commands to cater to players, moderation, and more.
-- Kits: Create and manage pre-configured sets of items for players to quickly access.
 - Permissions Manager: Manage user permissions and control who has access to what on your server.
 - Hologram Manager: Create and manage floating text displays to grab player attention.
 - Economy System: Manage a virtual economy on your server, with features like currency, shops, and trading.
