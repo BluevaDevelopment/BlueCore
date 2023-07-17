@@ -47,10 +47,9 @@ public class BlueCoreCommand implements CommandExecutor {
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
 		if(sender.hasPermission("bluecore.info")) {
 			List<String> bcinfo = main.configManager.getLang().getStringList("commands.bluecore.info");
-			for(int i=0;i<bcinfo.size();i++) {
-				String message = bcinfo.get(i);
+			for (String message : bcinfo) {
 				Player player = null;
-				if(sender instanceof Player) {
+				if (sender instanceof Player) {
 					player = (Player) sender;
 				}
 				sender.sendMessage(MessagesUtil.format(player, message.replace("{plugin_version}", main.pluginversion)));

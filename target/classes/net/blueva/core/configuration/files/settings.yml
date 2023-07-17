@@ -28,7 +28,7 @@ metrics: true
 #
 # Available languages:
 # English: en_UK
-# Spanish: es_ES
+# Spanish: es_ES (Outdated)
 language: en_UK
 
 # Check for updates:

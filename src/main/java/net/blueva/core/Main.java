@@ -70,6 +70,7 @@ public final class Main extends JavaPlugin {
 	public static boolean placeholderapi = false;
 	public String actualLang;
 	public String langPath;
+	public static String prefix;
 	private static Main plugin;
 	public static Main getPlugin() {
 		return plugin;
@@ -83,6 +84,8 @@ public final class Main extends JavaPlugin {
 		registerFiles();
 		registerEvents();
 		registerCommands();
+
+		prefix = configManager.getLang().getString("prefix");
 
 
 		if(configManager.getSettings().getBoolean("metrics")) {

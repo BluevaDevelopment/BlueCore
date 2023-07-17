@@ -55,11 +55,18 @@ public class MessagesUtil {
                     .replace("{player_world}", player.getWorld().getName())
                     .replace("{server_name}", Bukkit.getServer().getName())
                     .replace("{server_max_players}", String.valueOf(Bukkit.getServer().getMaxPlayers()))
-                    .replace("{server_version}", Bukkit.getServer().getVersion());
+                    .replace("{server_version}", Bukkit.getServer().getVersion())
+                    .replace("{prefix}", Main.prefix);
 
             if(Main.placeholderapi) {
                 return PlaceholderAPI.setPlaceholders(player, text);
             }
+        } else {
+            text = text
+                    .replace("{server_name}", Bukkit.getServer().getName())
+                    .replace("{server_max_players}", String.valueOf(Bukkit.getServer().getMaxPlayers()))
+                    .replace("{server_version}", Bukkit.getServer().getVersion())
+                    .replace("{prefix}", Main.prefix);
         }
 
         return text;
