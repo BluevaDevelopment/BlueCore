@@ -4,7 +4,6 @@ net\blueva\core\metrics\Metrics$CustomChart.class
 net\blueva\core\commands\SunCommand.class
 net\blueva\core\configuration\updater\KeyBuilder.class
 net\blueva\core\listeners\EntitySpawnListener.class
-net\blueva\core\managers\TablistManager$1.class
 net\blueva\core\commands\KillCommand.class
 net\blueva\core\libraries\netherboard\NMS$Version.class
 net\blueva\core\metrics\Metrics$JsonObjectBuilder.class

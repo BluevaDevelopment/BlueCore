@@ -37,7 +37,7 @@ import net.blueva.core.utils.StringUtil;
 
 public class TablistManager {
 
-	private Main main;
+	private final Main main;
 	int taskID;
 
 	public TablistManager(Main main) {
@@ -46,18 +46,18 @@ public class TablistManager {
 
 	public void createTablist() {
 		BukkitScheduler schedule = Bukkit.getServer().getScheduler();
-		taskID = schedule.scheduleSyncRepeatingTask(main, new Runnable() {
-			public void run() {
-				for(Player player : Bukkit.getOnlinePlayers()) {
-					updateTablist(player);
-				}
+		taskID = schedule.scheduleSyncRepeatingTask(main, () -> {
+			for(Player player : Bukkit.getOnlinePlayers()) {
+				updateTablist(player);
 			}
-		}, 0, Integer.valueOf(main.configManager.getSettings().getInt("tablist.ticks")));
+		}, 0, main.configManager.getSettings().getInt("tablist.ticks"));
 	}
 
 	private void updateTablist(Player p) {
-		p.setPlayerListHeader(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.header"), "\n")));
-		p.setPlayerListFooter(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.footer"), "\n")).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
+		if(main.configManager.getSettings().getBoolean("tablist.enabled")) {
+			p.setPlayerListHeader(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.header"), "\n")));
+			p.setPlayerListFooter(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.footer"), "\n")).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
+		}
 	}
 
 
