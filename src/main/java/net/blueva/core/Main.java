@@ -1,11 +1,36 @@
+/*
+ *  ____  _             ____
+ * | __ )| |_   _  ___ / ___|___  _ __ ___
+ * |  _ \| | | | |/ _ | |   / _ \| '__/ _ \
+ * | |_) | | |_| |  __| |__| (_) | | |  __/
+ * |____/|_|\__,_|\___|\____\___/|_|  \___|
+ *
+ * This file is part of Blue Core.
+ *
+ * Blue Core is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * Blue Core is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License version 3 for more details.
+ *
+ * Blue Core plugin developed by Blueva Development.
+ * Website: https://blueva.net/
+ * GitHub repository: https://github.com/BluevaDevelopment/BlueMenu
+ *
+ * Copyright (c) 2023 Blueva Development. All rights reserved.
+ */
+
 package net.blueva.core;
 
-import net.blueva.core.managers.LocationManager;
-import net.blueva.core.managers.ScoreboardManager;
-import net.blueva.core.managers.TablistManager;
 import net.blueva.core.commands.*;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.listeners.*;
+import net.blueva.core.managers.LocationManager;
+import net.blueva.core.managers.ScoreboardManager;
+import net.blueva.core.managers.TablistManager;
 import net.blueva.core.managers.WorldManager;
 import net.blueva.core.metrics.Metrics;
 import org.bukkit.Bukkit;
@@ -15,7 +40,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 
 public final class Main extends JavaPlugin {
 

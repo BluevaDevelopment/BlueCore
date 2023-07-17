@@ -40,7 +40,7 @@
         </repository>
     </repositories>
 
-<!-- Dependencies imports -->
+    <!-- Dependencies imports -->
     <dependencies>
         <dependency>
             <groupId>me.clip</groupId>
@@ -50,46 +50,12 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.19.3-R0.1-SNAPSHOT</version>
+            <version>1.20-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.3-R0.1-SNAPSHOT</version>
+            <version>1.20-R0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
-    <!-- Build settings -->
-    <build>
-        <!-- Name of your compiled artifact -->
-        <finalName>${project.artifactId}</finalName>
-        <!-- Directory of .java files -->
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <!-- Clean old builds and install dependencies before compile -->
-        <defaultGoal>clean install</defaultGoal>
-        <!-- Package files inside resource directory in to the jar -->
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-        </resources>
-
-        <!-- Compilation settings starts here -->
-        <plugins>
-            <!-- Compile with java 8 -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

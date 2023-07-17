@@ -72,7 +72,6 @@ net\blueva\core\metrics\Metrics.class
 net\blueva\core\commands\HealCommand.class
 net\blueva\core\commands\SuicideCommand.class
 net\blueva\core\configuration\GenerateLanguages.class
-net\blueva\core\metrics\Metrics$1.class
 net\blueva\core\libraries\iridiumcolor\patterns\Pattern.class
 net\blueva\core\metrics\Metrics$MultiLineChart.class
 net\blueva\core\libraries\netherboard\Netherboard.class
