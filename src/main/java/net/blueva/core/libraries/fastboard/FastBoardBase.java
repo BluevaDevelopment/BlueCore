@@ -391,8 +391,8 @@ public abstract class FastBoardBase<T> {
             }
 
             sendObjectivePacket(ObjectiveMode.REMOVE);
-        } catch (Throwable t) {
-            throw new RuntimeException("Unable to delete scoreboard", t);
+        } catch (Throwable ignored) {
+
         }
 
         this.deleted = true;

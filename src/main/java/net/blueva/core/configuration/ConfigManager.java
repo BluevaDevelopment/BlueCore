@@ -121,6 +121,42 @@ public class ConfigManager {
         }
     }
 
+    //scoreboards.yml file
+    public FileConfiguration getScoreboards() {
+        if(main.scoreboards == null) {
+            reloadScoreboards();
+        }
+        return main.scoreboards;
+    }
+
+    public void reloadScoreboards(){
+        if(main.scoreboards == null){
+            main.scoreboardsFile = new File(main.getDataFolder(),"scoreboards.yml");
+        }
+        main.scoreboards = YamlConfiguration.loadConfiguration(main.scoreboardsFile);
+        Reader defConfigStream;
+        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/scoreboards.yml")), StandardCharsets.UTF_8);
+        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+        main.scoreboards.setDefaults(defConfig);
+    }
+
+    public void saveScoreboards(){
+        try{
+            main.scoreboards.save(main.scoreboardsFile);
+            ConfigUpdater.update(main, "net/blueva/core/configuration/files/scoreboards.yml", new File(main.getDataFolder()+"/scoreboards.yml"));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void registerScoreboards(){
+        main.scoreboardsFile = new File(main.getDataFolder(),"scoreboards.yml");
+        if(!main.scoreboardsFile.exists()){
+            this.getScoreboards().options().copyDefaults(true);
+            saveScoreboards();
+        }
+    }
+
     //settings.yml file
     public FileConfiguration getSettings() {
         if(main.settings == null) {

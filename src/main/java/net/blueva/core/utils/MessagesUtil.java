@@ -52,6 +52,7 @@ public class MessagesUtil {
                     .replace("{player_location_x}", String.valueOf(Math.round(player.getLocation().getX())))
                     .replace("{player_location_y}", String.valueOf(Math.round(player.getLocation().getY())))
                     .replace("{player_location_z}", String.valueOf(Math.round(player.getLocation().getZ())))
+                    .replace("{player_world}", player.getWorld().getName())
                     .replace("{server_name}", Bukkit.getServer().getName())
                     .replace("{server_max_players}", String.valueOf(Bukkit.getServer().getMaxPlayers()))
                     .replace("{server_version}", Bukkit.getServer().getVersion());

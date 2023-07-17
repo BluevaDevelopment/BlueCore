@@ -131,39 +131,6 @@ welcome:
       # Message that will appear in this broadcast
       message: '&8[&c-&8] &a%player_name%'
 
-# Scoreboard:
-# Sets the scoreboard (sidebar) that is sent to the player
-scoreboard:
-
-  # Enables or disables the scoreboard
-  enabled: true
-
-  # Every how many ticks will the scoreboard be updated
-  ticks: 10
-
-  # The title displayed at the very top of the scoreboard
-  # WARNING! (Only for 1.12 or earlier) The title must be 35 characters or less. (Including color codes).
-  title: '&b&lBlue Core'
-
-  # The lines of the scoreboard. (Maximum 15 lines)
-  lines: 
-  - '&a'
-  - '&b&l➦ Player Name'
-  - ' &9● &f{player_name}'
-  - '&b'
-  - '&b&l➦ Ping'
-  - ' &9● &f{player_ping}'
-  - '&c'
-  - '&b&l➦ Location'
-  - ' &9● &fX: {player_location_x}'
-  - ' &9● &fY: {player_location_y}'
-  - ' &9● &fZ: {player_location_z}'
-  - '&d'
-  - 'blueva.net'
-
-  disabled_worlds:
-  - 'world_the_end'
-
 # TabList:
 # Sets the header and footer in the player list. (Show when you press the TAB key)
 tablist:
