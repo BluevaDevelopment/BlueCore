@@ -33,6 +33,7 @@ net\blueva\core\libraries\netherboard\BPlayerBoard.class
 net\blueva\core\managers\ScoreboardManager.class
 net\blueva\core\commands\AdventureCommand.class
 net\blueva\core\commands\DeleteWarpCommand.class
+net\blueva\core\commands\SudoCommand.class
 net\blueva\core\libraries\iridiumcolor\patterns\GradientPattern.class
 net\blueva\core\commands\KitCommand.class
 net\blueva\core\commands\MidnightCommand.class

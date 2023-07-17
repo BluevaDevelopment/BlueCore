@@ -110,6 +110,10 @@ commands:
       aliases: [ bstorm, brain, rain]
       description: Change the climate from one world to storm
       usage: /storm [action]
+   sudo:
+      aliases: [ bsudo, bexecute, execute]
+      description: Execute a command through another player.
+      usage: /sudo [action]
    suicide:
       aliases: [ bsuicide ]
       description: Kill yourself

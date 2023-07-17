@@ -183,6 +183,7 @@ public final class Main extends JavaPlugin {
 		this.getCommand("spectator").setExecutor(new SpectatorCommand(this));
 		this.getCommand("speed").setExecutor(new SpeedCommand(this));
 		this.getCommand("storm").setExecutor(new StormCommand(this));
+		this.getCommand("sudo").setExecutor(new SudoCommand(this));
 		this.getCommand("suicide").setExecutor(new SuicideCommand(this));
 		this.getCommand("sun").setExecutor(new SunCommand(this));
 		this.getCommand("survival").setExecutor(new SurvivalCommand(this));

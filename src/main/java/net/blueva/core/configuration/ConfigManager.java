@@ -239,7 +239,7 @@ public class ConfigManager {
         main.userFile = new File(main.getDataFolder()+"/data/users/"+uuid+".yml");
         main.user = YamlConfiguration.loadConfiguration(main.userFile);
         Reader defConfigStream;
-        defConfigStream = new InputStreamReader(main.getResource("net/blueva/core/configuration/files/data/userdatadefault.yml"), StandardCharsets.UTF_8);
+        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/data/userdatadefault.yml")), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
         main.user.setDefaults(defConfig);
     }
@@ -271,7 +271,7 @@ public class ConfigManager {
         main.kitFile = new File(main.getDataFolder()+"/data/kits/"+name+".yml");
         main.kit = YamlConfiguration.loadConfiguration(main.kitFile);
         Reader defConfigStream;
-        defConfigStream = new InputStreamReader(main.getResource("net/blueva/core/configuration/files/data/kitdatadefault.yml"), StandardCharsets.UTF_8);
+        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/data/kitdatadefault.yml")), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
         main.kit.setDefaults(defConfig);
     }
