@@ -32,7 +32,7 @@ import net.blueva.core.managers.LocationManager;
 import net.blueva.core.managers.ScoreboardManager;
 import net.blueva.core.managers.TablistManager;
 import net.blueva.core.managers.WorldManager;
-import net.blueva.core.metrics.Metrics;
+import net.blueva.core.libraries.metrics.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
