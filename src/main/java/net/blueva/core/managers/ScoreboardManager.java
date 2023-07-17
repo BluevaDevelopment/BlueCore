@@ -25,19 +25,22 @@
 
 package net.blueva.core.managers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import net.blueva.core.libraries.fastboard.FastBoard;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import net.blueva.core.Main;
-import net.blueva.core.libraries.netherboard.BPlayerBoard;
-import net.blueva.core.libraries.netherboard.Netherboard;
 
 public class ScoreboardManager {
 
-	private Main main;
+	private final Main main;
+	private final Map<UUID, FastBoard> boards = new HashMap<>();
 	int taskID;
 
 	public ScoreboardManager(Main main) {
@@ -48,26 +51,27 @@ public class ScoreboardManager {
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		taskID = scheduler.scheduleSyncRepeatingTask(main, () -> {
 			for(Player player : Bukkit.getOnlinePlayers()) {
-				updateScoreboard(player);
+				if(!boards.containsKey(player.getUniqueId())) {
+					FastBoard board = new FastBoard(player);
+					this.boards.put(player.getUniqueId(), board);
+				}
+				updateScoreboard(player, boards.get(player.getUniqueId()));
 			}
 		}, 0L, main.configManager.getSettings().getInt("scoreboard.ticks"));
 	}
 
-	private void updateScoreboard(Player p) {
+	private void updateScoreboard(Player p, FastBoard board) {
 		if(main.configManager.getSettings().getBoolean("scoreboard.enabled") && !main.configManager.getSettings().getStringList("scoreboard.disabled_worlds").contains(p.getWorld().getName())) {
-			BPlayerBoard board = Netherboard.instance().getBoard(p);
-			if(board == null) {
-				board = Netherboard.instance().createBoard(p, MessagesUtil.format(p, main.configManager.getSettings().getString("scoreboard.title")));
-			}
-			board.setName(MessagesUtil.format(p, main.configManager.getSettings().getString("scoreboard.title")));
+			board.updateTitle(MessagesUtil.format(p, main.configManager.getSettings().getString("scoreboard.title")));
 			List<String> lines = main.configManager.getSettings().getStringList("scoreboard.lines");
-			for(int i = lines.size() - 1; i >= 0; i--) {
-				int pos = lines.size() - 1 - i;
-				board.set(MessagesUtil.format(p, lines.get(i)), pos);
-			}
+			board.updateLines(lines);
 		} else {
-			if(Netherboard.instance().getBoard(p) != null) {
-				Netherboard.instance().deleteBoard(p);
+			if(board != null) {
+				BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+				scheduler.runTaskLater(main, () -> {
+					board.delete();
+					boards.remove(p.getUniqueId());
+				}, 20L);
 			}
 		}
 	}
