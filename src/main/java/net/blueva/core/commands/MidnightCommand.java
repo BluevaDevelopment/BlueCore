@@ -33,6 +33,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class MidnightCommand implements CommandExecutor {
 
@@ -42,11 +43,10 @@ public class MidnightCommand implements CommandExecutor {
         this.main = main;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         World world = null;
         if (args.length > 0) {
             world = Bukkit.getWorld(args[0]);
-            Bukkit.broadcastMessage(String.valueOf(args.length));
         }
         if (sender instanceof Player) {
             if (world == null) {

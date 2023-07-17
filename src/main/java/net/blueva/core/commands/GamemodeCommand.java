@@ -33,16 +33,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class GamemodeCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public GamemodeCommand(Main main) {
         this.main = main;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         Player player = null;
         if (sender instanceof Player) {
             player = (Player) sender;
@@ -114,7 +117,7 @@ public class GamemodeCommand implements CommandExecutor {
                 if (target != null) {
                     if (mode == GameMode.SURVIVAL) {
                         target.setGameMode(mode);
-                        target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", mode.toString())));
+                        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
                         sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.gamemode_changed_others")).replace("%gamemode%", mode.toString()).replace("%player%", target.getName()));
                     }
                 } else {
@@ -125,7 +128,7 @@ public class GamemodeCommand implements CommandExecutor {
             if (args.length == 1) {
                 if (player.hasPermission("bluecore.gamemode." + mode.toString().toLowerCase())) {
                     player.setGameMode(mode);
-                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", mode.toString())));
+                    player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
                 } else {
                     player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                 }
@@ -135,7 +138,7 @@ public class GamemodeCommand implements CommandExecutor {
                 if (target != null) {
                     if (player.hasPermission("bluecore.gamemode." + mode.toString().toLowerCase() + ".others")) {
                         target.setGameMode(mode);
-                        target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", mode.toString())));
+                        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
                         player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.gamemode_changed_others")).replace("%gamemode%", mode.toString()).replace("%player%", target.getName()));
                     } else {
                         player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));

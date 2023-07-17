@@ -33,17 +33,18 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
 
 public class FlyCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public FlyCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_fly_command")));
             return true;
@@ -53,10 +54,12 @@ public class FlyCommand implements CommandExecutor {
         if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.fly.others")) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }

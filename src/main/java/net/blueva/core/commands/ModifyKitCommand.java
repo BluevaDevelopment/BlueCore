@@ -34,26 +34,28 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ModifyKitCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public ModifyKitCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
             return true;
         }
 
-        if (args.length < 2 || args.length > 2) {
+        if (args.length != 2) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_modifykit_command")));
             return true;
         }
@@ -65,7 +67,7 @@ public class ModifyKitCommand implements CommandExecutor {
 
         try {
             delayInt = Integer.parseInt(delay);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
             
         }
 
@@ -75,7 +77,7 @@ public class ModifyKitCommand implements CommandExecutor {
         }
 
         if(!KitsManager.kitExists(kitname)) {
-            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.kit_not_found").replace("%kit_name%", kitname)));
+            player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.error.kit_not_found")).replace("%kit_name%", kitname)));
             return true;
         }
 
@@ -87,7 +89,7 @@ public class ModifyKitCommand implements CommandExecutor {
         }
 
         KitsManager.modifyKit(kitname, "bluecore.kit."+kitname, delayInt, items);
-        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.kit_modified").replace("%kit_name%", kitname)));
+        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.kit_modified")).replace("%kit_name%", kitname)));
 
         return true;
     }

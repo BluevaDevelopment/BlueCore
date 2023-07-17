@@ -176,7 +176,7 @@ public class WorldCommand implements CommandExecutor {
         }else if(args[0].equalsIgnoreCase("list")){
             if(player.hasPermission("bluecore.worldmanager.list")){
                 if (args.length == 1) {
-                    player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD.toString() + "Manager");
+                    player.sendMessage(ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + "World " + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Manager");
                     player.sendMessage(ChatColor.GREEN + "List of worlds [" + Bukkit.getWorlds().size() + "]");
                     player.sendMessage("");
                     for (World worlds : Bukkit.getWorlds())

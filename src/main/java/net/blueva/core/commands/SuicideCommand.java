@@ -32,17 +32,18 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
 
 public class SuicideCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public SuicideCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
             return true;

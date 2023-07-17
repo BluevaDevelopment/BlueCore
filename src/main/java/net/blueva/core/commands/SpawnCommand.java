@@ -34,17 +34,20 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class SpawnCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public SpawnCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_spawn_command")));
             return true;
@@ -54,10 +57,12 @@ public class SpawnCommand implements CommandExecutor {
         if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.spawn.others")) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
@@ -71,7 +76,7 @@ public class SpawnCommand implements CommandExecutor {
 
         teleportSpawn(sender, target);
         if (args.length == 1) {
-            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_spawn_others").replace("%player%", target.getName())));
+            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_spawn_others")).replace("%player%", target.getName())));
         }
 
         return true;
@@ -81,11 +86,12 @@ public class SpawnCommand implements CommandExecutor {
         String spawn = main.configManager.getWarps().getString("spawn");
         if (main.configManager.getWarps().isSet("warps." + spawn + ".world")) {
             String world = main.configManager.getWarps().getString("warps." + spawn + ".world");
-            double x = Double.parseDouble(main.configManager.getWarps().getString("warps." + spawn + ".x"));
-            double y = Double.parseDouble(main.configManager.getWarps().getString("warps." + spawn + ".y"));
-            double z = Double.parseDouble(main.configManager.getWarps().getString("warps." + spawn + ".z"));
-            float yaw = Float.parseFloat(main.configManager.getWarps().getString("warps." + spawn + ".yaw"));
-            float pitch = Float.parseFloat(main.configManager.getWarps().getString("warps." + spawn + ".pitch"));
+            double x = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".x")));
+            double y = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".y")));
+            double z = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".z")));
+            float yaw = Float.parseFloat(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".yaw")));
+            float pitch = Float.parseFloat(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".pitch")));
+            assert world != null;
             Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
             target.teleport(loc);
             target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_spawn")));

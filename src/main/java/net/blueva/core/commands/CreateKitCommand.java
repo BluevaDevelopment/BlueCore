@@ -35,26 +35,28 @@ import org.bukkit.inventory.ItemStack;
 import net.blueva.core.Main;
 import net.blueva.core.managers.KitsManager;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CreateKitCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public CreateKitCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
             return true;
         }
 
-        if (args.length < 2 || args.length > 2) {
+        if (args.length != 2) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_createkit_command")));
             return true;
         }
@@ -66,7 +68,7 @@ public class CreateKitCommand implements CommandExecutor {
 
         try {
             delayInt = Integer.parseInt(delay);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
             
         }
 
@@ -76,7 +78,7 @@ public class CreateKitCommand implements CommandExecutor {
         }
 
         if(KitsManager.kitExists(kitname)) {
-            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.existing_kit").replace("%kit_name%", kitname)));
+            player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.error.existing_kit")).replace("%kit_name%", kitname)));
             return true;
         }
 
@@ -88,7 +90,7 @@ public class CreateKitCommand implements CommandExecutor {
         }
 
         KitsManager.createKit(kitname, "bluecore.kit."+kitname, delayInt, items);
-        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.kit_created").replace("%kit_name%", kitname)));
+        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.kit_created")).replace("%kit_name%", kitname)));
 
         return true;
     }

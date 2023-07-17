@@ -34,6 +34,9 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class WarpCommand implements CommandExecutor {
 
@@ -43,7 +46,7 @@ public class WarpCommand implements CommandExecutor {
         this.main = main;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         Player finalsender = null;
         if(sender instanceof Player) {
             finalsender = (Player) sender;
@@ -54,7 +57,8 @@ public class WarpCommand implements CommandExecutor {
                 String warp = args[0];
                 Player target = Bukkit.getPlayer(args[1]);
                 teleportWarp(sender, target, warp);
-                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp_others").replace("%warp%", warp).replace("%player%", target.getName())));
+                assert target != null;
+                sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_warp_others")).replace("%warp%", warp).replace("%player%", target.getName())));
             } else if (args.length == 1) {
                 if (sender instanceof Player) {
                     String warp = args[0];
@@ -77,14 +81,15 @@ public class WarpCommand implements CommandExecutor {
         if (sender.hasPermission("bluecore.warp." + warp)) {
             if (main.configManager.getWarps().isSet("warps." + warp + ".world")) {
                 String world = main.configManager.getWarps().getString("warps." + warp + ".world");
-                double x = Double.parseDouble(main.configManager.getWarps().getString("warps." + warp + ".x"));
-                double y = Double.parseDouble(main.configManager.getWarps().getString("warps." + warp + ".y"));
-                double z = Double.parseDouble(main.configManager.getWarps().getString("warps." + warp + ".z"));
-                float yaw = Float.parseFloat(main.configManager.getWarps().getString("warps." + warp + ".yaw"));
-                float pitch = Float.parseFloat(main.configManager.getWarps().getString("warps." + warp + ".pitch"));
+                double x = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + warp + ".x")));
+                double y = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + warp + ".y")));
+                double z = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + warp + ".z")));
+                float yaw = Float.parseFloat(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + warp + ".yaw")));
+                float pitch = Float.parseFloat(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + warp + ".pitch")));
+                assert world != null;
                 Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
                 target.teleport(loc);
-                target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_warp").replace("%warp%", warp)));
+                target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_warp")).replace("%warp%", warp)));
             }
         }
     }

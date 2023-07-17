@@ -33,6 +33,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class TeleportCommand implements CommandExecutor {
     private final Main main;
@@ -42,7 +45,7 @@ public class TeleportCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player splayer = null;
         if(sender instanceof Player) {
             splayer = (Player) sender;
@@ -70,7 +73,7 @@ public class TeleportCommand implements CommandExecutor {
                     }
 
                     splayer.teleport(target);
-                    sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.success.teleported_to_player").replace("%player%", target.getName())));
+                    sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_player")).replace("%player%", target.getName())));
                 } else {
                     sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_teleport_command")));
                 }
@@ -94,7 +97,7 @@ public class TeleportCommand implements CommandExecutor {
 
             if (player1 != null && player2 != null) {
                 player1.teleport(player2);
-                sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.success.teleported_to_player_others").replace("%player1%", player1.getName()).replace("%player2%", player2.getName())));
+                sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_player_others")).replace("%player1%", player1.getName()).replace("%player2%", player2.getName())));
             } else {
                 sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.error.both_players_online")));
             }
@@ -105,7 +108,7 @@ public class TeleportCommand implements CommandExecutor {
                 double y = Double.parseDouble(args[1]);
                 double z = Double.parseDouble(args[2]);
                 splayer.teleport(new Location(((Player) sender).getWorld(), x, y, z, 0, 0));
-                sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.success.teleported_to_coord")
+                sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_coord"))
                         .replace("%x%", Double.toString(x))
                         .replace("%y%", Double.toString(y))
                         .replace("%z%", Double.toString(z))));
@@ -126,7 +129,7 @@ public class TeleportCommand implements CommandExecutor {
                 double y = Double.parseDouble(args[2]);
                 double z = Double.parseDouble(args[3]);
                 target.teleport(new Location(target.getWorld(), x, y, z, 0, 0));
-                sender.sendMessage(MessagesUtil.format(splayer, main.configManager.getLang().getString("messages.success.teleported_to_coord")
+                sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_coord"))
                         .replace("%x%", Double.toString(x))
                         .replace("%y%", Double.toString(y))
                         .replace("%z%", Double.toString(z))

@@ -33,17 +33,20 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class EnderChestCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public EnderChestCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_enderchest_command")));
             return true;
@@ -53,10 +56,12 @@ public class EnderChestCommand implements CommandExecutor {
         if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.enderchest.others")) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
@@ -71,7 +76,7 @@ public class EnderChestCommand implements CommandExecutor {
         target.openInventory(target.getEnderChest());
         target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.enderchest_open")));
         if (args.length == 1) {
-            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.enderchest_open_others").replace("%player%", target.getName())));
+            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.enderchest_open_others")).replace("%player%", target.getName())));
         }
 
         return true;

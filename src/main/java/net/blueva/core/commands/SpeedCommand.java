@@ -33,17 +33,20 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class SpeedCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public SpeedCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length < 1 || args.length > 2) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_speed_command")));
             return true;
@@ -87,9 +90,9 @@ public class SpeedCommand implements CommandExecutor {
 
         target.setWalkSpeed(speed);
         target.setFlySpeed(speed);
-        target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.speed_changed").replace("%speed%", String.valueOf(speed))));
+        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.speed_changed")).replace("%speed%", String.valueOf(speed))));
         if (args.length == 2) {
-            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.speed_changed_others").replace("%speed%", String.valueOf(speed)).replace("%player%", target.getName())));
+            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.speed_changed_others")).replace("%speed%", String.valueOf(speed)).replace("%player%", target.getName())));
         }
 
         return true;

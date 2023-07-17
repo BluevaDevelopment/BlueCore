@@ -27,6 +27,8 @@ package net.blueva.core.commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -37,6 +39,7 @@ import net.blueva.core.Main;
 import net.blueva.core.managers.KitsManager;
 import net.blueva.core.utils.DateUtil;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
 
 public class KitCommand implements CommandExecutor {
 
@@ -46,7 +49,7 @@ public class KitCommand implements CommandExecutor {
         this.main = main;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 2) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_kit_command")));
             return true;
@@ -65,7 +68,7 @@ public class KitCommand implements CommandExecutor {
         String kit = args[0];
 
         if(!KitsManager.kitExists(kit)) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.kit_not_found").replace("%kit_name%", kit)));
+            sender.sendMessage(MessagesUtil.format(null, Objects.requireNonNull(main.configManager.getLang().getString("messages.error.kit_not_found")).replace("%kit_name%", kit)));
             return true;
         }
 
@@ -80,9 +83,10 @@ public class KitCommand implements CommandExecutor {
             
             KitsManager.giveKit(target, kit);
 
-            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.kit_given_others").replace("%kit_name%", kit).replace("%player%", target.getName())));
-            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.kit_given").replace("%kit_name%", kit)));
-        } else if (args.length == 1) {
+            assert target != null;
+            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.kit_given_others")).replace("%kit_name%", kit).replace("%player%", target.getName())));
+            target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.kit_given")).replace("%kit_name%", kit)));
+        } else {
             target = (Player) sender;
 
             if (!sender.hasPermission("bluecore.kit."+kit)) {
@@ -103,7 +107,7 @@ public class KitCommand implements CommandExecutor {
             }
 
             KitsManager.giveKit(target, kit);
-            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.kit_given").replace("%kit_name%", kit)));
+            target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.kit_given")).replace("%kit_name%", kit)));
         } 
 
         return true;
@@ -129,18 +133,16 @@ public class KitCommand implements CommandExecutor {
     private boolean isFutureKitDatePassed(String kit, Player target) {
         String dateString = main.configManager.getUser(target.getUniqueId()).getString("date.kits."+kit);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assert dateString != null;
         LocalDateTime futureDate = LocalDateTime.parse(dateString, formatter);
 
-        if(!DateUtil.isConfigDatePassed(futureDate)) {
-            return false;
-        } 
-
-        return true;
+        return DateUtil.isConfigDatePassed(futureDate);
     }
 
     private String getTimeUntilFutureDateAsString(String kit, Player target) {
         String dateString = main.configManager.getUser(target.getUniqueId()).getString("date.kits."+kit);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assert dateString != null;
         LocalDateTime futureDate = LocalDateTime.parse(dateString, formatter);
         return DateUtil.getTimeUntilFutureDateAsString(futureDate, kit);
     }

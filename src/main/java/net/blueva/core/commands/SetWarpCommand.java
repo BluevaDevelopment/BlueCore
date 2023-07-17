@@ -32,16 +32,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class SetWarpCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public SetWarpCommand(Main main) {
         this.main = main;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
             return true;
@@ -64,7 +67,7 @@ public class SetWarpCommand implements CommandExecutor {
         }
 
         Location l = player.getLocation();
-        String world = l.getWorld().getName();
+        String world = Objects.requireNonNull(l.getWorld()).getName();
         double x = l.getX();
         double y = l.getY();
         double z = l.getZ();
@@ -78,7 +81,7 @@ public class SetWarpCommand implements CommandExecutor {
         main.configManager.getWarps().set("warps." + args[0] + ".pitch", pitch);
         main.configManager.saveWarps();
         main.configManager.reloadWarps();
-        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.warp_set").replace("%warp%", args[0])));
+        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.warp_set")).replace("%warp%", args[0])));
 
         return true;
     }

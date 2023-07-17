@@ -28,7 +28,7 @@ And more to come!
 
 ## Compiling from Source
 
-Blue Core is an open source project and the source code is available on [GitHub](https://github.com/BluevaDevelopment/BlueCore). To build the plugin from source, you will need to have [Java Development Kit (JDK) 8](https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot) installed on your machine. 
+Blue Core is an open source project and the source code is available on [GitHub](https://github.com/BluevaDevelopment/BlueCore). To build the plugin from source, you will need to have [Java Development Kit (JDK) 17](https://adoptopenjdk.net/) installed on your machine. 
 
 With an IDE like IntelliJ IDEA or Eclipse, you can easily import the source code and build the plugin using Maven. Here are the steps to build Blue Core using IntelliJ IDEA:
 

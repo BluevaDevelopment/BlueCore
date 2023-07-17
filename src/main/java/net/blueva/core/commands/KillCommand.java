@@ -33,18 +33,21 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class KillCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public KillCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (args.length < 1 || args.length > 1) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+        if (args.length != 1) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_kill_command")));
             return true;
         }
@@ -66,7 +69,7 @@ public class KillCommand implements CommandExecutor {
         }
 
         target.setHealth(0);
-        sender.sendMessage(MessagesUtil.format(cmdsender, main.configManager.getLang().getString("messages.success.player_killed").replace("%player%", target.getName())));
+        sender.sendMessage(MessagesUtil.format(cmdsender, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.player_killed")).replace("%player%", target.getName())));
 
         return true;
     }

@@ -34,17 +34,20 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class CreativeCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public CreativeCommand(Main main) {
         this.main = main;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_creative_command")));
             return true;
@@ -54,10 +57,12 @@ public class CreativeCommand implements CommandExecutor {
         if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.gamemode.creative.others")) {
+                assert sender instanceof Player;
                 sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
                 return true;
             }
@@ -70,9 +75,9 @@ public class CreativeCommand implements CommandExecutor {
         }
 
         target.setGameMode(GameMode.CREATIVE);
-        target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed").replace("%gamemode%", "CREATIVE")));
+        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.gamemode_changed")).replace("%gamemode%", "CREATIVE")));
         if (args.length == 1) {
-            sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.gamemode_changed_others").replace("%gamemode%", "CREATIVE").replace("%player%", target.getName())));
+            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.gamemode_changed_others")).replace("%gamemode%", "CREATIVE").replace("%player%", target.getName())));
         }
 
         return true;

@@ -31,16 +31,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class SetSpawnCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public SetSpawnCommand(Main main) {
         this.main = main;
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         Player player = null;
         if(sender instanceof Player) {
             player = (Player)sender;
@@ -64,7 +67,7 @@ public class SetSpawnCommand implements CommandExecutor {
         main.configManager.getWarps().set("spawn", args[0]);
         main.configManager.saveWarps();
         main.configManager.reloadWarps();
-        sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.spawn_set").replace("%warp%", args[0])));
+        sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.spawn_set")).replace("%warp%", args[0])));
         return true;
     }
 }
