@@ -26,6 +26,7 @@
 package net.blueva.core.listeners;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -79,8 +80,8 @@ public class PlayerJoinListener implements Listener {
 		}
 
 		if(main.configManager.getSettings().getBoolean("welcome.broadcast.first_join.enabled")) {
-			if(!main.configManager.getUser(event.getPlayer().getUniqueId()).isSet("logoutlocation")) {
-				Bukkit.broadcastMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.first_join.message").replace("%player_name%", event.getPlayer().getName())));
+			if(!main.configManager.getUser(event.getPlayer().getUniqueId()).isSet("logoutlocation.world")) {
+				Bukkit.broadcastMessage(MessagesUtil.format(event.getPlayer(), Objects.requireNonNull(main.configManager.getSettings().getString("welcome.broadcast.first_join.message")).replace("%player_name%", event.getPlayer().getName())));
 
 			}
 		}
