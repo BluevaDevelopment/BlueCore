@@ -66,7 +66,7 @@ public class SudoCommand implements CommandExecutor {
             commandBuilder.append(args[i]).append(" ");
         }
         String command = commandBuilder.toString().trim();
-        
+
         target.chat("/"+MessagesUtil.format(target, command));
 
         return true;

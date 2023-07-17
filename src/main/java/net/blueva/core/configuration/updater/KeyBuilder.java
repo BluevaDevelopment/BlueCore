@@ -1,3 +1,12 @@
+/*
+ * This code uses part of the code from the Config-Updater project, developed by tchristofferson.
+ * You can find more information about the project at https://github.com/tchristofferson/Config-Updater/.
+ *
+ * Copyright (c) 2023, tchristofferson
+ * This software is subject to the MIT License. You may obtain a copy of the license at
+ * https://opensource.org/licenses/MIT.
+ *
+ */
 package net.blueva.core.configuration.updater;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,15 +29,22 @@ public class KeyBuilder implements Cloneable {
         this.builder = new StringBuilder(keyBuilder.toString());
     }
 
-    public void parseLine(String line) {
+    public void parseLine(String line, boolean checkIfExists) {
         line = line.trim();
+
         String[] currentSplitLine = line.split(":");
+
+        if (currentSplitLine.length > 2)
+            currentSplitLine = line.split(": ");
+
         String key = currentSplitLine[0].replace("'", "").replace("\"", "");
 
-        //Checks keyBuilder path against config to see if the path is valid.
-        //If the path doesn't exist in the config it keeps removing last key in keyBuilder.
-        while (builder.length() > 0 && !config.contains(builder.toString() + separator + key)) {
-            removeLastKey();
+        if (checkIfExists) {
+            //Checks keyBuilder path against config to see if the path is valid.
+            //If the path doesn't exist in the config it keeps removing last key in keyBuilder.
+            while (builder.length() > 0 && !config.contains(builder.toString() + separator + key)) {
+                removeLastKey();
+            }
         }
 
         //Add the separator if there is already a key inside keyBuilder
@@ -51,34 +67,17 @@ public class KeyBuilder implements Cloneable {
     public boolean isEmpty() {
         return builder.length() == 0;
     }
-
+    public void clear() {
+        builder.setLength(0);
+    }
     //Checks to see if the full key path represented by this instance is a sub-key of the key parameter
     public boolean isSubKeyOf(String parentKey) {
-        return isSubKeyOf(parentKey, builder.toString(), separator);
+        return KeyUtils.isSubKeyOf(parentKey, builder.toString(), separator);
     }
 
     //Checks to see if subKey is a sub-key of the key path this instance represents
     public boolean isSubKey(String subKey) {
-        return isSubKeyOf(builder.toString(), subKey, separator);
-    }
-
-    public static boolean isSubKeyOf(String parentKey, String subKey, char separator) {
-        if (parentKey.isEmpty())
-            return false;
-
-        return subKey.startsWith(parentKey)
-                && subKey.substring(parentKey.length()).startsWith(String.valueOf(separator));
-    }
-
-    public static String getIndents(String key, char separator) {
-        String[] splitKey = key.split("[" + separator + "]");
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 1; i < splitKey.length; i++) {
-            builder.append("  ");
-        }
-
-        return builder.toString();
+        return KeyUtils.isSubKeyOf(builder.toString(), subKey, separator);
     }
 
     public boolean isConfigSection() {
