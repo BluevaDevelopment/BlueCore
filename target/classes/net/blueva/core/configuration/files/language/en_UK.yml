@@ -86,6 +86,8 @@ messages:
     wm_creating_world: '{prefix} Creating the world &b%worldmanager_worldname%&f.'
     chat_cleared_others: '{prefix} You have cleared %player% chat'
     more_information: '{prefix} Get more information on the wiki: &b{url}'
+    pm_receiver_format: '&b&l{from_user} &f➜ &b&l{to_user}&8: &7{message}'
+    pm_sender_format: '&b&l{to_user} &f➜ &b&l{from_user}&8: &7{message}'
   other:
     use_gm_command: '{prefix} &cUse: /gm [survival/creative/adventure/spectator] [player]'
     use_survival_command: '{prefix} &cUse: /survival [player]'
@@ -120,6 +122,7 @@ messages:
     use_createkit_command: '{prefix} &cUse: /createkit [name] [delay]'
     use_kit_command: '{prefix} &cUse: /kit [name] [player]'
     use_modifykit_command: '{prefix} &cUse: /modifykit [name] [delay]'
+    use_message_command: '{prefix} &cUse: /message [name] [message]'
 commands:
   bluecore:
     info:

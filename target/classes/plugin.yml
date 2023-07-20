@@ -70,6 +70,10 @@ commands:
       aliases: [ bkit, kits ]
       description: Receive or give a kit.
       usage: /kit [action]
+   message:
+      aliases: [ bmessage, msg, tell]
+      description: Send private messages to other players
+      usage: /message [action]
    midnight:
       aliases: [ bmidnight ]
       description: Change the world time to midnight

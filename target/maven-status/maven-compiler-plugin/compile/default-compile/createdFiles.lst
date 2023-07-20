@@ -35,6 +35,7 @@ net\blueva\core\commands\UpdateWarpCommand.class
 net\blueva\core\commands\SunCommand.class
 net\blueva\core\commands\NightCommand.class
 net\blueva\core\managers\LocationManager.class
+net\blueva\core\managers\EconomyManager.class
 net\blueva\core\libraries\fastboard\FastBoardBase$ScoreboardAction.class
 net\blueva\core\commands\CreativeCommand.class
 net\blueva\core\commands\SetSpawnCommand.class
@@ -62,6 +63,7 @@ net\blueva\core\commands\DayCommand.class
 net\blueva\core\listeners\PlayerQuitListener.class
 net\blueva\core\managers\LocationManager$1.class
 net\blueva\core\listeners\PlayerDropItemListener.class
+net\blueva\core\commands\MessageCommand.class
 net\blueva\core\configuration\updater\ConfigUpdater.class
 net\blueva\core\commands\EnderChestCommand.class
 net\blueva\core\libraries\metrics\Metrics$JsonObjectBuilder.class

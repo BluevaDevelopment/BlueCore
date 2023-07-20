@@ -158,7 +158,6 @@ public final class Main extends JavaPlugin {
 		pm.registerEvents(new PlayerInteractListener(this), this);
 		pm.registerEvents(new PlayerJoinListener(this), this);
 		pm.registerEvents(new PlayerQuitListener(this), this);
-
 	}
 
 	private void registerCommands() {
@@ -176,6 +175,7 @@ public final class Main extends JavaPlugin {
 		Objects.requireNonNull(this.getCommand("heal")).setExecutor(new HealCommand(this));
 		Objects.requireNonNull(this.getCommand("kill")).setExecutor(new KillCommand(this));
 		Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitCommand(this));
+		Objects.requireNonNull(this.getCommand("message")).setExecutor(new MessageCommand(this));
 		Objects.requireNonNull(this.getCommand("midnight")).setExecutor(new MidnightCommand(this));
 		Objects.requireNonNull(this.getCommand("modifykit")).setExecutor(new ModifyKitCommand(this));
 		Objects.requireNonNull(this.getCommand("bluecore")).setExecutor(new BlueCoreCommand(this));
