@@ -27,12 +27,12 @@ package net.blueva.core;
 
 import net.blueva.core.commands.*;
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.libraries.vault.EconomyImplementer;
+import net.blueva.core.libraries.vault.VaultHook;
 import net.blueva.core.listeners.*;
-import net.blueva.core.managers.LocationManager;
-import net.blueva.core.managers.ScoreboardManager;
-import net.blueva.core.managers.TablistManager;
-import net.blueva.core.managers.WorldManager;
+import net.blueva.core.managers.*;
 import net.blueva.core.libraries.metrics.Metrics;
+import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,7 +40,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 public final class Main extends JavaPlugin {
 
@@ -48,35 +50,55 @@ public final class Main extends JavaPlugin {
 	public ConfigManager configManager;
 	public WorldManager worldManager;
 
+	//config files
+	//settings.yml
 	public FileConfiguration settings = null;
 	public File settingsFile = null;
+
+	//commands.yml
 	public FileConfiguration commands = null;
 	public File commandsFile = null;
+
+	//warps.yml
 	public FileConfiguration warps = null;
 	public File warpsFile = null;
+
+	//(xx.XX).yml
 	public FileConfiguration language = null;
 	public File languageFile = null;
+	public String actualLang;
+	public String langPath;
+
+	//(uuid).yml
 	public FileConfiguration user = null;
 	public File userFile = null;
+
+	//(kit_name).yml
 	public FileConfiguration kit = null;
 	public File kitFile = null;
+
+	//world.yml
 	public FileConfiguration worlds = null;
 	public File worldsFile = null;
+
+	//scoreboard.yml
 	public FileConfiguration scoreboards = null;
 	public File scoreboardsFile = null;
 
 	// other things
 	public String pluginversion = getDescription().getVersion();
-	public static boolean placeholderapi = false;
-	public String actualLang;
-	public String langPath;
 	public static String prefix;
+	public static boolean placeholderapi = false;
+	public static boolean vaultapi = false;
+	public EconomyImplementer economyImplementer = null;
+    public HashMap<UUID, Double> playerBank = new HashMap<>();
+	private VaultHook vaultHook;
 	private static Main plugin;
 	public static Main getPlugin() {
 		return plugin;
 	}
 
-	public void onEnable() {
+    public void onEnable() {
 		plugin = this;
 
 		configManager = new ConfigManager(this);
@@ -107,6 +129,13 @@ public final class Main extends JavaPlugin {
 		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 			placeholderapi = true;
 		}
+		if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
+			Bukkit.getConsoleSender().sendMessage(MessagesUtil.format(null, "[BlueCore] " + configManager.getLang().getString("messages.info.detected_vault")));
+			economyImplementer = new EconomyImplementer();
+			vaultHook = new VaultHook();
+			vaultHook.hook();
+			vaultapi = true;
+		}
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
 			worldManager.loadWorlds();
@@ -121,6 +150,10 @@ public final class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
+		if (vaultapi) {
+			vaultHook.unhook();
+		}
+
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + " ____  _             ____");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "| __ )| |_   _  ___ / ___|___  _ __ ___");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "|  _ \\| | | | |/ _ | |   / _ \\| '__/ _ \\");

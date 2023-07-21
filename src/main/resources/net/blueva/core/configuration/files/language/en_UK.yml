@@ -88,6 +88,7 @@ messages:
     more_information: '{prefix} Get more information on the wiki: &b{url}'
     pm_receiver_format: '&b&l{from_user} &f➜ &b&l{to_user}&8: &7{message}'
     pm_sender_format: '&b&l{to_user} &f➜ &b&l{from_user}&8: &7{message}'
+    detected_vault: 'Vault has been detected and economy has been enabled in BlueCore.'
   other:
     use_gm_command: '{prefix} &cUse: /gm [survival/creative/adventure/spectator] [player]'
     use_survival_command: '{prefix} &cUse: /survival [player]'
