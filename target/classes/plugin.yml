@@ -86,6 +86,10 @@ commands:
       aliases: [ bmodifykit, modifyk ]
       description: Modify a kit already created
       usage: /modifykit [action]
+   money:
+      aliases: [ bmoney, bbalance, balance ]
+      description: See the money of a player.
+      usage: /money [action]
    night:
       aliases: [ bnight ]
       description: Change the world time to night

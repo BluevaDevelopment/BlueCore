@@ -94,8 +94,8 @@ messages:
     pm_receiver_format: '&b&l{from_user} &f➜ &b&l{to_user}&8: &7{message}'
     pm_sender_format: '&b&l{to_user} &f➜ &b&l{from_user}&8: &7{message}'
     detected_vault: 'Vault has been detected and economy has been enabled in BlueCore.'
-    current_balance: '{prefix} You currently have &b{currency_symbol}{money}&f.'
-    current_balance_other: '{prefix} User &b{player_name}&f currently has &b{currency_symbol}{player_balance}&f.'
+    current_balance: '{prefix} You currently have &b{currency_symbol}{player_balance}&f.'
+    current_balance_others: '{prefix} User &b{player_name}&f currently has &b{currency_symbol}{player_balance}&f.'
   other:
     use_gm_command: '{prefix} &cUse: /gm [survival/creative/adventure/spectator] [player]'
     use_survival_command: '{prefix} &cUse: /survival [player]'

@@ -11,7 +11,7 @@ scoreboards:
     title: "&b&lServer Name"
     lines:
       - "&a"
-      - "&b&l» Jugador"
+      - "&b&l» Player"
       - " &7● &fName: &b{player_name}"
       - " &7● &fPing: &b{player_ping}"
       - " &7● &fMoney: &b{player_balance}"
@@ -29,7 +29,7 @@ scoreboards:
     title: "&4&lServer Name"
     lines:
       - "&a"
-      - "&4&l» Jugador"
+      - "&4&l» Player"
       - " &7● &fName: &c{player_name}"
       - " &7● &fPing: &c{player_ping}"
       - " &7● &fMoney: &c{player_balance}"

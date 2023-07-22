@@ -19,6 +19,7 @@ net\blueva\core\libraries\metrics\Metrics$JsonObjectBuilder$JsonObject.class
 net\blueva\core\libraries\metrics\Metrics$AdvancedBarChart.class
 net\blueva\core\libraries\metrics\Metrics.class
 net\blueva\core\libraries\fastboard\FastBoardBase.class
+net\blueva\core\commands\MoneyCommand.class
 net\blueva\core\libraries\fastboard\FastBoard.class
 net\blueva\core\commands\GamemodeCommand.class
 net\blueva\core\commands\TeleportCommand.class
