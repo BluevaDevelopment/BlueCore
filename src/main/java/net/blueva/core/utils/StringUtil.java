@@ -27,6 +27,8 @@ package net.blueva.core.utils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class StringUtil {
@@ -46,5 +48,15 @@ public class StringUtil {
       } 
     } 
     return sb.toString();
+  }
+
+  public static boolean isNumber(String str) {
+    DecimalFormat format = new DecimalFormat("0.#");
+    try {
+      format.parse(str);
+      return true;
+    } catch (ParseException e) {
+      return false;
+    }
   }
 }

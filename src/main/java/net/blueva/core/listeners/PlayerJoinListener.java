@@ -28,6 +28,7 @@ package net.blueva.core.listeners;
 import java.util.List;
 import java.util.Objects;
 
+import net.blueva.core.managers.EconomyManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -51,6 +52,16 @@ public class PlayerJoinListener implements Listener {
 	@EventHandler
 	public void OPJ(PlayerJoinEvent event) {
 		main.configManager.registerUser(event.getPlayer().getUniqueId());
+
+		if(Main.vaultapi) {
+			if(!main.playerBank.containsKey(event.getPlayer().getUniqueId())) {
+				main.playerBank.put(event.getPlayer().getUniqueId(), main.configManager.getUser(event.getPlayer().getUniqueId()).getDouble("money"));
+			}
+		}
+
+		if(!main.configManager.getUser(event.getPlayer().getUniqueId()).isSet("logoutlocation.world")) {
+			EconomyManager.setMoney(event.getPlayer(), main.configManager.getSettings().getDouble("economy.starting_balance"), main);
+		}
 
 		if(main.configManager.getSettings().getBoolean("welcome.broadcast.join.enabled")) {
 			event.setJoinMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.join.message")).replace("%player_name%", event.getPlayer().getDisplayName()));
@@ -82,7 +93,6 @@ public class PlayerJoinListener implements Listener {
 		if(main.configManager.getSettings().getBoolean("welcome.broadcast.first_join.enabled")) {
 			if(!main.configManager.getUser(event.getPlayer().getUniqueId()).isSet("logoutlocation.world")) {
 				Bukkit.broadcastMessage(MessagesUtil.format(event.getPlayer(), Objects.requireNonNull(main.configManager.getSettings().getString("welcome.broadcast.first_join.message")).replace("%player_name%", event.getPlayer().getName())));
-
 			}
 		}
 

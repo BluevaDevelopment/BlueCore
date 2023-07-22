@@ -61,56 +61,45 @@ public class GamemodeCommand implements CommandExecutor {
             return true;
         }
         String gamemode = args[0].toLowerCase();
-        GameMode mode = null;
+        GameMode mode;
         switch (gamemode) {
-            case "survival":
-            case "surv":
-            case "su":
-            case "s":
+            case "survival", "surv", "su", "s" -> {
                 if (!sender.hasPermission("bluecore.gamemode.survival")) {
                     sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.SURVIVAL;
-                break;
-            case "creative":
-            case "crea":
-            case "cr":
-            case "c":
+            }
+            case "creative", "crea", "cr", "c" -> {
                 if (!sender.hasPermission("bluecore.gamemode.creative")) {
                     sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.CREATIVE;
-                break;
-            case "adventure":
-            case "adven":
-            case "adv":
-            case "a":
+            }
+            case "adventure", "adven", "adv", "a" -> {
                 if (!sender.hasPermission("bluecore.gamemode.adventure")) {
                     sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.ADVENTURE;
-                break;
-            case "spectator":
-            case "spect":
-            case "spec":
-            case "sp":
+            }
+            case "spectator", "spect", "spec", "sp" -> {
                 if (!sender.hasPermission("bluecore.gamemode.spectator")) {
                     sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.SPECTATOR;
-                break;
-            default:
+            }
+            default -> {
                 sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_gm_command")));
                 return true;
+            }
         }
 
         if (!(sender instanceof Player)) {
             if (args.length == 1) {
-                sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_gm_command")));
+                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_gm_command")));
             }
             if (args.length == 2) {
                 Player target = Bukkit.getPlayer(args[1]);

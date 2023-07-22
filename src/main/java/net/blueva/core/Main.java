@@ -91,6 +91,7 @@ public final class Main extends JavaPlugin {
 	public static boolean placeholderapi = false;
 	public static boolean vaultapi = false;
 	public EconomyImplementer economyImplementer = null;
+	public static String currency_symbol;
     public HashMap<UUID, Double> playerBank = new HashMap<>();
 	private VaultHook vaultHook;
 	private static Main plugin;
@@ -108,6 +109,7 @@ public final class Main extends JavaPlugin {
 		registerCommands();
 
 		prefix = configManager.getLang().getString("prefix");
+		currency_symbol = configManager.getSettings().getString("economy.currency_symbol");
 
 
 		if(configManager.getSettings().getBoolean("metrics")) {
@@ -200,6 +202,7 @@ public final class Main extends JavaPlugin {
 		Objects.requireNonNull(this.getCommand("creative")).setExecutor(new CreativeCommand(this));
 		Objects.requireNonNull(this.getCommand("day")).setExecutor(new DayCommand(this));
 		Objects.requireNonNull(this.getCommand("deletewarp")).setExecutor(new DeleteWarpCommand(this));
+		Objects.requireNonNull(this.getCommand("economy")).setExecutor(new EconomyCommand(this));
 		Objects.requireNonNull(this.getCommand("enderchest")).setExecutor(new EnderChestCommand(this));
 		Objects.requireNonNull(this.getCommand("feed")).setExecutor(new FeedCommand(this));
 		Objects.requireNonNull(this.getCommand("fly")).setExecutor(new FlyCommand(this));

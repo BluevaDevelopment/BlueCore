@@ -38,6 +38,10 @@ commands:
       aliases: [ bdeletewarp, bdelwarp, delwarp ]
       description: Deletes a warp
       usage: /deletewarp [action]
+   economy:
+      aliases: [ beconomy, beco, eco ]
+      description: Manages the server economy.
+      usage: /economy [action]
    enderchest:
       aliases: [ benderchest, bec, ec ]
       description: Open the Ender Chest

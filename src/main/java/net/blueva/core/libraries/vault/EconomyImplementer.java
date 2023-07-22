@@ -1,3 +1,27 @@
+/*
+ *  ____  _             ____
+ * | __ )| |_   _  ___ / ___|___  _ __ ___
+ * |  _ \| | | | |/ _ | |   / _ \| '__/ _ \
+ * | |_) | | |_| |  __| |__| (_) | | |  __/
+ * |____/|_|\__,_|\___|\____\___/|_|  \___|
+ *
+ * This file is part of Blue Core.
+ *
+ * Blue Core is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * Blue Core is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License version 3 for more details.
+ *
+ * Blue Core plugin developed by Blueva Development.
+ * Website: https://blueva.net/
+ * GitHub repository: https://github.com/BluevaDevelopment/BlueMenu
+ *
+ * Copyright (c) 2023 Blueva Development. All rights reserved.
+ */
 package net.blueva.core.libraries.vault;
 
 import net.blueva.core.Main;
@@ -15,7 +39,7 @@ public class EconomyImplementer implements Economy {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return Main.vaultapi;
     }
 
     @Override
@@ -71,6 +95,7 @@ public class EconomyImplementer implements Economy {
     @Override
     public double getBalance(String s) {
         Player player = Bukkit.getPlayer(s);
+        assert player != null;
         UUID uuid = player.getUniqueId();
         return main.playerBank.get(uuid);
     }
@@ -84,6 +109,7 @@ public class EconomyImplementer implements Economy {
     @Override
     public double getBalance(String s, String s1) {
         Player player = Bukkit.getPlayer(s);
+        assert player != null;
         UUID uuid = player.getUniqueId();
         return main.playerBank.get(uuid);
     }
@@ -116,30 +142,62 @@ public class EconomyImplementer implements Economy {
 
     @Override
     public EconomyResponse withdrawPlayer(String s, double v) {
+        Player player = Bukkit.getPlayer(s);
+        assert player != null;
+        UUID uuid = player.getUniqueId();
+        double oldBalance = main.playerBank.get(uuid);
+        double newBalance = oldBalance - v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(player.getUniqueId());
         return null;
     }
 
     @Override
     public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double v) {
+        UUID uuid = offlinePlayer.getUniqueId();
+        double oldBalance = main.playerBank.get(uuid);
+        double newBalance = oldBalance - v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(offlinePlayer.getUniqueId());
         return null;
     }
 
     @Override
     public EconomyResponse withdrawPlayer(String s, String s1, double v) {
+        Player player = Bukkit.getPlayer(s);
+        assert player != null;
+        UUID uuid = player.getUniqueId();
+        double oldBalance = main.playerBank.get(uuid);
+        double newBalance = oldBalance - v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(player.getUniqueId());
         return null;
     }
 
     @Override
     public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, String s, double v) {
+        UUID uuid = offlinePlayer.getUniqueId();
+        double oldBalance = main.playerBank.get(uuid);
+        double newBalance = oldBalance - v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(offlinePlayer.getUniqueId());
         return null;
     }
 
     @Override
     public EconomyResponse depositPlayer(String s, double v) {
         Player player = Bukkit.getPlayer(s);
+        assert player != null;
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
-        main.playerBank.put(uuid, oldBalance + v);
+        double newBalance = oldBalance + v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(player.getUniqueId());
         return null;
     }
 
@@ -147,16 +205,23 @@ public class EconomyImplementer implements Economy {
     public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double v) {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
-        main.playerBank.put(uuid, oldBalance + v);
+        double newBalance = oldBalance + v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(offlinePlayer.getUniqueId());
         return null;
     }
 
     @Override
     public EconomyResponse depositPlayer(String s, String s1, double v) {
         Player player = Bukkit.getPlayer(s);
+        assert player != null;
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
-        main.playerBank.put(uuid, oldBalance + v);
+        double newBalance = oldBalance + v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(player.getUniqueId());
         return null;
     }
 
@@ -164,7 +229,10 @@ public class EconomyImplementer implements Economy {
     public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, String s, double v) {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
-        main.playerBank.put(uuid, oldBalance + v);
+        double newBalance = oldBalance + v;
+        main.playerBank.put(uuid, newBalance);
+        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+        main.configManager.saveUser(offlinePlayer.getUniqueId());
         return null;
     }
 

@@ -37,6 +37,8 @@ net\blueva\core\commands\UpdateWarpCommand.class
 net\blueva\core\commands\SunCommand.class
 net\blueva\core\commands\NightCommand.class
 net\blueva\core\managers\LocationManager.class
+net\blueva\core\commands\EconomyCommand.class
+net\blueva\core\managers\EconomyManager.class
 net\blueva\core\libraries\fastboard\FastBoardBase$ScoreboardAction.class
 net\blueva\core\commands\CreativeCommand.class
 net\blueva\core\commands\SetSpawnCommand.class

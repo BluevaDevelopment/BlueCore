@@ -16,7 +16,7 @@ With Blue Core, you'll have all the essential tools a Minecraft server needs. Th
 - Custom Commands: Create custom commands to help players navigate your server.
 - World Manager: Easily manage and switch between different worlds on your server.
 - Kits: Create and manage pre-configured sets of items for players to quickly access.
-- Economy System: Manage a virtual economy on your server, with features like currency, shops, and trading. (Vault is temporarily required for this feature)
+- Economy System: Manage a virtual economy on your server, with features like currency, shops, and trading.
 
 ### Planned Features
 - Over 300 commands: A wide range of commands to cater to players, moderation, and more.
