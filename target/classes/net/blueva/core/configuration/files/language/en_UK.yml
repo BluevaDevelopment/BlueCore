@@ -76,6 +76,7 @@ messages:
     existing_kit: '{prefix} &cThe kit %kit_name% already exists. Modify it with /modifykit [name] [delay]'
     kit_not_found: '{prefix} &cThe kit %kit_name% does not exist.'
     kit_delay: '{prefix} &cYou will be able to reclaim the %kit_name% kit in &4&l%kit_delay_year% year(s), %kit_delay_month% month(s), %kit_delay_day% day(s), %kit_delay_hour% hour(s), %kit_delay_minute% minute(s) and %kit_delay_second% second(s)&c.'
+    money_out_of_range: '{prefix} &cYour balance results in a balance below the minimum or maximum allowed.'
     wm_alredy_exist: '{prefix} &c%worldmanager_worldname% already exists as a world!'
     wm_creation_error: '{prefix} &cCreation world failed, Please check console for errors!'
     wm_deletion_error: '{prefix} &cDeletion world failed, Please check console for errors!'

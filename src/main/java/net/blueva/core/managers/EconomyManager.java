@@ -26,6 +26,7 @@
 package net.blueva.core.managers;
 
 import net.blueva.core.Main;
+import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.entity.Player;
 
 public class EconomyManager {
@@ -34,8 +35,10 @@ public class EconomyManager {
         if(!Main.vaultapi) {
             double playerMoney = main.configManager.getUser(player.getUniqueId()).getDouble("money");
             double newQuantity = playerMoney+quantity;
-            main.configManager.getUser(player.getUniqueId()).set("config", newQuantity);
-            main.configManager.saveUser(player.getUniqueId());
+            if(allowModifyBalance(player, main, quantity)) {
+                main.configManager.getUser(player.getUniqueId()).set("config", newQuantity);
+                main.configManager.saveUser(player.getUniqueId());
+            }
         } else {
             main.economyImplementer.depositPlayer(player, quantity);
         }
@@ -45,8 +48,10 @@ public class EconomyManager {
         if(!Main.vaultapi) {
             double playerMoney = main.configManager.getUser(player.getUniqueId()).getDouble("money");
             double newQuantity = playerMoney-quantity;
-            main.configManager.getUser(player.getUniqueId()).set("config", newQuantity);
-            main.configManager.saveUser(player.getUniqueId());
+            if(allowModifyBalance(player, main, quantity)) {
+                main.configManager.getUser(player.getUniqueId()).set("config", newQuantity);
+                main.configManager.saveUser(player.getUniqueId());
+            }
         } else {
             main.economyImplementer.withdrawPlayer(player, quantity);
         }
@@ -54,8 +59,10 @@ public class EconomyManager {
 
     public static void setMoney(Player player, double quantity, Main main) {
         if(!Main.vaultapi) {
-            main.configManager.getUser(player.getUniqueId()).set("config", quantity);
-            main.configManager.saveUser(player.getUniqueId());
+            if(allowModifyBalance(player, main, quantity)) {
+                main.configManager.getUser(player.getUniqueId()).set("config", quantity);
+                main.configManager.saveUser(player.getUniqueId());
+            }
         } else {
             double actualBalance = main.economyImplementer.getBalance(player);
             main.economyImplementer.withdrawPlayer(player, actualBalance);
@@ -73,4 +80,26 @@ public class EconomyManager {
 
         return balance;
     }
+
+    public static boolean allowModifyBalance(Player player, Main main, double quantity) {
+        boolean bool = false;
+        double min = main.configManager.getSettings().getDouble("economy.min_money");
+        double max = main.configManager.getSettings().getDouble("economy.max_money");
+        double currentBalance = balancePlayer(player, main);
+
+        if (max == -1) {
+            if (currentBalance + quantity >= min) {
+                bool = true;
+            }
+        } else if (currentBalance + quantity >= min && currentBalance + quantity <= max) {
+            bool = true;
+        }
+
+        if(!bool) {
+            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.money_out_of_range")));
+        }
+
+        return bool;
+    }
+
 }

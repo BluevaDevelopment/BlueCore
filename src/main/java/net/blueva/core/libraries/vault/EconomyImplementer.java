@@ -25,6 +25,7 @@
 package net.blueva.core.libraries.vault;
 
 import net.blueva.core.Main;
+import net.blueva.core.managers.EconomyManager;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
@@ -147,9 +148,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(player.getUniqueId());
+        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(player.getUniqueId());
+        }
         return null;
     }
 
@@ -158,9 +161,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(offlinePlayer.getUniqueId());
+        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(offlinePlayer.getUniqueId());
+        }
         return null;
     }
 
@@ -171,9 +176,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(player.getUniqueId());
+        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(player.getUniqueId());
+        }
         return null;
     }
 
@@ -182,9 +189,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(offlinePlayer.getUniqueId());
+        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(offlinePlayer.getUniqueId());
+        }
         return null;
     }
 
@@ -195,9 +204,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(player.getUniqueId());
+        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(player.getUniqueId());
+        }
         return null;
     }
 
@@ -206,9 +217,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(offlinePlayer.getUniqueId());
+        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(offlinePlayer.getUniqueId());
+        }
         return null;
     }
 
@@ -219,9 +232,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(player.getUniqueId());
+        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(player.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(player.getUniqueId());
+        }
         return null;
     }
 
@@ -230,9 +245,11 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        main.playerBank.put(uuid, newBalance);
-        main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
-        main.configManager.saveUser(offlinePlayer.getUniqueId());
+        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+            main.playerBank.put(uuid, newBalance);
+            main.configManager.getUser(offlinePlayer.getUniqueId()).set("money", newBalance);
+            main.configManager.saveUser(offlinePlayer.getUniqueId());
+        }
         return null;
     }
 
