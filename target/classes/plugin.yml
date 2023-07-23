@@ -98,6 +98,10 @@ commands:
       aliases: [ bnoon ]
       description: Change the world time to noon
       usage: /noon [action]
+   pay:
+      aliases: [ bpay ]
+      description: Pay money to another player.
+      usage: /pay [action]
    setspawn:
       aliases: [ bsetspawn ]
       description: Sets the spawn

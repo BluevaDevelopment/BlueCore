@@ -51,12 +51,7 @@ public class StringUtil {
   }
 
   public static boolean isNumber(String str) {
-    DecimalFormat format = new DecimalFormat("0.#");
-    try {
-      format.parse(str);
-      return true;
-    } catch (ParseException e) {
-      return false;
-    }
+    String numericRegex = "^\\d*\\.?\\d+$";
+    return str.matches(numericRegex);
   }
 }

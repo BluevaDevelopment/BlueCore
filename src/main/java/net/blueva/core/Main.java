@@ -218,6 +218,7 @@ public final class Main extends JavaPlugin {
 		Objects.requireNonNull(this.getCommand("bluecore")).setExecutor(new BlueCoreCommand(this));
 		Objects.requireNonNull(this.getCommand("night")).setExecutor(new NightCommand(this));
 		Objects.requireNonNull(this.getCommand("noon")).setExecutor(new NoonCommand(this));
+		Objects.requireNonNull(this.getCommand("pay")).setExecutor(new PayCommand(this));
 		Objects.requireNonNull(this.getCommand("setspawn")).setExecutor(new SetSpawnCommand(this));
 		Objects.requireNonNull(this.getCommand("setwarp")).setExecutor(new SetWarpCommand(this));
 		Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));

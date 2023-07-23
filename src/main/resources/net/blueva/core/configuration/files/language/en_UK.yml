@@ -52,6 +52,8 @@ messages:
     money_withdrawn: '{prefix} You have withdrawn &b{currency_symbol}{amount}&f from {player_name}'
     money_set: '{prefix} You have set &b{currency_symbol}{amount}&f to {player_name}'
     money_reset: '{prefix] You have set the balance of &b{player_name} &fto &a{currency_symbol}0&f.'
+    money_paid: '{prefix} You have paid &b{amount} &fto &b{player_name}&f.'
+    money_received: '{prefix} You have received &b{amount} &ffrom {player_name}'
     kit_created: '{prefix} The kit &b%kit_name%&f has been successfully created.'
     kit_modified: '{prefix} The kit &b%kit_name%&f has been successfully modified.'
     kit_given: '{prefix} You have received the kit &b%kit_name%&f.'
@@ -77,6 +79,7 @@ messages:
     kit_not_found: '{prefix} &cThe kit %kit_name% does not exist.'
     kit_delay: '{prefix} &cYou will be able to reclaim the %kit_name% kit in &4&l%kit_delay_year% year(s), %kit_delay_month% month(s), %kit_delay_day% day(s), %kit_delay_hour% hour(s), %kit_delay_minute% minute(s) and %kit_delay_second% second(s)&c.'
     money_out_of_range: '{prefix} &cYour balance results in a balance below the minimum or maximum allowed.'
+    insufficient_money: '{prefix} &cYou do not have enough money to complete that action.'
     wm_alredy_exist: '{prefix} &c%worldmanager_worldname% already exists as a world!'
     wm_creation_error: '{prefix} &cCreation world failed, Please check console for errors!'
     wm_deletion_error: '{prefix} &cDeletion world failed, Please check console for errors!'
@@ -132,6 +135,7 @@ messages:
     use_modifykit_command: '{prefix} &cUse: /modifykit [name] [delay]'
     use_message_command: '{prefix} &cUse: /message [name] [message]'
     use_economy_command: '{prefix} &cUse: /economy [withdraw/deposit/set/reset/balance] [player] (quantity)'
+    use_pay_command: '{prefix} &cUse: /pay [player] [quantity]'
 commands:
   bluecore:
     info:

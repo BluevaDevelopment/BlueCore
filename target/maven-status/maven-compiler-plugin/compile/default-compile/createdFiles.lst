@@ -86,6 +86,7 @@ net\blueva\core\commands\StormCommand.class
 net\blueva\core\listeners\PlayerInteractListener.class
 net\blueva\core\libraries\fastboard\FastBoardBase$ObjectiveMode.class
 net\blueva\core\commands\HealCommand.class
+net\blueva\core\commands\PayCommand.class
 net\blueva\core\libraries\fastboard\FastBoardBase$VersionType.class
 net\blueva\core\configuration\ConfigManager.class
 net\blueva\core\listeners\EntityDamageListener.class
