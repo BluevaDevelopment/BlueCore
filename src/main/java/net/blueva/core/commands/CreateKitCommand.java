@@ -18,7 +18,7 @@
  *
  * Blue Core plugin developed by Blueva Development.
  * Website: https://blueva.net/
- * GitHub repository: https://github.com/BluevaDevelopment/BlueMenu
+ * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
  * Copyright (c) 2023 Blueva Development. All rights reserved.
  */
