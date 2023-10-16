@@ -27,3 +27,4 @@ jobs:
         with:
           name: github-actions-artifact
           path: staging
+          retention-days: 7
