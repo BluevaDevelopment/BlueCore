@@ -1,4 +1,15 @@
-# Blue Core - The All-In-One Minecraft Server Solution
+![Logo](https://blueva.net/uploads/post_images/1-1679771276.png "Blue Core Logo")
+
+<div align="center">
+  <a href="https://www.spigotmc.org/"><img src="https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/supported/spigot_64h.png" alt="SpigotMC"></a>
+  <a href="https://papermc.io/"><img src="https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/supported/paper_64h.png" alt="PaperMC"></a>
+  <a href="https://purpurmc.org/"><img src="https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/supported/purpur_64h.png" alt="Purpur"></a>
+</div>
+<div align="center">
+  <a href="https://ko-fi.com/bluevanet"><img src="https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/donate/kofi-plural_64h.png" alt="Donaciones"></a>
+  <a href="https://blueva.net/wiki/bluecore"><img src="https://github.com/intergrav/devins-badges/blob/v3/assets/cozy/documentation/readthedocs_64h.png?raw=true" alt="Documentación"></a>
+  <a href="https://discord.gg/kgxBr8pwpU"><img src="https://github.com/intergrav/devins-badges/blob/v3/assets/cozy/social/discord-plural_64h.png?raw=true" alt="Discord"></a>
+</div>
 
 ## Why Use Blue Core?
 With Blue Core, you'll have all the essential tools a Minecraft server needs. This plugin gives you a solid foundation with features like MOTD, Titles, Action Bar, Tab List, Scoreboard, Warps, Chat Utilities, Custom Commands, World Manager, and many useful commands. It will not only simplify your server administration, but it will also improve the experience for your players.

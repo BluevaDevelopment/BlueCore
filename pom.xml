@@ -9,7 +9,7 @@
     <!-- Plugin Information -->
     <name>BlueCore</name>
     <description>Everything you need for your server is in this plugin.</description>
-    <version>1.0.0</version>
+    <version>1.0.0-DEV</version>
     <url>https://github.com/BluevaDevelopment/BlueCore</url>
 
     <properties>
