@@ -58,7 +58,7 @@ public class MidnightCommand implements CommandExecutor {
             }
             world.setTime(18000);
             sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_time"))
-                    .replace("%world%", world.getName())
+                    .replace("%world_name%", world.getName())
                     .replace("%time%", "Midnight")
                     .replace("%ticks%", "6000"));
         } else {
@@ -68,7 +68,7 @@ public class MidnightCommand implements CommandExecutor {
             }
             world.setTime(18000);
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.success.changed_time"))
-                    .replace("%world%", world.getName())
+                    .replace("%world_name%", world.getName())
                     .replace("%time%", "Midnight")
                     .replace("%ticks%", "6000"));
         }

@@ -58,7 +58,7 @@ public class StormCommand implements CommandExecutor {
             }
             world.setStorm(true);
             sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_weather"))
-                    .replace("%world%", world.getName())
+                    .replace("%world_name%", world.getName())
                     .replace("%weather%", "Storm"));
         } else {
             if (world == null) {

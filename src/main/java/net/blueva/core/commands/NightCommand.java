@@ -58,7 +58,7 @@ public class NightCommand implements CommandExecutor {
             }
             world.setTime(13000);
             sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_time"))
-                    .replace("%world%", world.getName())
+                    .replace("%world_name%", world.getName())
                     .replace("%time%", "Night")
                     .replace("%ticks%", "13000"));
         } else {
@@ -68,7 +68,7 @@ public class NightCommand implements CommandExecutor {
             }
             world.setTime(13000);
             sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.success.changed_time"))
-                    .replace("%world%", world.getName())
+                    .replace("%world_name%", world.getName())
                     .replace("%time%", "Night")
                     .replace("%ticks%", "13000"));
         }
