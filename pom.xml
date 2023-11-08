@@ -9,7 +9,7 @@
     <!-- Plugin Information -->
     <name>BlueCore</name>
     <description>Everything you need for your server is in this plugin.</description>
-    <version>1.0.0-DEV</version>
+    <version>1.0.0</version>
     <url>https://github.com/BluevaDevelopment/BlueCore</url>
 
     <properties>
@@ -47,11 +47,6 @@
     <!-- Dependencies imports -->
     <dependencies>
         <dependency>
-            <groupId>me.clip</groupId>
-            <artifactId>placeholderapi</artifactId>
-            <version>2.11.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.20-R0.1-SNAPSHOT</version>
@@ -62,10 +57,20 @@
             <version>1.20-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>dev.dejvokep</groupId>
+            <artifactId>boosted-yaml</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.MilkBowl</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.7</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.1</version>
         </dependency>
     </dependencies>
 </project>
