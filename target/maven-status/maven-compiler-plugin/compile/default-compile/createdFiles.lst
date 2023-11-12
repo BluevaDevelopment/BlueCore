@@ -1,5 +1,6 @@
 net\blueva\core\libraries\vault\EconomyImplementer.class
 net\blueva\core\configuration\updater\KeyBuilder.class
+net\blueva\core\commands\TitleCommand.class
 net\blueva\core\listeners\EntitySpawnListener.class
 net\blueva\core\commands\KillCommand.class
 net\blueva\core\utils\DateUtil.class
@@ -35,6 +36,7 @@ net\blueva\core\commands\WorkbenchCommand.class
 net\blueva\core\listeners\BlockPlaceListener.class
 net\blueva\core\libraries\vault\VaultHook.class
 net\blueva\core\commands\UpdateWarpCommand.class
+net\blueva\core\commands\ActionBarCommand.class
 net\blueva\core\commands\SunCommand.class
 net\blueva\core\commands\NightCommand.class
 net\blueva\core\managers\LocationManager.class

@@ -48,6 +48,8 @@ messages:
     changed_weather: '{prefix} The weather of the world &b%world_name%&f has been changed to &b%weather%&f.'
     player_killed: '{prefix} Player &b%player%&f has been killed.'
     completed_suicide: '{prefix} You have committed suicide...'
+    title_sent: '{prefix} &b%player% &fhas received the title &b%title%&f;&b%subtitle%&f.'
+    title_sent_broadcast: '{prefix} Everyone has received the title &b%title%&f;&b%subtitle%.'
     money_deposited: '{prefix} You have deposited &b{currency_symbol}{amount}&f to {player_name}'
     money_withdrawn: '{prefix} You have withdrawn &b{currency_symbol}{amount}&f from {player_name}'
     money_set: '{prefix} You have set &b{currency_symbol}{amount}&f to {player_name}'
@@ -137,8 +139,9 @@ messages:
     use_economy_command: '{prefix} &cUse: /economy [withdraw/deposit/set/reset/balance] [player] (quantity)'
     use_pay_command: '{prefix} &cUse: /pay [player] [quantity]'
     use_title_command: '{prefix} &cUse: /title [send/broadcast]'
-    use_title_send_command: '{prefix} &cUse: /title send [player] [title\nsubtitle] (FadeIn:_:FadeOut)'
-    use_title_broadcast_command: '{prefix} &cUse: /title broadcast [title\nsubtitle] (FadeIn:_:FadeOut)'
+    use_title_send_command: '{prefix} &cUse: /title send [player] [Title;Sub Title]'
+    use_title_broadcast_command: '{prefix} &cUse: /title broadcast [Title;Sub Title]'
+    use_actionbar_command: '{prefix} &cUse: /actionbar [send/broadcast]'
 commands:
   bluecore:
     info:

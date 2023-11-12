@@ -196,6 +196,7 @@ public final class Main extends JavaPlugin {
 	}
 
 	private void registerCommands() {
+		Objects.requireNonNull(this.getCommand("actionbar")).setExecutor(new ActionBarCommand(this));
 		Objects.requireNonNull(this.getCommand("adventure")).setExecutor(new AdventureCommand(this));
 		Objects.requireNonNull(this.getCommand("clearchat")).setExecutor(new ClearChatCommand(this));
 		Objects.requireNonNull(this.getCommand("createkit")).setExecutor(new CreateKitCommand(this));
@@ -230,6 +231,7 @@ public final class Main extends JavaPlugin {
 		Objects.requireNonNull(this.getCommand("sun")).setExecutor(new SunCommand(this));
 		Objects.requireNonNull(this.getCommand("survival")).setExecutor(new SurvivalCommand(this));
 		Objects.requireNonNull(this.getCommand("teleport")).setExecutor(new TeleportCommand(this));
+		Objects.requireNonNull(this.getCommand("title")).setExecutor(new TitleCommand(this));
 		Objects.requireNonNull(this.getCommand("updatewarp")).setExecutor(new UpdateWarpCommand(this));
 		Objects.requireNonNull(this.getCommand("warp")).setExecutor(new WarpCommand(this));
 		Objects.requireNonNull(this.getCommand("workbench")).setExecutor(new WorkbenchCommand(this));

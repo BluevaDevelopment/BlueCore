@@ -54,4 +54,14 @@ public class StringUtil {
     String numericRegex = "^\\d*\\.?\\d+$";
     return str.matches(numericRegex);
   }
+
+  public static boolean isNumber(String[] array) {
+    String numericRegex = "^\\d*\\.?\\d+$";
+    for (String element : array) {
+      if (!element.matches(numericRegex)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

@@ -37,6 +37,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class MessagesUtil {
     public static @NotNull String format (Player player, String text) {
+        if(text == null) {
+            return "";
+        }
+
         String textfinal = formatPlaceholders(player, text);
         return formatColors(textfinal);
     }

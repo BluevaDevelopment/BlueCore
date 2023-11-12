@@ -10,6 +10,10 @@ softdepend:
    - PlaceholderAPI
    - Vault
 commands:
+   actionbar:
+      aliases: [ bactionbar, action, baction, ab, bab]
+      description: Manage Minecraft actionbars.
+      usage: /actionbar [action]
    adventure:
       aliases: [ badventure, adven, adv, a, gma ]
       description: Change your game mode
@@ -142,6 +146,10 @@ commands:
       aliases: [ bteleport, tp, goto ]
       description: Teleport to a player or location.
       usage: /teleport [action]
+   title:
+      aliases: [ btitle, bt, tm ]
+      description: Use minecraft Titles.
+      usage: /titles [action]
    survival:
       aliases: [ bsurvival, surv, srv, s, gms ]
       description: Change your game mode
