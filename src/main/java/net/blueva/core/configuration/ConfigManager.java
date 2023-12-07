@@ -84,7 +84,7 @@ public class ConfigManager {
         // BlueCore/data/modules/warps/warp.yml
         public static void registerWarpDocument(String name) {
             try {
-                warp = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/world/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
+                warp = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/worlds/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
                         GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
             } catch (IOException ex) {
                 ex.fillInStackTrace();
@@ -99,8 +99,8 @@ public class ConfigManager {
         // BlueCore/data/modules/worlds/world.yml
         public static void registerWorldDocument(String name) {
             try {
-                world = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/world/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
-                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
+                world = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/worlds/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
+                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(false).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
             } catch (IOException ex) {
                 ex.fillInStackTrace();
             }
@@ -164,6 +164,12 @@ public class ConfigManager {
         File data_modulesf = new File(Main.getPlugin().getDataFolder()+"/data/modules");
         if(!data_modulesf.exists()) {
             data_modulesf.mkdirs();
+        }
+
+        // Data -> Modules folder
+        File data_modules_worldsf = new File(Main.getPlugin().getDataFolder()+"/data/modules/worlds");
+        if(!data_modules_worldsf.exists()) {
+            data_modules_worldsf.mkdirs();
         }
 
         // Data -> Users folder

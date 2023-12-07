@@ -144,7 +144,7 @@ commands:
   bluecore:
     info:
       - '&b&lBlueCore &8- &fThe All-In-One Minecraft Server Solution'
-      - '&7Running version {plugin_version} &8- &7Get help with /bc help'
+      - '&7Running version &f{plugin_version} &8- &7Get help with &f/bc help'
     help:
       page1:
         - ''

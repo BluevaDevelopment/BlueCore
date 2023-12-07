@@ -36,14 +36,14 @@ import java.io.IOException;
 import java.util.Objects;
 public class WorldManager {
 
-    private Main main;
+    private final Main main;
 
     public WorldManager(Main main) {
         this.main = main;
     }
 
     public void loadWorlds() throws IOException {
-        File dataFolder = new File(Main.getPlugin().getDataFolder() + "/data/world/");
+        File dataFolder = new File(Main.getPlugin().getDataFolder() + "/data/modules/worlds/");
         File[] files = dataFolder.listFiles();
 
         if(files != null) {

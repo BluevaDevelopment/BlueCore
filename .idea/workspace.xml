@@ -6,16 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="87c7dee2-b431-491d-a3b9-2ff6b1e7e206" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerCommandPreprocessListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerCommandPreprocessListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/ScoreboardManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/managers/WorldManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/languages/en_UK.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/languages/en_UK.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/BlueCore-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/BlueCore-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/EconomyManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/EconomyManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/KitsManager$Kit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/KitsManager$Kit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/KitsManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/KitsManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/LocationManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/LocationManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/LocationManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/ScoreboardManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/ScoreboardManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/TablistManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/TablistManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager$Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager$Data.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/files/languages/en_UK.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/files/languages/en_UK.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/WorldManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/managers/WorldManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/original-BlueCore-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-BlueCore-1.0.0.jar" afterDir="false" />
     </list>
