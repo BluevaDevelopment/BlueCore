@@ -25,6 +25,7 @@
 
 package net.blueva.core.listeners;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,13 +46,13 @@ public class EntityDamageListener implements Listener {
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             String worldname = player.getWorld().getName();
-            if (!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".fall_damage")) {
+            if (!ConfigManager.Data.getWorldDocument(worldname).getBoolean("world." + worldname + ".fall_damage")) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
                     event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.fall_damage"));
                 }
             }
 
-            if (!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".pvp")) {
+            if (!ConfigManager.Data.getWorldDocument(worldname).getBoolean("world." + worldname + ".pvp")) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                     if (event.getEntityType() == EntityType.PLAYER) {
                         event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.pvp"));
@@ -59,7 +60,7 @@ public class EntityDamageListener implements Listener {
                 }
             }
 
-            if(main.configManager.getUser(player.getUniqueId()).getBoolean("godMode")) {
+            if(ConfigManager.Data.getUserDocument(player.getUniqueId()).getBoolean("godMode")) {
                 event.setCancelled(true);
             }
         }

@@ -35,11 +35,10 @@ import net.blueva.core.libraries.metrics.Metrics;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
@@ -47,46 +46,11 @@ import java.util.UUID;
 public final class Main extends JavaPlugin {
 
 	//managers
-	public ConfigManager configManager;
 	public WorldManager worldManager;
-
-	//config files
-	//settings.yml
-	public FileConfiguration settings = null;
-	public File settingsFile = null;
-
-	//commands.yml
-	public FileConfiguration commands = null;
-	public File commandsFile = null;
-
-	//warps.yml
-	public FileConfiguration warps = null;
-	public File warpsFile = null;
-
-	//(xx.XX).yml
-	public FileConfiguration language = null;
-	public File languageFile = null;
-	public String actualLang;
-	public String langPath;
-
-	//(uuid).yml
-	public FileConfiguration user = null;
-	public File userFile = null;
-
-	//(kit_name).yml
-	public FileConfiguration kit = null;
-	public File kitFile = null;
-
-	//world.yml
-	public FileConfiguration worlds = null;
-	public File worldsFile = null;
-
-	//scoreboard.yml
-	public FileConfiguration scoreboards = null;
-	public File scoreboardsFile = null;
 
 	// other things
 	public String pluginversion = getDescription().getVersion();
+	public String actualLang;
 	public static String prefix;
 	public static boolean placeholderapi = false;
 	public static boolean vaultapi = false;
@@ -102,17 +66,20 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
 		plugin = this;
 
-		configManager = new ConfigManager(this);
-
-		registerFiles();
+		ConfigManager.generateFolders();
+		ConfigManager.registerDocuments();
 		registerEvents();
 		registerCommands();
 
-		prefix = configManager.getLang().getString("prefix");
-		currency_symbol = configManager.getSettings().getString("economy.currency_symbol");
+		ModuleManager.loadAllModules(this);
 
 
-		if(configManager.getSettings().getBoolean("metrics")) {
+
+		prefix = ConfigManager.language.getString("prefix");
+		currency_symbol = ConfigManager.Modules.economy.getString("economy.currency_symbol");
+
+
+		if(ConfigManager.settings.getBoolean("metrics")) {
 			int pluginId = 17623;
 			new Metrics(this, pluginId);
 		}
@@ -131,16 +98,22 @@ public final class Main extends JavaPlugin {
 		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 			placeholderapi = true;
 		}
-		if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
-			Bukkit.getConsoleSender().sendMessage(MessagesUtil.format(null, "[BlueCore] " + configManager.getLang().getString("messages.info.detected_vault")));
-			economyImplementer = new EconomyImplementer();
-			vaultHook = new VaultHook();
-			vaultHook.hook();
-			vaultapi = true;
+		if(ConfigManager.Modules.economy.getBoolean("economy.enabled")) {
+			if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
+				Bukkit.getConsoleSender().sendMessage(MessagesUtil.format(null, "[BlueCore] " + ConfigManager.language.getString("messages.info.detected_vault")));
+				economyImplementer = new EconomyImplementer();
+				vaultHook = new VaultHook();
+				vaultHook.hook();
+				vaultapi = true;
+			}
 		}
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
-			worldManager.loadWorlds();
+			try {
+				worldManager.loadWorlds();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " ____  _             ____");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "| __ )| |_   _  ___ / ___|___  _ __ ___");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "|  _ \\| | | | |/ _ | |   / _ \\| '__/ _ \\");
@@ -163,21 +136,6 @@ public final class Main extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "|____/|_|\\__,_|\\___|\\____\\___/|_|  \\___|");
 		Bukkit.getConsoleSender().sendMessage("");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "V. " + pluginversion + " | Plugin disabled successfully | blueva.net");
-	}
-
-	private void registerFiles() {
-		configManager.generateFolders();
-
-		configManager.registerSettings();
-
-		actualLang = configManager.getSettings().getString("language");
-
-		configManager.registerCommands();
-		configManager.registerScoreboards();
-		configManager.registerSettings();
-		configManager.registerWarps();
-		configManager.registerWorlds();
-
 	}
 
 	private void registerEvents() {

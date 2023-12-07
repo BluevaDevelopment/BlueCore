@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -46,7 +47,7 @@ public class ActionBarCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
         if (args.length < 2) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.other.use_actionbar_command")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.other.use_actionbar_command")));
             return true;
         }
         if(args[0].equalsIgnoreCase("broadcast")){
@@ -61,12 +62,12 @@ public class ActionBarCommand implements CommandExecutor {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessagesUtil.format(null, message)));
                 }
             } else {
-                sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
             }
         }else if(args[0].equalsIgnoreCase("send")){
             if(sender.hasPermission("bluecore.title.send")){
                 if(args.length < 3) {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.other.use_actionbar_command")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.other.use_actionbar_command")));
                     return true;
                 }
 
@@ -80,13 +81,13 @@ public class ActionBarCommand implements CommandExecutor {
                 if(player != null) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessagesUtil.format((Player) sender, message)));
                 } else {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
                 }
             } else {
-                sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
             }
         }else{
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.other.use_actionbar_command")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.other.use_actionbar_command")));
         }
         return true;
     }

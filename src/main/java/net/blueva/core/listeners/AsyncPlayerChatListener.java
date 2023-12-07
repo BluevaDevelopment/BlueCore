@@ -28,6 +28,7 @@ package net.blueva.core.listeners;
 import java.util.Objects;
 import java.util.Set;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,19 +51,19 @@ public class AsyncPlayerChatListener implements Listener {
 		Player player = event.getPlayer();
 		String message = event.getMessage();
 		
-		if(main.configManager.getSettings().getBoolean("chat.antiswear.enabled")) {
+		if(ConfigManager.Modules.chat.getBoolean("chat.antiswear.enabled")) {
 			if(!player.hasPermission("bluecore.chat.antiswear.bypass")) {
-				for(String blockedWords : main.configManager.getSettings().getStringList("chat.antiswear.list")) {
+				for(String blockedWords : ConfigManager.Modules.chat.getStringList("chat.antiswear.list")) {
 					if(message.toLowerCase().replaceAll("[-_*. ]", "").contains(blockedWords.toLowerCase())) {
-						if(Objects.equals(main.configManager.getSettings().getString("chat.antiswear.mode"), "replace")) {
+						if(Objects.equals(ConfigManager.Modules.chat.getString("chat.antiswear.mode"), "replace")) {
 							StringBuilder a = new StringBuilder();
 							for(int c=0;c<blockedWords.length();c++) {
 								a.append("*");
 							}
 							message = message.replace(blockedWords, a.toString());
 						}
-						if(Objects.equals(main.configManager.getSettings().getString("chat.antiswear.mode"), "block")) {
-							player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.info.antiswear_block")));
+						if(Objects.equals(ConfigManager.Modules.chat.getString("chat.antiswear.mode"), "block")) {
+							player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.info.antiswear_block")));
 							event.setCancelled(true);
 							return;
 						}
@@ -72,11 +73,11 @@ public class AsyncPlayerChatListener implements Listener {
 				event.setMessage(message);
 			}
 		}
-		if(!Objects.equals(main.configManager.getSettings().getString("chat.format"), "none")) {
-			String formated_message = Objects.requireNonNull(main.configManager.getSettings().getString("chat.format")).replaceFirst("%player_displayname%", player.getDisplayName()).replaceFirst("%message%", message);
+		if(!Objects.equals(ConfigManager.Modules.chat.getString("chat.format"), "none")) {
+			String formated_message = Objects.requireNonNull(ConfigManager.Modules.chat.getString("chat.format")).replaceFirst("%player_displayname%", player.getDisplayName()).replaceFirst("%message%", message);
 			event.setFormat(MessagesUtil.format(player, formated_message));
 		}
-		if(main.configManager.getSettings().getBoolean("chat.per_world")) {
+		if(ConfigManager.Modules.chat.getBoolean("chat.per_world")) {
 			Set<Player> r = event.getRecipients();
 		    for (Player pls : Bukkit.getServer().getOnlinePlayers()) {
 		      if (!pls.getWorld().getName().equals(player.getWorld().getName()))

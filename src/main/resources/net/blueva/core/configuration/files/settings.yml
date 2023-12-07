@@ -6,7 +6,7 @@
 #
 # Configuration generated in version 1.0.0
 
-no_modify: 100
+file_version: 1
 
 # Metrics:
 # This plugin uses the bStats metrics system. If you want your data not to be collected, you can disable this system here. 
@@ -29,186 +29,19 @@ metrics: true
 # Available languages:
 # English: en_UK
 # Spanish: es_ES (Outdated)
-language: en_UK
+language:
+  main: en_UK # Main language in which all messages will be displayed if available.
+  fallback: en_UK # Fallback language that will be displayed when the main one fails.
 
 # Check for updates:
 # Check if your server is using the latest version of the plugin.
 # We recommend always using the latest version of the plugin for the best experience.
 check_for_updates: true
- 
-# Welcome:
-# Welcome all the users that enter the server.
-# You can use the placeholders of the plugin (https://github.com/BluevaDevelopment/BlueCore/wiki) or all PlaceHolderAPI placeholders.
-welcome:
 
-  # This is the message that appears when you enter a server. 
-  # It can contain server information such as the store, web page or whatever you want.
-  message:
-
-    # Enables or disables the welcome message
-    enabled: true
-
-    # Time the server waits to send the welcome message. (In ticks)
-    wait: 10 # 20 Ticks = 1 Second
-
-    # This is the message that will be sent to the players. Modify it to your liking, you can add or remove the lines you want.
-    list:
-    - '&9&m--------------------------------------'
-    - ''
-    - '        &9✦ &b&lWELCOME TO &nSERVERNAME&9 ✦'
-    - '   &f✵ &fThe best server in all of minecraft &f✵'
-    - ''
-    - ' &b➦ &fStore: &7store.servername.com'
-    - ' &b➦ &fWeb: &7www.servername.com'
-    - ' &b➦ &fDiscord: &7discord.servername.com'
-    - ''
-    - '&9&m--------------------------------------'
-
-  # Title that will be sent to the players when they join to the server.
-  # (Does not work in versions lower than 1.12)
-  title:
-
-    #Enables or disables the welcome title.
-    enabled: true
-
-    # Time the server waits to send the welcome title. (In ticks)
-    wait: 10 # 20 Ticks = 1 Second
-
-    # Set the welcome title
-    title: '&b&lServer Name'
-
-    # Sets the welcome subtitle. Appears below the title
-    subtitle: '&fwww.servername.com'
-
-    # The time it takes for the title to fade into the screen. (In ticks)
-    fade_in: 10
-
-    #The time it takes for the title to stay on the screen. (In ticks)
-    stay: 80
-
-    #The time it takes for the title to fade out of the screen. (In ticks)
-    fade_out: 10
-
-  # Actionbar that is sent to the player when they join the server.
-  actionbar:
-
-    # Enables or disables the welcome actionbar.
-    enabled: true
-
-    # Time the server waits to send the welcome actionbar. (In ticks)
-    wait: 10 # 20 Ticks = 1 Second
-
-    # Message to appear in the welcome actionbar
-    message: '&bWelcome to YourServer'
-
-  # Announces to all players when a player joins or leaves.
-  broadcast:
-
-    # Announces to all players when a new player joins the game
-    first_join:
-
-      # Enable or disable this broadcast
-      enabled: true
-
-      # Message that will appear in this broadcast
-      message: '&f%player_name% &bhas logged into the server for the first time. Welcome to the server!'
-
-    # Announces to all players when a player joins.
-    join:
-
-      # Enable or disable this broadcast
-      enabled: true
-
-      # Message that will appear in this broadcast
-      message: '&8[&a+&8] &a%player_name%'
-
-    # Announces to all players when a player leaves.
-    leave:
-
-      #Enable or disable this broadcast
-      enabled: true
-
-      # Message that will appear in this broadcast
-      message: '&8[&c-&8] &a%player_name%'
-
-# Economy:
-# Set up the server economy.
-economy:
-
-  # Money that players receive when they enter for the first time.
-  starting_balance: 100
-
-  # Symbol of the server's currency.
-  currency_symbol: $
-
-  # Minimum money that a player can have.
-  min_money: 0
-
-  # Maximum money that a player can have. (You can put "-1" for players to have unlimited money.)
-  max_money: 10000000000000
-
-# Tab list:
-# Sets the header and footer in the player list. (Show when you press the TAB key)
-tablist:
-
-  # Enable or disable the tablist
+# Backups:
+# ...
+# ...
+backups:
   enabled: true
-
-  # Every how many ticks will the tablist be updated 
-  ticks: 10
-
-  # Sets the header of the tablist. Add or remove the lines you want.
-  header:
-  - ''
-  - '&b&lBlue Core'
-  - '&fblueva.net'
-  - ''
-
-  # Sets the footer of the tablist. Add or remove the lines you want.
-  footer:
-  - ''
-  - '&7You are playing with &b%online% players'
-  - '&7                                                  &7'
-  
-# Chat:
-# Customize your server chat.
-chat:
-
-   # Customize the format of your server chat.
-   # If you prefer to disable this option and use the original format of minecraft or another plugin write 'none'.
-   format: '&7%player_displayname% &8➤ &f%message%'
-   
-   # If you enable this option, players will only be able to read messages from other players who are in the same world.
-   per_world: false
-   
-   # Avoid toxicity on your server by blocking bad vocabulary
-   antiswear:
-   
-      # Enables or disables the antiswear.
-      enabled: true
-      
-      # What do you want to happen if a blocked word is detected?
-      # - Block the whole message. (mode: block)
-      # - Replace the blocked word with asterisks (mode: replace)
-      mode: replace
-      
-      # List of blocked words. You can add or remove the ones you want.
-      list:
-      - 'asshole'
-      - 'bitch'
-      - 'cunt'
-      - 'dick'
-      - 'fuck'
-      - 'loser'
-      - 'idiot'
-      
-   # Block commands that can generate security vulnerabilities in your server.
-   command_blocker:
-   
-      # Enables or disables the command blocker
-      enabled: true
-      
-      # List of blocked commands (You have to include the /)
-      list:
-      - '/pl'
-      - '/plugins'
+  backup_every: 1d
+  remove_after: 15d

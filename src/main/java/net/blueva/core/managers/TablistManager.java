@@ -27,6 +27,7 @@ package net.blueva.core.managers;
 
 import java.util.ArrayList;
 
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -50,13 +51,13 @@ public class TablistManager {
 			for(Player player : Bukkit.getOnlinePlayers()) {
 				updateTablist(player);
 			}
-		}, 0, main.configManager.getSettings().getInt("tablist.ticks"));
+		}, 0, ConfigManager.Modules.tablist.getInt("tablist.tablist1.ticks"));
 	}
 
 	private void updateTablist(Player p) {
-		if(main.configManager.getSettings().getBoolean("tablist.enabled")) {
-			p.setPlayerListHeader(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.header"), "\n")));
-			p.setPlayerListFooter(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) main.configManager.getSettings().getStringList("tablist.footer"), "\n")).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
+		if(ConfigManager.Modules.tablist.getBoolean("tablist.tablist1.enabled")) {
+			p.setPlayerListHeader(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) ConfigManager.settings.getStringList("tablist.tablist1.header"), "\n")));
+			p.setPlayerListFooter(MessagesUtil.format(p, StringUtil.listToString((ArrayList<String>) ConfigManager.settings.getStringList("tablist.tablist1.footer"), "\n")).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
 		}
 	}
 

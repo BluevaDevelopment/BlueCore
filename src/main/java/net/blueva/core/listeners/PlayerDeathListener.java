@@ -25,6 +25,7 @@
 
 package net.blueva.core.listeners;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -34,6 +35,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.blueva.core.Main;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class PlayerDeathListener implements Listener {
@@ -45,7 +47,7 @@ public class PlayerDeathListener implements Listener {
 	}
 	
 	@EventHandler
-	public void OPD(PlayerDeathEvent event) {
+	public void OPD(PlayerDeathEvent event) throws IOException {
 		Player player = (Player) event.getEntity();
 		Location l = Objects.requireNonNull(event.getEntity().getPlayer()).getLocation();
 		String world = Objects.requireNonNull(l.getWorld()).getName();
@@ -54,23 +56,24 @@ public class PlayerDeathListener implements Listener {
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
-		main.configManager.getUser(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.world", world);
-		main.configManager.getUser(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.x", x);
-		main.configManager.getUser(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.y", y);
-		main.configManager.getUser(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.z", z);
-		main.configManager.getUser(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.yaw", yaw);
-		main.configManager.getUser(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.pitch", pitch);
-		main.configManager.saveUser(event.getEntity().getPlayer().getUniqueId());
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.world", world);
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.x", x);
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.y", y);
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.z", z);
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.yaw", yaw);
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.pitch", pitch);
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).save();
+		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).reload();
 
 
-		String respawnWorld = main.configManager.getWorlds().getString("worlds." + world + ".respawnWorld");
-		if(world.equals(main.configManager.getWorlds().getStringList("worlds")) && main.configManager.getWorlds().getBoolean("worlds." + world + ".drop_items")) {
-			if(main.configManager.getWorlds().isSet("worlds." + world + ".respawnWorld")) {
-				double xRespawn = Double.parseDouble(main.configManager.getWorlds().getString("worlds." + respawnWorld + ".spawnlocation.x"));
-				double yRespawn = Double.parseDouble(main.configManager.getWorlds().getString("worlds." + respawnWorld + ".spawnlocation.y"));
-				double zRespawn = Double.parseDouble(main.configManager.getWorlds().getString("worlds." + respawnWorld + ".spawnlocation.z"));
-				float pitchRespawn = Float.parseFloat(main.configManager.getWorlds().getString("worlds." + respawnWorld + ".spawnlocation.pitch"));
-				float yawRespawn = Float.parseFloat(main.configManager.getWorlds().getString("worlds." + respawnWorld + ".spawnlocation.yaw"));
+		String respawnWorld = ConfigManager.Data.getWorldDocument(world).getString("world." + world + ".respawnWorld");
+		if(ConfigManager.Data.getWorldDocument(world).getBoolean("world." + world + ".drop_items")) {
+			if(ConfigManager.Data.getWorldDocument(world).isString("world." + world + ".respawnWorld")) {
+				double xRespawn = Double.parseDouble(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.x"));
+				double yRespawn = Double.parseDouble(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.y"));
+				double zRespawn = Double.parseDouble(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.z"));
+				float pitchRespawn = Float.parseFloat(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.pitch"));
+				float yawRespawn = Float.parseFloat(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.yaw"));
 				Location loc = new Location(Bukkit.getWorld(respawnWorld), xRespawn, yRespawn, zRespawn, yawRespawn, pitchRespawn);
 				player.teleport(loc);
 			}

@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.managers.EconomyManager;
 import net.blueva.core.utils.MessagesUtil;
 import net.blueva.core.utils.StringUtil;
@@ -36,6 +37,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class EconomyCommand implements CommandExecutor {
@@ -51,7 +53,7 @@ public class EconomyCommand implements CommandExecutor {
         if(args.length == 3) {
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null) {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.player_offline")));
                 return true;
             }
 
@@ -59,62 +61,78 @@ public class EconomyCommand implements CommandExecutor {
             if(StringUtil.isNumber(args[2])) {
                 quantity = Double.parseDouble(args[2]);
             } else {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_economy_command")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
                 return true;
             }
 
             if(args[0].equalsIgnoreCase("deposit")) {
                 if(sender.hasPermission("bluecore.economy.deposit")) {
-                    EconomyManager.depositMoney(player, quantity, main);
-                    sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.money_deposited"))
+                    try {
+                        EconomyManager.depositMoney(player, quantity, main);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_deposited"))
                             .replace("{amount}", String.valueOf(quantity))));
                 } else {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             } else if(args[0].equalsIgnoreCase("withdraw")) {
                 if(sender.hasPermission("bluecore.economy.withdraw")) {
-                    EconomyManager.withdrawMoney(player, quantity, main);
-                    sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.money_withdrawn"))
+                    try {
+                        EconomyManager.withdrawMoney(player, quantity, main);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_withdrawn"))
                             .replace("{amount}", String.valueOf(quantity))));
                 } else {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             } else if(args[0].equalsIgnoreCase("set")) {
                 if(sender.hasPermission("bluecore.economy.set")) {
-                    EconomyManager.setMoney(player, quantity, main);
-                    sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.money_set"))
+                    try {
+                        EconomyManager.setMoney(player, quantity, main);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_set"))
                             .replace("{amount}", String.valueOf(quantity))));
                 } else {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             } else {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_economy_command")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
             }
         } else if(args.length == 2) {
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null) {
-                sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
                 return true;
             }
 
             if(args[0].equalsIgnoreCase("balance")) {
                 if(sender.hasPermission("bluecore.economy.balance")) {
-                    sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.info.current_balance_other")));
+                    sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.info.current_balance_other")));
                 } else {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             } else if(args[0].equalsIgnoreCase("reset")) {
                 if(sender.hasPermission("bluecore.economy.reset")) {
-                    EconomyManager.setMoney(player, 0, main);
-                    sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.success.money_reset")));
+                    try {
+                        EconomyManager.setMoney(player, 0, main);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.success.money_reset")));
                 } else {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             } else {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_economy_command")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
             }
         } else {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_economy_command")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
         }
 
         return true;

@@ -25,6 +25,7 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -46,7 +47,7 @@ public class BlueCoreCommand implements CommandExecutor {
 
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
 		if(sender.hasPermission("bluecore.info")) {
-			List<String> bcinfo = main.configManager.getLang().getStringList("commands.bluecore.info");
+			List<String> bcinfo = ConfigManager.language.getStringList("commands.bluecore.info");
 			for (String message : bcinfo) {
 				Player player = null;
 				if (sender instanceof Player) {

@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -53,21 +54,21 @@ public class NightCommand implements CommandExecutor {
                 world = ((Player) sender).getWorld();
             }
             if (!sender.hasPermission("bluecore.time.night" + (world == ((Player) sender).getWorld() ? "" : ".others"))) {
-                sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format(((Player) sender), ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
             world.setTime(13000);
-            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_time"))
+            sender.sendMessage(MessagesUtil.format(((Player) sender), ConfigManager.language.getString("messages.success.changed_time"))
                     .replace("%world_name%", world.getName())
                     .replace("%time%", "Night")
                     .replace("%ticks%", "13000"));
         } else {
             if (world == null) {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_noon_command")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_noon_command")));
                 return true;
             }
             world.setTime(13000);
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.success.changed_time"))
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.success.changed_time"))
                     .replace("%world_name%", world.getName())
                     .replace("%time%", "Night")
                     .replace("%ticks%", "13000"));

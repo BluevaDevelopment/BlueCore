@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.managers.KitsManager;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Material;
@@ -36,6 +37,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -51,12 +53,12 @@ public class ModifyKitCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.only_player")));
             return true;
         }
 
         if (args.length != 2) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_modifykit_command")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_modifykit_command")));
             return true;
         }
 
@@ -72,12 +74,12 @@ public class ModifyKitCommand implements CommandExecutor {
         }
 
         if (!sender.hasPermission("bluecore.modifykit")) {
-            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
+            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         if(!KitsManager.kitExists(kitname)) {
-            player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.error.kit_not_found")).replace("%kit_name%", kitname)));
+            player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.kit_not_found")).replace("%kit_name%", kitname)));
             return true;
         }
 
@@ -88,8 +90,12 @@ public class ModifyKitCommand implements CommandExecutor {
             }
         }
 
-        KitsManager.modifyKit(kitname, "bluecore.kit."+kitname, delayInt, items);
-        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.kit_modified")).replace("%kit_name%", kitname)));
+        try {
+            KitsManager.modifyKit(kitname, "bluecore.kit."+kitname, delayInt, items);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_modified")).replace("%kit_name%", kitname)));
 
         return true;
     }

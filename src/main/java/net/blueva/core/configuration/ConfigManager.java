@@ -25,246 +25,281 @@
 
 package net.blueva.core.configuration;
 
+import dev.dejvokep.boostedyaml.YamlDocument;
+import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
+import dev.dejvokep.boostedyaml.settings.dumper.DumperSettings;
+import dev.dejvokep.boostedyaml.settings.general.GeneralSettings;
+import dev.dejvokep.boostedyaml.settings.loader.LoaderSettings;
+import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
 import net.blueva.core.Main;
-import net.blueva.core.configuration.updater.ConfigUpdater;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.UUID;
 
 public class ConfigManager {
 
-    private final Main main;
+    public static YamlDocument settings;
+    public static YamlDocument language;
 
-    public ConfigManager(Main main) {
-        this.main = main;
+    public static class Modules {
+        public static YamlDocument auth;
+        public static YamlDocument bossbar;
+        public static YamlDocument chat;
+        public static YamlDocument commands;
+        public static YamlDocument economy;
+        public static YamlDocument holograms;
+        public static YamlDocument kits;
+        public static YamlDocument permissions;
+        public static YamlDocument scoreboards;
+        public static YamlDocument tablist;
+        public static YamlDocument warps;
+        public static YamlDocument welcome;
+        public static YamlDocument worlds;
     }
 
-    public void generateFolders() {
-        if(!main.getDataFolder().exists()) {
-            main.getDataFolder().mkdirs();
+    public static class Data {
+        public static YamlDocument kit;
+        public static YamlDocument warp;
+        public static YamlDocument world;
+        public static YamlDocument user;
+
+
+        // BlueCore/data/modules/kits/kit.yml
+        public static void registerKitDocument(String name) {
+            try {
+                kit = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/kits/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/kits/kitdatadefault.yml")),
+                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
+            } catch (IOException ex) {
+                ex.fillInStackTrace();
+            }
         }
 
-        // Language folder
-        File languagef = new File(main.getDataFolder()+"/language");
-        if(!languagef.exists()) {
-            languagef.mkdirs();
+        public static YamlDocument getKitDocument(String kit) {
+            registerKitDocument(kit);
+            return user;
+        }
 
-            GenerateLanguages gl = new GenerateLanguages(main);
-            gl.generate();
+        // BlueCore/data/modules/warps/warp.yml
+        public static void registerWarpDocument(String name) {
+            try {
+                warp = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/world/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
+                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
+            } catch (IOException ex) {
+                ex.fillInStackTrace();
+            }
+        }
+
+        public static YamlDocument getWarpDocument(String warp) {
+            registerWorldDocument(warp);
+            return user;
+        }
+
+        // BlueCore/data/modules/worlds/world.yml
+        public static void registerWorldDocument(String name) {
+            try {
+                world = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/world/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
+                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
+            } catch (IOException ex) {
+                ex.fillInStackTrace();
+            }
+        }
+
+        public static YamlDocument getWorldDocument(String name) {
+            registerWorldDocument(name);
+            return world;
+        }
+
+        public static void registerUserDocument(UUID uuid) {
+            // BlueCore/data/users/uuid.yml
+            try {
+                user = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/users/", uuid.toString()+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/users/userdatadefault.yml")),
+                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
+            } catch (IOException ex) {
+                ex.fillInStackTrace();
+            }
+        }
+
+        public static YamlDocument getUserDocument(UUID uuid) {
+            registerUserDocument(uuid);
+            return user;
+        }
+    }
+
+    public static void generateFolders() {
+        if(!Main.getPlugin().getDataFolder().exists()) {
+            Main.getPlugin().getDataFolder().mkdirs();
         }
 
         // Backups folder
-        File backupf = new File(main.getDataFolder()+"/backup");
+        File backupf = new File(Main.getPlugin().getDataFolder()+"/backups");
         if(!backupf.exists()) {
             backupf.mkdirs();
         }
 
         // Data folder
-        File dataf = new File(main.getDataFolder()+"/data");
+        File dataf = new File(Main.getPlugin().getDataFolder()+"/data");
         if(!dataf.exists()) {
             dataf.mkdirs();
         }
 
-        // users folder
-        File usersf = new File(main.getDataFolder()+"/data/users");
-        if(!usersf.exists()) {
-            usersf.mkdirs();
+        // Language folder
+        File languagesf = new File(Main.getPlugin().getDataFolder()+"/languages");
+        if(!languagesf.exists()) {
+            languagesf.mkdirs();
+
+            GenerateLanguages gl = new GenerateLanguages(Main.getPlugin());
+            gl.generate();
         }
 
-        // kitsf folder
-        File kitsf = new File(main.getDataFolder()+"/data/kits");
-        if(!kitsf.exists()) {
-            kitsf.mkdirs();
+        // Modules folder
+        File modulesf = new File(Main.getPlugin().getDataFolder()+"/modules");
+        if(!modulesf.exists()) {
+            modulesf.mkdirs();
+        }
+
+
+        // Data -> Modules folder
+        File data_modulesf = new File(Main.getPlugin().getDataFolder()+"/data/modules");
+        if(!data_modulesf.exists()) {
+            data_modulesf.mkdirs();
+        }
+
+        // Data -> Users folder
+        File data_usersf = new File(Main.getPlugin().getDataFolder()+"/data/users");
+        if(!data_usersf.exists()) {
+            data_usersf.mkdirs();
         }
     }
+
+    public static void registerDocuments() {
+        // BlueCore/settings.yml
+        try {
+            settings = YamlDocument.create(new File(Main.getPlugin().getDataFolder(), "settings.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/settings.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/language/xx.XX.yml
+        Main.getPlugin().actualLang = settings.getString("language.main");
+        try {
+            language = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/languages/", Main.getPlugin().actualLang+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/languages/"+Main.getPlugin().actualLang+".yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/auth.yml
+        try {
+            Modules.auth = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "auth.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/auth.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/bossbar.yml
+        try {
+            Modules.bossbar = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "bossbar.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/bossbar.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/chat.yml
+        try {
+            Modules.chat = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "chat.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/chat.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/commands.yml
+        try {
+            Modules.commands = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "commands.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/commands.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/economy.yml
+        try {
+            Modules.economy = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "economy.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/economy.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/holograms.yml
+        try {
+            Modules.holograms = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "holograms.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/holograms.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/kits.yml
+        try {
+            Modules.kits = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "kits.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/kits.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/permissions.yml
+        try {
+            Modules.permissions = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "permissions.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/permissions.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/scoreboards.yml
+        try {
+            Modules.scoreboards = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "scoreboards.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/scoreboards.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/tablist.yml
+        try {
+            Modules.tablist = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "tablist.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/tablist.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/warps.yml
+        try {
+            Modules.warps = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "warps.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/warps.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/welcome.yml
+        try {
+            Modules.welcome = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "welcome.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/welcome.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+
+        // BlueCore/modules/worlds.yml
+        try {
+            Modules.worlds = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "worlds.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/worlds.yml")),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
+        }
+    }
+
+
 
     //commands.yml file
-    public FileConfiguration getCommands() {
-        if(main.commands == null) {
-            reloadCommands();
-        }
-        return main.commands;
-    }
-
-    public void reloadCommands(){
-        if(main.commands == null){
-            main.commandsFile = new File(main.getDataFolder(),"commands.yml");
-        }
-        main.commands = YamlConfiguration.loadConfiguration(main.commandsFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/commands.yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.commands.setDefaults(defConfig);
-    }
-
-    public void saveCommands(){
-        try{
-            main.commands.save(main.commandsFile);
-            ConfigUpdater.update(main, "net/blueva/core/configuration/files/commands.yml", new File(main.getDataFolder()+"/commands.yml"));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerCommands(){
-        main.commandsFile = new File(main.getDataFolder(),"commands.yml");
-        if(!main.commandsFile.exists()){
-            this.getCommands().options().copyDefaults(true);
-            saveCommands();
-        }
-    }
-
-    //scoreboards.yml file
-    public FileConfiguration getScoreboards() {
-        if(main.scoreboards == null) {
-            reloadScoreboards();
-        }
-        return main.scoreboards;
-    }
-
-    public void reloadScoreboards(){
-        if(main.scoreboards == null){
-            main.scoreboardsFile = new File(main.getDataFolder(),"scoreboards.yml");
-        }
-        main.scoreboards = YamlConfiguration.loadConfiguration(main.scoreboardsFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/scoreboards.yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.scoreboards.setDefaults(defConfig);
-    }
-
-    public void saveScoreboards(){
-        try{
-            main.scoreboards.save(main.scoreboardsFile);
-            ConfigUpdater.update(main, "net/blueva/core/configuration/files/scoreboards.yml", new File(main.getDataFolder()+"/scoreboards.yml"));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerScoreboards(){
-        main.scoreboardsFile = new File(main.getDataFolder(),"scoreboards.yml");
-        if(!main.scoreboardsFile.exists()){
-            this.getScoreboards().options().copyDefaults(true);
-            saveScoreboards();
-        }
-    }
-
-    //settings.yml file
-    public FileConfiguration getSettings() {
-        if(main.settings == null) {
-            reloadSettings();
-        }
-        return main.settings;
-    }
-
-    public void reloadSettings(){
-        if(main.settings == null){
-            main.settingsFile = new File(main.getDataFolder(),"settings.yml");
-        }
-        main.settings = YamlConfiguration.loadConfiguration(main.settingsFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/settings.yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.settings.setDefaults(defConfig);
-    }
-
-    public void saveSettings(){
-        try{
-            main.settings.save(main.settingsFile);
-            ConfigUpdater.update(main, "net/blueva/core/configuration/files/settings.yml", new File(main.getDataFolder()+"/settings.yml"));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerSettings(){
-        main.settingsFile = new File(main.getDataFolder(),"settings.yml");
-        if(!main.settingsFile.exists()){
-            this.getSettings().options().copyDefaults(true);
-            saveSettings();
-        }
-    }
-
-    //warps.yml file
-    public FileConfiguration getWarps() {
-        if(main.warps == null) {
-            reloadWarps();
-        }
-        return main.warps;
-    }
-
-    public void reloadWarps(){
-        if(main.warps == null){
-            main.warpsFile = new File(main.getDataFolder(),"warps.yml");
-        }
-        main.warps = YamlConfiguration.loadConfiguration(main.warpsFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/warps.yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.warps.setDefaults(defConfig);
-    }
-
-    public void saveWarps(){
-        try{
-            main.warps.save(main.warpsFile);
-            //ConfigUpdater.update(main, "net/blueva/core/configuration/files/warps.yml", new File(main.getDataFolder()+"/warps.yml"));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerWarps(){
-        main.warpsFile = new File(main.getDataFolder(),"warps.yml");
-        if(!main.warpsFile.exists()){
-            this.getWarps().options().copyDefaults(true);
-            saveWarps();
-        }
-    }
-
-    //worlds.yml file
-    public FileConfiguration getWorlds() {
-        if(main.worlds == null) {
-            reloadWorlds();
-        }
-        return main.worlds;
-    }
-
-    public void reloadWorlds(){
-        if(main.worlds == null){
-            main.worldsFile = new File(main.getDataFolder(),"worlds.yml");
-        }
-        main.worlds = YamlConfiguration.loadConfiguration(main.worldsFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/worlds.yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.worlds.setDefaults(defConfig);
-    }
-
-    public void saveWorlds(){
-        try{
-            main.worlds.save(main.worldsFile);
-            //ConfigUpdater.update(main, "net/blueva/core/configuration/files/worlds.yml", new File(main.getDataFolder()+"/worlds.yml"));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerWorlds(){
-        main.worldsFile = new File(main.getDataFolder(),"worlds.yml");
-        if(!main.worldsFile.exists()){
-            this.getWorlds().options().copyDefaults(true);
-            saveWorlds();
-        }
-    }
-
+    /*
     //individual user file
     public FileConfiguration getUser(UUID uuid) {
         reloadUser(uuid);
@@ -364,5 +399,5 @@ public class ConfigManager {
             main.langPath = getLang().getCurrentPath();
             saveLang();
         }
-    }
+    }*/
 }

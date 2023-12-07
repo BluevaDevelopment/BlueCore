@@ -25,55 +25,46 @@
 
 package net.blueva.core.managers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
+import dev.dejvokep.boostedyaml.block.implementation.Section;
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.blueva.core.Main;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 public class KitsManager {
 
-    public static void createKit(String name, String permission, int delay, List<ItemStack> items) {
+    public static void createKit(String name, String permission, int delay, List<ItemStack> items) throws IOException {
         Kit kit = new Kit(name, permission, delay, items);
         saveKit(kit);
     }
-    
-    public static Kit getKit(String name) {
-        return loadKit(name);
-    }
 
     public static boolean kitExists(String name) {
-        if (Main.getPlugin().configManager.getKit(name).getString("name").equals("<name>")) {
-            return false; 
-        } else {
-            return true; 
-        }
+        return !ConfigManager.Data.getKitDocument(name).getString("name").equals("<name>");
     }
     
-    private static void saveKit(Kit kit) {
+    private static void saveKit(Kit kit) throws IOException {
         String kitName = kit.getName();
-        Main.getPlugin().configManager.registerKit(kitName);
-        
-        ConfigurationSection kitSection = Main.getPlugin().configManager.getKit(kitName);
+        ConfigManager.Data.registerKitDocument(kitName);
+
+        Section kitSection = ConfigManager.Data.getKitDocument(kitName).getSection(kitName);
         kitSection.set("name", kitName);
         kitSection.set("permission", kit.getPermission());
         kitSection.set("delay", kit.getDelay());
         kitSection.set("items", kit.getItems());
-        Main.getPlugin().configManager.saveKit(kitName);
-        Main.getPlugin().configManager.reloadKit(kitName);
+        ConfigManager.Data.getKitDocument(kitName).save();
+        ConfigManager.Data.getKitDocument(kitName).reload();
     }
     
     private static Kit loadKit(String name) {
-        String kitName = Main.getPlugin().configManager.getKit(name).getString("name");
-        String perms = Main.getPlugin().configManager.getKit(name).getString("perms");
-        int delay = Main.getPlugin().configManager.getKit(name).getInt("delay");
+        String kitName = ConfigManager.Data.getKitDocument(name).getString("name");
+        String perms = ConfigManager.Data.getKitDocument(name).getString("perms");
+        int delay = ConfigManager.Data.getKitDocument(name).getInt("delay");
 
         List<ItemStack> items = new ArrayList<>();
-        for (Object itemObj : Main.getPlugin().configManager.getKit(name).getList("items")) {
+        for (Object itemObj : ConfigManager.Data.getKitDocument(name).getList("items")) {
             ItemStack itemStack = (ItemStack) itemObj;
             items.add(itemStack);
         }
@@ -81,7 +72,7 @@ public class KitsManager {
         return new Kit(kitName, perms, delay, items);
     }
 
-    public static void modifyKit(String name, String permission, int delay, List<ItemStack> items) {
+    public static void modifyKit(String name, String permission, int delay, List<ItemStack> items) throws IOException {
         Kit kit = loadKit(name);
         if (kit != null) {
             kit.setPermission(permission);
@@ -109,7 +100,7 @@ public class KitsManager {
 
 
     public static class Kit {
-        private String name;
+        private final String name;
         private String permission;
         private int delay;
         private List<ItemStack> items;

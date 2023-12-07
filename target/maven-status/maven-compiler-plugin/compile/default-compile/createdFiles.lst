@@ -1,5 +1,4 @@
 net\blueva\core\libraries\vault\EconomyImplementer.class
-net\blueva\core\configuration\updater\KeyBuilder.class
 net\blueva\core\commands\TitleCommand.class
 net\blueva\core\listeners\EntitySpawnListener.class
 net\blueva\core\commands\KillCommand.class
@@ -38,6 +37,7 @@ net\blueva\core\libraries\vault\VaultHook.class
 net\blueva\core\commands\UpdateWarpCommand.class
 net\blueva\core\commands\ActionBarCommand.class
 net\blueva\core\commands\SunCommand.class
+net\blueva\core\configuration\ConfigManager$Data.class
 net\blueva\core\commands\NightCommand.class
 net\blueva\core\managers\LocationManager.class
 net\blueva\core\commands\EconomyCommand.class
@@ -46,6 +46,7 @@ net\blueva\core\libraries\fastboard\FastBoardBase$ScoreboardAction.class
 net\blueva\core\commands\CreativeCommand.class
 net\blueva\core\commands\SetSpawnCommand.class
 net\blueva\core\managers\KitsManager.class
+net\blueva\core\managers\ModuleManager.class
 net\blueva\core\utils\StringUtil.class
 net\blueva\core\commands\CreateKitCommand.class
 net\blueva\core\commands\WorldCommand.class
@@ -59,7 +60,6 @@ net\blueva\core\libraries\iridiumcolor\patterns\GradientPattern.class
 net\blueva\core\commands\MidnightCommand.class
 net\blueva\core\commands\FeedCommand.class
 net\blueva\core\Main.class
-net\blueva\core\configuration\updater\KeyUtils.class
 net\blueva\core\libraries\iridiumcolor\IridiumColorAPI.class
 net\blueva\core\commands\SpawnCommand.class
 net\blueva\core\listeners\PlayerJoinListener.class
@@ -67,10 +67,8 @@ net\blueva\core\libraries\metrics\Metrics$SimplePie.class
 net\blueva\core\commands\SpectatorCommand.class
 net\blueva\core\commands\DayCommand.class
 net\blueva\core\listeners\PlayerQuitListener.class
-net\blueva\core\managers\LocationManager$1.class
 net\blueva\core\listeners\PlayerDropItemListener.class
 net\blueva\core\commands\MessageCommand.class
-net\blueva\core\configuration\updater\ConfigUpdater.class
 net\blueva\core\commands\EnderChestCommand.class
 net\blueva\core\libraries\metrics\Metrics$JsonObjectBuilder.class
 net\blueva\core\libraries\metrics\Metrics$MultiLineChart.class
@@ -84,6 +82,7 @@ net\blueva\core\libraries\iridiumcolor\patterns\RainbowPattern.class
 net\blueva\core\commands\FlyCommand.class
 net\blueva\core\libraries\metrics\Metrics$DrilldownPie.class
 net\blueva\core\libraries\metrics\Metrics$MetricsBase.class
+net\blueva\core\configuration\ConfigManager$Modules.class
 net\blueva\core\commands\StormCommand.class
 net\blueva\core\listeners\PlayerInteractListener.class
 net\blueva\core\libraries\fastboard\FastBoardBase$ObjectiveMode.class

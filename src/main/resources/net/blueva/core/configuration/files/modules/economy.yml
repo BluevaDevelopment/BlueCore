@@ -1,0 +1,23 @@
+#  ____  _             ____
+# | __ )| |_   _  ___ / ___|___  _ __ ___
+# |  _ \| | | | |/ _ | |   / _ \| "__/ _ \
+# | |_) | | |_| |  __| |__| (_) | | |  __/
+# |____/|_|\__,_|\___|\____\___/|_|  \___|
+#
+
+file_version: 1 # Do not modify it under any circumstances.
+
+economy:
+  enabled: true
+
+  # Money that players receive when they enter for the first time.
+  starting_balance: 100
+
+  # Symbol of the server's currency.
+  currency_symbol: $
+
+  # Minimum money that a player can have.
+  min_money: 0
+
+  # Maximum money that a player can have. (You can put "-1" for players to have unlimited money.)
+  max_money: 10000000000000

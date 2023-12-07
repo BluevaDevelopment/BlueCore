@@ -25,6 +25,7 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,6 +34,7 @@ import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class SetSpawnCommand implements CommandExecutor {
@@ -50,24 +52,28 @@ public class SetSpawnCommand implements CommandExecutor {
         }
 
         if(!sender.hasPermission("bluecore.setspawn")) {
-            sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_permission")));
+            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_permission")));
             return true;
         }
 
         if(args.length != 1) {
-            sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_setspawn_command")));
+            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_setspawn_command")));
             return true;
         }
 
-        if(!main.configManager.getWarps().isSet("warps." + args[0])) {
-            sender.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.unknown_warp")));
+        if(!ConfigManager.Data.getWarpDocument(args[0]).isString("warps." + args[0])) {
+            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
             return true;
         }
 
-        main.configManager.getWarps().set("spawn", args[0]);
-        main.configManager.saveWarps();
-        main.configManager.reloadWarps();
-        sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.spawn_set")).replace("%warp%", args[0])));
+        ConfigManager.Data.getWarpDocument(args[0]).set("spawn", args[0]);
+        try {
+            ConfigManager.Data.getWarpDocument(args[0]).save();
+            ConfigManager.Data.getWarpDocument(args[0]).reload();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.spawn_set")).replace("%warp%", args[0])));
         return true;
     }
 }

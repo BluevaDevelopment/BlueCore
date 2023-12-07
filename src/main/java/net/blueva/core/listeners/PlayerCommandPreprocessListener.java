@@ -28,6 +28,7 @@ package net.blueva.core.listeners;
 import java.util.List;
 import java.util.Objects;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -52,73 +53,75 @@ public class PlayerCommandPreprocessListener implements Listener {
 	public void OPC(PlayerCommandPreprocessEvent event) {
 		Player player = event.getPlayer();
 		String message = event.getMessage().toLowerCase();
-		for (String key : Objects.requireNonNull(main.configManager.getCommands().getConfigurationSection("commands")).getKeys(false)) {
-			String command = main.configManager.getCommands().getString("commands." + key + ".command");
-			List<String> worlds = main.configManager.getCommands().getStringList("commands." + key + ".worlds");
-			assert command != null;
-			String[] separatedCommands = command.split(" ");
-			String[] separatedMessages = message.split(" ");
-			if (separatedMessages.length >= separatedCommands.length) {
-				boolean ContinueB = false;
-				for (int i = 0; i < separatedCommands.length; i++) {
-					if (!separatedCommands[i].equals(separatedMessages[i])) {
-						ContinueB = true;
-						break;
+		for (Object key : Objects.requireNonNull(ConfigManager.Modules.commands.getSection("custom_commands")).getKeys()) {
+			String command = ConfigManager.Modules.commands.getString("custom_commands." + key + ".command");
+			List<String> worlds = ConfigManager.Modules.commands.getStringList("custom_commands." + key + ".worlds");
+
+			if(command != null) {
+				String[] separatedCommands = command.split(" ");
+				String[] separatedMessages = message.split(" ");
+				if (separatedMessages.length >= separatedCommands.length) {
+					boolean ContinueB = false;
+					for (int i = 0; i < separatedCommands.length; i++) {
+						if (!separatedCommands[i].equals(separatedMessages[i])) {
+							ContinueB = true;
+							break;
+						}
 					}
-				}
-				if (ContinueB)
-					continue;
-				event.setCancelled(true);
-				if(main.configManager.getCommands().isSet("commands." + key + ".worlds")) {
-					for (String world : worlds) {
-						if (player.getWorld().getName().equals(world)) {
-							List<String> commands = main.configManager.getCommands().getStringList("commands." + key + ".run_commands");
-							ConsoleCommandSender consoleCommandSender = Bukkit.getServer().getConsoleSender();
-							for (String s : commands) {
-								String commandToSend = ((String) s).replaceAll("%player%", player.getName());
-								if (commandToSend.startsWith("console:")) {
-									if (commandToSend.contains("msg " + player.getName())) {
-										String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-										player.sendMessage(MessagesUtil.format(player, msg));
+					if (ContinueB)
+						continue;
+					event.setCancelled(true);
+					if(ConfigManager.Modules.commands.isString("custom_commands." + key + ".worlds")) {
+						for (String world : worlds) {
+							if (player.getWorld().getName().equals(world)) {
+								List<String> commands = ConfigManager.Modules.commands.getStringList("custom_commands." + key + ".run_commands");
+								ConsoleCommandSender consoleCommandSender = Bukkit.getServer().getConsoleSender();
+								for (String s : commands) {
+									String commandToSend = ((String) s).replaceAll("%player%", player.getName());
+									if (commandToSend.startsWith("console:")) {
+										if (commandToSend.contains("msg " + player.getName())) {
+											String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
+											player.sendMessage(MessagesUtil.format(player, msg));
+										} else {
+											Bukkit.dispatchCommand(consoleCommandSender, commandToSend.replace("console: ", ""));
+										}
 									} else {
-										Bukkit.dispatchCommand((CommandSender) consoleCommandSender, commandToSend.replace("console: ", ""));
+										player.chat("/" + commandToSend.replace("player: ", ""));
 									}
-								} else {
-									player.chat("/" + commandToSend.replace("player: ", ""));
 								}
+								return;
 							}
-							return;
 						}
-					}
-				} else {
-					List<String> commands = main.configManager.getCommands().getStringList("commands." + key + ".run_commands");
-					ConsoleCommandSender consoleCommandSender = Bukkit.getServer().getConsoleSender();
-					for (String s : commands) {
-						String commandToSend = ((String) s).replaceAll("%player%", player.getName());
-						if (commandToSend.startsWith("console:")) {
-							if (commandToSend.contains("msg " + player.getName())) {
-								String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-								player.sendMessage(MessagesUtil.format(player, msg));
+					} else {
+						List<String> commands = ConfigManager.Modules.commands.getStringList("custom_commands." + key + ".run_commands");
+						ConsoleCommandSender consoleCommandSender = Bukkit.getServer().getConsoleSender();
+						for (String s : commands) {
+							String commandToSend = ((String) s).replaceAll("%player%", player.getName());
+							if (commandToSend.startsWith("console:")) {
+								if (commandToSend.contains("msg " + player.getName())) {
+									String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
+									player.sendMessage(MessagesUtil.format(player, msg));
+								} else {
+									Bukkit.dispatchCommand(consoleCommandSender, commandToSend.replace("console: ", ""));
+								}
 							} else {
-								Bukkit.dispatchCommand((CommandSender) consoleCommandSender, commandToSend.replace("console: ", ""));
+								player.chat("/" + commandToSend.replace("player: ", ""));
 							}
-						} else {
-							player.chat("/" + commandToSend.replace("player: ", ""));
 						}
+						return;
 					}
-					return;
 				}
 			}
 		}
 
-		if(main.configManager.getSettings().getBoolean("chat.command_blocker.enabled")) {
+		if(ConfigManager.Modules.commands.getBoolean("chat.command_blocker.enabled")) {
 			String[] arrayOfString;
 			int j = (arrayOfString = event.getMessage().split(" ")).length;
 			for (int i = 0; i < j; i++) {
 				String bcmd = arrayOfString[i];
-				if (main.configManager.getSettings().getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
+				if (ConfigManager.Modules.commands.getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_perms")));
+					event.getPlayer().sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
 				}
 			}
 		}

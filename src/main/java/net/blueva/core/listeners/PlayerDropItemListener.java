@@ -25,6 +25,7 @@
 
 package net.blueva.core.listeners;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,7 +44,7 @@ public class PlayerDropItemListener implements Listener {
     public void OPDI(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(!main.configManager.getWorlds().getBoolean("worlds." + worldname + ".drop_items")) {
+        if(!ConfigManager.Data.getWorldDocument(worldname).getBoolean("worlds." + worldname + ".drop_items")) {
             event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.drop_items"));
         }
 

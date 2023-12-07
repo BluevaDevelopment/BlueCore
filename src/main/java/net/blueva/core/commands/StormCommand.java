@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -53,20 +54,20 @@ public class StormCommand implements CommandExecutor {
                 world = ((Player) sender).getWorld();
             }
             if (!sender.hasPermission("bluecore.weather.storm")) {
-                sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format(((Player) sender), ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
             world.setStorm(true);
-            sender.sendMessage(MessagesUtil.format(((Player) sender), main.configManager.getLang().getString("messages.success.changed_weather"))
+            sender.sendMessage(MessagesUtil.format(((Player) sender), ConfigManager.language.getString("messages.success.changed_weather"))
                     .replace("%world_name%", world.getName())
                     .replace("%weather%", "Storm"));
         } else {
             if (world == null) {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_storm_command")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_storm_command")));
                 return true;
             }
             world.setStorm(true);
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.success.changed_weather"))
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.success.changed_weather"))
                     .replace("%world%", world.getName())
                     .replace("%weather%", "Storm"));
         }

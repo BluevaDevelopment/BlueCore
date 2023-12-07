@@ -25,6 +25,7 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,6 +34,7 @@ import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class DeleteWarpCommand implements CommandExecutor {
@@ -45,7 +47,7 @@ public class DeleteWarpCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.only_player")));
             return true;
         }
 
@@ -53,16 +55,20 @@ public class DeleteWarpCommand implements CommandExecutor {
         if(args.length > 0){
             if(sender.hasPermission("bluecore.updatewarp")) {
                 if(args.length == 1){
-                    if(main.configManager.getWarps().isSet("warps."+ args[0])) {
-                        main.configManager.getWarps().set("warps."+ args[0], null);
-                        main.configManager.saveWarps();
-                        main.configManager.reloadWarps();
-                        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.warp_deleted")).replace("%warp%", args[0])));
+                    if(ConfigManager.Data.getWarpDocument(args[0]).isString("warp."+ args[0])) {
+                        ConfigManager.Data.getWarpDocument(args[0]).set("warp."+ args[0], null);
+                        try {
+                            ConfigManager.Data.getWarpDocument(args[0]).save();
+                            ConfigManager.Data.getWarpDocument(args[0]).reload();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_deleted")).replace("%warp%", args[0])));
                     } else {
-                        player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.unknown_warp")));
+                        player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_deletewarp_command")));
+                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_deletewarp_command")));
                 }
             }
         }

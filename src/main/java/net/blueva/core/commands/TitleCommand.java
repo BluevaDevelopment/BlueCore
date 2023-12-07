@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtil;
 import net.blueva.core.utils.StringUtil;
 import org.bukkit.Bukkit;
@@ -48,7 +49,7 @@ public class TitleCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
         if (args.length < 2) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_command")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_command")));
             return true;
         }
 
@@ -56,23 +57,23 @@ public class TitleCommand implements CommandExecutor {
             if(sender.hasPermission("bluecore.title.broadcast")){
                 sendTitle(sender, args, 1, true, null);
             } else {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.no_perms")));
             }
         } else if(args[0].equalsIgnoreCase("send")){
             if(sender.hasPermission("bluecore.title.send")){
 
                 Player target = Bukkit.getPlayer(args[1]);
                 if (target == null) {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
+                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
                     return true;
                 }
                 sendTitle(sender, args, 2, false, target);
 
             } else {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.no_perms")));
             }
         }else{
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_command")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_command")));
         }
         return true;
     }
@@ -104,9 +105,9 @@ public class TitleCommand implements CommandExecutor {
                     fadeOut = Integer.parseInt(parts[2]);
                 } else {
                     if(broadcast) {
-                        sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_broadcast_command")));
+                        sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
                     } else {
-                        sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_send_command")));
+                        sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
                     }
                 }
 
@@ -122,15 +123,15 @@ public class TitleCommand implements CommandExecutor {
                 subTitle = MessagesUtil.format(null, parts[1].trim());
             } else {
                 if(broadcast) {
-                    sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_broadcast_command")));
+                    sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
                 } else {
-                    sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_send_command")));
+                    sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
                 }
                 return;
             }
 
             if (broadcast) {
-                sender.sendMessage(MessagesUtil.format(null, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.title_sent_broadcast"))
+                sender.sendMessage(MessagesUtil.format(null, Objects.requireNonNull(ConfigManager.language.getString("messages.success.title_sent_broadcast"))
                         .replace("%title%", title)
                         .replace("%subtitle%", subTitle)));
                 for (Player p : Bukkit.getOnlinePlayers()) {
@@ -138,16 +139,16 @@ public class TitleCommand implements CommandExecutor {
                 }
             } else {
                 player.sendTitle(title, subTitle, fadeIn, stay, fadeOut);
-                sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.title_sent"))
+                sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.title_sent"))
                         .replace("%player%", player.getName())
                         .replace("%title%", title)
                         .replace("%subtitle%", subTitle)));
             }
         } else {
             if(broadcast) {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_broadcast_command")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
             } else {
-                sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_title_send_command")));
+                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
             }
         }
     }

@@ -56,9 +56,9 @@ public class GenerateLanguages {
     }
 
     public void generateFile(String file) throws IOException {
-        glangFile = new File(main.getDataFolder()+"/language/",file+".yml");
+        glangFile = new File(main.getDataFolder()+"/languages/",file+".yml");
         glang = YamlConfiguration.loadConfiguration(glangFile);
-        Reader defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/language/" + file + ".yml")), StandardCharsets.UTF_8);
+        Reader defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/languages/" + file + ".yml")), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
         glang.setDefaults(defConfig);
         glang.options().copyDefaults(true);

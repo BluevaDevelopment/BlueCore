@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.managers.EconomyManager;
 import net.blueva.core.utils.MessagesUtil;
 import net.blueva.core.utils.StringUtil;
@@ -36,6 +37,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class PayCommand implements CommandExecutor {
@@ -49,18 +51,18 @@ public class PayCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.only_player")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.only_player")));
             return true;
         }
 
         if (args.length <= 1) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.other.use_pay_command")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.other.use_pay_command")));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
             return true;
         }
 
@@ -68,24 +70,28 @@ public class PayCommand implements CommandExecutor {
         if(StringUtil.isNumber(args[1])) {
             money = Double.parseDouble(args[1]);
         } else {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.other.use_pay_command")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.other.use_pay_command")));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.pay")) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         if(EconomyManager.balancePlayer((Player) sender, main) >= money) {
-            EconomyManager.withdrawMoney((Player) sender, money, main);
-            EconomyManager.depositMoney(target, money, main);
-            sender.sendMessage(MessagesUtil.format((Player) sender, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.money_paid"))
+            try {
+                EconomyManager.withdrawMoney((Player) sender, money, main);
+                EconomyManager.depositMoney(target, money, main);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            sender.sendMessage(MessagesUtil.format((Player) sender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_paid"))
                     .replace("{amount}", String.valueOf(money))));
-            target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.money_received"))
+            target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_received"))
                     .replace("{amount}", String.valueOf(money))));
         } else {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.insufficient_money")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.insufficient_money")));
         }
 
         return true;

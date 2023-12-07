@@ -25,6 +25,7 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -48,18 +49,18 @@ public class MessageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length < 2) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.other.use_message_command")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.other.use_message_command")));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.message")) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
@@ -69,11 +70,11 @@ public class MessageCommand implements CommandExecutor {
         }
         String message = messageBuilder.toString().trim();
 
-        sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.info.pm_sender_format"))
+        sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.info.pm_sender_format"))
                 .replace("{from_user}", sender.getName())
                 .replace("{to_user}", target.getName())
                 .replace("{message}", message)));
-        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.info.pm_receiver_format"))
+        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.info.pm_receiver_format"))
                 .replace("{from_user}", sender.getName())
                 .replace("{to_user}", target.getName())
                 .replace("{message}", message)));

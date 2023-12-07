@@ -26,42 +26,45 @@
 package net.blueva.core.managers;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
+
 public class EconomyManager {
 
-    public static void depositMoney(Player player, double quantity, Main main) {
+    public static void depositMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
-            double playerMoney = main.configManager.getUser(player.getUniqueId()).getDouble("money");
+            double playerMoney = ConfigManager.Data.getUserDocument(player.getUniqueId()).getDouble("money");
             double newQuantity = playerMoney+quantity;
             if(allowModifyBalance(player, main, quantity)) {
-                main.configManager.getUser(player.getUniqueId()).set("config", newQuantity);
-                main.configManager.saveUser(player.getUniqueId());
+                ConfigManager.Data.getUserDocument(player.getUniqueId()).set("config", newQuantity);
+                ConfigManager.Data.getUserDocument(player.getUniqueId()).save();
             }
         } else {
             main.economyImplementer.depositPlayer(player, quantity);
         }
     }
 
-    public static void withdrawMoney(Player player, double quantity, Main main) {
+    public static void withdrawMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
-            double playerMoney = main.configManager.getUser(player.getUniqueId()).getDouble("money");
+            double playerMoney = ConfigManager.Data.getUserDocument(player.getUniqueId()).getDouble("money");
             double newQuantity = playerMoney-quantity;
             if(allowModifyBalance(player, main, quantity)) {
-                main.configManager.getUser(player.getUniqueId()).set("config", newQuantity);
-                main.configManager.saveUser(player.getUniqueId());
+                ConfigManager.Data.getUserDocument(player.getUniqueId()).set("config", newQuantity);
+                ConfigManager.Data.getUserDocument(player.getUniqueId()).save();
             }
         } else {
             main.economyImplementer.withdrawPlayer(player, quantity);
         }
     }
 
-    public static void setMoney(Player player, double quantity, Main main) {
+    public static void setMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
             if(allowModifyBalance(player, main, quantity)) {
-                main.configManager.getUser(player.getUniqueId()).set("config", quantity);
-                main.configManager.saveUser(player.getUniqueId());
+                ConfigManager.Data.getUserDocument(player.getUniqueId()).set("config", quantity);
+                ConfigManager.Data.getUserDocument(player.getUniqueId()).save();
             }
         } else {
             double actualBalance = main.economyImplementer.getBalance(player);
@@ -73,7 +76,7 @@ public class EconomyManager {
     public static double balancePlayer(Player player, Main main) {
         double balance = 0.0;
         if(!Main.vaultapi) {
-            balance = main.configManager.getUser(player.getUniqueId()).getDouble("money");
+            balance = ConfigManager.Data.getUserDocument(player.getUniqueId()).getDouble("money");
         } else {
             balance = main.economyImplementer.getBalance(player);
         }
@@ -83,8 +86,8 @@ public class EconomyManager {
 
     public static boolean allowModifyBalance(Player player, Main main, double quantity) {
         boolean bool = false;
-        double min = main.configManager.getSettings().getDouble("economy.min_money");
-        double max = main.configManager.getSettings().getDouble("economy.max_money");
+        double min = ConfigManager.Modules.economy.getDouble("economy.min_money");
+        double max = ConfigManager.Modules.economy.getDouble("economy.max_money");
         double currentBalance = balancePlayer(player, main);
 
         if (max == -1) {
@@ -96,7 +99,7 @@ public class EconomyManager {
         }
 
         if(!bool) {
-            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.money_out_of_range")));
+            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.money_out_of_range")));
         }
 
         return bool;

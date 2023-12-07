@@ -25,6 +25,7 @@
 
 package net.blueva.core.listeners;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,6 +34,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class PlayerQuitListener implements Listener {
@@ -44,9 +46,9 @@ public class PlayerQuitListener implements Listener {
 	}
 
 	@EventHandler
-	public void OPQ(PlayerQuitEvent event) {
-		if(main.configManager.getSettings().getBoolean("welcome.broadcast.leave.enabled")) {
-			event.setQuitMessage(MessagesUtil.format(event.getPlayer(), main.configManager.getSettings().getString("welcome.broadcast.leave.message").replace("%player_name%", event.getPlayer().getDisplayName())));
+	public void OPQ(PlayerQuitEvent event) throws IOException {
+		if(ConfigManager.Modules.welcome.getBoolean("welcome.broadcast.leave.enabled")) {
+			event.setQuitMessage(MessagesUtil.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.leave.message").replace("%player_name%", event.getPlayer().getDisplayName())));
 		} else {
 			event.setQuitMessage("");
 		}
@@ -58,19 +60,14 @@ public class PlayerQuitListener implements Listener {
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
-		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.world", world);
-		main.configManager.saveUser(event.getPlayer().getUniqueId());
-		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.x", x);
-		main.configManager.saveUser(event.getPlayer().getUniqueId());
-		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.y", y);
-		main.configManager.saveUser(event.getPlayer().getUniqueId());
-		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.z", z);
-		main.configManager.saveUser(event.getPlayer().getUniqueId());
-		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.yaw", yaw);
-		main.configManager.saveUser(event.getPlayer().getUniqueId());
-		main.configManager.getUser(event.getPlayer().getUniqueId()).set("logoutlocation.pitch", pitch);
-		main.configManager.saveUser(event.getPlayer().getUniqueId());
-		main.configManager.reloadUser(event.getPlayer().getUniqueId());
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.world", world);
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.x", x);
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.y", y);
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.z", z);
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.yaw", yaw);
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.pitch", pitch);
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).save();
+		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).reload();
 
 	}
 

@@ -25,6 +25,7 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,6 +35,8 @@ import org.bukkit.entity.Player;
 import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 public class GodCommand implements CommandExecutor {
 
@@ -46,7 +49,7 @@ public class GodCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_god_command")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_god_command")));
             return true;
         }
 
@@ -55,38 +58,47 @@ public class GodCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.god.others")) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
             if (!sender.hasPermission("bluecore.god")) {
-                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
         }
 
-        if(main.configManager.getUser(target.getUniqueId()).getBoolean("godMode")) {
-            main.configManager.getUser(target.getUniqueId()).set("godMode", false);
-            main.configManager.saveUser(target.getUniqueId());
-            main.configManager.reloadUser(target.getUniqueId());
-            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.god_mode_disabled")));
+        if(ConfigManager.Data.getUserDocument(target.getUniqueId()).getBoolean("godMode")) {
+            ConfigManager.Data.getUserDocument(target.getUniqueId()).set("godMode", false);
+            try {
+                ConfigManager.Data.getUserDocument(target.getUniqueId()).save();
+                ConfigManager.Data.getUserDocument(target.getUniqueId()).reload();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            target.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.god_mode_disabled")));
         } else {
-            main.configManager.getUser(target.getUniqueId()).set("godMode", true);
-            main.configManager.saveUser(target.getUniqueId());
-            main.configManager.reloadUser(target.getUniqueId());
-            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.god_mode_enabled")));
+            ConfigManager.Data.getUserDocument(target.getUniqueId()).set("godMode", true);
+            try {
+                ConfigManager.Data.getUserDocument(target.getUniqueId()).save();
+                ConfigManager.Data.getUserDocument(target.getUniqueId()).reload();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            target.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.god_mode_enabled")));
         }
         if (args.length == 1) {
-            if(main.configManager.getUser(target.getUniqueId()).getBoolean("godMode")) {
-                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.god_mode_disabled_others")).replace("%player%", target.getName()));
+            if(ConfigManager.Data.getUserDocument(target.getUniqueId()).getBoolean("godMode")) {
+                sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.god_mode_disabled_others")).replace("%player%", target.getName()));
             } else {
-                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.god_mode_enabled_others")).replace("%player%", target.getName()));
+                sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.god_mode_enabled_others")).replace("%player%", target.getName()));
             }
         }
 

@@ -25,6 +25,7 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -49,7 +50,7 @@ public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.other.use_spawn_command")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_spawn_command")));
             return true;
         }
 
@@ -58,45 +59,45 @@ public class SpawnCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.spawn.others")) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtil.format((Player) sender, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
             if (!sender.hasPermission("bluecore.spawn")) {
-                sender.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
         }
 
         teleportSpawn(sender, target);
         if (args.length == 1) {
-            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.teleported_to_spawn_others")).replace("%player%", target.getName())));
+            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_spawn_others")).replace("%player%", target.getName())));
         }
 
         return true;
     }
 
     private void teleportSpawn(CommandSender sender, Player target) {
-        String spawn = main.configManager.getWarps().getString("spawn");
-        if (main.configManager.getWarps().isSet("warps." + spawn + ".world")) {
-            String world = main.configManager.getWarps().getString("warps." + spawn + ".world");
-            double x = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".x")));
-            double y = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".y")));
-            double z = Double.parseDouble(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".z")));
-            float yaw = Float.parseFloat(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".yaw")));
-            float pitch = Float.parseFloat(Objects.requireNonNull(main.configManager.getWarps().getString("warps." + spawn + ".pitch")));
+        String spawn = ConfigManager.Modules.warps.getString("spawn");
+        if (ConfigManager.Modules.warps.isString("warps." + spawn + ".world")) {
+            String world = ConfigManager.Modules.warps.getString("warps." + spawn + ".world");
+            double x = Double.parseDouble(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".x")));
+            double y = Double.parseDouble(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".y")));
+            double z = Double.parseDouble(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".z")));
+            float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".yaw")));
+            float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".pitch")));
             assert world != null;
             Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
             target.teleport(loc);
-            target.sendMessage(MessagesUtil.format(target, main.configManager.getLang().getString("messages.success.teleported_to_spawn")));
+            target.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.teleported_to_spawn")));
         } else {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.spawn_not_set")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.spawn_not_set")));
         }
     }
 }

@@ -25,6 +25,7 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,6 +35,7 @@ import net.blueva.core.Main;
 import net.blueva.core.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class SetWarpCommand implements CommandExecutor {
@@ -46,23 +48,23 @@ public class SetWarpCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtil.format(null, main.configManager.getLang().getString("messages.error.only_player")));
+            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.only_player")));
             return true;
         }
 
         final Player player = (Player)sender;
         if(!player.hasPermission("bluecore.setwarp")) {
-            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.no_permission")));
+            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_permission")));
             return true;
         }
 
         if(args.length < 1) {
-            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.other.use_setwarp_command")));
+            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_setwarp_command")));
             return true;
         }
 
-        if(main.configManager.getWarps().isSet("warps." + args[0])) {
-            player.sendMessage(MessagesUtil.format(player, main.configManager.getLang().getString("messages.error.warp_already_set")));
+        if(ConfigManager.Data.getWarpDocument(args[0]).isString("warps." + args[0])) {
+            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.warp_already_set")));
             return true;
         }
 
@@ -73,15 +75,19 @@ public class SetWarpCommand implements CommandExecutor {
         double z = l.getZ();
         float yaw = l.getYaw();
         float pitch = l.getPitch();
-        main.configManager.getWarps().set("warps." + args[0] + ".world", world);
-        main.configManager.getWarps().set("warps." + args[0] + ".x", x);
-        main.configManager.getWarps().set("warps." + args[0] + ".y", y);
-        main.configManager.getWarps().set("warps." + args[0] + ".z", z);
-        main.configManager.getWarps().set("warps." + args[0] + ".yaw", yaw);
-        main.configManager.getWarps().set("warps." + args[0] + ".pitch", pitch);
-        main.configManager.saveWarps();
-        main.configManager.reloadWarps();
-        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(main.configManager.getLang().getString("messages.success.warp_set")).replace("%warp%", args[0])));
+        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".world", world);
+        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".x", x);
+        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".y", y);
+        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".z", z);
+        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".yaw", yaw);
+        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".pitch", pitch);
+        try {
+            ConfigManager.Data.getWarpDocument(args[0]).save();
+            ConfigManager.Data.getWarpDocument(args[0]).reload();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_set")).replace("%warp%", args[0])));
 
         return true;
     }

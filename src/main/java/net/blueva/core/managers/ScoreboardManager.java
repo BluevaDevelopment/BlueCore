@@ -25,15 +25,15 @@
 
 package net.blueva.core.managers;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.libraries.fastboard.FastBoard;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
-import net.blueva.core.Main;
+
+import java.util.*;
 
 public class ScoreboardManager {
 
@@ -47,7 +47,7 @@ public class ScoreboardManager {
 	}
 
 	public void createScoreboard() {
-		for (String scoreboard : Objects.requireNonNull(main.configManager.getScoreboards().getConfigurationSection("scoreboards")).getKeys(false)) {
+		for (Object scoreboard : Objects.requireNonNull(ConfigManager.Modules.scoreboards.getSection("scoreboards")).getKeys()) {
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 			int taskID = scheduler.scheduleSyncRepeatingTask(main, () -> {
 				for (Player player : Bukkit.getOnlinePlayers()) {
@@ -55,7 +55,7 @@ public class ScoreboardManager {
 						FastBoard board = new FastBoard(player);
 						this.boards.put(player.getUniqueId(), board);
 					}
-					updateScoreboards(player, boards.get(player.getUniqueId()), scoreboard);
+					updateScoreboards(player, boards.get(player.getUniqueId()), scoreboard.toString());
 
 					String scoreboardPath = "scoreboards." + scoreboard;
 					if(shouldDisplayScoreboard(player, scoreboardPath) && scoreboardHasPriority(scoreboardPath) && playerWithBoard.containsKey(player)) {
@@ -64,17 +64,17 @@ public class ScoreboardManager {
 						playerWithBoard.replace(player, false);
 					}
 				}
-			}, 0L, main.configManager.getScoreboards().getInt("scoreboards." + scoreboard + ".ticks"));
-			taskIDs.put(scoreboard, taskID);
+			}, 0L, ConfigManager.Modules.scoreboards.getInt("scoreboards." + scoreboard + ".ticks"));
+			taskIDs.put(scoreboard.toString(), taskID);
 		}
 	}
 
 	private void updateScoreboards(Player player, FastBoard board, String scoreboard) {
 		String scoreboardPath = "scoreboards." + scoreboard;
 		if (shouldDisplayScoreboard(player, scoreboardPath) && scoreboardHasPriority(scoreboardPath)) {
-			String title = MessagesUtil.format(player, main.configManager.getScoreboards().getString(scoreboardPath + ".title"));
+			String title = MessagesUtil.format(player, ConfigManager.Modules.scoreboards.getString(scoreboardPath + ".title"));
 			board.updateTitle(title);
-			List<String> lines = main.configManager.getScoreboards().getStringList(scoreboardPath + ".lines");
+			List<String> lines = ConfigManager.Modules.scoreboards.getStringList(scoreboardPath + ".lines");
 			List<String> formattedLines = formatLines(player, lines);
 			board.updateLines(formattedLines);
 		} else if(!checkPlayer(player)) {
@@ -94,12 +94,16 @@ public class ScoreboardManager {
 	}
 
 	private boolean shouldDisplayScoreboard(Player player, String scoreboardPath) {
-		String displayCondition = MessagesUtil.format(player, main.configManager.getScoreboards().getString(scoreboardPath + ".display_condition"));
+		String displayCondition = MessagesUtil.format(player, ConfigManager.Modules.scoreboards.getString(scoreboardPath + ".display_condition"));
 		return displayCondition.equals("*") || evaluateCondition(displayCondition, player);
 	}
 
 	private boolean evaluateCondition(String condition, Player player) {
-		String[] parts = condition.split(" ");
+		String[] parts = condition.split(" ", 3);
+
+		if (parts.length < 3) {
+			return false;
+		}
 
 		String operand1 = parts[0];
 		String operator = parts[1];
@@ -112,30 +116,23 @@ public class ScoreboardManager {
 		operand1 = MessagesUtil.format(player, operand1);
 		operand2 = MessagesUtil.format(player, operand2);
 
-		switch (operator) {
-			case "=":
-				return operand1.equals(operand2);
-			case "!=":
-				return !operand1.equals(operand2);
-			case "<":
-				return Double.parseDouble(operand1) < Double.parseDouble(operand2);
-			case ">":
-				return Double.parseDouble(operand1) > Double.parseDouble(operand2);
-			case "<=":
-				return Double.parseDouble(operand1) <= Double.parseDouble(operand2);
-			case ">=":
-				return Double.parseDouble(operand1) >= Double.parseDouble(operand2);
-			default:
-				return false;
-		}
+        return switch (operator) {
+            case "=" -> operand1.equals(operand2);
+            case "!=" -> !operand1.equals(operand2);
+            case "<" -> Double.parseDouble(operand1) < Double.parseDouble(operand2);
+            case ">" -> Double.parseDouble(operand1) > Double.parseDouble(operand2);
+            case "<=" -> Double.parseDouble(operand1) <= Double.parseDouble(operand2);
+            case ">=" -> Double.parseDouble(operand1) >= Double.parseDouble(operand2);
+            default -> false;
+        };
 	}
 
 	private boolean scoreboardHasPriority(String scoreboardPath) {
 		boolean bool = false;
 
-		int priority = main.configManager.getScoreboards().getInt(scoreboardPath + ".priority");
-		for (String scoreboard : Objects.requireNonNull(main.configManager.getScoreboards().getConfigurationSection("scoreboards")).getKeys(false)) {
-			if(main.configManager.getScoreboards().getInt("scoreboards."+scoreboard+".priority") <= priority) {
+		int priority = ConfigManager.Modules.scoreboards.getInt(scoreboardPath + ".priority");
+		for (Object scoreboard : Objects.requireNonNull(ConfigManager.Modules.scoreboards.getSection("scoreboards")).getKeys()) {
+			if(ConfigManager.Modules.scoreboards.getInt("scoreboards."+scoreboard+".priority") <= priority) {
 				bool = true;
 			}
 		}

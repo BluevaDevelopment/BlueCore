@@ -26,6 +26,7 @@
 package net.blueva.core.utils;
 
 import net.blueva.core.Main;
+import net.blueva.core.configuration.ConfigManager;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -55,7 +56,7 @@ public class DateUtil {
         long minutes = duration.toMinutes() % 60;
         long seconds = duration.getSeconds() % 60;
 
-        String text = Main.getPlugin().configManager.getLang().getString("messages.error.kit_delay").replace("%kit_name%", kit)
+        String text = ConfigManager.language.getString("messages.error.kit_delay").replace("%kit_name%", kit)
                 .replace("%kit_delay_year%", Long.toString(years))
                 .replace("%kit_delay_month%", Long.toString(months))
                 .replace("%kit_delay_day%", Long.toString(days))
