@@ -92,12 +92,12 @@ public class ConfigManager {
         }
 
         public static YamlDocument getWarpDocument(String warp) {
-            registerWorldDocument(warp);
+            registerWarpDocument(warp);
             return user;
         }
 
         // BlueCore/data/modules/worlds/world.yml
-        public static void registerWorldDocument(String name) {
+        public static void changeWorldReference(String name) {
             try {
                 world = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/worlds/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
                         GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(false).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
@@ -106,13 +106,8 @@ public class ConfigManager {
             }
         }
 
-        public static YamlDocument getWorldDocument(String name) {
-            registerWorldDocument(name);
-            return world;
-        }
-
+        // BlueCore/data/users/uuid.yml
         public static void registerUserDocument(UUID uuid) {
-            // BlueCore/data/users/uuid.yml
             try {
                 user = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/users/", uuid.toString()+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/users/userdatadefault.yml")),
                         GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());

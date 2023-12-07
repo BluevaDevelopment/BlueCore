@@ -44,7 +44,8 @@ public class PlayerDropItemListener implements Listener {
     public void OPDI(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         String worldname = event.getPlayer().getWorld().getName();
-        if(!ConfigManager.Data.getWorldDocument(worldname).getBoolean("worlds." + worldname + ".drop_items")) {
+        ConfigManager.Data.changeWorldReference(worldname);
+        if(!ConfigManager.Data.world.getBoolean("worlds." + worldname + ".drop_items")) {
             event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.drop_items"));
         }
 

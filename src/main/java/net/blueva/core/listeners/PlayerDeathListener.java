@@ -66,14 +66,15 @@ public class PlayerDeathListener implements Listener {
 		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).reload();
 
 
-		String respawnWorld = ConfigManager.Data.getWorldDocument(world).getString("world." + world + ".respawnWorld");
-		if(ConfigManager.Data.getWorldDocument(world).getBoolean("world." + world + ".drop_items")) {
-			if(ConfigManager.Data.getWorldDocument(world).isString("world." + world + ".respawnWorld")) {
-				double xRespawn = Double.parseDouble(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.x"));
-				double yRespawn = Double.parseDouble(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.y"));
-				double zRespawn = Double.parseDouble(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.z"));
-				float pitchRespawn = Float.parseFloat(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.pitch"));
-				float yawRespawn = Float.parseFloat(ConfigManager.Data.getWorldDocument(world).getString("world." + respawnWorld + ".spawnlocation.yaw"));
+		ConfigManager.Data.changeWorldReference(world);
+		String respawnWorld = ConfigManager.Data.world.getString("world." + world + ".respawnWorld");
+		if(ConfigManager.Data.world.getBoolean("world." + world + ".drop_items")) {
+			if(ConfigManager.Data.world.isString("world." + world + ".respawnWorld")) {
+				double xRespawn = Double.parseDouble(ConfigManager.Data.world.getString("world." + respawnWorld + ".spawnlocation.x"));
+				double yRespawn = Double.parseDouble(ConfigManager.Data.world.getString("world." + respawnWorld + ".spawnlocation.y"));
+				double zRespawn = Double.parseDouble(ConfigManager.Data.world.getString("world." + respawnWorld + ".spawnlocation.z"));
+				float pitchRespawn = Float.parseFloat(ConfigManager.Data.world.getString("world." + respawnWorld + ".spawnlocation.pitch"));
+				float yawRespawn = Float.parseFloat(ConfigManager.Data.world.getString("world." + respawnWorld + ".spawnlocation.yaw"));
 				Location loc = new Location(Bukkit.getWorld(respawnWorld), xRespawn, yRespawn, zRespawn, yawRespawn, pitchRespawn);
 				player.teleport(loc);
 			}

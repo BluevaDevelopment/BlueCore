@@ -50,30 +50,29 @@ public class WorldManager {
             if(files.length == 0) {
                 Bukkit.getConsoleSender().sendMessage("[BlueCore] [World Module] Importing worlds from the server to BlueCore World Module.");
                 for (World world : Bukkit.getWorlds()) {
-                    ConfigManager.Data.registerWorldDocument(world.getName());
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".name", world.getName());
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".alias", "&b" + world.getName().replace("_", " "));
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".build", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".break", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".pvp", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".fall_damage", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".interact", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".drop_items", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".mob_spawning", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".difficulty", world.getDifficulty().toString());
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".respawnWorld", "");
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".allowWeather", true);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".seed", world.getSeed());
-                    if(world.getGenerator() != null) ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".generator", world.getGenerator().toString().split("\\(")[0].trim());
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".environment", world.getEnvironment().toString());
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".type", world.getWorldType().toString());
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".spawnlocation.x", 0.0);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".spawnlocation.y", 65.0);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".spawnlocation.z", 0.0);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".spawnlocation.pitch", 0.0);
-                    ConfigManager.Data.getWorldDocument(world.getName()).set("world." + world.getName() + ".spawnlocation.yaw", 0.0);
-                    ConfigManager.Data.getWorldDocument(world.getName()).save();
-                    ConfigManager.Data.getWorldDocument(world.getName()).reload();
+                    ConfigManager.Data.changeWorldReference(world.getName());
+                    ConfigManager.Data.world.set("world." + world.getName() + ".name", world.getName());
+                    ConfigManager.Data.world.set("world." + world.getName() + ".alias", "&b" + world.getName().replace("_", " "));
+                    ConfigManager.Data.world.set("world." + world.getName() + ".build", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".break", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".pvp", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".fall_damage", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".interact", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".drop_items", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".mob_spawning", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".difficulty", world.getDifficulty().toString());
+                    ConfigManager.Data.world.set("world." + world.getName() + ".respawnWorld", "");
+                    ConfigManager.Data.world.set("world." + world.getName() + ".allowWeather", true);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".seed", world.getSeed());
+                    if(world.getGenerator() != null) ConfigManager.Data.world.set("world." + world.getName() + ".generator", world.getGenerator().toString().split("\\(")[0].trim());
+                    ConfigManager.Data.world.set("world." + world.getName() + ".environment", world.getEnvironment().toString());
+                    ConfigManager.Data.world.set("world." + world.getName() + ".type", world.getWorldType().toString());
+                    ConfigManager.Data.world.set("world." + world.getName() + ".spawnlocation.x", 0.0);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".spawnlocation.y", 65.0);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".spawnlocation.z", 0.0);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".spawnlocation.pitch", 0.0);
+                    ConfigManager.Data.world.set("world." + world.getName() + ".spawnlocation.yaw", 0.0);
+                    ConfigManager.Data.world.save();
                     Bukkit.getConsoleSender().sendMessage("[BlueCore] [World Module] Imported world: " + world.getName());
                 }
             } else {
@@ -111,30 +110,30 @@ public class WorldManager {
             player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.wm_creation_error")));
         }
 
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".name", name);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".alias", "&b" + name.replace("_", " "));
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".build", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".break", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".pvp", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".fall_damage", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".interact", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".drop_items", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".mob_spawning", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".difficulty", "NORMAL");
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".respawnWorld", "");
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".allowWeather", true);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".seed", Bukkit.getWorld(name).getSeed());
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".generator", "");
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".generator", "");
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".environment", environment.toUpperCase());
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".type", type.toUpperCase());
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.x", 0.0);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.y", 65.0);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.z", 0.0);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.pitch", 0.0);
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.yaw", 0.0);
-        ConfigManager.Data.getWorldDocument(name).save();
-        ConfigManager.Data.getWorldDocument(name).reload();
+        ConfigManager.Data.changeWorldReference(name);
+        ConfigManager.Data.world.set("world." + name + ".name", name);
+        ConfigManager.Data.world.set("world." + name + ".alias", "&b" + name.replace("_", " "));
+        ConfigManager.Data.world.set("world." + name + ".build", true);
+        ConfigManager.Data.world.set("world." + name + ".break", true);
+        ConfigManager.Data.world.set("world." + name + ".pvp", true);
+        ConfigManager.Data.world.set("world." + name + ".fall_damage", true);
+        ConfigManager.Data.world.set("world." + name + ".interact", true);
+        ConfigManager.Data.world.set("world." + name + ".drop_items", true);
+        ConfigManager.Data.world.set("world." + name + ".mob_spawning", true);
+        ConfigManager.Data.world.set("world." + name + ".difficulty", "NORMAL");
+        ConfigManager.Data.world.set("world." + name + ".respawnWorld", "");
+        ConfigManager.Data.world.set("world." + name + ".allowWeather", true);
+        ConfigManager.Data.world.set("world." + name + ".seed", Bukkit.getWorld(name).getSeed());
+        ConfigManager.Data.world.set("world." + name + ".generator", "");
+        ConfigManager.Data.world.set("world." + name + ".generator", "");
+        ConfigManager.Data.world.set("world." + name + ".environment", environment.toUpperCase());
+        ConfigManager.Data.world.set("world." + name + ".type", type.toUpperCase());
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.x", 0.0);
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.y", 65.0);
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.z", 0.0);
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.pitch", 0.0);
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.yaw", 0.0);
+        ConfigManager.Data.world.save();
         player.teleport(Objects.requireNonNull(Bukkit.getWorld(name)).getSpawnLocation());
         player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.success.wm_created_world")).replace("%world_name%", name));
 
@@ -180,23 +179,25 @@ public class WorldManager {
             player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.wm_invalid_world")));
             return;
         }
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.x", player.getLocation().getX());
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.y", player.getLocation().getY());
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.z", player.getLocation().getZ());
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.pitch", player.getLocation().getPitch());
-        ConfigManager.Data.getWorldDocument(name).set("world." + name + ".spawnlocation.yaw", player.getLocation().getYaw());
-        ConfigManager.Data.getWorldDocument(name).save();
-        ConfigManager.Data.getWorldDocument(name).reload();
+        ConfigManager.Data.changeWorldReference(name);
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.x", player.getLocation().getX());
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.y", player.getLocation().getY());
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.z", player.getLocation().getZ());
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.pitch", player.getLocation().getPitch());
+        ConfigManager.Data.world.set("world." + name + ".spawnlocation.yaw", player.getLocation().getYaw());
+        ConfigManager.Data.world.save();
+        ConfigManager.Data.world.reload();
     }
 
     public void gotoWorldSpawn(Player player) {
         String name = player.getWorld().getName();
-        World world = Bukkit.getWorld(Objects.requireNonNull(ConfigManager.Data.getWorldDocument(name).getString("world." + name + ".name")));
-        double x = ConfigManager.Data.getWorldDocument(name).getDouble("world." + name + ".spawnlocation.x");
-        double y = ConfigManager.Data.getWorldDocument(name).getDouble("world." + name + ".spawnlocation.y");
-        double z = ConfigManager.Data.getWorldDocument(name).getDouble("world." + name + ".spawnlocation.z");
-        float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.getWorldDocument(name).getString("worlds." + name + ".spawnlocation.pitch")));
-        float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.getWorldDocument(name).getString("worlds." + name + ".spawnlocation.yaw")));
+        ConfigManager.Data.changeWorldReference(name);
+        World world = Bukkit.getWorld(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".name")));
+        double x = ConfigManager.Data.world.getDouble("world." + name + ".spawnlocation.x");
+        double y = ConfigManager.Data.world.getDouble("world." + name + ".spawnlocation.y");
+        double z = ConfigManager.Data.world.getDouble("world." + name + ".spawnlocation.z");
+        float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".spawnlocation.pitch")));
+        float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".spawnlocation.yaw")));
         Location loc = new Location(world, x, y, z, yaw, pitch);
         player.teleport(loc);
     }
@@ -206,12 +207,13 @@ public class WorldManager {
             player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.wm_invalid_world")));
             return;
         }
-        World world = Bukkit.getWorld(Objects.requireNonNull(ConfigManager.Data.getWorldDocument(name).getString("worlds." + name + ".name")));
-        double x = ConfigManager.Data.getWorldDocument(name).getDouble("world." + name + ".spawnlocation.x");
-        double y = ConfigManager.Data.getWorldDocument(name).getDouble("world." + name + ".spawnlocation.y");
-        double z = ConfigManager.Data.getWorldDocument(name).getDouble("world." + name + ".spawnlocation.z");
-        float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.getWorldDocument(name).getString("worlds." + name + ".spawnlocation.pitch")));
-        float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.getWorldDocument(name).getString("worlds." + name + ".spawnlocation.yaw")));
+        ConfigManager.Data.changeWorldReference(name);
+        World world = Bukkit.getWorld(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".name")));
+        double x = ConfigManager.Data.world.getDouble("world." + name + ".spawnlocation.x");
+        double y = ConfigManager.Data.world.getDouble("world." + name + ".spawnlocation.y");
+        double z = ConfigManager.Data.world.getDouble("world." + name + ".spawnlocation.z");
+        float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".spawnlocation.pitch")));
+        float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".spawnlocation.yaw")));
         Location loc = new Location(world, x, y, z, yaw, pitch);
         player.teleport(loc);
     }
