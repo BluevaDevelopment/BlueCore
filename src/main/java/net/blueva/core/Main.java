@@ -109,10 +109,12 @@ public final class Main extends JavaPlugin {
 		}
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
-			try {
-				worldManager.loadWorlds();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+			if(ConfigManager.Modules.worlds.getBoolean("worlds.enabled")) {
+				try {
+					worldManager.loadWorlds();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 			}
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " ____  _             ____");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "| __ )| |_   _  ___ / ___|___  _ __ ___");

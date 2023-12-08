@@ -9,3 +9,19 @@ file_version: 1 # Do not modify it under any circumstances.
 
 worlds:
   enabled: true
+  defaults:
+    build: true
+    break: true
+    pvp: true
+    fall_damage: true
+    interact: true
+    drop_items: true
+    mob_spawning: true
+    respawn_world: ''
+    allow_weather: true
+    spawn_location:
+      x: 0.0
+      y: 65.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0

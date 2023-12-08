@@ -6,7 +6,7 @@
 
 file_version: 1
 language: 'English'
-prefix: '&b&lBlueCore &7&l»&f'
+prefix: '&b&lBlue Core &7&l»&f'
 messages:
   success:
     loaded_language: '{prefix} The language English has been loaded successfully.'
@@ -81,6 +81,7 @@ messages:
     kit_delay: '{prefix} &cYou will be able to reclaim the %kit_name% kit in &4&l%kit_delay_year% year(s), %kit_delay_month% month(s), %kit_delay_day% day(s), %kit_delay_hour% hour(s), %kit_delay_minute% minute(s) and %kit_delay_second% second(s)&c.'
     money_out_of_range: '{prefix} &cYour balance results in a balance below the minimum or maximum allowed.'
     insufficient_money: '{prefix} &cYou do not have enough money to complete that action.'
+    module_disabled: '{prefix} &cThis command belongs to the module &l%module% &cwhich is disabled.'
     wm_alredy_exist: '{prefix} &c%world_name% already exists as a world!'
     wm_creation_error: '{prefix} &cCreation world failed, Please check console for errors!'
     wm_deletion_error: '{prefix} &cDeletion world failed, Please check console for errors!'
@@ -143,7 +144,7 @@ messages:
 commands:
   bluecore:
     info:
-      - '&b&lBlueCore &8- &fThe All-In-One Minecraft Server Solution'
+      - '&b&lBlue Core &8- &fThe All-In-One Minecraft Server Solution'
       - '&7Running version &f{plugin_version} &8- &7Get help with &f/bc help'
     help:
       page1:

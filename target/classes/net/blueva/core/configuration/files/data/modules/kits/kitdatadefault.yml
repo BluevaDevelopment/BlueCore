@@ -4,7 +4,6 @@
 # | |_) | | |_| |  __| |__| (_) | | |  __/
 # |____/|_|\__,_|\___|\____\___/|_|  \___|
 
-file_version: 1
 name: <name>
 permission: bluecore.kit.<name>
 delay: 0

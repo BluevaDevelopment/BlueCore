@@ -78,7 +78,7 @@ public class WorldManager {
             } else {
                 for(File file : files) {
                     Bukkit.getConsoleSender().sendMessage("[BlueCore] [World Module] Loading world " + file.getName());
-                    WorldCreator setupworld = new WorldCreator(file.getName());
+                    WorldCreator setupworld = new WorldCreator(file.getName().replace(".yml", ""));
                     setupworld.createWorld();
                 }
             }
@@ -113,26 +113,25 @@ public class WorldManager {
         ConfigManager.Data.changeWorldReference(name);
         ConfigManager.Data.world.set("world." + name + ".name", name);
         ConfigManager.Data.world.set("world." + name + ".alias", "&b" + name.replace("_", " "));
-        ConfigManager.Data.world.set("world." + name + ".build", true);
-        ConfigManager.Data.world.set("world." + name + ".break", true);
-        ConfigManager.Data.world.set("world." + name + ".pvp", true);
-        ConfigManager.Data.world.set("world." + name + ".fall_damage", true);
-        ConfigManager.Data.world.set("world." + name + ".interact", true);
-        ConfigManager.Data.world.set("world." + name + ".drop_items", true);
-        ConfigManager.Data.world.set("world." + name + ".mob_spawning", true);
+        ConfigManager.Data.world.set("world." + name + ".build", ConfigManager.Modules.worlds.getString("worlds.defaults.build"));
+        ConfigManager.Data.world.set("world." + name + ".break", ConfigManager.Modules.worlds.getString("worlds.defaults.break"));
+        ConfigManager.Data.world.set("world." + name + ".pvp", ConfigManager.Modules.worlds.getString("worlds.defaults.pvp"));
+        ConfigManager.Data.world.set("world." + name + ".fall_damage", ConfigManager.Modules.worlds.getString("worlds.defaults.fall_damage"));
+        ConfigManager.Data.world.set("world." + name + ".interact", ConfigManager.Modules.worlds.getString("worlds.defaults.interact"));
+        ConfigManager.Data.world.set("world." + name + ".drop_items", ConfigManager.Modules.worlds.getString("worlds.defaults.drop_items"));
+        ConfigManager.Data.world.set("world." + name + ".mob_spawning", ConfigManager.Modules.worlds.getString("worlds.defaults.mob_spawning"));
         ConfigManager.Data.world.set("world." + name + ".difficulty", "NORMAL");
-        ConfigManager.Data.world.set("world." + name + ".respawnWorld", "");
-        ConfigManager.Data.world.set("world." + name + ".allowWeather", true);
-        ConfigManager.Data.world.set("world." + name + ".seed", Bukkit.getWorld(name).getSeed());
-        ConfigManager.Data.world.set("world." + name + ".generator", "");
+        ConfigManager.Data.world.set("world." + name + ".respawn_world", ConfigManager.Modules.worlds.getString("worlds.defaults.respawn_world"));
+        ConfigManager.Data.world.set("world." + name + ".allow_weather", ConfigManager.Modules.worlds.getString("worlds.defaults.allow_weather"));
+        ConfigManager.Data.world.set("world." + name + ".seed", Objects.requireNonNull(Bukkit.getWorld(name)).getSeed());
         ConfigManager.Data.world.set("world." + name + ".generator", "");
         ConfigManager.Data.world.set("world." + name + ".environment", environment.toUpperCase());
         ConfigManager.Data.world.set("world." + name + ".type", type.toUpperCase());
-        ConfigManager.Data.world.set("world." + name + ".spawnlocation.x", 0.0);
-        ConfigManager.Data.world.set("world." + name + ".spawnlocation.y", 65.0);
-        ConfigManager.Data.world.set("world." + name + ".spawnlocation.z", 0.0);
-        ConfigManager.Data.world.set("world." + name + ".spawnlocation.pitch", 0.0);
-        ConfigManager.Data.world.set("world." + name + ".spawnlocation.yaw", 0.0);
+        ConfigManager.Data.world.set("world." + name + ".spawn_location.x", ConfigManager.Modules.worlds.getFloat("worlds.defaults.spawn_location.x"));
+        ConfigManager.Data.world.set("world." + name + ".spawn_location.y", ConfigManager.Modules.worlds.getFloat("worlds.defaults.spawn_location.y"));
+        ConfigManager.Data.world.set("world." + name + ".spawn_location.z", ConfigManager.Modules.worlds.getFloat("worlds.defaults.spawn_location.z"));
+        ConfigManager.Data.world.set("world." + name + ".spawn_location.pitch", ConfigManager.Modules.worlds.getFloat("worlds.defaults.spawn_location.pitch"));
+        ConfigManager.Data.world.set("world." + name + ".spawn_location.yaw", ConfigManager.Modules.worlds.getFloat("worlds.defaults.spawn_location.yaw"));
         ConfigManager.Data.world.save();
         player.teleport(Objects.requireNonNull(Bukkit.getWorld(name)).getSpawnLocation());
         player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.success.wm_created_world")).replace("%world_name%", name));
