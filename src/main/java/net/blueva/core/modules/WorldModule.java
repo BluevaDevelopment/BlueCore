@@ -23,7 +23,7 @@
  * Copyright (c) 2023 Blueva Development. All rights reserved.
  */
 
-package net.blueva.core.managers;
+package net.blueva.core.modules;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
@@ -34,11 +34,11 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
-public class WorldManager {
+public class WorldModule {
 
     private final Main main;
 
-    public WorldManager(Main main) {
+    public WorldModule(Main main) {
         this.main = main;
     }
 

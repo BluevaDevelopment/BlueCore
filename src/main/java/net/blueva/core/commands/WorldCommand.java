@@ -79,7 +79,7 @@ public class WorldCommand implements CommandExecutor {
                     if (args.length == 3) {
                         if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             try {
-                                main.worldManager.createWorld(player, args[1], null, null, null);
+                                main.worldModule.createWorld(player, args[1], null, null, null);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
@@ -107,7 +107,7 @@ public class WorldCommand implements CommandExecutor {
                             if(args[3].equals("-t")) {
                                 if(args[4].equals("flat") || args[4].equals("large_biomes") || args[4].equals("normal") || args[4].equals("amplified")) {
                                     try {
-                                        main.worldManager.createWorld(player, args[1], args[2].toUpperCase(), args[4].toUpperCase(), null);
+                                        main.worldModule.createWorld(player, args[1], args[2].toUpperCase(), args[4].toUpperCase(), null);
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -116,7 +116,7 @@ public class WorldCommand implements CommandExecutor {
                             } else if(args[3].equals("-g")) {
                                 if(!args[4].isEmpty()) {
                                     try {
-                                        main.worldManager.createWorld(player, args[1], args[2].toUpperCase(), null, args[4]);
+                                        main.worldModule.createWorld(player, args[1], args[2].toUpperCase(), null, args[4]);
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -138,7 +138,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                     if (args.length == 2) {
-                        main.worldManager.deleteWorld(player, args[1]);
+                        main.worldModule.deleteWorld(player, args[1]);
                         return true;
                     }
                 } else {
@@ -148,7 +148,7 @@ public class WorldCommand implements CommandExecutor {
                 if(player.hasPermission("bluecore.world.setspawn")){
                     if (args.length == 1) {
                         try {
-                            main.worldManager.setWorldSpawn(player);
+                            main.worldModule.setWorldSpawn(player);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -160,7 +160,7 @@ public class WorldCommand implements CommandExecutor {
             }else if(args[0].equalsIgnoreCase("spawn")){
                 if(player.hasPermission("bluecore.world.spawn")){
                     if (args.length == 1) {
-                        main.worldManager.gotoWorldSpawn(player);
+                        main.worldModule.gotoWorldSpawn(player);
                         return true;
                     }
                 } else {
@@ -173,7 +173,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                     if (args.length == 2) {
-                        main.worldManager.gotoWorld(player, args[1]);
+                        main.worldModule.gotoWorld(player, args[1]);
                         return true;
                     }
                 } else {
@@ -186,7 +186,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                     if (args.length == 2) {
-                        main.worldManager.importWorld(player, args[1]);
+                        main.worldModule.importWorld(player, args[1]);
                         return true;
                     }
                 } else {

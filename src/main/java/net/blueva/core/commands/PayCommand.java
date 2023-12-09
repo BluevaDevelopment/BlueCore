@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.managers.EconomyManager;
+import net.blueva.core.modules.EconomyModule;
 import net.blueva.core.utils.MessagesUtil;
 import net.blueva.core.utils.StringUtil;
 import org.bukkit.Bukkit;
@@ -79,10 +79,10 @@ public class PayCommand implements CommandExecutor {
             return true;
         }
 
-        if(EconomyManager.balancePlayer((Player) sender, main) >= money) {
+        if(EconomyModule.balancePlayer((Player) sender, main) >= money) {
             try {
-                EconomyManager.withdrawMoney((Player) sender, money, main);
-                EconomyManager.depositMoney(target, money, main);
+                EconomyModule.withdrawMoney((Player) sender, money, main);
+                EconomyModule.depositMoney(target, money, main);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

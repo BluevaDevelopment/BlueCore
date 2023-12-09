@@ -22,32 +22,29 @@
  *
  * Copyright (c) 2023 Blueva Development. All rights reserved.
  */
+package net.blueva.core.utils;
 
-package net.blueva.core.managers;
-
+import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import net.blueva.core.Main;
-
 import java.io.IOException;
 import java.util.Objects;
 
-public class LocationManager {
-	
-	private final Main main;
-	int taskID;
-	
-	public LocationManager(Main main) {
-		this.main = main;
-	}
-	
-	public void createLastLocation() {
-		BukkitScheduler schedule = Bukkit.getServer().getScheduler();
-		taskID = schedule.scheduleSyncRepeatingTask(main, () -> {
+public class LocationUtils {
+    private final Main main;
+    int taskID;
+
+    public LocationUtils(Main main) {
+        this.main = main;
+    }
+
+    public void createLastLocation() {
+        BukkitScheduler schedule = Bukkit.getServer().getScheduler();
+        taskID = schedule.scheduleSyncRepeatingTask(main, () -> {
             for(Player player : Bukkit.getOnlinePlayers()) {
                 try {
                     updateLocation(player);
@@ -56,24 +53,23 @@ public class LocationManager {
                 }
             }
         }, 0, 1200); //1200 Ticks = 60 Seconds (It will be possible to customize it in the settings.yml in the future)
-}
+    }
 
-	private void updateLocation(Player p) throws IOException {
-		Location l = p.getLocation();
-		String world = Objects.requireNonNull(l.getWorld()).getName();
-		double x = l.getX();
-		double y = l.getY();
-		double z = l.getZ();
-		float yaw = l.getYaw();
-		float pitch = l.getPitch();
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.world", world);
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.x", x);
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.y", y);
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.z", z);
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.yaw", yaw);
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.pitch", pitch);
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).save();
-		ConfigManager.Data.getUserDocument(p.getUniqueId()).reload();
-	}
-
+    private void updateLocation(Player p) throws IOException {
+        Location l = p.getLocation();
+        String world = Objects.requireNonNull(l.getWorld()).getName();
+        double x = l.getX();
+        double y = l.getY();
+        double z = l.getZ();
+        float yaw = l.getYaw();
+        float pitch = l.getPitch();
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.world", world);
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.x", x);
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.y", y);
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.z", z);
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.yaw", yaw);
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.pitch", pitch);
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).save();
+        ConfigManager.Data.getUserDocument(p.getUniqueId()).reload();
+    }
 }

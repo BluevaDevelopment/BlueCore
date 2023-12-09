@@ -27,7 +27,7 @@ package net.blueva.core.libraries.vault;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.managers.EconomyManager;
+import net.blueva.core.modules.EconomyModule;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
@@ -151,7 +151,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(player.getUniqueId()).set("money", newBalance);
             ConfigManager.Data.getUserDocument(player.getUniqueId());
@@ -164,7 +164,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(offlinePlayer.getUniqueId()).set("money", newBalance);
             try {
@@ -184,7 +184,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(player.getUniqueId()).set("money", newBalance);
             try {
@@ -202,7 +202,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
-        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(offlinePlayer.getUniqueId()).set("money", newBalance);
             try {
@@ -222,7 +222,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(player.getUniqueId()).set("money", newBalance);
             try {
@@ -240,7 +240,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(offlinePlayer.getUniqueId()).set("money", newBalance);
             try {
@@ -260,7 +260,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        if(EconomyManager.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(player.getUniqueId()).set("money", newBalance);
             try {
@@ -278,7 +278,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
-        if(EconomyManager.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
+        if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             ConfigManager.Data.getUserDocument(offlinePlayer.getUniqueId()).set("money", newBalance);
             try {

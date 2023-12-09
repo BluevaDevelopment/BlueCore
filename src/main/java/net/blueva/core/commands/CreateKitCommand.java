@@ -34,7 +34,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import net.blueva.core.Main;
-import net.blueva.core.managers.KitsManager;
+import net.blueva.core.modules.KitsModule;
 import net.blueva.core.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -79,7 +79,7 @@ public class CreateKitCommand implements CommandExecutor {
             return true;
         }
 
-        if(KitsManager.kitExists(kitname)) {
+        if(KitsModule.kitExists(kitname)) {
             player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.existing_kit")).replace("%kit_name%", kitname)));
             return true;
         }
@@ -92,7 +92,7 @@ public class CreateKitCommand implements CommandExecutor {
         }
 
         try {
-            KitsManager.createKit(kitname, "bluecore.kit."+kitname, delayInt, items);
+            KitsModule.createKit(kitname, "bluecore.kit."+kitname, delayInt, items);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

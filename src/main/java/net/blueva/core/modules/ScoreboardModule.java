@@ -23,7 +23,7 @@
  * Copyright (c) 2023 Blueva Development. All rights reserved.
  */
 
-package net.blueva.core.managers;
+package net.blueva.core.modules;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
@@ -35,14 +35,14 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import java.util.*;
 
-public class ScoreboardManager {
+public class ScoreboardModule {
 
 	private final Main main;
 	private final Map<UUID, FastBoard> boards = new HashMap<>();
 	private final Map<String, Integer> taskIDs = new HashMap<>();
 	private final Map<Player, Boolean> playerWithBoard = new HashMap<>();
 
-	public ScoreboardManager(Main main) {
+	public ScoreboardModule(Main main) {
 		this.main = main;
 	}
 

@@ -30,8 +30,11 @@ import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.libraries.vault.EconomyImplementer;
 import net.blueva.core.libraries.vault.VaultHook;
 import net.blueva.core.listeners.*;
-import net.blueva.core.managers.*;
 import net.blueva.core.libraries.metrics.Metrics;
+import net.blueva.core.modules.ScoreboardModule;
+import net.blueva.core.modules.TablistModule;
+import net.blueva.core.modules.WorldModule;
+import net.blueva.core.utils.LocationUtils;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -46,7 +49,7 @@ import java.util.UUID;
 public final class Main extends JavaPlugin {
 
 	//managers
-	public WorldManager worldManager;
+	public WorldModule worldModule;
 
 	// other things
 	public String pluginversion = getDescription().getVersion();
@@ -71,29 +74,24 @@ public final class Main extends JavaPlugin {
 		registerEvents();
 		registerCommands();
 
-		ModuleManager.loadAllModules(this);
-
-
-
 		prefix = ConfigManager.language.getString("prefix");
 		currency_symbol = ConfigManager.Modules.economy.getString("economy.currency_symbol");
-
 
 		if(ConfigManager.settings.getBoolean("metrics")) {
 			int pluginId = 17623;
 			new Metrics(this, pluginId);
 		}
 
-		ScoreboardManager scoreboard = new ScoreboardManager(this);
+		ScoreboardModule scoreboard = new ScoreboardModule(this);
 		scoreboard.createScoreboard();
 
-		TablistManager tablist = new TablistManager(this);
+		TablistModule tablist = new TablistModule(this);
 		tablist.createTablist();
 
-		LocationManager lastlocation = new LocationManager(this);
+		LocationUtils lastlocation = new LocationUtils(this);
 		lastlocation.createLastLocation();
 
-		worldManager = new WorldManager(this);
+		worldModule = new WorldModule(this);
 
 		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 			placeholderapi = true;
@@ -111,7 +109,7 @@ public final class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
 			if(ConfigManager.Modules.worlds.getBoolean("worlds.enabled")) {
 				try {
-					worldManager.loadWorlds();
+					worldModule.loadWorlds();
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
@@ -197,5 +195,4 @@ public final class Main extends JavaPlugin {
 		Objects.requireNonNull(this.getCommand("workbench")).setExecutor(new WorkbenchCommand(this));
 		Objects.requireNonNull(this.getCommand("world")).setExecutor(new WorldCommand(this));
 	}
-
 }

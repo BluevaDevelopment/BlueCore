@@ -26,7 +26,7 @@
 package net.blueva.core.utils;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.blueva.core.managers.EconomyManager;
+import net.blueva.core.modules.EconomyModule;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -54,7 +54,7 @@ public class MessagesUtil {
                     .replace("{player_exp}", String.valueOf(player.getExp()))
                     .replace("{player_health}", String.valueOf(player.getHealth()))
                     .replace("{player_level}", String.valueOf(player.getLevel()))
-                    .replace("{player_balance}", String.valueOf(EconomyManager.balancePlayer(player, Main.getPlugin())))
+                    .replace("{player_balance}", String.valueOf(EconomyModule.balancePlayer(player, Main.getPlugin())))
                     .replace("{player_location_x}", String.valueOf(Math.round(player.getLocation().getX())))
                     .replace("{player_location_y}", String.valueOf(Math.round(player.getLocation().getY())))
                     .replace("{player_location_z}", String.valueOf(Math.round(player.getLocation().getZ())))

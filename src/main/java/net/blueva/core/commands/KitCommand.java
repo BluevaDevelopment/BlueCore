@@ -38,7 +38,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.managers.KitsManager;
+import net.blueva.core.modules.KitsModule;
 import net.blueva.core.utils.DateUtil;
 import net.blueva.core.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
@@ -69,7 +69,7 @@ public class KitCommand implements CommandExecutor {
 
         String kit = args[0];
 
-        if(!KitsManager.kitExists(kit)) {
+        if(!KitsModule.kitExists(kit)) {
             sender.sendMessage(MessagesUtil.format(null, Objects.requireNonNull(ConfigManager.language.getString("messages.error.kit_not_found")).replace("%kit_name%", kit)));
             return true;
         }
@@ -83,7 +83,7 @@ public class KitCommand implements CommandExecutor {
                 return true;
             }
             
-            KitsManager.giveKit(target, kit);
+            KitsModule.giveKit(target, kit);
 
             assert target != null;
             sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given_others")).replace("%kit_name%", kit).replace("%player%", target.getName())));
@@ -116,7 +116,7 @@ public class KitCommand implements CommandExecutor {
                 }
             }
 
-            KitsManager.giveKit(target, kit);
+            KitsModule.giveKit(target, kit);
             target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given")).replace("%kit_name%", kit)));
         } 
 

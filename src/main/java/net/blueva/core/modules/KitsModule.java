@@ -23,7 +23,7 @@
  * Copyright (c) 2023 Blueva Development. All rights reserved.
  */
 
-package net.blueva.core.managers;
+package net.blueva.core.modules;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
 import net.blueva.core.configuration.ConfigManager;
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-public class KitsManager {
+public class KitsModule {
 
     public static void createKit(String name, String permission, int delay, List<ItemStack> items) throws IOException {
         Kit kit = new Kit(name, permission, delay, items);

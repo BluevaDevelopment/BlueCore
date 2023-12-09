@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.managers.KitsManager;
+import net.blueva.core.modules.KitsModule;
 import net.blueva.core.utils.MessagesUtil;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -78,7 +78,7 @@ public class ModifyKitCommand implements CommandExecutor {
             return true;
         }
 
-        if(!KitsManager.kitExists(kitname)) {
+        if(!KitsModule.kitExists(kitname)) {
             player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.kit_not_found")).replace("%kit_name%", kitname)));
             return true;
         }
@@ -91,7 +91,7 @@ public class ModifyKitCommand implements CommandExecutor {
         }
 
         try {
-            KitsManager.modifyKit(kitname, "bluecore.kit."+kitname, delayInt, items);
+            KitsModule.modifyKit(kitname, "bluecore.kit."+kitname, delayInt, items);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

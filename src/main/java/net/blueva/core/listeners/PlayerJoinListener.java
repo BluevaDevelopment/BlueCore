@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Objects;
 
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.managers.EconomyManager;
+import net.blueva.core.modules.EconomyModule;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -62,7 +62,7 @@ public class PlayerJoinListener implements Listener {
 		}
 
 		if(ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).get("logoutlocation.world") != null) {
-			EconomyManager.setMoney(event.getPlayer(), ConfigManager.settings.getDouble("economy.starting_balance"), main);
+			EconomyModule.setMoney(event.getPlayer(), ConfigManager.settings.getDouble("economy.starting_balance"), main);
 		}
 
 		if(ConfigManager.Modules.welcome.getBoolean("welcome.enabled")) {

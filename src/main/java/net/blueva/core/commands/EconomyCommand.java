@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.managers.EconomyManager;
+import net.blueva.core.modules.EconomyModule;
 import net.blueva.core.utils.MessagesUtil;
 import net.blueva.core.utils.StringUtil;
 import org.bukkit.Bukkit;
@@ -68,7 +68,7 @@ public class EconomyCommand implements CommandExecutor {
             if(args[0].equalsIgnoreCase("deposit")) {
                 if(sender.hasPermission("bluecore.economy.deposit")) {
                     try {
-                        EconomyManager.depositMoney(player, quantity, main);
+                        EconomyModule.depositMoney(player, quantity, main);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -80,7 +80,7 @@ public class EconomyCommand implements CommandExecutor {
             } else if(args[0].equalsIgnoreCase("withdraw")) {
                 if(sender.hasPermission("bluecore.economy.withdraw")) {
                     try {
-                        EconomyManager.withdrawMoney(player, quantity, main);
+                        EconomyModule.withdrawMoney(player, quantity, main);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -92,7 +92,7 @@ public class EconomyCommand implements CommandExecutor {
             } else if(args[0].equalsIgnoreCase("set")) {
                 if(sender.hasPermission("bluecore.economy.set")) {
                     try {
-                        EconomyManager.setMoney(player, quantity, main);
+                        EconomyModule.setMoney(player, quantity, main);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -120,7 +120,7 @@ public class EconomyCommand implements CommandExecutor {
             } else if(args[0].equalsIgnoreCase("reset")) {
                 if(sender.hasPermission("bluecore.economy.reset")) {
                     try {
-                        EconomyManager.setMoney(player, 0, main);
+                        EconomyModule.setMoney(player, 0, main);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

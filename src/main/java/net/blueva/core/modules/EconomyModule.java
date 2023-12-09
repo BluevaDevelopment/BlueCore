@@ -23,7 +23,7 @@
  * Copyright (c) 2023 Blueva Development. All rights reserved.
  */
 
-package net.blueva.core.managers;
+package net.blueva.core.modules;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
@@ -32,7 +32,7 @@ import org.bukkit.entity.Player;
 
 import java.io.IOException;
 
-public class EconomyManager {
+public class EconomyModule {
 
     public static void depositMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {

@@ -23,7 +23,7 @@
  * Copyright (c) 2023 Blueva Development. All rights reserved.
  */
 
-package net.blueva.core.managers;
+package net.blueva.core.modules;
 
 import java.util.ArrayList;
 
@@ -36,12 +36,12 @@ import org.bukkit.scheduler.BukkitScheduler;
 import net.blueva.core.Main;
 import net.blueva.core.utils.StringUtil;
 
-public class TablistManager {
+public class TablistModule {
 
 	private final Main main;
 	int taskID;
 
-	public TablistManager(Main main) {
+	public TablistModule(Main main) {
 		this.main = main;
 	}
 
