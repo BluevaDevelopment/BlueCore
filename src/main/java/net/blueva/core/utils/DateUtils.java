@@ -25,14 +25,13 @@
 
 package net.blueva.core.utils;
 
-import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class DateUtil {
+public class DateUtils {
 
     public static boolean isConfigDatePassed(LocalDateTime futureDate) {
         LocalDateTime currentDate = LocalDateTime.now();

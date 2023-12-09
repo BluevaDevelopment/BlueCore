@@ -30,7 +30,6 @@ import java.util.Objects;
 
 import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,7 +38,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 
 public class PlayerCommandPreprocessListener implements Listener {
 
@@ -81,7 +80,7 @@ public class PlayerCommandPreprocessListener implements Listener {
 									if (commandToSend.startsWith("console:")) {
 										if (commandToSend.contains("msg " + player.getName())) {
 											String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-											player.sendMessage(MessagesUtil.format(player, msg));
+											player.sendMessage(MessagesUtils.format(player, msg));
 										} else {
 											Bukkit.dispatchCommand(consoleCommandSender, commandToSend.replace("console: ", ""));
 										}
@@ -100,7 +99,7 @@ public class PlayerCommandPreprocessListener implements Listener {
 							if (commandToSend.startsWith("console:")) {
 								if (commandToSend.contains("msg " + player.getName())) {
 									String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-									player.sendMessage(MessagesUtil.format(player, msg));
+									player.sendMessage(MessagesUtils.format(player, msg));
 								} else {
 									Bukkit.dispatchCommand(consoleCommandSender, commandToSend.replace("console: ", ""));
 								}
@@ -121,7 +120,7 @@ public class PlayerCommandPreprocessListener implements Listener {
 				String bcmd = arrayOfString[i];
 				if (ConfigManager.Modules.commands.getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+					event.getPlayer().sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
 				}
 			}
 		}

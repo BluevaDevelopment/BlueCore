@@ -32,7 +32,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -48,7 +48,7 @@ public class PlayerQuitListener implements Listener {
 	@EventHandler
 	public void OPQ(PlayerQuitEvent event) throws IOException {
 		if(ConfigManager.Modules.welcome.getBoolean("welcome.broadcast.leave.enabled")) {
-			event.setQuitMessage(MessagesUtil.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.leave.message").replace("%player_name%", event.getPlayer().getDisplayName())));
+			event.setQuitMessage(MessagesUtils.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.leave.message").replace("%player_name%", event.getPlayer().getDisplayName())));
 		} else {
 			event.setQuitMessage("");
 		}

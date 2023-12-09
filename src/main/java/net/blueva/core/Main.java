@@ -35,7 +35,7 @@ import net.blueva.core.modules.ScoreboardModule;
 import net.blueva.core.modules.TablistModule;
 import net.blueva.core.modules.WorldModule;
 import net.blueva.core.utils.LocationUtils;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
@@ -98,7 +98,7 @@ public final class Main extends JavaPlugin {
 		}
 		if(ConfigManager.Modules.economy.getBoolean("economy.enabled")) {
 			if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
-				Bukkit.getConsoleSender().sendMessage(MessagesUtil.format(null, "[BlueCore] " + ConfigManager.language.getString("messages.info.detected_vault")));
+				Bukkit.getConsoleSender().sendMessage(MessagesUtils.format(null, "[BlueCore] " + ConfigManager.language.getString("messages.info.detected_vault")));
 				economyImplementer = new EconomyImplementer();
 				vaultHook = new VaultHook();
 				vaultHook.hook();

@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -54,21 +54,21 @@ public class NoonCommand implements CommandExecutor {
                 world = ((Player) sender).getWorld();
             }
             if (!sender.hasPermission("bluecore.time.noon" + (world == ((Player) sender).getWorld() ? "" : ".others"))) {
-                sender.sendMessage(MessagesUtil.format(((Player) sender), ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
             world.setTime(6000);
-            sender.sendMessage(MessagesUtil.format(((Player) sender), ConfigManager.language.getString("messages.success.changed_time"))
+            sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.success.changed_time"))
                     .replace("%world_name%", world.getName())
                     .replace("%time%", "Noon")
                     .replace("%ticks%", "6000"));
         } else {
             if (world == null) {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_noon_command")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_noon_command")));
                 return true;
             }
             world.setTime(6000);
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.success.changed_time"))
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.success.changed_time"))
                     .replace("%world_name%", world.getName())
                     .replace("%time%", "Noon")
                     .replace("%ticks%", "6000"));

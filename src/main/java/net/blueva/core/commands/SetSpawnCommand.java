@@ -31,7 +31,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -53,20 +53,20 @@ public class SetSpawnCommand implements CommandExecutor {
         }
 
         if(!sender.hasPermission("bluecore.setspawn")) {
-            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_permission")));
+            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_permission")));
             return true;
         }
 
         if(ConfigManager.Modules.warps.getBoolean("warps.enabled")) {
             if(args.length != 1) {
-                sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_setspawn_command")));
+                sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_setspawn_command")));
                 return true;
             }
 
             String warp = args[0];
             File warpFile = new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/"+warp+".yml");
             if(!warpFile.exists()) {
-                sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
+                sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
                 return true;
             }
 
@@ -77,9 +77,9 @@ public class SetSpawnCommand implements CommandExecutor {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.spawn_set")).replace("%warp%", args[0])));
+            sender.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.spawn_set")).replace("%warp%", args[0])));
         } else {
-            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.module_disabled")
+            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.module_disabled")
                     .replace("%module%", "Warps")));
         }
 

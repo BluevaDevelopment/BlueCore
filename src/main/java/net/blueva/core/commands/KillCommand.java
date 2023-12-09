@@ -33,7 +33,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -49,7 +49,7 @@ public class KillCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length != 1) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_kill_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_kill_command")));
             return true;
         }
 
@@ -60,17 +60,17 @@ public class KillCommand implements CommandExecutor {
         }
 
         if (!sender.hasPermission("bluecore.kill")) {
-            sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         if (target == null) {
-            sender.sendMessage(MessagesUtil.format(cmdsender, ConfigManager.language.getString("messages.error.player_offline")));
+            sender.sendMessage(MessagesUtils.format(cmdsender, ConfigManager.language.getString("messages.error.player_offline")));
             return true;
         }
 
         target.setHealth(0);
-        sender.sendMessage(MessagesUtil.format(cmdsender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.player_killed")).replace("%player%", target.getName())));
+        sender.sendMessage(MessagesUtils.format(cmdsender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.player_killed")).replace("%player%", target.getName())));
 
         return true;
     }

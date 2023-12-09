@@ -27,11 +27,9 @@ package net.blueva.core.utils;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 
-public class StringUtil {
+public class StringUtils {
   public static @NotNull String listToString(ArrayList<String> list, String spacer) {
     return listToString(list, spacer, spacer);
   }

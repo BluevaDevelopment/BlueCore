@@ -35,7 +35,7 @@ import net.blueva.core.libraries.iridiumcolor.IridiumColorAPI;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MessagesUtil {
+public class MessagesUtils {
     public static @NotNull String format (Player player, String text) {
         if(text == null) {
             return "";

@@ -33,7 +33,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -49,7 +49,7 @@ public class FeedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_feed_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_feed_command")));
             return true;
         }
 
@@ -58,26 +58,26 @@ public class FeedCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.feed.others")) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
         } else {
             target = (Player) sender;
             if (!sender.hasPermission("bluecore.feed")) {
-                sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
         }
 
         target.setFoodLevel(20);
-        target.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.satisfied_appetite")));
+        target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.satisfied_appetite")));
         if (args.length == 1) {
-            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.satisfied_appetite_others")).replace("%player%", target.getName())));
+            sender.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.satisfied_appetite_others")).replace("%player%", target.getName())));
         }
 
         return true;

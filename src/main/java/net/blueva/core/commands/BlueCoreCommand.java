@@ -32,7 +32,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -53,7 +53,7 @@ public class BlueCoreCommand implements CommandExecutor {
 				if (sender instanceof Player) {
 					player = (Player) sender;
 				}
-				sender.sendMessage(MessagesUtil.format(player, message.replace("{plugin_version}", main.pluginversion)));
+				sender.sendMessage(MessagesUtils.format(player, message.replace("{plugin_version}", main.pluginversion)));
 			}
 		}
 		return true;

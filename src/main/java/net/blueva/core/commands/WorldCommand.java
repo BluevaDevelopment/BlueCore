@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -50,13 +50,13 @@ public class WorldCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
             return true;
         }
         final Player player = (Player)sender;
 
         if (args.length == 0) {
-            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
             return true;
         }
 
@@ -64,15 +64,15 @@ public class WorldCommand implements CommandExecutor {
             if(args[0].equalsIgnoreCase("create")){
                 if(player.hasPermission("bluecore.world.create")){
                     if (args.length == 1) {
-                        player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+                        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
                         return true;
                     }
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) != null) {
-                            player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.wm_alredy_exist")).replace("%world_name%",  worldname)));
+                            player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.wm_alredy_exist")).replace("%world_name%",  worldname)));
                         } else {
-                            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
                         }
                         return true;
                     }
@@ -85,20 +85,20 @@ public class WorldCommand implements CommandExecutor {
                             }
                             return true;
                         } else {
-                            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.wm_invalid_args")));
+                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_args")));
                         }
                     }
                     if (args.length == 4) {
                         if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             if(args[3].equals("-t")) {
-                                player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
                             } else if(args[3].equals("-g")) {
-                                player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
                             } else {
-                                player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
                             }
                         } else {
-                            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
                         }
 
                     }
@@ -122,19 +122,19 @@ public class WorldCommand implements CommandExecutor {
                                     }
                                 }
                             } else {
-                                player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
                             }
                         } else {
-                            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.wm_invalid_args")));
+                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_args")));
                         }
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("delete")){
                 if(player.hasPermission("bluecore.world.delete")){
                     if (args.length == 1) {
-                        player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+                        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
                         return true;
                     }
                     if (args.length == 2) {
@@ -142,7 +142,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("setspawn")){
                 if(player.hasPermission("bluecore.world.setspawn")){
@@ -155,7 +155,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("spawn")){
                 if(player.hasPermission("bluecore.world.spawn")){
@@ -164,7 +164,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("goto")){
                 if(player.hasPermission("bluecore.world.goto")){
@@ -177,7 +177,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("import")){
                 if(player.hasPermission("bluecore.world.import")){
@@ -190,7 +190,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }else if(args[0].equalsIgnoreCase("list")){
                 if(player.hasPermission("bluecore.world.list")){
@@ -203,13 +203,13 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }else{
-                player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.unknown_command")));
+                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_command")));
             }
         } else {
-            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.module_disabled")
+            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.module_disabled")
                     .replace("%module%", "World")));
         }
         return true;

@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -53,12 +53,12 @@ public class GamemodeCommand implements CommandExecutor {
         }
 
         if (!sender.hasPermission("bluecore.gamemode")) {
-            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         if (args.length == 0) {
-            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_gm_command")));
+            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_gm_command")));
             return true;
         }
         String gamemode = args[0].toLowerCase();
@@ -66,61 +66,61 @@ public class GamemodeCommand implements CommandExecutor {
         switch (gamemode) {
             case "survival", "surv", "su", "s" -> {
                 if (!sender.hasPermission("bluecore.gamemode.survival")) {
-                    sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.SURVIVAL;
             }
             case "creative", "crea", "cr", "c" -> {
                 if (!sender.hasPermission("bluecore.gamemode.creative")) {
-                    sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.CREATIVE;
             }
             case "adventure", "adven", "adv", "a" -> {
                 if (!sender.hasPermission("bluecore.gamemode.adventure")) {
-                    sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.ADVENTURE;
             }
             case "spectator", "spect", "spec", "sp" -> {
                 if (!sender.hasPermission("bluecore.gamemode.spectator")) {
-                    sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                     return true;
                 }
                 mode = GameMode.SPECTATOR;
             }
             default -> {
-                sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_gm_command")));
+                sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_gm_command")));
                 return true;
             }
         }
 
         if (!(sender instanceof Player)) {
             if (args.length == 1) {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_gm_command")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_gm_command")));
             }
             if (args.length == 2) {
                 Player target = Bukkit.getPlayer(args[1]);
                 if (target != null) {
                     if (mode == GameMode.SURVIVAL) {
                         target.setGameMode(mode);
-                        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
-                        sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.success.gamemode_changed_others")).replace("%gamemode%", mode.toString()).replace("%player%", target.getName()));
+                        target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
+                        sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.success.gamemode_changed_others")).replace("%gamemode%", mode.toString()).replace("%player%", target.getName()));
                     }
                 } else {
-                    sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.player_not_found")).replace("%player%", args[1]));
+                    sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.player_not_found")).replace("%player%", args[1]));
                 }
             }
         } else {
             if (args.length == 1) {
                 if (player.hasPermission("bluecore.gamemode." + mode.toString().toLowerCase())) {
                     player.setGameMode(mode);
-                    player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
+                    player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                 }
             }
             if (args.length == 2) {
@@ -128,10 +128,10 @@ public class GamemodeCommand implements CommandExecutor {
                 if (target != null) {
                     if (player.hasPermission("bluecore.gamemode." + mode.toString().toLowerCase() + ".others")) {
                         target.setGameMode(mode);
-                        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
-                        player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.success.gamemode_changed_others")).replace("%gamemode%", mode.toString()).replace("%player%", target.getName()));
+                        target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.gamemode_changed")).replace("%gamemode%", mode.toString())));
+                        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.success.gamemode_changed_others")).replace("%gamemode%", mode.toString()).replace("%player%", target.getName()));
                     } else {
-                        player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
                     }
                 }
                 return true;

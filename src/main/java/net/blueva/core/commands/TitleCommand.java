@@ -27,8 +27,8 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.utils.MessagesUtil;
-import net.blueva.core.utils.StringUtil;
+import net.blueva.core.utils.MessagesUtils;
+import net.blueva.core.utils.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,7 +36,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class TitleCommand implements CommandExecutor {
@@ -49,7 +48,7 @@ public class TitleCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
         if (args.length < 2) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_command")));
             return true;
         }
 
@@ -57,23 +56,23 @@ public class TitleCommand implements CommandExecutor {
             if(sender.hasPermission("bluecore.title.broadcast")){
                 sendTitle(sender, args, 1, true, null);
             } else {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.no_perms")));
             }
         } else if(args[0].equalsIgnoreCase("send")){
             if(sender.hasPermission("bluecore.title.send")){
 
                 Player target = Bukkit.getPlayer(args[1]);
                 if (target == null) {
-                    sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+                    sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
                     return true;
                 }
                 sendTitle(sender, args, 2, false, target);
 
             } else {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.no_perms")));
             }
         }else{
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_command")));
         }
         return true;
     }
@@ -99,39 +98,39 @@ public class TitleCommand implements CommandExecutor {
             String subTitle = "";
 
             if (parts.length >= 4) {
-                if (StringUtil.isNumber(parts[0]) && StringUtil.isNumber(parts[1]) && StringUtil.isNumber(parts[2])) {
+                if (StringUtils.isNumber(parts[0]) && StringUtils.isNumber(parts[1]) && StringUtils.isNumber(parts[2])) {
                     fadeIn = Integer.parseInt(parts[0]);
                     stay = Integer.parseInt(parts[1]);
                     fadeOut = Integer.parseInt(parts[2]);
                 } else {
                     if(broadcast) {
-                        sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
+                        sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
                     } else {
-                        sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
+                        sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
                     }
                 }
 
-                title = MessagesUtil.format(null, parts[3].trim());
+                title = MessagesUtils.format(null, parts[3].trim());
 
                 if (parts.length == 5) {
-                    subTitle = MessagesUtil.format(null, parts[4].trim());
+                    subTitle = MessagesUtils.format(null, parts[4].trim());
                 }
             } else if (parts.length == 1) {
-                title = MessagesUtil.format(null, parts[0].trim());
+                title = MessagesUtils.format(null, parts[0].trim());
             } else if (parts.length == 2) {
-                title = MessagesUtil.format(null, parts[0].trim());
-                subTitle = MessagesUtil.format(null, parts[1].trim());
+                title = MessagesUtils.format(null, parts[0].trim());
+                subTitle = MessagesUtils.format(null, parts[1].trim());
             } else {
                 if(broadcast) {
-                    sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
+                    sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
                 } else {
-                    sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
+                    sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
                 }
                 return;
             }
 
             if (broadcast) {
-                sender.sendMessage(MessagesUtil.format(null, Objects.requireNonNull(ConfigManager.language.getString("messages.success.title_sent_broadcast"))
+                sender.sendMessage(MessagesUtils.format(null, Objects.requireNonNull(ConfigManager.language.getString("messages.success.title_sent_broadcast"))
                         .replace("%title%", title)
                         .replace("%subtitle%", subTitle)));
                 for (Player p : Bukkit.getOnlinePlayers()) {
@@ -139,16 +138,16 @@ public class TitleCommand implements CommandExecutor {
                 }
             } else {
                 player.sendTitle(title, subTitle, fadeIn, stay, fadeOut);
-                sender.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.title_sent"))
+                sender.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.title_sent"))
                         .replace("%player%", player.getName())
                         .replace("%title%", title)
                         .replace("%subtitle%", subTitle)));
             }
         } else {
             if(broadcast) {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_broadcast_command")));
             } else {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_title_send_command")));
             }
         }
     }

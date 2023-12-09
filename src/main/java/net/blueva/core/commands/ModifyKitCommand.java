@@ -28,7 +28,7 @@ package net.blueva.core.commands;
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.modules.KitsModule;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -53,12 +53,12 @@ public class ModifyKitCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
             return true;
         }
 
         if (args.length != 2) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_modifykit_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_modifykit_command")));
             return true;
         }
 
@@ -74,12 +74,12 @@ public class ModifyKitCommand implements CommandExecutor {
         }
 
         if (!sender.hasPermission("bluecore.modifykit")) {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         if(!KitsModule.kitExists(kitname)) {
-            player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.kit_not_found")).replace("%kit_name%", kitname)));
+            player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.kit_not_found")).replace("%kit_name%", kitname)));
             return true;
         }
 
@@ -95,7 +95,7 @@ public class ModifyKitCommand implements CommandExecutor {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_modified")).replace("%kit_name%", kitname)));
+        player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_modified")).replace("%kit_name%", kitname)));
 
         return true;
     }

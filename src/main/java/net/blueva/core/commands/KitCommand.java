@@ -39,8 +39,8 @@ import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
 import net.blueva.core.modules.KitsModule;
-import net.blueva.core.utils.DateUtil;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.DateUtils;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class KitCommand implements CommandExecutor {
@@ -53,24 +53,24 @@ public class KitCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 2) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_kit_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_kit_command")));
             return true;
         }
 
         if (args.length < 1 || args.length > 2) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_kit_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_kit_command")));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.kit")) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         String kit = args[0];
 
         if(!KitsModule.kitExists(kit)) {
-            sender.sendMessage(MessagesUtil.format(null, Objects.requireNonNull(ConfigManager.language.getString("messages.error.kit_not_found")).replace("%kit_name%", kit)));
+            sender.sendMessage(MessagesUtils.format(null, Objects.requireNonNull(ConfigManager.language.getString("messages.error.kit_not_found")).replace("%kit_name%", kit)));
             return true;
         }
 
@@ -79,26 +79,26 @@ public class KitCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[1]);
 
             if (!sender.hasPermission("bluecore.kit.others") && !sender.hasPermission("bluecore.kit."+kit+".others")) {
-                sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
             
             KitsModule.giveKit(target, kit);
 
             assert target != null;
-            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given_others")).replace("%kit_name%", kit).replace("%player%", target.getName())));
-            target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given")).replace("%kit_name%", kit)));
+            sender.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given_others")).replace("%kit_name%", kit).replace("%player%", target.getName())));
+            target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given")).replace("%kit_name%", kit)));
         } else {
             target = (Player) sender;
 
             if (!sender.hasPermission("bluecore.kit."+kit)) {
-                sender.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
 
             if(ConfigManager.Data.getUserDocument(target.getUniqueId()).isString("date.kits."+kit)) {
                 if(!isFutureKitDatePassed(kit, target)) {
-                    sender.sendMessage(MessagesUtil.format(target.getPlayer(), getTimeUntilFutureDateAsString(kit, target)));
+                    sender.sendMessage(MessagesUtils.format(target.getPlayer(), getTimeUntilFutureDateAsString(kit, target)));
                     return true;
                 } else {
                     try {
@@ -117,7 +117,7 @@ public class KitCommand implements CommandExecutor {
             }
 
             KitsModule.giveKit(target, kit);
-            target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given")).replace("%kit_name%", kit)));
+            target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given")).replace("%kit_name%", kit)));
         } 
 
         return true;
@@ -146,7 +146,7 @@ public class KitCommand implements CommandExecutor {
         assert dateString != null;
         LocalDateTime futureDate = LocalDateTime.parse(dateString, formatter);
 
-        return DateUtil.isConfigDatePassed(futureDate);
+        return DateUtils.isConfigDatePassed(futureDate);
     }
 
     private String getTimeUntilFutureDateAsString(String kit, Player target) {
@@ -154,7 +154,7 @@ public class KitCommand implements CommandExecutor {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         assert dateString != null;
         LocalDateTime futureDate = LocalDateTime.parse(dateString, formatter);
-        return DateUtil.getTimeUntilFutureDateAsString(futureDate, kit);
+        return DateUtils.getTimeUntilFutureDateAsString(futureDate, kit);
     }
     
 }

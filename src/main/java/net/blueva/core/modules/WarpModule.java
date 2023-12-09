@@ -26,7 +26,7 @@ package net.blueva.core.modules;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -39,7 +39,7 @@ public class WarpModule {
     public static boolean setWarp(String warp, Player player) throws IOException {
         File warpFile = new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/"+warp+".yml");
         if(warpFile.exists()) {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.warp_already_set")));
+            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.warp_already_set")));
             return false;
         }
 
@@ -64,7 +64,7 @@ public class WarpModule {
     public static boolean updateWarp (String warp, Player player) throws IOException {
         File warpFile = new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/"+warp+".yml");
         if(!warpFile.exists()) {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
+            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
             return false;
         }
 
@@ -90,10 +90,10 @@ public class WarpModule {
         if(warpFile.exists()) {
             ConfigManager.Data.changeWarpReference(warp);
             if(warpFile.delete()) {
-                player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_deleted")).replace("%warp%", warp)));
+                player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_deleted")).replace("%warp%", warp)));
             }
         } else {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
+            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
         }
     }
 

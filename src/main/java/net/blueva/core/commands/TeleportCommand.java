@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -53,12 +53,12 @@ public class TeleportCommand implements CommandExecutor {
         }
 
         if (!sender.hasPermission("bluecore.teleport")) {
-            sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         if (args.length == 0) {
-            sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.other.use_teleport_command")));
+            sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.other.use_teleport_command")));
             return true;
         }
 
@@ -69,22 +69,22 @@ public class TeleportCommand implements CommandExecutor {
                 if (sender instanceof Player) {
 
                     if(splayer == target) {
-                        sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.self_teleport")));
+                        sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.self_teleport")));
                         return true;
                     }
 
                     splayer.teleport(target);
-                    sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_player")).replace("%player%", target.getName())));
+                    sender.sendMessage(MessagesUtils.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_player")).replace("%player%", target.getName())));
                 } else {
-                    sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_teleport_command")));
+                    sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_teleport_command")));
                 }
             } else {
-                sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.player_offline")));
             }
         } else if (args.length == 2) {
             // Teleport one player to another player
             if (!sender.hasPermission("bluecore.teleport.others")) {
-                sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
 
@@ -92,15 +92,15 @@ public class TeleportCommand implements CommandExecutor {
             Player player2 = Bukkit.getPlayer(args[1]);
 
             if(player1 == player2) {
-                sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.same_players")));
+                sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.same_players")));
                 return true;
             }
 
             if (player1 != null && player2 != null) {
                 player1.teleport(player2);
-                sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_player_others")).replace("%player1%", player1.getName()).replace("%player2%", player2.getName())));
+                sender.sendMessage(MessagesUtils.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_player_others")).replace("%player1%", player1.getName()).replace("%player2%", player2.getName())));
             } else {
-                sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.both_players_online")));
+                sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.both_players_online")));
             }
         } else if (args.length == 3) {
             // Teleport sender to coordinates
@@ -109,17 +109,17 @@ public class TeleportCommand implements CommandExecutor {
                 double y = Double.parseDouble(args[1]);
                 double z = Double.parseDouble(args[2]);
                 splayer.teleport(new Location(((Player) sender).getWorld(), x, y, z, 0, 0));
-                sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_coord"))
+                sender.sendMessage(MessagesUtils.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_coord"))
                         .replace("%x%", Double.toString(x))
                         .replace("%y%", Double.toString(y))
                         .replace("%z%", Double.toString(z))));
             } else {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_teleport_command")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_teleport_command")));
             }
         } else if (args.length == 4) {
             // Teleport player to coordinates
             if (!sender.hasPermission("bluecore.teleport.others")) {
-                sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.no_permission")));
+                sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.no_permission")));
                 return true;
             }
 
@@ -130,16 +130,16 @@ public class TeleportCommand implements CommandExecutor {
                 double y = Double.parseDouble(args[2]);
                 double z = Double.parseDouble(args[3]);
                 target.teleport(new Location(target.getWorld(), x, y, z, 0, 0));
-                sender.sendMessage(MessagesUtil.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_coord"))
+                sender.sendMessage(MessagesUtils.format(splayer, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_coord"))
                         .replace("%x%", Double.toString(x))
                         .replace("%y%", Double.toString(y))
                         .replace("%z%", Double.toString(z))
                         .replace("%player%", target.getName())));
             } else {
-                sender.sendMessage(MessagesUtil.format(splayer, ConfigManager.language.getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtils.format(splayer, ConfigManager.language.getString("messages.error.player_offline")));
             }
         } else {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_teleport_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_teleport_command")));
         }
         return true;
     }

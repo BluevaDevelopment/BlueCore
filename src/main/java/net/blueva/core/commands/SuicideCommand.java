@@ -32,7 +32,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class SuicideCommand implements CommandExecutor {
@@ -46,18 +46,18 @@ public class SuicideCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.suicide")) {
-            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
         Player target = (Player) sender;
         target.setHealth(0);
-        target.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.completed_suicide")));
+        target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.completed_suicide")));
 
         return true;
     }

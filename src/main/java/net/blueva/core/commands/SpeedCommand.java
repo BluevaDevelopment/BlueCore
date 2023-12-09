@@ -33,7 +33,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -49,12 +49,12 @@ public class SpeedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length < 1 || args.length > 2) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_speed_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_speed_command")));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.speed")) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.no_perms")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.no_perms")));
             return true;
         }
 
@@ -62,12 +62,12 @@ public class SpeedCommand implements CommandExecutor {
         try {
             speed = Float.parseFloat(args[0]);
         } catch (NumberFormatException e) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.invalid_speed")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.invalid_speed")));
             return true;
         }
 
         if (speed < 0 || speed > 1) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.invalid_speed")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.invalid_speed")));
             return true;
         }
 
@@ -75,25 +75,25 @@ public class SpeedCommand implements CommandExecutor {
         if (args.length == 2) {
             target = Bukkit.getPlayer(args[1]);
             if (target == null) {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.player_offline")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.player_offline")));
                 return true;
             }
             if (!sender.hasPermission("bluecore.speed.others")) {
-                sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.no_perms")));
+                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.no_perms")));
                 return true;
             }
         } else if (sender instanceof Player) {
             target = (Player) sender;
         } else {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_speed_command")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_speed_command")));
             return true;
         }
 
         target.setWalkSpeed(speed);
         target.setFlySpeed(speed);
-        target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed")).replace("%speed%", String.valueOf(speed))));
+        target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed")).replace("%speed%", String.valueOf(speed))));
         if (args.length == 2) {
-            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed_others")).replace("%speed%", String.valueOf(speed)).replace("%player%", target.getName())));
+            sender.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed_others")).replace("%speed%", String.valueOf(speed)).replace("%player%", target.getName())));
         }
 
         return true;

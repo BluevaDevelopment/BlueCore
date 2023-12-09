@@ -27,7 +27,7 @@ package net.blueva.core.modules;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class EconomyModule {
         }
 
         if(!bool) {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.money_out_of_range")));
+            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.money_out_of_range")));
         }
 
         return bool;

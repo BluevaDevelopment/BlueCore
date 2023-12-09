@@ -32,11 +32,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtil;
+import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.util.Objects;
 
 public class DeleteWarpCommand implements CommandExecutor {
 
@@ -48,12 +45,12 @@ public class DeleteWarpCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
             return true;
         }
 
         if(!sender.hasPermission("bluecore.updatewarp")) {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.no_permission")));
+            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_permission")));
             return true;
         }
 
@@ -62,11 +59,11 @@ public class DeleteWarpCommand implements CommandExecutor {
                 if(args.length == 1){
                     WarpModule.deleteWarp(args[0], player);
                 } else {
-                    player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_deletewarp_command")));
+                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_deletewarp_command")));
                 }
             }
         } else {
-            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.module_disabled")
+            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.module_disabled")
                     .replace("%module%", "Warps")));
         }
 
