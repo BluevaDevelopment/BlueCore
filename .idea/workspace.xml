@@ -5,28 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87c7dee2-b431-491d-a3b9-2ff6b1e7e206" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DeleteWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DeleteWarpCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetSpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetSpawnCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetWarpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpawnCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/UpdateWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/UpdateWarpCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WarpCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/BlueCore-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/BlueCore-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/DeleteWarpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/DeleteWarpCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/SetSpawnCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/SetSpawnCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/SetWarpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/SetWarpCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/UpdateWarpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/UpdateWarpCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/WarpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/commands/WarpCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager$Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager$Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/ConfigManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/files/languages/en_UK.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/blueva/core/configuration/files/languages/en_UK.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/original-BlueCore-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-BlueCore-1.0.0.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +48,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Maven.BlueCore [clean,install,--non-recursive].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.BlueCore [clean].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,

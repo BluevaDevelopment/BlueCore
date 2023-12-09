@@ -82,18 +82,13 @@ public class ConfigManager {
         }
 
         // BlueCore/data/modules/warps/warp.yml
-        public static void registerWarpDocument(String name) {
+        public static void changeWarpReference(String name) {
             try {
-                warp = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/worlds/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
-                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
+                warp = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.yml")),
+                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(false).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
             } catch (IOException ex) {
                 ex.fillInStackTrace();
             }
-        }
-
-        public static YamlDocument getWarpDocument(String warp) {
-            registerWarpDocument(warp);
-            return user;
         }
 
         // BlueCore/data/modules/worlds/world.yml
@@ -161,10 +156,22 @@ public class ConfigManager {
             data_modulesf.mkdirs();
         }
 
-        // Data -> Modules folder
+        // Data -> Modules --> Worlds folder
         File data_modules_worldsf = new File(Main.getPlugin().getDataFolder()+"/data/modules/worlds");
         if(!data_modules_worldsf.exists()) {
             data_modules_worldsf.mkdirs();
+        }
+
+        // Data -> Modules --> Warps folder
+        File data_modules_warpsf = new File(Main.getPlugin().getDataFolder()+"/data/modules/warps");
+        if(!data_modules_warpsf.exists()) {
+            data_modules_warpsf.mkdirs();
+        }
+
+        // Data -> Modules --> Kits folder
+        File data_modules_kitsf = new File(Main.getPlugin().getDataFolder()+"/data/modules/kits");
+        if(!data_modules_kitsf.exists()) {
+            data_modules_kitsf.mkdirs();
         }
 
         // Data -> Users folder

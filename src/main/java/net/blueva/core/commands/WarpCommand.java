@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.modules.WarpModule;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -53,45 +54,41 @@ public class WarpCommand implements CommandExecutor {
             finalsender = (Player) sender;
         }
 
-        if (args.length > 0) {
-            if (args.length == 2) {
+        if(ConfigManager.Modules.warps.getBoolean("warps.enabled")) {
+            if (args.length > 0) {
                 String warp = args[0];
-                Player target = Bukkit.getPlayer(args[1]);
-                teleportWarp(sender, target, warp);
-                assert target != null;
-                sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_warp_others")).replace("%warp%", warp).replace("%player%", target.getName())));
-            } else if (args.length == 1) {
-                if (sender instanceof Player) {
-                    String warp = args[0];
-                    Player player = (Player) sender;
-                    teleportWarp(sender, player, warp);
+                if (args.length == 2) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if(target != null) {
+                        if(WarpModule.teleportPlayer(target, warp)) {
+                            sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_warp_others")).replace("%warp%", warp).replace("%player%", target.getName())));
+                        } else {
+                            sender.sendMessage(MessagesUtil.format(finalsender, ConfigManager.language.getString("messages.error.unknown_warp")));
+                        }
+                    } else {
+                        sender.sendMessage(MessagesUtil.format(finalsender, ConfigManager.language.getString("messages.error.player_offline")));
+                    }
+                } else if (args.length == 1) {
+                    if (sender instanceof Player player) {
+                        if(WarpModule.teleportPlayer(player, warp)) {
+                            player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_warp")).replace("%warp%", warp)));
+                        } else {
+                            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
+                        }
+                    } else {
+                        sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_warp_command")));
+                    }
                 } else {
-                    sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.other.use_warp_command")));
+                    sender.sendMessage(MessagesUtil.format(finalsender, ConfigManager.language.getString("messages.other.use_warp_command")));
                 }
             } else {
                 sender.sendMessage(MessagesUtil.format(finalsender, ConfigManager.language.getString("messages.other.use_warp_command")));
             }
         } else {
-            sender.sendMessage(MessagesUtil.format(finalsender, ConfigManager.language.getString("messages.other.use_warp_command")));
+            sender.sendMessage(MessagesUtil.format(finalsender, ConfigManager.language.getString("messages.error.module_disabled")
+                    .replace("%module%", "Warps")));
         }
 
         return true;
-    }
-
-    private void teleportWarp(CommandSender sender, Player target, String warp) {
-        if (sender.hasPermission("bluecore.warp." + warp)) {
-            if (ConfigManager.Data.getWarpDocument(warp).isString("warps." + warp + ".world")) {
-                String world = ConfigManager.Data.getWarpDocument(warp).getString("warps." + warp + ".world");
-                double x = Double.parseDouble(Objects.requireNonNull(ConfigManager.Data.getWarpDocument(warp).getString("warps." + warp + ".x")));
-                double y = Double.parseDouble(Objects.requireNonNull(ConfigManager.Data.getWarpDocument(warp).getString("warps." + warp + ".y")));
-                double z = Double.parseDouble(Objects.requireNonNull(ConfigManager.Data.getWarpDocument(warp).getString("warps." + warp + ".z")));
-                float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.getWarpDocument(warp).getString("warps." + warp + ".yaw")));
-                float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.getWarpDocument(warp).getString("warps." + warp + ".pitch")));
-                assert world != null;
-                Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-                target.teleport(loc);
-                target.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_warp")).replace("%warp%", warp)));
-            }
-        }
     }
 }

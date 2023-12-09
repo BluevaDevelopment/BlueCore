@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.modules.WarpModule;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -58,36 +59,23 @@ public class SetWarpCommand implements CommandExecutor {
             return true;
         }
 
-        if(args.length < 1) {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_setwarp_command")));
-            return true;
-        }
+        if(ConfigManager.Modules.warps.getBoolean("warps.enabled")) {
+            if(args.length < 1) {
+                player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.other.use_setwarp_command")));
+                return true;
+            }
 
-        if(ConfigManager.Data.getWarpDocument(args[0]).isString("warps." + args[0])) {
-            player.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.warp_already_set")));
-            return true;
+            try {
+                if(WarpModule.setWarp(args[0], player)) {
+                    player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_set")).replace("%warp%", args[0])));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            sender.sendMessage(MessagesUtil.format(player, ConfigManager.language.getString("messages.error.module_disabled")
+                    .replace("%module%", "Warps")));
         }
-
-        Location l = player.getLocation();
-        String world = Objects.requireNonNull(l.getWorld()).getName();
-        double x = l.getX();
-        double y = l.getY();
-        double z = l.getZ();
-        float yaw = l.getYaw();
-        float pitch = l.getPitch();
-        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".world", world);
-        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".x", x);
-        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".y", y);
-        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".z", z);
-        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".yaw", yaw);
-        ConfigManager.Data.getWarpDocument(args[0]).set("warps." + args[0] + ".pitch", pitch);
-        try {
-            ConfigManager.Data.getWarpDocument(args[0]).save();
-            ConfigManager.Data.getWarpDocument(args[0]).reload();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        player.sendMessage(MessagesUtil.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_set")).replace("%warp%", args[0])));
 
         return true;
     }

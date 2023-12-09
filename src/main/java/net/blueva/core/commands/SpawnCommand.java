@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.modules.WarpModule;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -75,29 +76,15 @@ public class SpawnCommand implements CommandExecutor {
             }
         }
 
-        teleportSpawn(sender, target);
+        if(WarpModule.teleportSpawn(target)) {
+            target.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.teleported_to_spawn")));
+        } else {
+            sender.sendMessage(MessagesUtil.format((Player) sender, ConfigManager.language.getString("messages.error.spawn_not_set")));
+        }
         if (args.length == 1) {
             sender.sendMessage(MessagesUtil.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.teleported_to_spawn_others")).replace("%player%", target.getName())));
         }
 
         return true;
-    }
-
-    private void teleportSpawn(CommandSender sender, Player target) {
-        String spawn = ConfigManager.Modules.warps.getString("spawn");
-        if (ConfigManager.Modules.warps.isString("warps." + spawn + ".world")) {
-            String world = ConfigManager.Modules.warps.getString("warps." + spawn + ".world");
-            double x = Double.parseDouble(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".x")));
-            double y = Double.parseDouble(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".y")));
-            double z = Double.parseDouble(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".z")));
-            float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".yaw")));
-            float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Modules.warps.getString("warps." + spawn + ".pitch")));
-            assert world != null;
-            Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-            target.teleport(loc);
-            target.sendMessage(MessagesUtil.format(target, ConfigManager.language.getString("messages.success.teleported_to_spawn")));
-        } else {
-            sender.sendMessage(MessagesUtil.format(null, ConfigManager.language.getString("messages.error.spawn_not_set")));
-        }
     }
 }
