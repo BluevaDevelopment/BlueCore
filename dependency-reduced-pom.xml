@@ -24,12 +24,18 @@
           <artifactSet>
             <includes>
               <include>dev.dejvokep:boosted-yaml</include>
+              <include>net.kyori:adventure-api</include>
+              <include>net.kyori:adventure-platform-bukkit</include>
             </includes>
           </artifactSet>
           <relocations>
             <relocation>
               <pattern>dev.dejvokep.boostedyaml</pattern>
               <shadedPattern>net.blueva.core.libraries.boostedyaml</shadedPattern>
+            </relocation>
+            <relocation>
+              <pattern>net.kyori.adventure</pattern>
+              <shadedPattern>net.blueva.core.libraries.adventure</shadedPattern>
             </relocation>
           </relocations>
           <filters>
