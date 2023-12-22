@@ -48,7 +48,7 @@ public class PlayerQuitListener implements Listener {
 	@EventHandler
 	public void OPQ(PlayerQuitEvent event) throws IOException {
 		if(ConfigManager.Modules.welcome.getBoolean("welcome.broadcast.leave.enabled")) {
-			event.setQuitMessage(MessagesUtils.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.leave.message").replace("%player_name%", event.getPlayer().getDisplayName())));
+			event.setQuitMessage(MessagesUtils.formatLegacy(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.leave.message").replace("%player_name%", event.getPlayer().getDisplayName())));
 		} else {
 			event.setQuitMessage("");
 		}

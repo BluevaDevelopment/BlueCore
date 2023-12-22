@@ -80,7 +80,7 @@ public class PlayerCommandPreprocessListener implements Listener {
 									if (commandToSend.startsWith("console:")) {
 										if (commandToSend.contains("msg " + player.getName())) {
 											String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-											player.sendMessage(MessagesUtils.format(player, msg));
+											MessagesUtils.sendToPlayer(player, msg);
 										} else {
 											Bukkit.dispatchCommand(consoleCommandSender, commandToSend.replace("console: ", ""));
 										}
@@ -99,7 +99,7 @@ public class PlayerCommandPreprocessListener implements Listener {
 							if (commandToSend.startsWith("console:")) {
 								if (commandToSend.contains("msg " + player.getName())) {
 									String msg = commandToSend.replace("msg " + player.getName() + " ", "").replace("console: ", "");
-									player.sendMessage(MessagesUtils.format(player, msg));
+									MessagesUtils.sendToPlayer(player, msg);
 								} else {
 									Bukkit.dispatchCommand(consoleCommandSender, commandToSend.replace("console: ", ""));
 								}
@@ -120,7 +120,7 @@ public class PlayerCommandPreprocessListener implements Listener {
 				String bcmd = arrayOfString[i];
 				if (ConfigManager.Modules.commands.getStringList("chat.command_blocker.list").contains(bcmd.toLowerCase())) {
 					event.setCancelled(true);
-					event.getPlayer().sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+					MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.error.no_perms"));
 				}
 			}
 		}

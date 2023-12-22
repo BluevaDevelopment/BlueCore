@@ -53,7 +53,7 @@ public class BlueCoreCommand implements CommandExecutor {
 				if (sender instanceof Player) {
 					player = (Player) sender;
 				}
-				sender.sendMessage(MessagesUtils.format(player, message.replace("{plugin_version}", main.pluginversion)));
+				MessagesUtils.sendToSender(player, message.replace("{plugin_version}", main.pluginversion));
 			}
 		}
 		return true;

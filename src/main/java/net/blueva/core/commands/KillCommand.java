@@ -49,7 +49,7 @@ public class KillCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length != 1) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_kill_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_kill_command"));
             return true;
         }
 
@@ -60,17 +60,17 @@ public class KillCommand implements CommandExecutor {
         }
 
         if (!sender.hasPermission("bluecore.kill")) {
-            sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+            MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.error.no_perms"));
             return true;
         }
 
         if (target == null) {
-            sender.sendMessage(MessagesUtils.format(cmdsender, ConfigManager.language.getString("messages.error.player_offline")));
+            MessagesUtils.sendToSender(cmdsender, ConfigManager.language.getString("messages.error.player_offline"));
             return true;
         }
 
         target.setHealth(0);
-        sender.sendMessage(MessagesUtils.format(cmdsender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.player_killed")).replace("%player%", target.getName())));
+        MessagesUtils.sendToSender(cmdsender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.player_killed")).replace("%player%", target.getName()));
 
         return true;
     }

@@ -54,20 +54,20 @@ public class StormCommand implements CommandExecutor {
                 world = ((Player) sender).getWorld();
             }
             if (!sender.hasPermission("bluecore.weather.storm")) {
-                sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
             world.setStorm(true);
-            sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.success.changed_weather"))
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.success.changed_weather")
                     .replace("%world_name%", world.getName())
                     .replace("%weather%", "Storm"));
         } else {
             if (world == null) {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_storm_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_storm_command"));
                 return true;
             }
             world.setStorm(true);
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.success.changed_weather"))
+            MessagesUtils.sendToSender(null, ConfigManager.language.getString("messages.success.changed_weather")
                     .replace("%world%", world.getName())
                     .replace("%weather%", "Storm"));
         }

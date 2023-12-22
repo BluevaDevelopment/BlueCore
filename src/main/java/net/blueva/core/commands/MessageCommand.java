@@ -49,18 +49,18 @@ public class MessageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length < 2) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.other.use_message_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_message_command"));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.message")) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
             return true;
         }
 
@@ -70,11 +70,11 @@ public class MessageCommand implements CommandExecutor {
         }
         String message = messageBuilder.toString().trim();
 
-        sender.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.info.pm_sender_format"))
+        MessagesUtils.sendToSender(target, Objects.requireNonNull(ConfigManager.language.getString("messages.info.pm_sender_format")
                 .replace("{from_user}", sender.getName())
                 .replace("{to_user}", target.getName())
                 .replace("{message}", message)));
-        target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.info.pm_receiver_format"))
+        MessagesUtils.sendToSender(target, Objects.requireNonNull(ConfigManager.language.getString("messages.info.pm_receiver_format")
                 .replace("{from_user}", sender.getName())
                 .replace("{to_user}", target.getName())
                 .replace("{message}", message)));

@@ -51,18 +51,18 @@ public class PayCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.only_player")));
+            MessagesUtils.sendToConsole(ConfigManager.language.getString("messages.other.only_player"));
             return true;
         }
 
         if (args.length <= 1) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.other.use_pay_command")));
+            MessagesUtils.sendToPlayer((Player) sender, ConfigManager.language.getString("messages.other.use_pay_command"));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+            MessagesUtils.sendToPlayer((Player) sender, ConfigManager.language.getString("messages.error.player_offline"));
             return true;
         }
 
@@ -70,12 +70,12 @@ public class PayCommand implements CommandExecutor {
         if(StringUtils.isNumber(args[1])) {
             money = Double.parseDouble(args[1]);
         } else {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.other.use_pay_command")));
+            MessagesUtils.sendToPlayer((Player) sender, ConfigManager.language.getString("messages.other.use_pay_command"));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.pay")) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+            MessagesUtils.sendToPlayer((Player) sender, ConfigManager.language.getString("messages.error.no_perms"));
             return true;
         }
 
@@ -86,12 +86,12 @@ public class PayCommand implements CommandExecutor {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            sender.sendMessage(MessagesUtils.format((Player) sender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_paid"))
-                    .replace("{amount}", String.valueOf(money))));
-            target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_received"))
-                    .replace("{amount}", String.valueOf(money))));
+            MessagesUtils.sendToPlayer((Player) sender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_paid"))
+                    .replace("{amount}", String.valueOf(money)));
+            MessagesUtils.sendToPlayer(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_received"))
+                    .replace("{amount}", String.valueOf(money)));
         } else {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.insufficient_money")));
+            MessagesUtils.sendToPlayer((Player) sender, ConfigManager.language.getString("messages.error.insufficient_money"));
         }
 
         return true;

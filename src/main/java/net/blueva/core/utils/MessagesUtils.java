@@ -26,26 +26,78 @@
 package net.blueva.core.utils;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.blueva.core.modules.EconomyModule;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import net.blueva.core.Main;
-import net.blueva.core.libraries.iridiumcolor.IridiumColorAPI;
-
+import net.blueva.core.modules.EconomyModule;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.title.Title;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.Duration;
+import java.util.Objects;
+
 public class MessagesUtils {
-    public static @NotNull String format (Player player, String text) {
-        if(text == null) {
-            return "";
+    public static void sendToSender(CommandSender sender, String message) {
+        if(sender instanceof Player player) {
+            sendToPlayer(player, message);
+        } else {
+            sendToConsole(message);
+        }
+    }
+
+    public static void sendToPlayer(Player player, String message) {
+        if(!Objects.equals(message, "")) {
+            Audience audience = Main.getPlugin().adventure().player(player);
+            Component component = format(player, message);
+            audience.sendMessage(component);
+        }
+    }
+
+    public static void sendToConsole(String message) {
+        if(!Objects.equals(message, "")) {
+            Audience audience = Main.getPlugin().adventure().console();
+            Component component = format(null, message);
+            audience.sendMessage(component);
+        }
+    }
+
+    public static void broadcast(String message) {
+        for(Player players : Bukkit.getOnlinePlayers()) {
+            sendToPlayer(players, message);
+        }
+    }
+
+    private static @NotNull Component format (Player player, String message) {
+        if(message == null) {
+            return Component.empty();
         }
 
-        String textfinal = formatPlaceholders(player, text);
+        String textfinal = formatPlaceholders(player, message);
         return formatColors(textfinal);
     }
 
+    public static @NotNull String formatLegacy(Player player, String message) {
+        if (message == null) {
+            return "";
+        }
+
+        String textFinal = formatPlaceholders(player, message);
+        return ChatColor.translateAlternateColorCodes('&', textFinal);
+    }
+
     public static String formatPlaceholders(Player player, String text) {
+        text = text
+                .replace("{server_name}", Bukkit.getServer().getName())
+                .replace("{server_max_players}", String.valueOf(Bukkit.getServer().getMaxPlayers()))
+                .replace("{server_version}", Bukkit.getServer().getVersion())
+                .replace("{currency_symbol}", Main.currency_symbol)
+                .replace("{prefix}", Main.prefix);
+
         if(player != null) {
             text = text
                     .replace("{player_name}", player.getName())
@@ -58,32 +110,33 @@ public class MessagesUtils {
                     .replace("{player_location_x}", String.valueOf(Math.round(player.getLocation().getX())))
                     .replace("{player_location_y}", String.valueOf(Math.round(player.getLocation().getY())))
                     .replace("{player_location_z}", String.valueOf(Math.round(player.getLocation().getZ())))
-                    .replace("{player_world}", player.getWorld().getName())
-                    .replace("{server_name}", Bukkit.getServer().getName())
-                    .replace("{server_max_players}", String.valueOf(Bukkit.getServer().getMaxPlayers()))
-                    .replace("{server_version}", Bukkit.getServer().getVersion())
-                    .replace("{prefix}", Main.prefix)
-                    .replace("{currency_symbol}", Main.currency_symbol);
+                    .replace("{player_world}", player.getWorld().getName());
 
             if(Main.placeholderapi) {
                 return PlaceholderAPI.setPlaceholders(player, text);
             }
-        } else {
-            text = text
-                    .replace("{server_name}", Bukkit.getServer().getName())
-                    .replace("{server_max_players}", String.valueOf(Bukkit.getServer().getMaxPlayers()))
-                    .replace("{server_version}", Bukkit.getServer().getVersion())
-                    .replace("{prefix}", Main.prefix);
         }
 
         return text;
     }
 
-    public static @NotNull String formatColors(String text) {
-        if(text == null) {
-            return "";
-        }
+    @NotNull
+    public static Component formatColors(String message) {
+        var mm = MiniMessage.miniMessage();
+        return mm.deserialize(message);
+    }
 
-        return IridiumColorAPI.process(text);
+    public static void sendTitle(Player player, String maintitle, String subtitle, Integer fadeIn, Integer stay, Integer fadeOut) {
+        Audience audience = Main.getPlugin().adventure().player(player);
+
+        final Title.Times times = Title.Times.times(Duration.ofMillis(fadeIn*50), Duration.ofMillis(stay*50), Duration.ofMillis(fadeIn*50));
+        final Title title = Title.title(formatColors(maintitle), formatColors(subtitle), times);
+
+        audience.showTitle(title);
+    }
+
+    public static void sendActionBar(Player player, String message) {
+        Audience audience = Main.getPlugin().adventure().player(player);
+        audience.sendActionBar(formatColors(message));
     }
 }

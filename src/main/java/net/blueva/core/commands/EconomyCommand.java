@@ -53,7 +53,7 @@ public class EconomyCommand implements CommandExecutor {
         if(args.length == 3) {
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null) {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.player_offline")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
                 return true;
             }
 
@@ -61,7 +61,7 @@ public class EconomyCommand implements CommandExecutor {
             if(StringUtils.isNumber(args[2])) {
                 quantity = Double.parseDouble(args[2]);
             } else {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_economy_command"));
                 return true;
             }
 
@@ -72,10 +72,10 @@ public class EconomyCommand implements CommandExecutor {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    sender.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_deposited"))
-                            .replace("{amount}", String.valueOf(quantity))));
+                    MessagesUtils.sendToSender(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_deposited"))
+                            .replace("{amount}", String.valueOf(quantity)));
                 } else {
-                    sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             } else if(args[0].equalsIgnoreCase("withdraw")) {
                 if(sender.hasPermission("bluecore.economy.withdraw")) {
@@ -84,10 +84,10 @@ public class EconomyCommand implements CommandExecutor {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    sender.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_withdrawn"))
-                            .replace("{amount}", String.valueOf(quantity))));
+                    MessagesUtils.sendToSender(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_withdrawn"))
+                            .replace("{amount}", String.valueOf(quantity)));
                 } else {
-                    sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             } else if(args[0].equalsIgnoreCase("set")) {
                 if(sender.hasPermission("bluecore.economy.set")) {
@@ -96,26 +96,26 @@ public class EconomyCommand implements CommandExecutor {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    sender.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_set"))
-                            .replace("{amount}", String.valueOf(quantity))));
+                    MessagesUtils.sendToSender(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.money_set"))
+                            .replace("{amount}", String.valueOf(quantity)));
                 } else {
-                    sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             } else {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_economy_command"));
             }
         } else if(args.length == 2) {
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null) {
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
                 return true;
             }
 
             if(args[0].equalsIgnoreCase("balance")) {
                 if(sender.hasPermission("bluecore.economy.balance")) {
-                    sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.info.current_balance_other")));
+                    MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.info.current_balance_other"));
                 } else {
-                    sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             } else if(args[0].equalsIgnoreCase("reset")) {
                 if(sender.hasPermission("bluecore.economy.reset")) {
@@ -124,15 +124,15 @@ public class EconomyCommand implements CommandExecutor {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.success.money_reset")));
+                    MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.success.money_reset"));
                 } else {
-                    sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             } else {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_economy_command"));
             }
         } else {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_economy_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_economy_command"));
         }
 
         return true;

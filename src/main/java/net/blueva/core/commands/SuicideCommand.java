@@ -46,18 +46,18 @@ public class SuicideCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.only_player"));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.suicide")) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+            MessagesUtils.sendToPlayer((Player) sender, ConfigManager.language.getString("messages.error.no_perms"));
             return true;
         }
 
         Player target = (Player) sender;
         target.setHealth(0);
-        target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.completed_suicide")));
+        MessagesUtils.sendToPlayer(target, ConfigManager.language.getString("messages.success.completed_suicide"));
 
         return true;
     }

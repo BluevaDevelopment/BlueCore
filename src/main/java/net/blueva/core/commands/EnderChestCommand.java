@@ -49,7 +49,7 @@ public class EnderChestCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_enderchest_command")));
+            MessagesUtils.sendToSender(null, ConfigManager.language.getString("messages.other.use_enderchest_command"));
             return true;
         }
 
@@ -57,27 +57,25 @@ public class EnderChestCommand implements CommandExecutor {
         if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
                 return true;
             }
             if (!sender.hasPermission("bluecore.enderchest.others")) {
-                assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         } else {
             target = (Player) sender;
             if (!sender.hasPermission("bluecore.enderchest")) {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         }
 
         target.openInventory(target.getEnderChest());
-        target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.enderchest_open")));
+        MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.enderchest_open"));
         if (args.length == 1) {
-            sender.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.enderchest_open_others")).replace("%player%", target.getName())));
+            MessagesUtils.sendToSender(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.enderchest_open_others")).replace("%player%", target.getName()));
         }
 
         return true;

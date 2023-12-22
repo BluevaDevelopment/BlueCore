@@ -54,21 +54,21 @@ public class MidnightCommand implements CommandExecutor {
                 world = ((Player) sender).getWorld();
             }
             if (!sender.hasPermission("bluecore.time.midnight" + (world == ((Player) sender).getWorld() ? "" : ".others"))) {
-                sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToPlayer(((Player) sender), ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
             world.setTime(18000);
-            sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.success.changed_time"))
+            MessagesUtils.sendToPlayer(((Player) sender), ConfigManager.language.getString("messages.success.changed_time")
                     .replace("%world_name%", world.getName())
                     .replace("%time%", "Midnight")
                     .replace("%ticks%", "6000"));
         } else {
             if (world == null) {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_noon_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_noon_command"));
                 return true;
             }
             world.setTime(18000);
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.success.changed_time"))
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.success.changed_time")
                     .replace("%world_name%", world.getName())
                     .replace("%time%", "Midnight")
                     .replace("%ticks%", "6000"));

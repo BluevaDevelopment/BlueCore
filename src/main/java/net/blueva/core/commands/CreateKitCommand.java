@@ -54,12 +54,12 @@ public class CreateKitCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            MessagesUtils.sendToConsole(ConfigManager.language.getString("messages.error.only_player"));
             return true;
         }
 
         if (args.length != 2) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_createkit_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_createkit_command"));
             return true;
         }
 
@@ -75,12 +75,12 @@ public class CreateKitCommand implements CommandExecutor {
         }
 
         if (!sender.hasPermission("bluecore.createkit")) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+            MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.error.no_perms"));
             return true;
         }
 
         if(KitsModule.kitExists(kitname)) {
-            player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.existing_kit")).replace("%kit_name%", kitname)));
+            MessagesUtils.sendToSender(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.existing_kit")).replace("%kit_name%", kitname));
             return true;
         }
 
@@ -96,7 +96,7 @@ public class CreateKitCommand implements CommandExecutor {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_created")).replace("%kit_name%", kitname)));
+        MessagesUtils.sendToSender(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_created")).replace("%kit_name%", kitname));
 
         return true;
     }

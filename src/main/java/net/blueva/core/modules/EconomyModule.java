@@ -99,7 +99,7 @@ public class EconomyModule {
         }
 
         if(!bool) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.money_out_of_range")));
+            MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.error.money_out_of_range"));
         }
 
         return bool;

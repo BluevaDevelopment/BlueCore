@@ -39,7 +39,7 @@ public class WarpModule {
     public static boolean setWarp(String warp, Player player) throws IOException {
         File warpFile = new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/"+warp+".yml");
         if(warpFile.exists()) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.warp_already_set")));
+            MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.error.warp_already_set"));
             return false;
         }
 
@@ -64,7 +64,7 @@ public class WarpModule {
     public static boolean updateWarp (String warp, Player player) throws IOException {
         File warpFile = new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/"+warp+".yml");
         if(!warpFile.exists()) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
+            MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.error.unknown_warp"));
             return false;
         }
 
@@ -90,10 +90,10 @@ public class WarpModule {
         if(warpFile.exists()) {
             ConfigManager.Data.changeWarpReference(warp);
             if(warpFile.delete()) {
-                player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_deleted")).replace("%warp%", warp)));
+                MessagesUtils.sendToPlayer(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_deleted")).replace("%warp%", warp));
             }
         } else {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
+            MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.error.unknown_warp"));
         }
     }
 

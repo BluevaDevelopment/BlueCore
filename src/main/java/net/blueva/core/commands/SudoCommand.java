@@ -26,6 +26,7 @@
 package net.blueva.core.commands;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.kyori.adventure.audience.Audience;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -47,18 +48,18 @@ public class SudoCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length < 2) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.other.use_sudo_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_sudo_command"));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.sudo")) {
-            sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
             return true;
         }
 
@@ -68,7 +69,7 @@ public class SudoCommand implements CommandExecutor {
         }
         String command = commandBuilder.toString().trim();
 
-        target.chat("/"+ MessagesUtils.format(target, command));
+        target.chat("/"+ MessagesUtils.formatLegacy(target, command));
 
         return true;
     }

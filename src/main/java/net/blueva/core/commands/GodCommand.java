@@ -49,7 +49,7 @@ public class GodCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_god_command")));
+            MessagesUtils.sendToConsole(ConfigManager.language.getString("messages.other.use_god_command"));
             return true;
         }
 
@@ -57,19 +57,17 @@ public class GodCommand implements CommandExecutor {
         if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
                 return true;
             }
             if (!sender.hasPermission("bluecore.god.others")) {
-                assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         } else {
             target = (Player) sender;
             if (!sender.hasPermission("bluecore.god")) {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         }
@@ -83,7 +81,7 @@ public class GodCommand implements CommandExecutor {
                 throw new RuntimeException(e);
             }
 
-            target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.god_mode_disabled")));
+            MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_disabled"));
         } else {
             ConfigManager.Data.getUserDocument(target.getUniqueId()).set("godMode", true);
             try {
@@ -92,13 +90,13 @@ public class GodCommand implements CommandExecutor {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.god_mode_enabled")));
+            MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_enabled"));
         }
         if (args.length == 1) {
             if(ConfigManager.Data.getUserDocument(target.getUniqueId()).getBoolean("godMode")) {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.god_mode_disabled_others")).replace("%player%", target.getName()));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_disabled_others").replace("%player%", target.getName()));
             } else {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.god_mode_enabled_others")).replace("%player%", target.getName()));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_enabled_others").replace("%player%", target.getName()));
             }
         }
 

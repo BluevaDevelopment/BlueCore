@@ -49,12 +49,12 @@ public class SpeedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (args.length < 1 || args.length > 2) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_speed_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_speed_command"));
             return true;
         }
 
         if (!sender.hasPermission("bluecore.speed")) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.no_perms")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
             return true;
         }
 
@@ -62,12 +62,12 @@ public class SpeedCommand implements CommandExecutor {
         try {
             speed = Float.parseFloat(args[0]);
         } catch (NumberFormatException e) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.invalid_speed")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.invalid_speed"));
             return true;
         }
 
         if (speed < 0 || speed > 1) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.invalid_speed")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.invalid_speed"));
             return true;
         }
 
@@ -75,25 +75,25 @@ public class SpeedCommand implements CommandExecutor {
         if (args.length == 2) {
             target = Bukkit.getPlayer(args[1]);
             if (target == null) {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.player_offline")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
                 return true;
             }
             if (!sender.hasPermission("bluecore.speed.others")) {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         } else if (sender instanceof Player) {
             target = (Player) sender;
         } else {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_speed_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_speed_command"));
             return true;
         }
 
         target.setWalkSpeed(speed);
         target.setFlySpeed(speed);
-        target.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed")).replace("%speed%", String.valueOf(speed))));
+        MessagesUtils.sendToPlayer(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed")).replace("%speed%", String.valueOf(speed)));
         if (args.length == 2) {
-            sender.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed_others")).replace("%speed%", String.valueOf(speed)).replace("%player%", target.getName())));
+            MessagesUtils.sendToPlayer(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.speed_changed_others")).replace("%speed%", String.valueOf(speed)).replace("%player%", target.getName()));
         }
 
         return true;

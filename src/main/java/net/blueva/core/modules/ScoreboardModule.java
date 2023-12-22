@@ -25,9 +25,9 @@
 
 package net.blueva.core.modules;
 
+import fr.mrmicky.fastboard.FastBoard;
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.libraries.fastboard.FastBoard;
 import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -72,7 +72,7 @@ public class ScoreboardModule {
 	private void updateScoreboards(Player player, FastBoard board, String scoreboard) {
 		String scoreboardPath = "scoreboards." + scoreboard;
 		if (shouldDisplayScoreboard(player, scoreboardPath) && scoreboardHasPriority(scoreboardPath)) {
-			String title = MessagesUtils.format(player, ConfigManager.Modules.scoreboards.getString(scoreboardPath + ".title"));
+			String title = MessagesUtils.formatLegacy(player, ConfigManager.Modules.scoreboards.getString(scoreboardPath + ".title"));
 			board.updateTitle(title);
 			List<String> lines = ConfigManager.Modules.scoreboards.getStringList(scoreboardPath + ".lines");
 			List<String> formattedLines = formatLines(player, lines);
@@ -94,7 +94,7 @@ public class ScoreboardModule {
 	}
 
 	private boolean shouldDisplayScoreboard(Player player, String scoreboardPath) {
-		String displayCondition = MessagesUtils.format(player, ConfigManager.Modules.scoreboards.getString(scoreboardPath + ".display_condition"));
+		String displayCondition = MessagesUtils.formatLegacy(player, ConfigManager.Modules.scoreboards.getString(scoreboardPath + ".display_condition"));
 		return displayCondition.equals("*") || evaluateCondition(displayCondition, player);
 	}
 
@@ -113,8 +113,8 @@ public class ScoreboardModule {
 	}
 
 	private boolean compareVariables(String operator, String operand1, String operand2, Player player) {
-		operand1 = MessagesUtils.format(player, operand1);
-		operand2 = MessagesUtils.format(player, operand2);
+		operand1 = MessagesUtils.formatLegacy(player, operand1);
+		operand2 = MessagesUtils.formatLegacy(player, operand2);
 
         return switch (operator) {
             case "=" -> operand1.equals(operand2);
@@ -143,7 +143,7 @@ public class ScoreboardModule {
 	private List<String> formatLines(Player player, List<String> lines) {
 		List<String> formattedLines = new ArrayList<>();
 		for (String line : lines) {
-			String formattedLine = MessagesUtils.format(player, line);
+			String formattedLine = MessagesUtils.formatLegacy(player, line);
 			formattedLines.add(formattedLine);
 		}
 		return formattedLines;

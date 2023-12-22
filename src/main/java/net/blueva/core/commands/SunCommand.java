@@ -54,20 +54,20 @@ public class SunCommand implements CommandExecutor {
                 world = ((Player) sender).getWorld();
             }
             if (!sender.hasPermission("bluecore.weather.clear")) {
-                sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
             world.setStorm(false);
-            sender.sendMessage(MessagesUtils.format(((Player) sender), ConfigManager.language.getString("messages.success.changed_weather"))
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.success.changed_weather")
                     .replace("%world%", world.getName())
                     .replace("%weather%", "Clear"));
         } else {
             if (world == null) {
-                sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_sun_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_sun_command"));
                 return true;
             }
             world.setStorm(false);
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.success.changed_weather"))
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.success.changed_weather")
                     .replace("%world%", world.getName())
                     .replace("%weather%", "Clear"));
         }

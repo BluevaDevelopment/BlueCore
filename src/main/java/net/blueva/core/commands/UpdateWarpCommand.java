@@ -48,12 +48,12 @@ public class UpdateWarpCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            MessagesUtils.sendToConsole(ConfigManager.language.getString("messages.error.only_player"));
             return true;
         }
 
         if(!sender.hasPermission("bluecore.updatewarp")) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_permission")));
+            MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.error.no_permission"));
             return true;
         }
 
@@ -62,18 +62,18 @@ public class UpdateWarpCommand implements CommandExecutor {
                 if(args.length == 1){
                     try {
                         if(WarpModule.updateWarp(args[0], player)) {
-                            player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_updated")).replace("%warp%", args[0])));
+                            MessagesUtils.sendToPlayer(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.warp_updated")).replace("%warp%", args[0]));
                         }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_updatewarp_command")));
+                    MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.other.use_updatewarp_command"));
                 }
             }
         } else {
-            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.module_disabled")
-                    .replace("%module%", "Warps")));
+            MessagesUtils.sendToPlayer(player, ConfigManager.language.getString("messages.error.module_disabled")
+                    .replace("%module%", "Warps"));
         }
         return true;
     }

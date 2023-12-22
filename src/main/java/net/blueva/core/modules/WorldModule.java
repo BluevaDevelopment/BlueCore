@@ -28,7 +28,9 @@ package net.blueva.core.modules;
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtils;
+import net.kyori.adventure.audience.Audience;
 import org.bukkit.*;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -85,7 +87,7 @@ public class WorldModule {
         }
     }
 
-    public void createWorld(Player player, String name, String environment, String type, String generator) throws IOException {
+    public void createWorld(CommandSender sender, Player player, String name, String environment, String type, String generator) throws IOException {
         if(environment == null) {
             environment = "normal";
         }
@@ -93,7 +95,7 @@ public class WorldModule {
             type = "normal";
         }
 
-        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.info.wm_creating_world")).replace("%worldmanager_worldname%", name));
+        MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.info.wm_creating_world").replace("%worldmanager_worldname%", name));
         WorldCreator setupworld = new WorldCreator(name);
         setupworld.environment(World.Environment.valueOf(environment.toUpperCase()));
         setupworld.type(WorldType.valueOf(type.toUpperCase()));
@@ -107,7 +109,7 @@ public class WorldModule {
             setupworld.createWorld();
         } catch (Exception e) {
             e.printStackTrace();
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_creation_error")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_creation_error"));
         }
 
         ConfigManager.Data.changeWorldReference(name);
@@ -133,18 +135,21 @@ public class WorldModule {
         ConfigManager.Data.world.set("world." + name + ".spawn_location.pitch", ConfigManager.Modules.worlds.getFloat("worlds.defaults.spawn_location.pitch"));
         ConfigManager.Data.world.set("world." + name + ".spawn_location.yaw", ConfigManager.Modules.worlds.getFloat("worlds.defaults.spawn_location.yaw"));
         ConfigManager.Data.world.save();
-        player.teleport(Objects.requireNonNull(Bukkit.getWorld(name)).getSpawnLocation());
-        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.success.wm_created_world")).replace("%world_name%", name));
 
+        MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.success.wm_created_world").replace("%world_name%", name));
+
+        if(player != null) {
+            player.teleport(Objects.requireNonNull(Bukkit.getWorld(name)).getSpawnLocation());
+        }
     }
 
-    public void deleteWorld(Player player, String name) {
+    public void deleteWorld(CommandSender sender, String name) {
         if (Bukkit.getWorld(name) == null) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_world")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_invalid_world"));
             return;
         }
         if (!Bukkit.getWorld(name).getPlayers().isEmpty()) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_players_in_world")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_players_in_world"));
             return;
         }
         Bukkit.unloadWorld(name, false);
@@ -153,29 +158,29 @@ public class WorldModule {
     public void importWorld(Player player, String name) {
         File worldfile = new File(Bukkit.getServer().getWorldContainer(), name);
         if (!worldfile.exists()) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_world")));
+            MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.error.wm_invalid_world"));
             return;
         }
         if (Bukkit.getWorld(name) != null) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_already_imported")));
+            MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.error.wm_already_imported"));
             return;
         }
         Bukkit.unloadWorld(name, true);
         try {
             WorldCreator setupworld = new WorldCreator(name);
             setupworld.createWorld();
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.success.wm_imported_world")).replace("%world_world%", name));
+            MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.success.wm_imported_world").replace("%world_world%", name));
             player.teleport(Bukkit.getWorld(name).getSpawnLocation());
         } catch (Exception e) {
             e.printStackTrace();
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_imported_error")));
+            MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.error.wm_imported_error"));
         }
     }
 
-    public void setWorldSpawn(Player player) throws IOException {
+    public void setWorldSpawn(CommandSender sender, Player player) throws IOException {
         String name = player.getWorld().getName();
         if (Bukkit.getWorld(name) == null) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_world")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_invalid_world"));
             return;
         }
         ConfigManager.Data.changeWorldReference(name);
@@ -201,9 +206,9 @@ public class WorldModule {
         player.teleport(loc);
     }
 
-    public void gotoWorld(Player player, String name) {
+    public void gotoWorld(CommandSender sender, Player player, String name) {
         if (Bukkit.getWorld(name) == null) {
-            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_world")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_invalid_world"));
             return;
         }
         ConfigManager.Data.changeWorldReference(name);
@@ -214,6 +219,8 @@ public class WorldModule {
         float pitch = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".spawnlocation.pitch")));
         float yaw = Float.parseFloat(Objects.requireNonNull(ConfigManager.Data.world.getString("world." + name + ".spawnlocation.yaw")));
         Location loc = new Location(world, x, y, z, yaw, pitch);
-        player.teleport(loc);
+        if(player != null) {
+            player.teleport(loc);
+        }
     }
 }

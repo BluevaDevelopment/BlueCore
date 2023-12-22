@@ -67,7 +67,7 @@ public class PlayerJoinListener implements Listener {
 
 		if(ConfigManager.Modules.welcome.getBoolean("welcome.enabled")) {
 			if(ConfigManager.Modules.welcome.getBoolean("welcome.broadcast.join.enabled")) {
-				event.setJoinMessage(MessagesUtils.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.join.message")).replace("%player_name%", event.getPlayer().getDisplayName()));
+				event.setJoinMessage(MessagesUtils.formatLegacy(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.join.message")).replace("%player_name%", event.getPlayer().getDisplayName()));
 			} else {
 				event.setJoinMessage("");
 			}
@@ -76,26 +76,22 @@ public class PlayerJoinListener implements Listener {
 				List<String> description = ConfigManager.Modules.welcome.getStringList("welcome.message.list");
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, () -> {
 					for (String message : description) {
-						event.getPlayer().sendMessage(MessagesUtils.format(event.getPlayer(), message));
+						MessagesUtils.sendToPlayer(event.getPlayer(), message);
 					}
 				}, ConfigManager.Modules.welcome.getInt("welcome.message.wait"));
 			}
 
 			if(ConfigManager.Modules.welcome.getBoolean("welcome.title.enabled")) {
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, () -> event.getPlayer().sendTitle(MessagesUtils.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.title.title")), MessagesUtils.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.title.subtitle")), ConfigManager.Modules.welcome.getInt("welcome.title.fade_in"), ConfigManager.Modules.welcome.getInt("welcome.title.stay"), ConfigManager.Modules.welcome.getInt("welcome.title.fade_out")), ConfigManager.Modules.welcome.getInt("welcome.title.wait"));
-
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, () -> MessagesUtils.sendTitle(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.title.title"), ConfigManager.Modules.welcome.getString("welcome.title.subtitle"), ConfigManager.Modules.welcome.getInt("welcome.title.fade_in"), ConfigManager.Modules.welcome.getInt("welcome.title.stay"), ConfigManager.Modules.welcome.getInt("welcome.title.fade_out")));
 			}
 
 			if(ConfigManager.Modules.welcome.getBoolean("welcome.actionbar.enabled")) {
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, () -> {
-					TextComponent text_component = new TextComponent(MessagesUtils.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.actionbar.message")));
-					event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, text_component);
-				}, ConfigManager.Modules.welcome.getInt("welcome.actionbar.wait"));
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, () -> MessagesUtils.sendActionBar(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.actionbar.message")), ConfigManager.Modules.welcome.getInt("welcome.actionbar.wait"));
 			}
 
 			if(ConfigManager.Modules.welcome.getBoolean("welcome.broadcast.first_join.enabled")) {
 				if(ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).getString("logoutlocation.world") != null) {
-					Bukkit.broadcastMessage(MessagesUtils.format(event.getPlayer(), Objects.requireNonNull(ConfigManager.Modules.welcome.getString("welcome.broadcast.first_join.message")).replace("%player_name%", event.getPlayer().getName())));
+					MessagesUtils.broadcast(Objects.requireNonNull(ConfigManager.Modules.welcome.getString("welcome.broadcast.first_join.message")).replace("%player_name%", event.getPlayer().getName()));
 				}
 			}
 		}

@@ -50,13 +50,13 @@ public class WorldCommand implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args){
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.error.only_player")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.only_player"));
             return true;
         }
         final Player player = (Player)sender;
 
         if (args.length == 0) {
-            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_command"));
             return true;
         }
 
@@ -64,41 +64,41 @@ public class WorldCommand implements CommandExecutor {
             if(args[0].equalsIgnoreCase("create")){
                 if(player.hasPermission("bluecore.world.create")){
                     if (args.length == 1) {
-                        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+                        MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_command"));
                         return true;
                     }
                     if (args.length == 2) {
                         String worldname = args[1];
                         if (Bukkit.getWorld(worldname) != null) {
-                            player.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.error.wm_alredy_exist")).replace("%world_name%",  worldname)));
+                            MessagesUtils.sendToSender(sender, Objects.requireNonNull(ConfigManager.language.getString("messages.error.wm_alredy_exist")).replace("%world_name%",  worldname));
                         } else {
-                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+                            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_command"));
                         }
                         return true;
                     }
                     if (args.length == 3) {
                         if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             try {
-                                main.worldModule.createWorld(player, args[1], null, null, null);
+                                main.worldModule.createWorld(sender, player, args[1], null, null, null);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
                             return true;
                         } else {
-                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_args")));
+                            MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.error.wm_invalid_args"));
                         }
                     }
                     if (args.length == 4) {
                         if(args[2].equalsIgnoreCase("normal") || args[2].equalsIgnoreCase("nether") || args[2].equalsIgnoreCase("the_end")) {
                             if(args[3].equals("-t")) {
-                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_create_command"));
                             } else if(args[3].equals("-g")) {
-                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_create_command"));
                             } else {
-                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_create_command"));
                             }
                         } else {
-                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_create_command"));
                         }
 
                     }
@@ -107,7 +107,7 @@ public class WorldCommand implements CommandExecutor {
                             if(args[3].equals("-t")) {
                                 if(args[4].equals("flat") || args[4].equals("large_biomes") || args[4].equals("normal") || args[4].equals("amplified")) {
                                     try {
-                                        main.worldModule.createWorld(player, args[1], args[2].toUpperCase(), args[4].toUpperCase(), null);
+                                        main.worldModule.createWorld(sender, player, args[1], args[2].toUpperCase(), args[4].toUpperCase(), null);
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -116,25 +116,25 @@ public class WorldCommand implements CommandExecutor {
                             } else if(args[3].equals("-g")) {
                                 if(!args[4].isEmpty()) {
                                     try {
-                                        main.worldModule.createWorld(player, args[1], args[2].toUpperCase(), null, args[4]);
+                                        main.worldModule.createWorld(sender, player, args[1], args[2].toUpperCase(), null, args[4]);
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
                                     }
                                 }
                             } else {
-                                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_create_command")));
+                                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_create_command"));
                             }
                         } else {
-                            player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.wm_invalid_args")));
+                            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_invalid_args"));
                         }
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             }else if(args[0].equalsIgnoreCase("delete")){
                 if(player.hasPermission("bluecore.world.delete")){
                     if (args.length == 1) {
-                        player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_world_command")));
+                        MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_world_command"));
                         return true;
                     }
                     if (args.length == 2) {
@@ -142,20 +142,20 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             }else if(args[0].equalsIgnoreCase("setspawn")){
                 if(player.hasPermission("bluecore.world.setspawn")){
                     if (args.length == 1) {
                         try {
-                            main.worldModule.setWorldSpawn(player);
+                            main.worldModule.setWorldSpawn(sender, player);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             }else if(args[0].equalsIgnoreCase("spawn")){
                 if(player.hasPermission("bluecore.world.spawn")){
@@ -164,7 +164,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             }else if(args[0].equalsIgnoreCase("goto")){
                 if(player.hasPermission("bluecore.world.goto")){
@@ -173,11 +173,11 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                     if (args.length == 2) {
-                        main.worldModule.gotoWorld(player, args[1]);
+                        main.worldModule.gotoWorld(sender, player, args[1]);
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             }else if(args[0].equalsIgnoreCase("import")){
                 if(player.hasPermission("bluecore.world.import")){
@@ -190,7 +190,7 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             }else if(args[0].equalsIgnoreCase("list")){
                 if(player.hasPermission("bluecore.world.list")){
@@ -203,14 +203,14 @@ public class WorldCommand implements CommandExecutor {
                         return true;
                     }
                 } else {
-                    player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_perms")));
+                    MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 }
             }else{
-                player.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.unknown_command"));
             }
         } else {
-            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.module_disabled")
-                    .replace("%module%", "World")));
+            MessagesUtils.sendToSender(player, ConfigManager.language.getString("messages.error.module_disabled")
+                    .replace("%module%", "World"));
         }
         return true;
     }

@@ -53,20 +53,20 @@ public class SetSpawnCommand implements CommandExecutor {
         }
 
         if(!sender.hasPermission("bluecore.setspawn")) {
-            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.no_permission")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_permission"));
             return true;
         }
 
         if(ConfigManager.Modules.warps.getBoolean("warps.enabled")) {
             if(args.length != 1) {
-                sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.other.use_setspawn_command")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.other.use_setspawn_command"));
                 return true;
             }
 
             String warp = args[0];
             File warpFile = new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/"+warp+".yml");
             if(!warpFile.exists()) {
-                sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.unknown_warp")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.unknown_warp"));
                 return true;
             }
 
@@ -77,10 +77,10 @@ public class SetSpawnCommand implements CommandExecutor {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            sender.sendMessage(MessagesUtils.format(player, Objects.requireNonNull(ConfigManager.language.getString("messages.success.spawn_set")).replace("%warp%", args[0])));
+            MessagesUtils.sendToSender(sender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.spawn_set")).replace("%warp%", args[0]));
         } else {
-            sender.sendMessage(MessagesUtils.format(player, ConfigManager.language.getString("messages.error.module_disabled")
-                    .replace("%module%", "Warps")));
+            MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.module_disabled")
+                    .replace("%module%", "Warps"));
         }
 
         return true;

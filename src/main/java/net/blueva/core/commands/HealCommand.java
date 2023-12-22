@@ -47,9 +47,9 @@ public class HealCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_heal_command")));
+            MessagesUtils.sendToConsole(ConfigManager.language.getString("messages.other.use_heal_command"));
             return true;
         }
 
@@ -57,27 +57,25 @@ public class HealCommand implements CommandExecutor {
         if (args.length == 1) {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.player_offline"));
                 return true;
             }
             if (!sender.hasPermission("bluecore.heal.others")) {
-                assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         } else {
             target = (Player) sender;
             if (!sender.hasPermission("bluecore.heal")) {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         }
 
         target.setHealth(20);
-        target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.healed_player")));
+        MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.healed_player"));
         if (args.length == 1) {
-            sender.sendMessage(MessagesUtils.format(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.healed_player_others")).replace("%player%", target.getName())));
+            MessagesUtils.sendToSender(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.healed_player_others")).replace("%player%", target.getName()));
         }
 
         return true;

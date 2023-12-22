@@ -26,9 +26,12 @@
 package net.blueva.core.modules;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.utils.MessagesUtils;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -45,20 +48,39 @@ public class TablistModule {
 		this.main = main;
 	}
 
-	public void createTablist() {
+	public void createTab() {
 		BukkitScheduler schedule = Bukkit.getServer().getScheduler();
 		taskID = schedule.scheduleSyncRepeatingTask(main, () -> {
 			for(Player player : Bukkit.getOnlinePlayers()) {
-				updateTablist(player);
+				updateTab(player);
 			}
 		}, 0, ConfigManager.Modules.tablist.getInt("tablist.tablist1.ticks"));
 	}
 
-	private void updateTablist(Player p) {
+	private void updateTab(Player p) {
 		if(ConfigManager.Modules.tablist.getBoolean("tablist.tablist1.enabled")) {
-			p.setPlayerListHeader(MessagesUtils.format(p, StringUtils.listToString((ArrayList<String>) ConfigManager.settings.getStringList("tablist.tablist1.header"), "\n")));
-			p.setPlayerListFooter(MessagesUtils.format(p, StringUtils.listToString((ArrayList<String>) ConfigManager.settings.getStringList("tablist.tablist1.footer"), "\n")).replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size())));
+			Audience audience = Main.getPlugin().adventure().player(p);
+			audience.sendPlayerListHeader(MessagesUtils.formatColors(StringUtils.listToString((ArrayList<String>) ConfigManager.settings.getStringList("tablist.tablist1.header"), "\n")));
+			audience.sendPlayerListFooter(MessagesUtils.formatColors(StringUtils.listToString((ArrayList<String>) ConfigManager.settings.getStringList("tablist.tablist1.footer"), "\n").replace("%online%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size()))));
 		}
+	}
+
+	private boolean shouldDisplay(Player player, String scoreboardPath) {
+		Component displayCondition = MessagesUtils.formatColors(ConfigManager.Modules.scoreboards.getString(scoreboardPath + ".display_condition"));
+		return displayCondition.equals("*") /*ConditionsUtils.evaluateCondition(displayCondition, player)*/;
+	}
+
+	private boolean hasPriority(String scoreboardPath) {
+		boolean bool = false;
+
+		int priority = ConfigManager.Modules.scoreboards.getInt(scoreboardPath + ".priority");
+		for (Object scoreboard : Objects.requireNonNull(ConfigManager.Modules.scoreboards.getSection("scoreboards")).getKeys()) {
+			if(ConfigManager.Modules.scoreboards.getInt("scoreboards."+scoreboard+".priority") <= priority) {
+				bool = true;
+			}
+		}
+
+		return bool;
 	}
 
 

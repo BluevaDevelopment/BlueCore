@@ -27,19 +27,20 @@ package net.blueva.core;
 
 import net.blueva.core.commands.*;
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.libraries.bstats.Metrics;
 import net.blueva.core.libraries.vault.EconomyImplementer;
 import net.blueva.core.libraries.vault.VaultHook;
 import net.blueva.core.listeners.*;
-import net.blueva.core.libraries.metrics.Metrics;
 import net.blueva.core.modules.ScoreboardModule;
 import net.blueva.core.modules.TablistModule;
 import net.blueva.core.modules.WorldModule;
 import net.blueva.core.utils.LocationUtils;
-import net.blueva.core.utils.MessagesUtils;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -62,12 +63,15 @@ public final class Main extends JavaPlugin {
     public HashMap<UUID, Double> playerBank = new HashMap<>();
 	private VaultHook vaultHook;
 	private static Main plugin;
+	private BukkitAudiences adventure;
 	public static Main getPlugin() {
 		return plugin;
 	}
 
     public void onEnable() {
 		plugin = this;
+
+		this.adventure = BukkitAudiences.create(this);
 
 		ConfigManager.generateFolders();
 		ConfigManager.registerDocuments();
@@ -86,7 +90,7 @@ public final class Main extends JavaPlugin {
 		scoreboard.createScoreboard();
 
 		TablistModule tablist = new TablistModule(this);
-		tablist.createTablist();
+		tablist.createTab();
 
 		LocationUtils lastlocation = new LocationUtils(this);
 		lastlocation.createLastLocation();
@@ -98,7 +102,7 @@ public final class Main extends JavaPlugin {
 		}
 		if(ConfigManager.Modules.economy.getBoolean("economy.enabled")) {
 			if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
-				Bukkit.getConsoleSender().sendMessage(MessagesUtils.format(null, "[BlueCore] " + ConfigManager.language.getString("messages.info.detected_vault")));
+				Bukkit.getConsoleSender().sendMessage("[BlueCore] " + ConfigManager.language.getString("messages.info.detected_vault"));
 				economyImplementer = new EconomyImplementer();
 				vaultHook = new VaultHook();
 				vaultHook.hook();
@@ -194,5 +198,12 @@ public final class Main extends JavaPlugin {
 		Objects.requireNonNull(this.getCommand("warp")).setExecutor(new WarpCommand(this));
 		Objects.requireNonNull(this.getCommand("workbench")).setExecutor(new WorkbenchCommand(this));
 		Objects.requireNonNull(this.getCommand("world")).setExecutor(new WorldCommand(this));
+	}
+
+	public @NonNull BukkitAudiences adventure() {
+		if(this.adventure == null) {
+			throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+		}
+		return this.adventure;
 	}
 }

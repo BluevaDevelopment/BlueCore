@@ -47,7 +47,7 @@ public class FlyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player) && args.length != 1) {
-            sender.sendMessage(MessagesUtils.format(null, ConfigManager.language.getString("messages.other.use_fly_command")));
+            MessagesUtils.sendToConsole(ConfigManager.language.getString("messages.other.use_fly_command"));
             return true;
         }
 
@@ -56,18 +56,18 @@ public class FlyCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
             if (target == null) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.player_offline")));
+                MessagesUtils.sendToSender((Player) sender, ConfigManager.language.getString("messages.error.player_offline"));
                 return true;
             }
             if (!sender.hasPermission("bluecore.fly.others")) {
                 assert sender instanceof Player;
-                sender.sendMessage(MessagesUtils.format((Player) sender, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender((Player) sender, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         } else {
             target = (Player) sender;
             if (!sender.hasPermission("bluecore.fly")) {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.error.no_perms")));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
         }
@@ -75,17 +75,17 @@ public class FlyCommand implements CommandExecutor {
         if(target.isFlying()) {
             target.setAllowFlight(false);
             target.setFlying(false);
-            target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.fly_mode_disabled")));
+            MessagesUtils.sendToPlayer(target, ConfigManager.language.getString("messages.success.fly_mode_disabled"));
         } else {
             target.setAllowFlight(true);
             target.setFlying(true);
-            target.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.fly_mode_enabled")));
+            MessagesUtils.sendToPlayer(target, ConfigManager.language.getString("messages.success.fly_mode_enabled"));
         }
         if (args.length == 1) {
             if(target.isFlying()) {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.fly_mode_disabled_others")).replace("%player%", target.getName()));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.fly_mode_disabled_others").replace("%player%", target.getName()));
             } else {
-                sender.sendMessage(MessagesUtils.format(target, ConfigManager.language.getString("messages.success.fly_mode_enabled_others")).replace("%player%", target.getName()));
+                MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.fly_mode_enabled_others").replace("%player%", target.getName()));
             }
         }
 
