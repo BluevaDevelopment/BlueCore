@@ -20,10 +20,10 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2023 Blueva Development. All rights reserved.
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
  */
 
-package net.blueva.core.libraries.vault;
+package net.blueva.core.modules.economy.vault;
 
 import net.blueva.core.Main;
 import net.milkbowl.vault.economy.Economy;

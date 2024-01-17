@@ -20,7 +20,7 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2023 Blueva Development. All rights reserved.
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
  */
 
 package net.blueva.core.listeners;
@@ -30,13 +30,11 @@ import java.util.List;
 import java.util.Objects;
 
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.modules.EconomyModule;
+import net.blueva.core.configuration.DataManager;
+import net.blueva.core.modules.economy.EconomyModule;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 
 import org.bukkit.Bukkit;
 
@@ -53,15 +51,15 @@ public class PlayerJoinListener implements Listener {
 
 	@EventHandler
 	public void OPJ(PlayerJoinEvent event) throws IOException {
-		ConfigManager.Data.registerUserDocument(event.getPlayer().getUniqueId());
+		DataManager.Users.getUser(event.getPlayer().getUniqueId());
 
 		if(Main.vaultapi) {
 			if(!main.playerBank.containsKey(event.getPlayer().getUniqueId())) {
-				main.playerBank.put(event.getPlayer().getUniqueId(), ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).getDouble("money"));
+				main.playerBank.put(event.getPlayer().getUniqueId(), DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("money").getDouble());
 			}
 		}
 
-		if(ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).get("logoutlocation.world") != null) {
+		if(DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "world").getString() != null) {
 			EconomyModule.setMoney(event.getPlayer(), ConfigManager.settings.getDouble("economy.starting_balance"), main);
 		}
 
@@ -90,7 +88,7 @@ public class PlayerJoinListener implements Listener {
 			}
 
 			if(ConfigManager.Modules.welcome.getBoolean("welcome.broadcast.first_join.enabled")) {
-				if(ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).getString("logoutlocation.world") != null) {
+				if(DataManager.Users.getUser(event.getPlayer().getUniqueId()).getString("logoutlocation.world") != null) {
 					MessagesUtils.broadcast(Objects.requireNonNull(ConfigManager.Modules.welcome.getString("welcome.broadcast.first_join.message")).replace("%player_name%", event.getPlayer().getName()));
 				}
 			}

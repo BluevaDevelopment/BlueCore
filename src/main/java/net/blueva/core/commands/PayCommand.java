@@ -20,14 +20,14 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2023 Blueva Development. All rights reserved.
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
  */
 
 package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.modules.EconomyModule;
+import net.blueva.core.modules.economy.EconomyModule;
 import net.blueva.core.utils.MessagesUtils;
 import net.blueva.core.utils.StringUtils;
 import org.bukkit.Bukkit;

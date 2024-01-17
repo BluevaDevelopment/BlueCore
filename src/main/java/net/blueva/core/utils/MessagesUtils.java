@@ -20,14 +20,14 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2023 Blueva Development. All rights reserved.
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
  */
 
 package net.blueva.core.utils;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.blueva.core.Main;
-import net.blueva.core.modules.EconomyModule;
+import net.blueva.core.modules.economy.EconomyModule;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;

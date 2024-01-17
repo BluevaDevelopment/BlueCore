@@ -25,18 +25,17 @@
 
 package net.blueva.core.commands;
 
+import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
+import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import net.blueva.core.Main;
-import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
+import org.spongepowered.configurate.serialize.SerializationException;
 
 public class GodCommand implements CommandExecutor {
 
@@ -71,29 +70,26 @@ public class GodCommand implements CommandExecutor {
                 return true;
             }
         }
-
-        if(ConfigManager.Data.getUserDocument(target.getUniqueId()).getBoolean("godMode")) {
-            ConfigManager.Data.getUserDocument(target.getUniqueId()).set("godMode", false);
+        if(DataManager.Users.getUser(target.getUniqueId()).node("god_mode").getBoolean()) {
             try {
-                ConfigManager.Data.getUserDocument(target.getUniqueId()).save();
-                ConfigManager.Data.getUserDocument(target.getUniqueId()).reload();
-            } catch (IOException e) {
+                DataManager.Users.getUser(target.getUniqueId()).node("god_mode").set(false);
+            } catch (SerializationException e) {
                 throw new RuntimeException(e);
             }
 
             MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_disabled"));
         } else {
-            ConfigManager.Data.getUserDocument(target.getUniqueId()).set("godMode", true);
             try {
-                ConfigManager.Data.getUserDocument(target.getUniqueId()).save();
-                ConfigManager.Data.getUserDocument(target.getUniqueId()).reload();
-            } catch (IOException e) {
+                DataManager.Users.getUser(target.getUniqueId()).node("god_mode").set(true);
+            } catch (SerializationException e) {
                 throw new RuntimeException(e);
             }
+            DataManager.Users.saveUser(target.getUniqueId());
+            DataManager.Users.reloadUser(target.getUniqueId());
             MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_enabled"));
         }
         if (args.length == 1) {
-            if(ConfigManager.Data.getUserDocument(target.getUniqueId()).getBoolean("godMode")) {
+            if(DataManager.Users.getUser(target.getUniqueId()).node("god_mode").getBoolean()) {
                 MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_disabled_others").replace("%player%", target.getName()));
             } else {
                 MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.success.god_mode_enabled_others").replace("%player%", target.getName()));

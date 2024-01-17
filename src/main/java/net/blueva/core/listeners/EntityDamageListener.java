@@ -26,6 +26,7 @@
 package net.blueva.core.listeners;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -61,7 +62,7 @@ public class EntityDamageListener implements Listener {
                 }
             }
 
-            if(ConfigManager.Data.getUserDocument(player.getUniqueId()).getBoolean("godMode")) {
+            if(DataManager.Users.getUser(player.getUniqueId()).node("god_mode").getBoolean()) {
                 event.setCancelled(true);
             }
         }

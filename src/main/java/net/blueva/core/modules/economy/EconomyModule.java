@@ -20,13 +20,14 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2023 Blueva Development. All rights reserved.
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
  */
 
-package net.blueva.core.modules;
+package net.blueva.core.modules.economy;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.entity.Player;
 
@@ -36,11 +37,12 @@ public class EconomyModule {
 
     public static void depositMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
-            double playerMoney = ConfigManager.Data.getUserDocument(player.getUniqueId()).getDouble("money");
+            double playerMoney = DataManager.Users.getUser(player.getUniqueId()).node("money").getDouble();
             double newQuantity = playerMoney+quantity;
             if(allowModifyBalance(player, main, quantity)) {
-                ConfigManager.Data.getUserDocument(player.getUniqueId()).set("config", newQuantity);
-                ConfigManager.Data.getUserDocument(player.getUniqueId()).save();
+                DataManager.Users.getUser(player.getUniqueId()).node("money").set(newQuantity);
+                DataManager.Users.saveUser(player.getUniqueId());
+                DataManager.Users.reloadUser(player.getUniqueId());
             }
         } else {
             main.economyImplementer.depositPlayer(player, quantity);
@@ -49,11 +51,12 @@ public class EconomyModule {
 
     public static void withdrawMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
-            double playerMoney = ConfigManager.Data.getUserDocument(player.getUniqueId()).getDouble("money");
+            double playerMoney = DataManager.Users.getUser(player.getUniqueId()).node("money").getDouble();
             double newQuantity = playerMoney-quantity;
             if(allowModifyBalance(player, main, quantity)) {
-                ConfigManager.Data.getUserDocument(player.getUniqueId()).set("config", newQuantity);
-                ConfigManager.Data.getUserDocument(player.getUniqueId()).save();
+                DataManager.Users.getUser(player.getUniqueId()).node("money").set(newQuantity);
+                DataManager.Users.saveUser(player.getUniqueId());
+                DataManager.Users.reloadUser(player.getUniqueId());
             }
         } else {
             main.economyImplementer.withdrawPlayer(player, quantity);
@@ -63,8 +66,8 @@ public class EconomyModule {
     public static void setMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
             if(allowModifyBalance(player, main, quantity)) {
-                ConfigManager.Data.getUserDocument(player.getUniqueId()).set("config", quantity);
-                ConfigManager.Data.getUserDocument(player.getUniqueId()).save();
+                DataManager.Users.getUser(player.getUniqueId()).node("money").set(quantity);
+                DataManager.Users.saveUser(player.getUniqueId());
             }
         } else {
             double actualBalance = main.economyImplementer.getBalance(player);
@@ -76,7 +79,7 @@ public class EconomyModule {
     public static double balancePlayer(Player player, Main main) {
         double balance = 0.0;
         if(!Main.vaultapi) {
-            balance = ConfigManager.Data.getUserDocument(player.getUniqueId()).getDouble("money");
+            balance = DataManager.Users.getUser(player.getUniqueId()).node("money").getDouble();
         } else {
             balance = main.economyImplementer.getBalance(player);
         }

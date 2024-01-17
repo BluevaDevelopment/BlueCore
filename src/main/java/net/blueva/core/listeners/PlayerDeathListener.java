@@ -26,6 +26,7 @@
 package net.blueva.core.listeners;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -56,14 +57,14 @@ public class PlayerDeathListener implements Listener {
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.world", world);
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.x", x);
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.y", y);
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.z", z);
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.yaw", yaw);
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).set("lastlocation.pitch", pitch);
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).save();
-		ConfigManager.Data.getUserDocument(event.getEntity().getPlayer().getUniqueId()).reload();
+		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.world").set(world);
+		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.x").set(x);
+		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.y").set(y);
+		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.z").set(z);
+		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.yaw").set(yaw);
+		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.pitch").set(pitch);
+		DataManager.Users.saveUser(event.getEntity().getPlayer().getUniqueId());
+		DataManager.Users.reloadUser(event.getEntity().getPlayer().getUniqueId());
 
 
 		ConfigManager.Data.changeWorldReference(world);

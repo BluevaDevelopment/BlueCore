@@ -26,6 +26,8 @@
 package net.blueva.core.listeners;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -60,15 +62,14 @@ public class PlayerQuitListener implements Listener {
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.world", world);
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.x", x);
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.y", y);
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.z", z);
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.yaw", yaw);
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).set("logoutlocation.pitch", pitch);
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).save();
-		ConfigManager.Data.getUserDocument(event.getPlayer().getUniqueId()).reload();
-
+		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "world").set(world);
+		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "x").set(x);
+		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "y").set(y);
+		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "z").set(z);
+		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "yaw").set(yaw);
+		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "pitch").set(pitch);
+		DataManager.Users.saveUser(event.getPlayer().getUniqueId());
+		DataManager.Users.reloadUser(event.getPlayer().getUniqueId());
 	}
 
 

@@ -20,7 +20,7 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2023 Blueva Development. All rights reserved.
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
  */
 
 package net.blueva.core;
@@ -28,10 +28,10 @@ package net.blueva.core;
 import net.blueva.core.commands.*;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.libraries.bstats.Metrics;
-import net.blueva.core.libraries.vault.EconomyImplementer;
-import net.blueva.core.libraries.vault.VaultHook;
+import net.blueva.core.modules.economy.vault.EconomyImplementer;
+import net.blueva.core.modules.economy.vault.VaultHook;
 import net.blueva.core.listeners.*;
-import net.blueva.core.modules.ScoreboardModule;
+import net.blueva.core.modules.scoreboard.ScoreboardModule;
 import net.blueva.core.modules.TablistModule;
 import net.blueva.core.modules.WorldModule;
 import net.blueva.core.utils.LocationUtils;
@@ -87,7 +87,8 @@ public final class Main extends JavaPlugin {
 		}
 
 		ScoreboardModule scoreboard = new ScoreboardModule(this);
-		scoreboard.createScoreboard();
+		scoreboard.loadScoreboards();
+		Bukkit.getScheduler().runTaskTimer(this, scoreboard::updatePlayerScoreboards, 0, 20);
 
 		TablistModule tablist = new TablistModule(this);
 		tablist.createTab();

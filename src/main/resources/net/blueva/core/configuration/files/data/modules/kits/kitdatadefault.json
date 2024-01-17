@@ -1,0 +1,6 @@
+{
+  "name": "<name>",
+  "permission": "bluecore.kit.<name>",
+  "delay": 0,
+  "items": []
+}

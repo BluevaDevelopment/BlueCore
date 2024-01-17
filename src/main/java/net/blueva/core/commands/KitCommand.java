@@ -31,6 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -95,7 +96,7 @@ public class KitCommand implements CommandExecutor {
                 return true;
             }
 
-            if(ConfigManager.Data.getUserDocument(target.getUniqueId()).isString("date.kits."+kit)) {
+            if(!DataManager.Users.getUser(target.getUniqueId()).node("date", "kits", kit).isNull()) {
                 if(!isFutureKitDatePassed(kit, target)) {
                     MessagesUtils.sendToSender(target.getPlayer(), getTimeUntilFutureDateAsString(kit, target));
                     return true;
@@ -128,19 +129,19 @@ public class KitCommand implements CommandExecutor {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String futureDateStr = futureDate.format(formatter);
 
-        ConfigManager.Data.getUserDocument(target.getUniqueId()).set("date.kits."+kit, futureDateStr);
-        ConfigManager.Data.getUserDocument(target.getUniqueId()).save();
-        ConfigManager.Data.getUserDocument(target.getUniqueId()).reload();
+        DataManager.Users.getUser(target.getUniqueId()).node("date", "kits", kit).set(futureDateStr);
+        DataManager.Users.saveUser(target.getUniqueId());
+        DataManager.Users.reloadUser(target.getUniqueId());
     }
 
     private void removeKitDate(String kit, Player target) throws IOException {
-        ConfigManager.Data.getUserDocument(target.getUniqueId()).set("date.kits."+kit, null);
-        ConfigManager.Data.getUserDocument(target.getUniqueId()).save();
-        ConfigManager.Data.getUserDocument(target.getUniqueId()).reload();
+        DataManager.Users.getUser(target.getUniqueId()).node("date", "kits", kit).set(null);
+        DataManager.Users.saveUser(target.getUniqueId());
+        DataManager.Users.reloadUser(target.getUniqueId());
     }
 
     private boolean isFutureKitDatePassed(String kit, Player target) {
-        String dateString = ConfigManager.Data.getUserDocument(target.getUniqueId()).getString("date.kits."+kit);
+        String dateString = DataManager.Users.getUser(target.getUniqueId()).node("date", "kits", kit).getString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         assert dateString != null;
         LocalDateTime futureDate = LocalDateTime.parse(dateString, formatter);
@@ -149,7 +150,7 @@ public class KitCommand implements CommandExecutor {
     }
 
     private String getTimeUntilFutureDateAsString(String kit, Player target) {
-        String dateString = ConfigManager.Data.getUserDocument(target.getUniqueId()).getString("date.kits."+kit);
+        String dateString = DataManager.Users.getUser(target.getUniqueId()).node("date", "kits", kit).getString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         assert dateString != null;
         LocalDateTime futureDate = LocalDateTime.parse(dateString, formatter);

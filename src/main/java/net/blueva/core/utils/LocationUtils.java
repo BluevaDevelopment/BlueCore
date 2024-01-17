@@ -26,6 +26,7 @@ package net.blueva.core.utils;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -63,13 +64,13 @@ public class LocationUtils {
         double z = l.getZ();
         float yaw = l.getYaw();
         float pitch = l.getPitch();
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.world", world);
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.x", x);
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.y", y);
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.z", z);
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.yaw", yaw);
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).set("lastlocation.pitch", pitch);
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).save();
-        ConfigManager.Data.getUserDocument(p.getUniqueId()).reload();
+        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "world").set(world);
+        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "x").set(x);
+        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "y").set(y);
+        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "z").set(z);
+        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "yaw").set(yaw);
+        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "pitch").set(pitch);
+        DataManager.Users.saveUser(p.getUniqueId());
+        DataManager.Users.reloadUser(p.getUniqueId());
     }
 }

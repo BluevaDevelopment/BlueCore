@@ -36,7 +36,6 @@ import net.blueva.core.Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.UUID;
 
 public class ConfigManager {
 
@@ -63,7 +62,6 @@ public class ConfigManager {
         public static YamlDocument kit;
         public static YamlDocument warp;
         public static YamlDocument world;
-        public static YamlDocument user;
 
 
         // BlueCore/data/modules/kits/kit.yml
@@ -76,9 +74,9 @@ public class ConfigManager {
             }
         }
 
-        public static YamlDocument getKitDocument(String kit) {
-            registerKitDocument(kit);
-            return user;
+        public static YamlDocument getKitDocument(String kit_name) {
+            registerKitDocument(kit_name);
+            return kit;
         }
 
         // BlueCore/data/modules/warps/warp.yml
@@ -99,21 +97,6 @@ public class ConfigManager {
             } catch (IOException ex) {
                 ex.fillInStackTrace();
             }
-        }
-
-        // BlueCore/data/users/uuid.yml
-        public static void registerUserDocument(UUID uuid) {
-            try {
-                user = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/users/", uuid.toString()+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/users/userdatadefault.yml")),
-                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
-            } catch (IOException ex) {
-                ex.fillInStackTrace();
-            }
-        }
-
-        public static YamlDocument getUserDocument(UUID uuid) {
-            registerUserDocument(uuid);
-            return user;
         }
     }
 
@@ -303,109 +286,4 @@ public class ConfigManager {
             ex.fillInStackTrace();
         }
     }
-
-
-
-    //commands.yml file
-    /*
-    //individual user file
-    public FileConfiguration getUser(UUID uuid) {
-        reloadUser(uuid);
-        return main.user;
-    }
-
-    public void reloadUser(UUID uuid){
-        main.userFile = new File(main.getDataFolder()+"/data/users/"+uuid+".yml");
-        main.user = YamlConfiguration.loadConfiguration(main.userFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/data/userdatadefault.yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.user.setDefaults(defConfig);
-    }
-
-    public void saveUser(UUID uuid){
-        try{
-            main.user.save(main.userFile);
-            //ConfigUpdater.update(main, "net/blueva/arcade/configuration/files/data/userdatadefault.yml", new File(main.getDataFolder()+"/data/"+userid+".yml"));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerUser(UUID uuid){
-        main.userFile = new File(main.getDataFolder()+"/data/users/"+uuid+".yml");
-        if(!main.userFile.exists()){
-            this.getUser(uuid).options().copyDefaults(true);
-            saveUser(uuid);
-        }
-    }
-
-    //individual kit file
-    public FileConfiguration getKit(String name) {
-        reloadKit(name);
-        return main.kit;
-    }
-
-    public void reloadKit(String name){
-        main.kitFile = new File(main.getDataFolder()+"/data/kits/"+name+".yml");
-        main.kit = YamlConfiguration.loadConfiguration(main.kitFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/data/kitdatadefault.yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.kit.setDefaults(defConfig);
-    }
-
-    public void saveKit(String name){
-        try{
-            main.kit.save(main.kitFile);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerKit(String name){
-        main.kitFile = new File(main.getDataFolder()+"/data/kits/"+name+".yml");
-        if(!main.kitFile.exists()){
-            this.getKit(name).options().copyDefaults(true);
-            saveKit(name);
-        }
-    }
-
-    //actual lang manager
-    //lang.yml file
-    public FileConfiguration getLang() {
-        if(main.language == null) {
-            reloadLang();
-        }
-        return main.language;
-    }
-
-    public void reloadLang(){
-        if(main.language == null){
-            main.languageFile = new File(main.getDataFolder()+"/language/",main.actualLang+".yml");
-        }
-        main.language = YamlConfiguration.loadConfiguration(main.languageFile);
-        Reader defConfigStream;
-        defConfigStream = new InputStreamReader(Objects.requireNonNull(main.getResource("net/blueva/core/configuration/files/language/" + main.actualLang + ".yml")), StandardCharsets.UTF_8);
-        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        main.language.setDefaults(defConfig);
-    }
-
-    public void saveLang(){
-        try{
-            main.language.save(main.languageFile);
-            ConfigUpdater.update(main, "net/blueva/core/configuration/files/language/"+main.actualLang+".yml", new File(main.getDataFolder()+"/language/"+main.actualLang+".yml"));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void registerLang(){
-        main.languageFile = new File(main.getDataFolder()+"/language/",main.actualLang+".yml");
-        if(!main.languageFile.exists()){
-            this.getLang().options().copyDefaults(true);
-            main.langPath = getLang().getCurrentPath();
-            saveLang();
-        }
-    }*/
 }
