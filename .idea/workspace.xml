@@ -6,27 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="87c7dee2-b431-491d-a3b9-2ff6b1e7e206" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/EconomyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/EconomyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GodCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GodCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/KitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/KitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/PayCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/PayCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/GenerateLanguages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/GenerateLanguages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/libraries/vault/EconomyImplementer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/libraries/vault/VaultHook.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/EntityDamageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/EntityDamageListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerDeathListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerDeathListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerJoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerQuitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/PlayerQuitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/EconomyModule.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/ScoreboardModule.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/LocationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/LocationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/MessagesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/MessagesUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/data/users/userdatadefault.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BlueCore-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/BlueCore-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/WarpModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/WarpModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
