@@ -14,8 +14,8 @@
 ## Why Use Blue Core?
 With Blue Core, you'll have all the essential tools a Minecraft server needs. This plugin gives you a solid foundation with features like MOTD, Titles, Action Bar, Tab List, Scoreboard, Warps, Chat Utilities, Custom Commands, World Manager, and many useful commands. It will not only simplify your server administration, but it will also improve the experience for your players.
 
+⚠️ Warning: This plugin is still a work in progress and is not recommended for use on public servers. ⚠️
 ## Features
-
 ### Already Added
 - MOTD: Customize the message that greets players upon logging in.
 - Titles: Display eye-catching text messages to players.
