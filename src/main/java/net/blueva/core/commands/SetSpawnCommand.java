@@ -70,7 +70,6 @@ public class SetSpawnCommand implements CommandExecutor {
                 return true;
             }
 
-            ConfigManager.Data.changeWarpReference(warp);
             ConfigManager.Modules.warps.set("warps.spawn", args[0]);
             try {
                 ConfigManager.Modules.warps.save();

@@ -60,7 +60,6 @@ public class ConfigManager {
 
     public static class Data {
         public static YamlDocument kit;
-        public static YamlDocument warp;
         public static YamlDocument world;
 
 
@@ -77,16 +76,6 @@ public class ConfigManager {
         public static YamlDocument getKitDocument(String kit_name) {
             registerKitDocument(kit_name);
             return kit;
-        }
-
-        // BlueCore/data/modules/warps/warp.yml
-        public static void changeWarpReference(String name) {
-            try {
-                warp = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/warps/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.yml")),
-                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(false).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
-            } catch (IOException ex) {
-                ex.fillInStackTrace();
-            }
         }
 
         // BlueCore/data/modules/worlds/world.yml

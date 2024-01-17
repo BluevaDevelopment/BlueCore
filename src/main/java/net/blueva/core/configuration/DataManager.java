@@ -40,23 +40,23 @@ public class DataManager {
 
     public static class Users {
 
-        private static File userFile;
-        private static GsonConfigurationLoader userLoader;
+        private static File file;
+        private static GsonConfigurationLoader loader;
         private static ConfigurationNode user;
 
         private static void changeUserReference(String uuid) {
-            userFile = new File(Main.getPlugin().getDataFolder() + "/data/users", "/" + uuid + ".json");
-            userLoader = GsonConfigurationLoader.builder().file(userFile).build();
+            file = new File(Main.getPlugin().getDataFolder() + "/data/users", "/" + uuid + ".json");
+            loader = GsonConfigurationLoader.builder().file(file).build();
 
             try {
-                if (!userFile.exists()) {
+                if (!file.exists()) {
                     InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/users/userdatadefault.json");
                     if (in != null) {
-                        Files.copy(in, userFile.toPath());
+                        Files.copy(in, file.toPath());
 
                     }
                 }
-                user = userLoader.load();
+                user = loader.load();
             } catch (Exception e) {
                 e.fillInStackTrace();
             }
@@ -72,7 +72,7 @@ public class DataManager {
             String uuidString = uuid.toString();
             changeUserReference(uuidString);
             try {
-                userLoader.save(user);
+                loader.save(user);
             } catch (ConfigurateException e) {
                 throw new RuntimeException(e);
             }
@@ -82,7 +82,7 @@ public class DataManager {
             String uuidString = uuid.toString();
             changeUserReference(uuidString);
             try {
-                user = userLoader.load();
+                user = loader.load();
             } catch (ConfigurateException e) {
                 throw new RuntimeException(e);
             }
@@ -96,7 +96,50 @@ public class DataManager {
 
         }
         public static class Warps {
+            private static File file;
+            private static GsonConfigurationLoader loader;
+            private static ConfigurationNode warp;
 
+            private static void changeReference(String name) {
+                file = new File(Main.getPlugin().getDataFolder() + "/data/users", "/" + name + ".json");
+                loader = GsonConfigurationLoader.builder().file(file).build();
+
+                try {
+                    if (!file.exists()) {
+                        InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/modules/warps/warpdatadefault.json");
+                        if (in != null) {
+                            Files.copy(in, file.toPath());
+
+                        }
+                    }
+                    warp = loader.load();
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+            }
+
+            public static ConfigurationNode get(String name) {
+                changeReference(name);
+                return warp;
+            }
+
+            public static void save(String name) {
+                changeReference(name);
+                try {
+                    loader.save(warp);
+                } catch (ConfigurateException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            public static void reload(UUID uuid) {
+                String uuidString = uuid.toString();
+                try {
+                    warp = loader.load();
+                } catch (ConfigurateException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         public static class Worlds {
 
