@@ -17,11 +17,6 @@ worlds:
     interact: true
     drop_items: true
     mob_spawning: true
+    difficulty: NORMAL
     respawn_world: ''
     allow_weather: true
-    spawn_location:
-      x: 0.0
-      y: 65.0
-      z: 0.0
-      pitch: 0.0
-      yaw: 0.0

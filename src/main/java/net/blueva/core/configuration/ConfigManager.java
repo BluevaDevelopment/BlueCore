@@ -58,20 +58,6 @@ public class ConfigManager {
         public static YamlDocument worlds;
     }
 
-    public static class Data {
-        public static YamlDocument world;
-
-        // BlueCore/data/modules/worlds/world.yml
-        public static void changeWorldReference(String name) {
-            try {
-                world = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/worlds/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml")),
-                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(false).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
-            } catch (IOException ex) {
-                ex.fillInStackTrace();
-            }
-        }
-    }
-
     public static void generateFolders() {
         if(!Main.getPlugin().getDataFolder().exists()) {
             Main.getPlugin().getDataFolder().mkdirs();

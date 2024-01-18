@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87c7dee2-b431-491d-a3b9-2ff6b1e7e206" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CreateKitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CreateKitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/KitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/KitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/ModifyKitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/ModifyKitCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/KitsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/kits/KitsModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/data/modules/kits/kitdatadefault.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/BlockPlaceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/listeners/BlockPlaceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/WorldModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/modules/WorldModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/modules/worlds.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/net/blueva/core/configuration/files/modules/worlds.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

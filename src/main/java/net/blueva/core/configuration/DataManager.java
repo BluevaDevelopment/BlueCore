@@ -97,12 +97,12 @@ public class DataManager {
             private static ConfigurationNode kit;
 
             private static void changeReference(String name) {
-                file = new File(Main.getPlugin().getDataFolder() + "/data/users", "/" + name + ".json");
+                file = new File(Main.getPlugin().getDataFolder() + "/data/modules/kits", "/" + name + ".json");
                 loader = GsonConfigurationLoader.builder().file(file).build();
 
                 try {
                     if (!file.exists()) {
-                        InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/modules/warps/kitdatadefault.json");
+                        InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/modules/kits/kitdatadefault.json");
                         if (in != null) {
                             Files.copy(in, file.toPath());
 
@@ -144,7 +144,7 @@ public class DataManager {
             private static ConfigurationNode warp;
 
             private static void changeReference(String name) {
-                file = new File(Main.getPlugin().getDataFolder() + "/data/users", "/" + name + ".json");
+                file = new File(Main.getPlugin().getDataFolder() + "/data/modules/warps", "/" + name + ".json");
                 loader = GsonConfigurationLoader.builder().file(file).build();
 
                 try {
@@ -185,7 +185,50 @@ public class DataManager {
             }
         }
         public static class Worlds {
+            private static File file;
+            private static GsonConfigurationLoader loader;
+            private static ConfigurationNode world;
 
+            private static void changeReference(String name) {
+                file = new File(Main.getPlugin().getDataFolder() + "/data/modules/worlds", "/" + name + ".json");
+                loader = GsonConfigurationLoader.builder().file(file).build();
+
+                try {
+                    if (!file.exists()) {
+                        InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/modules/warps/worlddatadefault.json");
+                        if (in != null) {
+                            Files.copy(in, file.toPath());
+
+                        }
+                    }
+                    world = loader.load();
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+            }
+
+            public static ConfigurationNode get(String name) {
+                changeReference(name);
+                return world;
+            }
+
+            public static void save(String name) {
+                changeReference(name);
+                try {
+                    loader.save(world);
+                } catch (ConfigurateException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            public static void reload(String name) {
+                changeReference(name);
+                try {
+                    world = loader.load();
+                } catch (ConfigurateException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }
