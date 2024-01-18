@@ -34,7 +34,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import net.blueva.core.Main;
-import net.blueva.core.modules.KitsModule;
+import net.blueva.core.modules.kits.KitsModule;
 import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
 

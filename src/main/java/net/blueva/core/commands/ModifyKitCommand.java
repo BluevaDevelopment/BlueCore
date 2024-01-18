@@ -27,7 +27,7 @@ package net.blueva.core.commands;
 
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
-import net.blueva.core.modules.KitsModule;
+import net.blueva.core.modules.kits.KitsModule;
 import net.blueva.core.utils.MessagesUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

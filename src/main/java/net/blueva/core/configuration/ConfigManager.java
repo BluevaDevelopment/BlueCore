@@ -59,24 +59,7 @@ public class ConfigManager {
     }
 
     public static class Data {
-        public static YamlDocument kit;
         public static YamlDocument world;
-
-
-        // BlueCore/data/modules/kits/kit.yml
-        public static void registerKitDocument(String name) {
-            try {
-                kit = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/data/modules/kits/", name+".yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/data/modules/kits/kitdatadefault.yml")),
-                        GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().build());
-            } catch (IOException ex) {
-                ex.fillInStackTrace();
-            }
-        }
-
-        public static YamlDocument getKitDocument(String kit_name) {
-            registerKitDocument(kit_name);
-            return kit;
-        }
 
         // BlueCore/data/modules/worlds/world.yml
         public static void changeWorldReference(String name) {

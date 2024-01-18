@@ -31,7 +31,6 @@ import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.gson.GsonConfigurationLoader;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.UUID;
@@ -93,8 +92,52 @@ public class DataManager {
 
     public static class Modules {
         public static class Kits {
+            private static File file;
+            private static GsonConfigurationLoader loader;
+            private static ConfigurationNode kit;
 
+            private static void changeReference(String name) {
+                file = new File(Main.getPlugin().getDataFolder() + "/data/users", "/" + name + ".json");
+                loader = GsonConfigurationLoader.builder().file(file).build();
+
+                try {
+                    if (!file.exists()) {
+                        InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/modules/warps/kitdatadefault.json");
+                        if (in != null) {
+                            Files.copy(in, file.toPath());
+
+                        }
+                    }
+                    kit = loader.load();
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+            }
+
+            public static ConfigurationNode get(String name) {
+                changeReference(name);
+                return kit;
+            }
+
+            public static void save(String name) {
+                changeReference(name);
+                try {
+                    loader.save(kit);
+                } catch (ConfigurateException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            public static void reload(String name) {
+                changeReference(name);
+                try {
+                    kit = loader.load();
+                } catch (ConfigurateException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
+
         public static class Warps {
             private static File file;
             private static GsonConfigurationLoader loader;

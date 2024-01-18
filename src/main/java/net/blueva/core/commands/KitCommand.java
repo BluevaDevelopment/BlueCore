@@ -39,10 +39,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.blueva.core.Main;
-import net.blueva.core.modules.KitsModule;
+import net.blueva.core.modules.kits.KitsModule;
 import net.blueva.core.utils.DateUtils;
 import net.blueva.core.utils.MessagesUtils;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.configurate.serialize.SerializationException;
 
 public class KitCommand implements CommandExecutor {
 
@@ -83,8 +84,12 @@ public class KitCommand implements CommandExecutor {
                 MessagesUtils.sendToSender(target, ConfigManager.language.getString("messages.error.no_perms"));
                 return true;
             }
-            
-            KitsModule.giveKit(target, kit);
+
+            try {
+                KitsModule.giveKit(target, kit);
+            } catch (SerializationException e) {
+                throw new RuntimeException(e);
+            }
 
             MessagesUtils.sendToSender(sender, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given_others")).replace("%kit_name%", kit).replace("%player%", target.getName()));
             MessagesUtils.sendToSender(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given")).replace("%kit_name%", kit));
@@ -116,7 +121,11 @@ public class KitCommand implements CommandExecutor {
                 }
             }
 
-            KitsModule.giveKit(target, kit);
+            try {
+                KitsModule.giveKit(target, kit);
+            } catch (SerializationException e) {
+                throw new RuntimeException(e);
+            }
             MessagesUtils.sendToPlayer(target, Objects.requireNonNull(ConfigManager.language.getString("messages.success.kit_given")).replace("%kit_name%", kit));
         } 
 
@@ -125,7 +134,7 @@ public class KitCommand implements CommandExecutor {
 
     private void setFutureKitDate(String kit, Player target) throws IOException {
         LocalDateTime currentDate = LocalDateTime.now();
-        LocalDateTime futureDate = currentDate.plusSeconds(ConfigManager.Data.getKitDocument(kit).getInt("delay"));
+        LocalDateTime futureDate = currentDate.plusSeconds(DataManager.Modules.Kits.get(kit).node("items").getInt());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String futureDateStr = futureDate.format(formatter);
 
