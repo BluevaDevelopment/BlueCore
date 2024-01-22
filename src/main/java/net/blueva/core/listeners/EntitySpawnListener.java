@@ -26,6 +26,7 @@
 package net.blueva.core.listeners;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,9 +45,8 @@ public class EntitySpawnListener implements Listener {
     public void OES(EntitySpawnEvent event) {
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            String worldname = player.getWorld().getName();
-            ConfigManager.Data.changeWorldReference(worldname);
-            if(!ConfigManager.Data.world.getBoolean("world." + worldname + ".mob_spawning") && !(event.getEntity() instanceof Player)) {
+            String world_name = player.getWorld().getName();
+            if(!DataManager.Modules.Warps.get(world_name).node("world." + world_name + ".mob_spawning").getBoolean() && !(event.getEntity() instanceof Player)) {
                 event.setCancelled(true);
             }
         }

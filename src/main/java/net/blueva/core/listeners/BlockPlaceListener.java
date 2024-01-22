@@ -26,6 +26,7 @@
 package net.blueva.core.listeners;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,8 +44,8 @@ public class BlockPlaceListener implements Listener {
     @EventHandler
     public void OPB(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        String worldname = event.getPlayer().getWorld().getName();
-        if(!ConfigManager.Data.world.getBoolean("world." + worldname + ".build")) {
+        String world_name = event.getPlayer().getWorld().getName();
+        if(!DataManager.Modules.Warps.get(world_name).node("world." + world_name + ".build").getBoolean()) {
             event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.build"));
         }
 

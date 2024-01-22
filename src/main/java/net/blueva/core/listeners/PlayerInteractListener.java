@@ -26,6 +26,7 @@
 package net.blueva.core.listeners;
 
 import net.blueva.core.configuration.ConfigManager;
+import net.blueva.core.configuration.DataManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,9 +44,8 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void OPI(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        String worldname = event.getPlayer().getWorld().getName();
-        ConfigManager.Data.changeWorldReference(worldname);
-        if(!ConfigManager.Data.world.getBoolean("worlds." + worldname + ".interact")) {
+        String world_name = event.getPlayer().getWorld().getName();
+        if(!DataManager.Modules.Warps.get(world_name).node("worlds." + world_name + ".interact").getBoolean()) {
             event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.interact"));
         }
 

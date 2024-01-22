@@ -46,15 +46,14 @@ public class EntityDamageListener implements Listener {
     public void OED(EntityDamageEvent event) {
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            String worldname = player.getWorld().getName();
-            ConfigManager.Data.changeWorldReference(worldname);
-            if (!ConfigManager.Data.world.getBoolean("world." + worldname + ".fall_damage")) {
+            String world_name = player.getWorld().getName();
+            if (!DataManager.Modules.Warps.get(world_name).node("world." + world_name + ".fall_damage").getBoolean()) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
                     event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.fall_damage"));
                 }
             }
 
-            if (!ConfigManager.Data.world.getBoolean("world." + worldname + ".pvp")) {
+            if (!DataManager.Modules.Warps.get(world_name).node("world." + world_name + ".pvp").getBoolean()) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                     if (event.getEntityType() == EntityType.PLAYER) {
                         event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.pvp"));
