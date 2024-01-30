@@ -189,13 +189,13 @@ public class DataManager {
             private static GsonConfigurationLoader loader;
             private static ConfigurationNode world;
 
-            private static void changeReference(String name) {
+            public static void changeReference(String name) {
                 file = new File(Main.getPlugin().getDataFolder() + "/data/modules/worlds", "/" + name + ".json");
                 loader = GsonConfigurationLoader.builder().file(file).build();
 
                 try {
                     if (!file.exists()) {
-                        InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/modules/warps/worlddatadefault.json");
+                        InputStream in = Main.getPlugin().getClass().getResourceAsStream("/net/blueva/core/configuration/files/data/modules/worlds/worlddatadefault.json");
                         if (in != null) {
                             Files.copy(in, file.toPath());
 
@@ -208,12 +208,10 @@ public class DataManager {
             }
 
             public static ConfigurationNode get(String name) {
-                changeReference(name);
                 return world;
             }
 
             public static void save(String name) {
-                changeReference(name);
                 try {
                     loader.save(world);
                 } catch (ConfigurateException e) {
@@ -222,7 +220,6 @@ public class DataManager {
             }
 
             public static void reload(String name) {
-                changeReference(name);
                 try {
                     world = loader.load();
                 } catch (ConfigurateException e) {

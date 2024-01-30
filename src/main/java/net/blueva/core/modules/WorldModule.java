@@ -47,6 +47,7 @@ public class WorldModule {
     }
 
     private void registerWorldData(World world, String environment, String type) throws SerializationException {
+        DataManager.Modules.Worlds.changeReference(world.getName());
         DataManager.Modules.Worlds.get(world.getName()).node("world", world.getName(), "name").set(world.getName());
         DataManager.Modules.Worlds.get(world.getName()).node("world", world.getName(), "alias").set("<aqua>" + world.getName().replace("_", " "));
         DataManager.Modules.Worlds.get(world.getName()).node("world", world.getName(), "build").set(ConfigManager.Modules.worlds.getString("worlds.defaults.build"));
@@ -70,7 +71,6 @@ public class WorldModule {
         DataManager.Modules.Worlds.get(world.getName()).node("world", world.getName(), "spawn_location", "pitch").set(world.getSpawnLocation().getPitch());
         DataManager.Modules.Worlds.get(world.getName()).node("world", world.getName(), "spawn_location", "yaw").set(world.getSpawnLocation().getYaw());
         DataManager.Modules.Worlds.save(world.getName());
-        DataManager.Modules.Worlds.reload(world.getName());
     }
 
     public void loadWorlds() throws IOException {
@@ -171,17 +171,18 @@ public class WorldModule {
             MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_invalid_world"));
             return;
         }
+        DataManager.Modules.Worlds.changeReference(name);
         DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "x").set(player.getLocation().getX());
         DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "y").set(player.getLocation().getY());
         DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "z").set(player.getLocation().getZ());
         DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "pitch").set(player.getLocation().getPitch());
         DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "yaw").set(player.getLocation().getYaw());
         DataManager.Modules.Worlds.save(name);
-        DataManager.Modules.Worlds.reload(name);
     }
 
     public void gotoWorldSpawn(Player player) {
         String name = player.getWorld().getName();
+        DataManager.Modules.Worlds.changeReference(name);
         World world = Bukkit.getWorld(Objects.requireNonNull(DataManager.Modules.Worlds.get(name).node("world", name, "name").getString()));
         double x = DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "x").getDouble();
         double y = DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "y").getDouble();
@@ -197,6 +198,7 @@ public class WorldModule {
             MessagesUtils.sendToSender(sender, ConfigManager.language.getString("messages.error.wm_invalid_world"));
             return;
         }
+        DataManager.Modules.Worlds.changeReference(name);
         World world = Bukkit.getWorld(Objects.requireNonNull(DataManager.Modules.Worlds.get(name).node("world", name, "name").getString()));
         double x = DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "x").getDouble();
         double y = DataManager.Modules.Worlds.get(name).node("world", name, "spawn_location", "y").getDouble();
