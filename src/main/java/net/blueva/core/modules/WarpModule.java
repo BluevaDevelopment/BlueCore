@@ -51,6 +51,7 @@ public class WarpModule {
         double z = l.getZ();
         float yaw = l.getYaw();
         float pitch = l.getPitch();
+        DataManager.Modules.Warps.changeReference(warp);
         DataManager.Modules.Warps.get(warp).node("warp", warp, "world").set(world);
         DataManager.Modules.Warps.get(warp).node("warp." + warp + ".x").set(x);
         DataManager.Modules.Warps.get(warp).node("warp." + warp + ".y").set(y);
@@ -75,6 +76,7 @@ public class WarpModule {
         double z = l.getZ();
         float yaw = l.getYaw();
         float pitch = l.getPitch();
+        DataManager.Modules.Warps.changeReference(warp);
         DataManager.Modules.Warps.get(warp).node("warp", warp, "world").set(world);
         DataManager.Modules.Warps.get(warp).node("warp." + warp + ".x").set(x);
         DataManager.Modules.Warps.get(warp).node("warp." + warp + ".y").set(y);
@@ -97,6 +99,7 @@ public class WarpModule {
     }
 
     public static boolean teleportPlayer(Player player, String warp) {
+        DataManager.Modules.Warps.changeReference(warp);
         if (!DataManager.Modules.Warps.get(warp).node("warp", warp, "world").isNull()) {
                 String world = DataManager.Modules.Warps.get(warp).node("warp", warp, "world").getString();
             double x = Double.parseDouble(Objects.requireNonNull(DataManager.Modules.Warps.get(warp).node("warp", warp, "x").getString()));

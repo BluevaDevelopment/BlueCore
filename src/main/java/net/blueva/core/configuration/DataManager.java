@@ -43,7 +43,7 @@ public class DataManager {
         private static GsonConfigurationLoader loader;
         private static ConfigurationNode user;
 
-        private static void changeUserReference(String uuid) {
+        public static void changeUserReference(String uuid) {
             file = new File(Main.getPlugin().getDataFolder() + "/data/users", "/" + uuid + ".json");
             loader = GsonConfigurationLoader.builder().file(file).build();
 
@@ -62,14 +62,10 @@ public class DataManager {
         }
 
         public static ConfigurationNode getUser(UUID uuid) {
-            String uuidString = uuid.toString();
-            changeUserReference(uuidString);
             return user;
         }
 
         public static void saveUser(UUID uuid) {
-            String uuidString = uuid.toString();
-            changeUserReference(uuidString);
             try {
                 loader.save(user);
             } catch (ConfigurateException e) {
@@ -78,8 +74,6 @@ public class DataManager {
         }
 
         public static void reloadUser(UUID uuid) {
-            String uuidString = uuid.toString();
-            changeUserReference(uuidString);
             try {
                 user = loader.load();
             } catch (ConfigurateException e) {
@@ -96,7 +90,7 @@ public class DataManager {
             private static GsonConfigurationLoader loader;
             private static ConfigurationNode kit;
 
-            private static void changeReference(String name) {
+            public static void changeReference(String name) {
                 file = new File(Main.getPlugin().getDataFolder() + "/data/modules/kits", "/" + name + ".json");
                 loader = GsonConfigurationLoader.builder().file(file).build();
 
@@ -115,12 +109,10 @@ public class DataManager {
             }
 
             public static ConfigurationNode get(String name) {
-                changeReference(name);
                 return kit;
             }
 
             public static void save(String name) {
-                changeReference(name);
                 try {
                     loader.save(kit);
                 } catch (ConfigurateException e) {
@@ -129,7 +121,6 @@ public class DataManager {
             }
 
             public static void reload(String name) {
-                changeReference(name);
                 try {
                     kit = loader.load();
                 } catch (ConfigurateException e) {
@@ -143,7 +134,7 @@ public class DataManager {
             private static GsonConfigurationLoader loader;
             private static ConfigurationNode warp;
 
-            private static void changeReference(String name) {
+            public static void changeReference(String name) {
                 file = new File(Main.getPlugin().getDataFolder() + "/data/modules/warps", "/" + name + ".json");
                 loader = GsonConfigurationLoader.builder().file(file).build();
 
@@ -162,12 +153,10 @@ public class DataManager {
             }
 
             public static ConfigurationNode get(String name) {
-                changeReference(name);
                 return warp;
             }
 
             public static void save(String name) {
-                changeReference(name);
                 try {
                     loader.save(warp);
                 } catch (ConfigurateException e) {

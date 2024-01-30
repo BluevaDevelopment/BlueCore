@@ -64,12 +64,13 @@ public class LocationUtils {
         double z = l.getZ();
         float yaw = l.getYaw();
         float pitch = l.getPitch();
-        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "world").set(world);
-        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "x").set(x);
-        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "y").set(y);
-        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "z").set(z);
-        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "yaw").set(yaw);
-        DataManager.Users.getUser(p.getUniqueId()).node("lastlocation", "pitch").set(pitch);
+        DataManager.Users.changeUserReference(p.getUniqueId().toString());
+        DataManager.Users.getUser(p.getUniqueId()).node("last_location", "world").set(world);
+        DataManager.Users.getUser(p.getUniqueId()).node("last_location", "x").set(x);
+        DataManager.Users.getUser(p.getUniqueId()).node("last_location", "y").set(y);
+        DataManager.Users.getUser(p.getUniqueId()).node("last_location", "z").set(z);
+        DataManager.Users.getUser(p.getUniqueId()).node("last_location", "yaw").set(yaw);
+        DataManager.Users.getUser(p.getUniqueId()).node("last_location", "pitch").set(pitch);
         DataManager.Users.saveUser(p.getUniqueId());
         DataManager.Users.reloadUser(p.getUniqueId());
     }

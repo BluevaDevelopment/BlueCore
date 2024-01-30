@@ -45,12 +45,14 @@ public class KitsModule {
     }
 
     public static boolean kitExists(String name) {
+        DataManager.Modules.Kits.changeReference(name);
         return !DataManager.Modules.Kits.get(name).node("name").getString().equals("<name>");
     }
     
     private static void saveKit(KitData kit) throws SerializationException {
         String kit_name = kit.getName();
 
+        DataManager.Modules.Kits.changeReference(kit_name);
         DataManager.Modules.Kits.get(kit_name).node("name").set(kit_name);
         DataManager.Modules.Kits.get(kit_name).node("permission").set(kit.getPermission());
         DataManager.Modules.Kits.get(kit_name).node("delay").set(kit.getDelay());
@@ -60,6 +62,7 @@ public class KitsModule {
     }
     
     private static KitData loadKit(String name) throws SerializationException {
+        DataManager.Modules.Kits.changeReference(name);
         String kitName = DataManager.Modules.Kits.get(name).node("name").getString();
         String perms = DataManager.Modules.Kits.get(name).node("permission").getString();
         int delay = DataManager.Modules.Kits.get(name).node("items").getInt();

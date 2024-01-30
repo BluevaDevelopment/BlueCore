@@ -45,7 +45,8 @@ public class BlockBreakListener implements Listener {
     public void OBB(BlockBreakEvent event) {
         Player player = event.getPlayer();
         String world_name = event.getPlayer().getWorld().getName();
-        if(!DataManager.Modules.Warps.get(world_name).node("world." + world_name + ".break").getBoolean()) {
+        DataManager.Modules.Worlds.changeReference(world_name);
+        if(!DataManager.Modules.Worlds.get(world_name).node("world." + world_name + ".break").getBoolean()) {
             event.setCancelled(player.hasPermission("bluecore.worldmanager.bypass.break"));
         }
 

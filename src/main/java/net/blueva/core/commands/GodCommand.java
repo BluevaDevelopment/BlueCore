@@ -70,6 +70,7 @@ public class GodCommand implements CommandExecutor {
                 return true;
             }
         }
+        DataManager.Users.changeUserReference(target.getUniqueId().toString());
         if(DataManager.Users.getUser(target.getUniqueId()).node("god_mode").getBoolean()) {
             try {
                 DataManager.Users.getUser(target.getUniqueId()).node("god_mode").set(false);

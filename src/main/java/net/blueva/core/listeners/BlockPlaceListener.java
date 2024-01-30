@@ -45,7 +45,8 @@ public class BlockPlaceListener implements Listener {
     public void OPB(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         String world_name = event.getPlayer().getWorld().getName();
-        if(!DataManager.Modules.Warps.get(world_name).node("world." + world_name + ".build").getBoolean()) {
+        DataManager.Modules.Worlds.changeReference(world_name);
+        if(!DataManager.Modules.Worlds.get(world_name).node("world." + world_name + ".build").getBoolean()) {
             event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.build"));
         }
 

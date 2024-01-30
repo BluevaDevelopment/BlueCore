@@ -59,6 +59,7 @@ public class PlayerJoinListener implements Listener {
 			}
 		}
 
+		DataManager.Users.changeUserReference(event.getPlayer().getUniqueId().toString());
 		if(DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "world").getString() != null) {
 			EconomyModule.setMoney(event.getPlayer(), ConfigManager.settings.getDouble("economy.starting_balance"), main);
 		}

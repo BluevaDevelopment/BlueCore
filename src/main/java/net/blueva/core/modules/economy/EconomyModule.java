@@ -37,6 +37,7 @@ public class EconomyModule {
 
     public static void depositMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
+            DataManager.Users.changeUserReference(player.getUniqueId().toString());
             double playerMoney = DataManager.Users.getUser(player.getUniqueId()).node("money").getDouble();
             double newQuantity = playerMoney+quantity;
             if(allowModifyBalance(player, main, quantity)) {
@@ -51,6 +52,7 @@ public class EconomyModule {
 
     public static void withdrawMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
+            DataManager.Users.changeUserReference(player.getUniqueId().toString());
             double playerMoney = DataManager.Users.getUser(player.getUniqueId()).node("money").getDouble();
             double newQuantity = playerMoney-quantity;
             if(allowModifyBalance(player, main, quantity)) {
@@ -66,6 +68,7 @@ public class EconomyModule {
     public static void setMoney(Player player, double quantity, Main main) throws IOException {
         if(!Main.vaultapi) {
             if(allowModifyBalance(player, main, quantity)) {
+                DataManager.Users.changeUserReference(player.getUniqueId().toString());
                 DataManager.Users.getUser(player.getUniqueId()).node("money").set(quantity);
                 DataManager.Users.saveUser(player.getUniqueId());
             }
@@ -79,6 +82,7 @@ public class EconomyModule {
     public static double balancePlayer(Player player, Main main) {
         double balance = 0.0;
         if(!Main.vaultapi) {
+            DataManager.Users.changeUserReference(player.getUniqueId().toString());
             balance = DataManager.Users.getUser(player.getUniqueId()).node("money").getDouble();
         } else {
             balance = main.economyImplementer.getBalance(player);

@@ -49,7 +49,7 @@ public class PlayerDeathListener implements Listener {
 	
 	@EventHandler
 	public void OPD(PlayerDeathEvent event) throws IOException {
-		Player player = (Player) event.getEntity();
+		Player player = event.getEntity().getPlayer();
 		Location l = Objects.requireNonNull(event.getEntity().getPlayer()).getLocation();
 		String world = Objects.requireNonNull(l.getWorld()).getName();
 		double x = l.getX();
@@ -57,6 +57,7 @@ public class PlayerDeathListener implements Listener {
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
+		DataManager.Users.changeUserReference(event.getEntity().getPlayer().getUniqueId().toString());
 		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.world").set(world);
 		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.x").set(x);
 		DataManager.Users.getUser(event.getEntity().getPlayer().getUniqueId()).node("lastlocation.y").set(y);
@@ -67,14 +68,15 @@ public class PlayerDeathListener implements Listener {
 		DataManager.Users.reloadUser(event.getEntity().getPlayer().getUniqueId());
 
 
-		String respawnWorld = DataManager.Modules.Warps.get(world).node("world." + world + ".respawn_world").getString();
-		if(DataManager.Modules.Warps.get(world).node("world." + world + ".drop_items").getBoolean()) {
-			DataManager.Modules.Warps.get(world).node("world." + world + ".respawn_world").getBoolean(); {
-				double xRespawn = Double.parseDouble(Objects.requireNonNull(DataManager.Modules.Warps.get(world).node("world." + respawnWorld + ".spawn_location.x").getString()));
-				double yRespawn = Double.parseDouble(Objects.requireNonNull(DataManager.Modules.Warps.get(world).node("world." + respawnWorld + ".spawn_location.y").getString()));
-				double zRespawn = Double.parseDouble(Objects.requireNonNull(DataManager.Modules.Warps.get(world).node("world." + respawnWorld + ".spawn_location.z").getString()));
-				float pitchRespawn = Float.parseFloat(Objects.requireNonNull(DataManager.Modules.Warps.get(world).node("world." + respawnWorld + ".spawn_location.pitch").getString()));
-				float yawRespawn = Float.parseFloat(Objects.requireNonNull(DataManager.Modules.Warps.get(world).node("world." + respawnWorld + ".spawn_location.yaw").getString()));
+		DataManager.Modules.Worlds.changeReference(world);
+		String respawnWorld = DataManager.Modules.Worlds.get(world).node("world." + world + ".respawn_world").getString();
+		if(DataManager.Modules.Worlds.get(world).node("world." + world + ".drop_items").getBoolean()) {
+			DataManager.Modules.Worlds.get(world).node("world." + world + ".respawn_world").getBoolean(); {
+				double xRespawn = Double.parseDouble(Objects.requireNonNull(DataManager.Modules.Worlds.get(world).node("world." + respawnWorld + ".spawn_location.x").getString()));
+				double yRespawn = Double.parseDouble(Objects.requireNonNull(DataManager.Modules.Worlds.get(world).node("world." + respawnWorld + ".spawn_location.y").getString()));
+				double zRespawn = Double.parseDouble(Objects.requireNonNull(DataManager.Modules.Worlds.get(world).node("world." + respawnWorld + ".spawn_location.z").getString()));
+				float pitchRespawn = Float.parseFloat(Objects.requireNonNull(DataManager.Modules.Worlds.get(world).node("world." + respawnWorld + ".spawn_location.pitch").getString()));
+				float yawRespawn = Float.parseFloat(Objects.requireNonNull(DataManager.Modules.Worlds.get(world).node("world." + respawnWorld + ".spawn_location.yaw").getString()));
 				Location loc = new Location(Bukkit.getWorld(respawnWorld), xRespawn, yRespawn, zRespawn, yawRespawn, pitchRespawn);
 				player.teleport(loc);
 			}

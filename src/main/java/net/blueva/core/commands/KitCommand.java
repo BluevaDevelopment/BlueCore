@@ -101,6 +101,7 @@ public class KitCommand implements CommandExecutor {
                 return true;
             }
 
+            DataManager.Users.changeUserReference(target.getUniqueId().toString());
             if(!DataManager.Users.getUser(target.getUniqueId()).node("date", "kits", kit).isNull()) {
                 if(!isFutureKitDatePassed(kit, target)) {
                     MessagesUtils.sendToSender(target.getPlayer(), getTimeUntilFutureDateAsString(kit, target));
@@ -133,6 +134,8 @@ public class KitCommand implements CommandExecutor {
     }
 
     private void setFutureKitDate(String kit, Player target) throws IOException {
+        DataManager.Modules.Kits.changeReference(kit);
+
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime futureDate = currentDate.plusSeconds(DataManager.Modules.Kits.get(kit).node("items").getInt());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

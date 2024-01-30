@@ -45,7 +45,8 @@ public class PlayerInteractListener implements Listener {
     public void OPI(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         String world_name = event.getPlayer().getWorld().getName();
-        if(!DataManager.Modules.Warps.get(world_name).node("worlds." + world_name + ".interact").getBoolean()) {
+        DataManager.Modules.Worlds.changeReference(world_name);
+        if(!DataManager.Modules.Worlds.get(world_name).node("worlds." + world_name + ".interact").getBoolean()) {
             event.setCancelled(!player.hasPermission("bluecore.worldmanager.bypass.interact"));
         }
 

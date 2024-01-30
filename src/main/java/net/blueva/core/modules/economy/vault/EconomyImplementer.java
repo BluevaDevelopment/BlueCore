@@ -151,6 +151,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
+        DataManager.Users.changeUserReference(player.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {
@@ -169,6 +170,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
+        DataManager.Users.changeUserReference(offlinePlayer.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {
@@ -189,6 +191,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
+        DataManager.Users.changeUserReference(player.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {
@@ -207,6 +210,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance - v;
+        DataManager.Users.changeUserReference(offlinePlayer.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {
@@ -227,6 +231,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
+        DataManager.Users.changeUserReference(player.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {
@@ -245,6 +250,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
+        DataManager.Users.changeUserReference(offlinePlayer.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {
@@ -265,6 +271,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = player.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
+        DataManager.Users.changeUserReference(player.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance(player, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {
@@ -283,6 +290,7 @@ public class EconomyImplementer implements Economy {
         UUID uuid = offlinePlayer.getUniqueId();
         double oldBalance = main.playerBank.get(uuid);
         double newBalance = oldBalance + v;
+        DataManager.Users.changeUserReference(offlinePlayer.getUniqueId().toString());
         if(EconomyModule.allowModifyBalance((Player) offlinePlayer, Main.getPlugin(), newBalance)) {
             main.playerBank.put(uuid, newBalance);
             try {

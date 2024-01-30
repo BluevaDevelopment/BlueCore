@@ -46,7 +46,8 @@ public class EntitySpawnListener implements Listener {
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             String world_name = player.getWorld().getName();
-            if(!DataManager.Modules.Warps.get(world_name).node("world." + world_name + ".mob_spawning").getBoolean() && !(event.getEntity() instanceof Player)) {
+            DataManager.Modules.Worlds.changeReference(world_name);
+            if(!DataManager.Modules.Worlds.get(world_name).node("world." + world_name + ".mob_spawning").getBoolean() && !(event.getEntity() instanceof Player)) {
                 event.setCancelled(true);
             }
         }

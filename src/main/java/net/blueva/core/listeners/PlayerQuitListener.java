@@ -62,6 +62,7 @@ public class PlayerQuitListener implements Listener {
 		double z = l.getZ();
 		float yaw = l.getYaw();
 		float pitch = l.getPitch();
+		DataManager.Users.changeUserReference(event.getPlayer().getUniqueId().toString());
 		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "world").set(world);
 		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "x").set(x);
 		DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "y").set(y);
