@@ -1,3 +1,28 @@
+/*
+ *  ____  _             ____
+ * | __ )| |_   _  ___ / ___|___  _ __ ___
+ * |  _ \| | | | |/ _ | |   / _ \| '__/ _ \
+ * | |_) | | |_| |  __| |__| (_) | | |  __/
+ * |____/|_|\__,_|\___|\____\___/|_|  \___|
+ *
+ * This file is part of Blue Core.
+ *
+ * Blue Core is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * Blue Core is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License version 3 for more details.
+ *
+ * Blue Core plugin developed by Blueva Development.
+ * Website: https://blueva.net/
+ * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
+ *
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
+ */
+
 package net.blueva.core.modules.scoreboard;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
@@ -22,7 +47,7 @@ public class ScoreboardData {
         this.lines = config.getStringList("lines").stream()
                 .map(line -> ChatColor.translateAlternateColorCodes('&', line))
                 .collect(Collectors.toList());
-        this.displayCondition = config.getString("display_condition", "*");
+        this.displayCondition = config.getString("display_condition", "true");
         this.priority = config.getInt("priority", 0);
     }
 
@@ -32,7 +57,7 @@ public class ScoreboardData {
         try {
             return (boolean) MVEL.eval(condition);
         } catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage("Error evaluating condition: " + condition);
+            Bukkit.getConsoleSender().sendMessage("[BlueCore] Error evaluating condition: " + condition);
             e.printStackTrace();
             return false;
         }

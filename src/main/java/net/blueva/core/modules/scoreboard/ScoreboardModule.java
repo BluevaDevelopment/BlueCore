@@ -1,3 +1,28 @@
+/*
+ *  ____  _             ____
+ * | __ )| |_   _  ___ / ___|___  _ __ ___
+ * |  _ \| | | | |/ _ | |   / _ \| '__/ _ \
+ * | |_) | | |_| |  __| |__| (_) | | |  __/
+ * |____/|_|\__,_|\___|\____\___/|_|  \___|
+ *
+ * This file is part of Blue Core.
+ *
+ * Blue Core is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * Blue Core is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License version 3 for more details.
+ *
+ * Blue Core plugin developed by Blueva Development.
+ * Website: https://blueva.net/
+ * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
+ *
+ * Copyright (c) 2024 Blueva Development. All rights reserved.
+ */
+
 package net.blueva.core.modules.scoreboard;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
@@ -25,8 +50,8 @@ public class ScoreboardModule {
 	private final Map<Object, ScoreboardData> scoreboards = new HashMap<>();
 
 	public void loadScoreboards() {
-		if (ConfigManager.Modules.scoreboards.getBoolean("scoreboards.enabled")) {
-			Section scoreboardSection = ConfigManager.Modules.scoreboards.getSection("scoreboards");
+		if (ConfigManager.Modules.scoreboards.getBoolean("scoreboard.enabled")) {
+			Section scoreboardSection = ConfigManager.Modules.scoreboards.getSection("scoreboard.scoreboards");
 
 			for (Object scoreboardKey : scoreboardSection.getKeys()) {
 				Section scoreboardData = scoreboardSection.getSection(scoreboardKey.toString());
@@ -45,23 +70,17 @@ public class ScoreboardModule {
 	private void updatePlayerScoreboard(Player player) {
 		UUID playerId = player.getUniqueId();
 
-		// Verificar si ya tiene un scoreboard
 		if (playerBoards.containsKey(playerId)) {
-			FastBoard board = playerBoards.get(playerId);
-
-			// Verificar si el scoreboard actual sigue siendo válido
+			//FastBoard board = playerBoards.get(playerId);
 			ScoreboardData currentData = getHighestPriorityValidScoreboard(player);
 			ScoreboardData boardData = playerScoreboardData.get(playerId);
 
 			if (currentData != null && !currentData.equals(boardData)) {
-				// La configuración del scoreboard ha cambiado, actualizar el scoreboard
 				updateScoreboard(player, currentData);
 			} else if (currentData == null) {
-				// No hay ningún scoreboard válido, quitar el scoreboard
 				removePlayerScoreboard(player);
 			}
 		} else {
-			// El jugador no tiene un scoreboard, agregar uno si es necesario
 			ScoreboardData newData = getHighestPriorityValidScoreboard(player);
 			if (newData != null) {
 				addPlayerScoreboard(player, newData);
@@ -84,8 +103,6 @@ public class ScoreboardModule {
 
 	private void updateScoreboard(Player player, ScoreboardData data) {
 		FastBoard board = playerBoards.get(player.getUniqueId());
-
-		// Actualizar datos y mostrar el scoreboard
 		playerScoreboardData.put(player.getUniqueId(), data);
 		data.updateBoard(board);
 	}

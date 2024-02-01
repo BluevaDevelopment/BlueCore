@@ -7,21 +7,21 @@
 
 file_version: 1 # Do not modify it under any circumstances.
 
-tablist:
+tab_list:
   enabled: true
-  tablist1:
-    ticks: 10
-    header:
-      - ""
-    footer:
-      - ""
-    display_condition: "*"
-    priority: 0
-  tablist2:
-    ticks: 10
-    header:
-      - ""
-    footer:
-      - ""
-    display_condition: "{player_world} = world_nether"
-    priority: 10
+  refresh: 20
+  tab_lists:
+    '1':
+      header:
+        - "Tablist 1"
+      footer:
+        - ":)"
+      display_condition: "true"
+      priority: 0
+    '2':
+      header:
+        - "Tablist 2"
+      footer:
+        - "  :("
+      display_condition: "{player_world} == world_nether"
+      priority: 10

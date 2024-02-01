@@ -204,9 +204,9 @@ public class ConfigManager {
             ex.fillInStackTrace();
         }
 
-        // BlueCore/modules/scoreboards.yml
+        // BlueCore/modules/scoreboard.yml
         try {
-            Modules.scoreboards = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "scoreboards.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/scoreboards.yml")),
+            Modules.scoreboards = YamlDocument.create(new File(Main.getPlugin().getDataFolder()+"/modules/", "scoreboard.yml"), Objects.requireNonNull(Main.getPlugin().getResource("net/blueva/core/configuration/files/modules/scoreboard.yml")),
                     GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setVersioning(new BasicVersioning("file_version")).build());
         } catch (IOException ex) {
             ex.fillInStackTrace();

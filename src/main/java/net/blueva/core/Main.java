@@ -88,7 +88,9 @@ public final class Main extends JavaPlugin {
 
 		ScoreboardModule scoreboard = new ScoreboardModule(this);
 		scoreboard.loadScoreboards();
-		Bukkit.getScheduler().runTaskTimer(this, scoreboard::updatePlayerScoreboards, 0, 20);
+		int delay_ticks = ConfigManager.Modules.scoreboards.getInt("scoreboards.join_delay");
+		int refresh_ticks = ConfigManager.Modules.scoreboards.getInt("scoreboards.refresh");
+		Bukkit.getScheduler().runTaskTimer(this, scoreboard::updatePlayerScoreboards, delay_ticks, refresh_ticks);
 
 		TablistModule tablist = new TablistModule(this);
 		tablist.createTab();
