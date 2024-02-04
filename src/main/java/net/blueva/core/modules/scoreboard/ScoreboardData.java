@@ -26,9 +26,11 @@
 package net.blueva.core.modules.scoreboard;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
-import fr.mrmicky.fastboard.FastBoard;
+import fr.mrmicky.fastboard.adventure.FastBoard;
+import net.blueva.core.utils.MessagesUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.mvel2.MVEL;
 
 import java.util.List;
@@ -43,10 +45,8 @@ public class ScoreboardData {
 
     public ScoreboardData(Section config) {
         this.ticks = config.getInt("ticks", 20);
-        this.title = ChatColor.translateAlternateColorCodes('&', config.getString("title"));
-        this.lines = config.getStringList("lines").stream()
-                .map(line -> ChatColor.translateAlternateColorCodes('&', line))
-                .collect(Collectors.toList());
+        this.title = config.getString("title");
+        this.lines = config.getStringList("lines");
         this.displayCondition = config.getString("display_condition", "true");
         this.priority = config.getInt("priority", 0);
     }
@@ -58,14 +58,19 @@ public class ScoreboardData {
             return (boolean) MVEL.eval(condition);
         } catch (Exception e) {
             Bukkit.getConsoleSender().sendMessage("[BlueCore] Error evaluating condition: " + condition);
-            e.printStackTrace();
+            Bukkit.getConsoleSender().sendMessage("[BlueCore] " + e.fillInStackTrace());
             return false;
         }
     }
 
-    public void updateBoard(FastBoard board) {
-        board.updateTitle(title);
-        board.updateLines(lines.toArray(new String[0]));
+    public void updateBoard(FastBoard board, Player player) {
+        Component titleAdventure = MessagesUtils.format(player, title);
+        List<Component> linesAdventure = lines.stream()
+                        .map(line -> MessagesUtils.format(player, line))
+                        .toList();
+
+        board.updateTitle(titleAdventure);
+        board.updateLines(linesAdventure.toArray(new Component[0]));
     }
 
     public int getPriority() {

@@ -72,13 +72,13 @@ public class MessagesUtils {
         }
     }
 
-    private static @NotNull Component format (Player player, String message) {
+    public static @NotNull Component format (Player player, String message) {
         if(message == null) {
             return Component.empty();
         }
 
-        String textfinal = formatPlaceholders(player, message);
-        return formatColors(textfinal);
+        String text_final = formatPlaceholders(player, message);
+        return formatColors(text_final);
     }
 
     public static @NotNull String formatLegacy(Player player, String message) {
@@ -101,12 +101,12 @@ public class MessagesUtils {
         if(player != null) {
             text = text
                     .replace("{player_name}", player.getName())
-                    .replace("{player_displayname}", player.getDisplayName())
+                    .replace("{player_display_name}", player.getDisplayName())
                     .replace("{player_ping}", String.valueOf(player.getPing()))
                     .replace("{player_exp}", String.valueOf(player.getExp()))
                     .replace("{player_health}", String.valueOf(player.getHealth()))
                     .replace("{player_level}", String.valueOf(player.getLevel()))
-                    .replace("{player_balance}", String.valueOf(EconomyModule.balancePlayer(player, Main.getPlugin())))
+                    //.replace("{player_balance}", String.valueOf(EconomyModule.balancePlayer(player, Main.getPlugin())))
                     .replace("{player_location_x}", String.valueOf(Math.round(player.getLocation().getX())))
                     .replace("{player_location_y}", String.valueOf(Math.round(player.getLocation().getY())))
                     .replace("{player_location_z}", String.valueOf(Math.round(player.getLocation().getZ())))

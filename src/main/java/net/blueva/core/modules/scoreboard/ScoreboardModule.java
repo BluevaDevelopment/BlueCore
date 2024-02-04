@@ -26,7 +26,7 @@
 package net.blueva.core.modules.scoreboard;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
-import fr.mrmicky.fastboard.FastBoard;
+import fr.mrmicky.fastboard.adventure.FastBoard;
 import net.blueva.core.Main;
 import net.blueva.core.configuration.ConfigManager;
 import org.bukkit.Bukkit;
@@ -71,13 +71,11 @@ public class ScoreboardModule {
 		UUID playerId = player.getUniqueId();
 
 		if (playerBoards.containsKey(playerId)) {
-			//FastBoard board = playerBoards.get(playerId);
 			ScoreboardData currentData = getHighestPriorityValidScoreboard(player);
-			ScoreboardData boardData = playerScoreboardData.get(playerId);
 
-			if (currentData != null && !currentData.equals(boardData)) {
+			if (currentData != null ) {
 				updateScoreboard(player, currentData);
-			} else if (currentData == null) {
+			} else {
 				removePlayerScoreboard(player);
 			}
 		} else {
@@ -92,7 +90,7 @@ public class ScoreboardModule {
 		FastBoard board = new FastBoard(player);
 		playerBoards.put(player.getUniqueId(), board);
 		playerScoreboardData.put(player.getUniqueId(), data);
-		data.updateBoard(board);
+		data.updateBoard(board, player);
 	}
 
 	private void removePlayerScoreboard(Player player) {
@@ -104,7 +102,7 @@ public class ScoreboardModule {
 	private void updateScoreboard(Player player, ScoreboardData data) {
 		FastBoard board = playerBoards.get(player.getUniqueId());
 		playerScoreboardData.put(player.getUniqueId(), data);
-		data.updateBoard(board);
+		data.updateBoard(board, player);
 	}
 
 	private ScoreboardData getHighestPriorityValidScoreboard(Player player) {
