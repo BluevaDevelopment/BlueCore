@@ -106,7 +106,7 @@ public class MessagesUtils {
                     .replace("{player_exp}", String.valueOf(player.getExp()))
                     .replace("{player_health}", String.valueOf(player.getHealth()))
                     .replace("{player_level}", String.valueOf(player.getLevel()))
-                    //.replace("{player_balance}", String.valueOf(EconomyModule.balancePlayer(player, Main.getPlugin())))
+                    .replace("{player_balance}", String.valueOf(EconomyModule.balancePlayer(player, Main.getPlugin())))
                     .replace("{player_location_x}", String.valueOf(Math.round(player.getLocation().getX())))
                     .replace("{player_location_y}", String.valueOf(Math.round(player.getLocation().getY())))
                     .replace("{player_location_z}", String.valueOf(Math.round(player.getLocation().getZ())))

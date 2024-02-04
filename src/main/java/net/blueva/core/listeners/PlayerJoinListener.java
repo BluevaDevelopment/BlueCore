@@ -51,15 +51,13 @@ public class PlayerJoinListener implements Listener {
 
 	@EventHandler
 	public void OPJ(PlayerJoinEvent event) throws IOException {
-		DataManager.Users.getUser(event.getPlayer().getUniqueId());
-
+		DataManager.Users.changeUserReference(event.getPlayer().getUniqueId().toString());
 		if(Main.vaultapi) {
 			if(!main.playerBank.containsKey(event.getPlayer().getUniqueId())) {
 				main.playerBank.put(event.getPlayer().getUniqueId(), DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("money").getDouble());
 			}
 		}
 
-		DataManager.Users.changeUserReference(event.getPlayer().getUniqueId().toString());
 		if(DataManager.Users.getUser(event.getPlayer().getUniqueId()).node("logoutlocation", "world").getString() != null) {
 			EconomyModule.setMoney(event.getPlayer(), ConfigManager.settings.getDouble("economy.starting_balance"), main);
 		}
