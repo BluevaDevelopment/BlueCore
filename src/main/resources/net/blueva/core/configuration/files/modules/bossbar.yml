@@ -7,5 +7,5 @@
 
 file_version: 1 # Do not modify it under any circumstances.
 
-bossbar:
+boss_bar:
   enabled: true

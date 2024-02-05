@@ -22,16 +22,17 @@ welcome:
 
     # This is the message that will be sent to the players. Modify it to your liking, you can add or remove the lines you want.
     list:
-      - '&9&m--------------------------------------'
-      - ''
-      - '        &9✦ &b&lWELCOME TO &nSERVERNAME&9 ✦'
-      - '   &f✵ &fThe best server in all of minecraft &f✵'
-      - ''
-      - ' &b➦ &fStore: &7store.servername.com'
-      - ' &b➦ &fWeb: &7www.servername.com'
-      - ' &b➦ &fDiscord: &7discord.servername.com'
-      - ''
-      - '&9&m--------------------------------------'
+      - '<gradient:blue:aqua><st>--------------------------------------</st></gradient>'
+      - '<white>'
+      - '        <blue>◀</blue> <bold><aqua>WELCOME TO <u>SERVERNAME</u></bold> <blue>▶</blue>'
+      - '   ✵ <gray>The best server in all of minecraft</gray> ✵'
+      - '<white>'
+      - ' <aqua>➦ Store:</aqua> store.servername.com'
+      - ' <aqua>➦ Web:</aqua> www.servername.com'
+      - ' <aqua>➦ Discord:</aqua> discord.servername.com'
+      - '<white>'
+      - '<gradient:aqua:blue><st>--------------------------------------</st></gradient>'
+
 
   # Title that will be sent to the players when they join to the server.
   # (Does not work in versions lower than 1.12)
@@ -44,10 +45,10 @@ welcome:
     wait: 10 # 20 Ticks = 1 Second
 
     # Set the welcome title
-    title: '&b&lServer Name'
+    title: '<gradient:blue:aqua><st>Server Name</st></gradient>'
 
     # Sets the welcome subtitle. Appears below the title
-    subtitle: '&fwww.servername.com'
+    subtitle: '<white>www.servername.com</white>'
 
     # The time it takes for the title to fade into the screen. (In ticks)
     fade_in: 10
@@ -68,7 +69,7 @@ welcome:
     wait: 10 # 20 Ticks = 1 Second
 
     # Message to appear in the welcome actionbar
-    message: '&bWelcome to YourServer'
+    message: '<aqua>Welcome to Your Server</aqua>'
 
   # Announces to all players when a player joins or leaves.
   broadcast:
@@ -80,7 +81,7 @@ welcome:
       enabled: true
 
       # Message that will appear in this broadcast
-      message: '&f%player_name% &bhas logged into the server for the first time. Welcome to the server!'
+      message: '%player_name% <aqua>has logged into the server for the first time. Welcome to the server!</aqua>'
 
     # Announces to all players when a player joins.
     join:
@@ -89,7 +90,7 @@ welcome:
       enabled: true
 
       # Message that will appear in this broadcast
-      message: '&8[&a+&8] &a%player_name%'
+      message: '<dark_gray>[</dark_grak><green>+</green><dark_gray>]</dark_gray> <green>%player_name%</green>'
 
     # Announces to all players when a player leaves.
     leave:
@@ -98,4 +99,4 @@ welcome:
       enabled: true
 
       # Message that will appear in this broadcast
-      message: '&8[&c-&8] &a%player_name%'
+      message: '<dark_gray>[</dark_grak><red>+</red><dark_gray>]</dark_gray> <red>%player_name%</red>'
