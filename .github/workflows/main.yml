@@ -24,7 +24,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Step 5 - Persist workflow data as artificats
-        uses: actions/upload-artifact@v4.3.4
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: 'BlueCore'
           path: staging
