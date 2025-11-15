@@ -20,12 +20,16 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2024 Blueva Development. All rights reserved.
+ * Copyright (c) 2025 Blueva Development. All rights reserved.
  */
 
 package net.blueva.core;
 
-import net.blueva.core.commands.*;
+import net.blueva.core.commands.legacy.*;
+import net.blueva.core.commands.main.CommandHandler;
+import net.blueva.core.commands.main.command.BlueCoreCommand;
+import net.blueva.core.commands.main.subcommands.core.HelpSubCommand;
+import net.blueva.core.commands.main.subcommands.core.InfoSubCommand;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.libraries.bstats.Metrics;
 import net.blueva.core.modules.economy.vault.EconomyImplementer;
@@ -161,6 +165,15 @@ public final class Main extends JavaPlugin {
 	}
 
 	private void registerCommands() {
+        CommandHandler bc = new CommandHandler();
+
+        bc.register("bluecore", new BlueCoreCommand());
+        bc.register("help", new HelpSubCommand());
+        bc.register("info", new InfoSubCommand());
+        Objects.requireNonNull(getCommand("bluecore")).setExecutor(bc);
+        //Objects.requireNonNull(getCommand("bluecore")).setTabCompleter(new ...);
+
+        // LEGACY
 		Objects.requireNonNull(this.getCommand("actionbar")).setExecutor(new ActionBarCommand(this));
 		Objects.requireNonNull(this.getCommand("adventure")).setExecutor(new AdventureCommand(this));
 		Objects.requireNonNull(this.getCommand("clearchat")).setExecutor(new ClearChatCommand(this));
@@ -181,7 +194,6 @@ public final class Main extends JavaPlugin {
 		Objects.requireNonNull(this.getCommand("midnight")).setExecutor(new MidnightCommand(this));
 		Objects.requireNonNull(this.getCommand("modifykit")).setExecutor(new ModifyKitCommand(this));
 		Objects.requireNonNull(this.getCommand("money")).setExecutor(new MoneyCommand(this));
-		Objects.requireNonNull(this.getCommand("bluecore")).setExecutor(new BlueCoreCommand(this));
 		Objects.requireNonNull(this.getCommand("night")).setExecutor(new NightCommand(this));
 		Objects.requireNonNull(this.getCommand("noon")).setExecutor(new NoonCommand(this));
 		Objects.requireNonNull(this.getCommand("pay")).setExecutor(new PayCommand(this));
