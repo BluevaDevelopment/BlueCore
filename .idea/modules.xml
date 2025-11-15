@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BlueCore.iml" filepath="$PROJECT_DIR$/BlueCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BlueCore.iml" filepath="$PROJECT_DIR$/.idea/BlueCore.iml" />
     </modules>
   </component>
 </project>
