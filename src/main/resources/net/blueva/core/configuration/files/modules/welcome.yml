@@ -90,7 +90,7 @@ welcome:
       enabled: true
 
       # Message that will appear in this broadcast
-      message: '<dark_gray>[</dark_grak><green>+</green><dark_gray>]</dark_gray> <green>%player_name%</green>'
+      message: '<dark_gray>[</dark_gray><green>+</green><dark_gray>]</dark_gray> <green>%player_name%</green>'
 
     # Announces to all players when a player leaves.
     leave:
