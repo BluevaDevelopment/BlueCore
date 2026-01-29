@@ -32,6 +32,7 @@ import java.util.Objects;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.configuration.DataManager;
 import net.blueva.core.modules.economy.EconomyModule;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -63,10 +64,11 @@ public class PlayerJoinListener implements Listener {
 		}
 
 		if(ConfigManager.Modules.welcome.getBoolean("welcome.enabled")) {
+			event.setJoinMessage("");
 			if(ConfigManager.Modules.welcome.getBoolean("welcome.broadcast.join.enabled")) {
-				event.setJoinMessage(MessagesUtils.formatLegacy(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.join.message")).replace("%player_name%", event.getPlayer().getDisplayName()));
-			} else {
-				event.setJoinMessage("");
+				for(Player player : Bukkit.getOnlinePlayers()) {
+					main.adventure().player(player).sendMessage(MessagesUtils.format(event.getPlayer(), ConfigManager.Modules.welcome.getString("welcome.broadcast.join.message").replace("%player_name%", event.getPlayer().getDisplayName())));
+				}
 			}
 
 			if(ConfigManager.Modules.welcome.getBoolean("welcome.message.enabled")) {
