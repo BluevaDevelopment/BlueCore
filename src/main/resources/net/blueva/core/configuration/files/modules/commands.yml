@@ -20,155 +20,194 @@ custom_commands:
     - 'console: msg %player% &aThis command only works in the nether world'
 
 commands:
+   # register_standalone enables /command and /alias standalones for /bluecore subcommands.
    adventure:
       enabled: true
+      register_standalone: true
       aliases: [ badventure, adven, adv, a, gma ]
       description: Change your game mode
    clearchat:
       enabled: true
+      register_standalone: true
       aliases: [ bclearchat, ncc, cc ]
       description: Clears the chat of one or all players
    createkit:
       enabled: true
+      register_standalone: true
       aliases: [ bcreatekit, ck ]
       description: Create a new kit on the server.
    bluecore:
       enabled: true
+      register_standalone: true
       aliases: [ bc, bcore, bluec, core ]
       description: Main command
    creative:
       enabled: true
+      register_standalone: true
       aliases: [ bcreative, crea, cr, c, gmc ]
       description: Change your game mode
    day:
       enabled: true
+      register_standalone: true
       aliases: [ nday ]
       description: Change the world time to day
    deletewarp:
       enabled: true
+      register_standalone: true
       aliases: [ bdeletewarp, bdelwarp, delwarp ]
       description: Deletes a warp
    economy:
       enabled: true
+      register_standalone: true
       aliases: [ beconomy, beco, eco ]
       description: Manages the server economy.
    enderchest:
       enabled: true
+      register_standalone: true
       aliases: [ benderchest, bec, ec ]
       description: Open the Ender Chest
    feed:
       enabled: true
+      register_standalone: true
       aliases: [ bfeed, beat, eat ]
       description: Satisfy the hunger.
    fly:
       enabled: true
+      register_standalone: true
       aliases: [ bfly ]
       description: Activate fly mode.
    gamemode:
       enabled: true
+      register_standalone: true
       aliases: [ bgamemode, bgm, gm, gmode, gamem ]
       description: Change your game mode
    god:
       enabled: true
+      register_standalone: true
       aliases: [ bgod ]
       description: Enable god mode
    heal:
       enabled: true
+      register_standalone: true
       aliases: [ bheal ]
       description: Heals you or the given player.
    kill:
       enabled: true
+      register_standalone: true
       aliases: [ bkill, murder ]
       description: Kill a player
    kit:
       enabled: true
+      register_standalone: true
       aliases: [ bkit, kits ]
       description: Receive or give a kit.
    message:
       enabled: true
+      register_standalone: true
       aliases: [ bmessage, msg, tell]
       description: Send private messages to other players
    midnight:
       enabled: true
+      register_standalone: true
       aliases: [ bmidnight ]
       description: Change the world time to midnight
    modifykit:
       enabled: true
+      register_standalone: true
       aliases: [ bmodifykit, modifyk ]
       description: Modify a kit already created
    money:
       enabled: true
+      register_standalone: true
       aliases: [ bmoney, bbalance, balance ]
       description: See the money of a player.
    night:
       enabled: true
+      register_standalone: true
       aliases: [ bnight ]
       description: Change the world time to night
    noon:
       enabled: true
+      register_standalone: true
       aliases: [ bnoon ]
       description: Change the world time to noon
    pay:
       enabled: true
+      register_standalone: true
       aliases: [ bpay ]
       description: Pay money to another player.
    setspawn:
       enabled: true
+      register_standalone: true
       aliases: [ bsetspawn ]
       description: Sets the spawn
    setwarp:
       enabled: true
+      register_standalone: true
       aliases: [ bsetwarp ]
       description: Sets a warp
    spawn:
       enabled: true
+      register_standalone: true
       aliases: [ bspawn ]
       description: Teleport to the spawn
    spectator:
       enabled: true
+      register_standalone: true
       aliases: [ bspectator, spec, sp, gmsp ]
       description: Change your game mode
    speed:
       enabled: true
+      register_standalone: true
       aliases: [ bspeed ]
       description: Change your speed
    storm:
       enabled: true
+      register_standalone: true
       aliases: [ bstorm, brain, rain]
       description: Change the climate from one world to storm
    sudo:
       enabled: true
+      register_standalone: true
       aliases: [ bsudo, bexecute, execute]
       description: Execute a command through another player.
    suicide:
       enabled: true
+      register_standalone: true
       aliases: [ bsuicide ]
       description: Kill yourself
    sun:
       enabled: true
+      register_standalone: true
       aliases: [ bsun, bclear, clear ]
       description: Change the climate from one world to clear
    teleport:
       enabled: true
+      register_standalone: true
       aliases: [ bteleport, tp, goto ]
       description: Teleport to a player or location.
    survival:
       enabled: true
+      register_standalone: true
       aliases: [ bsurvival, surv, srv, s, gms ]
       description: Change your game mode
    updatewarp:
       enabled: true
+      register_standalone: true
       aliases: [ bupdatewarp, bupdwarp, updwarp ]
       description: Update a warp
    warp:
       enabled: true
+      register_standalone: true
       aliases: [ bwarp ]
       description: Teleport to a warp
    workbench:
       enabled: true
+      register_standalone: true
       aliases: [ bworkbench, bwb, bcraftingtable, bcraft, wb, craftingtable, craft ]
       description: Open the Crafting Table
    world:
       enabled: true
+      register_standalone: true
       aliases: [ bworld, worlds, wm, w ]
       description: Manage your server worlds

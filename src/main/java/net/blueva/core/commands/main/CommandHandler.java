@@ -37,6 +37,7 @@ import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.serialize.SerializationException;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class CommandHandler implements CommandExecutor
@@ -47,6 +48,32 @@ public class CommandHandler implements CommandExecutor
     public void register(String name, CommandInterface cmd) {
 
         commands.put(name, cmd);
+    }
+
+    public void registerAlias(String alias, String commandName) {
+        if (commands.containsKey(alias)) {
+            return;
+        }
+
+        CommandInterface executor = commands.get(commandName);
+        if (executor != null) {
+            commands.put(alias, executor);
+        }
+    }
+
+    public boolean executeSubcommand(CommandSender sender, Command cmd, String commandLabel, String subcommand, String[] args) {
+        if (exists(subcommand)) {
+            try {
+                getExecutor(subcommand).onCommand(sender, cmd, commandLabel, args);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return true;
+        }
+
+        Main.getPlugin().adventure().sender(sender).sendMessage(MessagesUtils.format(Bukkit.getPlayer(sender.getName()), ConfigManager.language.getString("messages.error.unknown_command")
+                .replace("{command}", "bw")));
+        return true;
     }
 
     public boolean exists(String name) {
@@ -71,19 +98,8 @@ public class CommandHandler implements CommandExecutor
             return true;
         }
 
-        if(exists(args[0])){
-
-            try {
-                getExecutor(args[0]).onCommand(sender, cmd, commandLabel, args);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-
-            Main.getPlugin().adventure().sender(sender).sendMessage(MessagesUtils.format(Bukkit.getPlayer(sender.getName()), ConfigManager.language.getString("messages.error.unknown_command")
-                    .replace("{command}", "bw")));
-        }
-        return true;
+        String[] subArgs = Arrays.copyOfRange(args, 1, args.length);
+        return executeSubcommand(sender, cmd, commandLabel, args[0], subArgs);
     }
 
 }

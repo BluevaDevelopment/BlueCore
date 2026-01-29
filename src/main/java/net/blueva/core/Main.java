@@ -25,11 +25,10 @@
 
 package net.blueva.core;
 
-import net.blueva.core.commands.legacy.*;
 import net.blueva.core.commands.main.CommandHandler;
+import net.blueva.core.commands.main.command.BlueCoreAliasRegister;
 import net.blueva.core.commands.main.command.BlueCoreCommand;
-import net.blueva.core.commands.main.subcommands.core.HelpSubCommand;
-import net.blueva.core.commands.main.subcommands.core.InfoSubCommand;
+import net.blueva.core.commands.main.subcommands.core.*;
 import net.blueva.core.configuration.ConfigManager;
 import net.blueva.core.libraries.bstats.Metrics;
 import net.blueva.core.modules.economy.vault.EconomyImplementer;
@@ -80,9 +79,13 @@ public final class Main extends JavaPlugin {
 		ConfigManager.generateFolders();
 		ConfigManager.registerDocuments();
 		registerEvents();
-		registerCommands();
+        try {
+            registerCommands();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-		prefix = ConfigManager.language.getString("prefix");
+        prefix = ConfigManager.language.getString("prefix");
 		currency_symbol = ConfigManager.Modules.economy.getString("economy.currency_symbol");
 
 		if(ConfigManager.settings.getBoolean("metrics")) {
@@ -164,55 +167,54 @@ public final class Main extends JavaPlugin {
 		pm.registerEvents(new PlayerQuitListener(this), this);
 	}
 
-	private void registerCommands() {
+	private void registerCommands() throws IOException {
         CommandHandler bc = new CommandHandler();
 
         bc.register("bluecore", new BlueCoreCommand());
         bc.register("help", new HelpSubCommand());
         bc.register("info", new InfoSubCommand());
+		bc.register("actionbar", new ActionBarCommand(this));
+		bc.register("adventure", new AdventureCommand(this));
+		bc.register("clearchat", new ClearChatCommand(this));
+		bc.register("createkit", new CreateKitCommand(this));
+		bc.register("creative", new CreativeCommand(this));
+		bc.register("day", new DayCommand(this));
+		bc.register("deletewarp", new DeleteWarpCommand(this));
+		bc.register("economy", new EconomyCommand(this));
+		bc.register("enderchest", new EnderChestCommand(this));
+		bc.register("feed", new FeedCommand(this));
+		bc.register("fly", new FlyCommand(this));
+		bc.register("gamemode", new GamemodeCommand(this));
+		bc.register("god", new GodCommand(this));
+		bc.register("heal", new HealCommand(this));
+		bc.register("kill", new KillCommand(this));
+		bc.register("kit", new KitCommand(this));
+		bc.register("message", new MessageCommand(this));
+		bc.register("midnight", new MidnightCommand(this));
+		bc.register("modifykit", new ModifyKitCommand(this));
+		bc.register("money", new MoneyCommand(this));
+		bc.register("night", new NightCommand(this));
+		bc.register("noon", new NoonCommand(this));
+		bc.register("pay", new PayCommand(this));
+		bc.register("setspawn", new SetSpawnCommand(this));
+		bc.register("setwarp", new SetWarpCommand(this));
+		bc.register("spawn", new SpawnCommand(this));
+		bc.register("spectator", new SpectatorCommand(this));
+		bc.register("speed", new SpeedCommand(this));
+		bc.register("storm", new StormCommand(this));
+		bc.register("sudo", new SudoCommand(this));
+		bc.register("suicide", new SuicideCommand(this));
+		bc.register("sun", new SunCommand(this));
+		bc.register("survival", new SurvivalCommand(this));
+		bc.register("teleport", new TeleportCommand(this));
+		bc.register("title", new TitleCommand(this));
+		bc.register("updatewarp", new UpdateWarpCommand(this));
+		bc.register("warp", new WarpCommand(this));
+		bc.register("workbench", new WorkbenchCommand(this));
+		bc.register("world", new WorldCommand(this));
         Objects.requireNonNull(getCommand("bluecore")).setExecutor(bc);
+		new BlueCoreAliasRegister(this, bc).registerAliases();
         //Objects.requireNonNull(getCommand("bluecore")).setTabCompleter(new ...);
-
-        // LEGACY
-		Objects.requireNonNull(this.getCommand("actionbar")).setExecutor(new ActionBarCommand(this));
-		Objects.requireNonNull(this.getCommand("adventure")).setExecutor(new AdventureCommand(this));
-		Objects.requireNonNull(this.getCommand("clearchat")).setExecutor(new ClearChatCommand(this));
-		Objects.requireNonNull(this.getCommand("createkit")).setExecutor(new CreateKitCommand(this));
-		Objects.requireNonNull(this.getCommand("creative")).setExecutor(new CreativeCommand(this));
-		Objects.requireNonNull(this.getCommand("day")).setExecutor(new DayCommand(this));
-		Objects.requireNonNull(this.getCommand("deletewarp")).setExecutor(new DeleteWarpCommand(this));
-		Objects.requireNonNull(this.getCommand("economy")).setExecutor(new EconomyCommand(this));
-		Objects.requireNonNull(this.getCommand("enderchest")).setExecutor(new EnderChestCommand(this));
-		Objects.requireNonNull(this.getCommand("feed")).setExecutor(new FeedCommand(this));
-		Objects.requireNonNull(this.getCommand("fly")).setExecutor(new FlyCommand(this));
-		Objects.requireNonNull(this.getCommand("gamemode")).setExecutor(new GamemodeCommand(this));
-		Objects.requireNonNull(this.getCommand("god")).setExecutor(new GodCommand(this));
-		Objects.requireNonNull(this.getCommand("heal")).setExecutor(new HealCommand(this));
-		Objects.requireNonNull(this.getCommand("kill")).setExecutor(new KillCommand(this));
-		Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitCommand(this));
-		Objects.requireNonNull(this.getCommand("message")).setExecutor(new MessageCommand(this));
-		Objects.requireNonNull(this.getCommand("midnight")).setExecutor(new MidnightCommand(this));
-		Objects.requireNonNull(this.getCommand("modifykit")).setExecutor(new ModifyKitCommand(this));
-		Objects.requireNonNull(this.getCommand("money")).setExecutor(new MoneyCommand(this));
-		Objects.requireNonNull(this.getCommand("night")).setExecutor(new NightCommand(this));
-		Objects.requireNonNull(this.getCommand("noon")).setExecutor(new NoonCommand(this));
-		Objects.requireNonNull(this.getCommand("pay")).setExecutor(new PayCommand(this));
-		Objects.requireNonNull(this.getCommand("setspawn")).setExecutor(new SetSpawnCommand(this));
-		Objects.requireNonNull(this.getCommand("setwarp")).setExecutor(new SetWarpCommand(this));
-		Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new SpawnCommand(this));
-		Objects.requireNonNull(this.getCommand("spectator")).setExecutor(new SpectatorCommand(this));
-		Objects.requireNonNull(this.getCommand("speed")).setExecutor(new SpeedCommand(this));
-		Objects.requireNonNull(this.getCommand("storm")).setExecutor(new StormCommand(this));
-		Objects.requireNonNull(this.getCommand("sudo")).setExecutor(new SudoCommand(this));
-		Objects.requireNonNull(this.getCommand("suicide")).setExecutor(new SuicideCommand(this));
-		Objects.requireNonNull(this.getCommand("sun")).setExecutor(new SunCommand(this));
-		Objects.requireNonNull(this.getCommand("survival")).setExecutor(new SurvivalCommand(this));
-		Objects.requireNonNull(this.getCommand("teleport")).setExecutor(new TeleportCommand(this));
-		Objects.requireNonNull(this.getCommand("title")).setExecutor(new TitleCommand(this));
-		Objects.requireNonNull(this.getCommand("updatewarp")).setExecutor(new UpdateWarpCommand(this));
-		Objects.requireNonNull(this.getCommand("warp")).setExecutor(new WarpCommand(this));
-		Objects.requireNonNull(this.getCommand("workbench")).setExecutor(new WorkbenchCommand(this));
-		Objects.requireNonNull(this.getCommand("world")).setExecutor(new WorldCommand(this));
 	}
 
 	public @NonNull BukkitAudiences adventure() {
