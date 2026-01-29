@@ -20,7 +20,7 @@
  * Website: https://blueva.net/
  * GitHub repository: https://github.com/BluevaDevelopment/BlueCore
  *
- * Copyright (c) 2025 Blueva Development. All rights reserved.
+ * Copyright (c) 2026 Blueva Development. All rights reserved.
  */
 package net.blueva.core.utils;
 

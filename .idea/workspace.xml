@@ -5,52 +5,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87c7dee2-b431-491d-a3b9-2ff6b1e7e206" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CommandInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/CommandHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/command/BlueCoreCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/subcommands/core/InfoSubCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/ActionBarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ActionBarCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/AdventureCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/AdventureCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/BlueCoreCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/subcommands/core/HelpSubCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/ClearChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ClearChatCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CreateKitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/CreateKitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CreativeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/CreativeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DayCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/DayCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/DeleteWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/DeleteWarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/EconomyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/EconomyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/EnderChestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/EnderChestCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/FeedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/FeedCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/FlyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/FlyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GamemodeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/GamemodeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/GodCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/GodCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/HealCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/HealCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/KillCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/KillCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/KitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/KitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/MessageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MessageCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/MidnightCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MidnightCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/ModifyKitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ModifyKitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/MoneyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MoneyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/NightCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/NightCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/NoonCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/NoonCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/PayCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/PayCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetSpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SetSpawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SetWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SetWarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpectatorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpectatorCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SpeedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpeedCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/StormCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/StormCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SudoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SudoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SuicideCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SuicideCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SunCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/SurvivalCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SurvivalCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/TeleportCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/TeleportCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/TitleCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/TitleCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/UpdateWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/UpdateWarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WarpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorkbenchCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WorkbenchCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/WorldCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WorldCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CommandInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/CommandInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ActionBarCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ActionBarCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/AdventureCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/AdventureCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ClearChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ClearChatCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/CreateKitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/CreateKitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/CreativeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/CreativeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/DayCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/DayCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/DeleteWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/DeleteWarpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/EconomyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/EconomyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/EnderChestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/EnderChestCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/FeedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/FeedCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/FlyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/FlyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/GamemodeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/GamemodeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/GodCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/GodCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/HealCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/HealCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/KillCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/KillCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/KitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/KitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MessageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MessageCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MidnightCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MidnightCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ModifyKitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/ModifyKitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MoneyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/MoneyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/NightCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/NightCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/NoonCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/NoonCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/PayCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/PayCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SetSpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SetSpawnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SetWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SetWarpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpawnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpectatorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpectatorCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpeedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SpeedCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/StormCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/StormCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SudoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SudoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SuicideCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SuicideCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SunCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SurvivalCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/SurvivalCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/TeleportCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/TeleportCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/TitleCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/TitleCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/UpdateWarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/UpdateWarpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WarpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WarpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WorkbenchCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WorkbenchCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WorldCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/legacy/WorldCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/command/BlueCoreCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/command/BlueCoreCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/subcommands/core/HelpSubCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/subcommands/core/HelpSubCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/subcommands/core/InfoSubCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/commands/main/subcommands/core/InfoSubCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/ConfigManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/DataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/GenerateLanguages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/configuration/GenerateLanguages.java" afterDir="false" />
@@ -78,7 +79,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/LocationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/LocationUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/MessagesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/MessagesUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/StringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/blueva/core/utils/StringUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,13 +121,14 @@
     "Maven.BlueCore [verify].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.preview.features.used": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/dnlbl/Documents/IDEA Projects/Blueva/BlueCore",
+    "last_opened_file_path": "C:/Users/dnlbl/Documents/GitHub/Mirror/BlueCore",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -142,6 +143,13 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="net.blueva.core.commands" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
